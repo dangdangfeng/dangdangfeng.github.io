@@ -17,20 +17,20 @@
 <!--<![endif]-->
 
 <head>
-  <title>Hexo</title>
+  <title>流城</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Hexo">
-    <meta name="author" content="John Doe">
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
     <!-- Favicon, (keep icon in root folder) -->
     <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
 
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
     <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
 	
     <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
@@ -77,6 +77,8 @@
 
   
   
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
   
 
   
@@ -104,9 +106,9 @@
                 <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
                 <ul class="sb-submenu">
                     
-                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
                     
-                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
                     
                 </ul>
             </li>
@@ -154,7 +156,7 @@
                     <!-- Info-bar -->
                     <nav>
                         <ul class="nav">
-                            <li><a href="/" class="animsition-link">Hexo</a></li>
+                            <li><a href="/" class="animsition-link">流城</a></li>
                             <li class="nolink"><span>Always </span>Creative.</li>
                             
                             <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
@@ -229,12 +231,17 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2016/08/29/hello-world/">Hello World</a></h3>
+                    <h3><a href="/2016/08/29/Cordova-Source-Code-Analyse/">Cordova Source Code Analyse</a></h3>
                     <span>
                         <span class="post-meta">
-      <time datetime="2016-08-29T14:26:01.000Z" itemprop="datePublished">
+      <time datetime="2016-08-29T15:27:36.000Z" itemprop="datePublished">
           2016-08-29
       </time>
+    
+    
+    | 
+    <a href='/tags/Source/'>Source</a>
+    
     
 </span>
                     </span>
@@ -242,13 +249,23 @@
                 <div class="col-md-8">
                     <p>
                       
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new p
+                        官网
+文件分类
+
+目录文件说明：
+conig.xml ：cordova的配置文件
+hooks/ ：存放自定义cordova命令的脚本文件。
+platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改
+plugins/ ：插件目录（主要是提供各个平台的原生API）
+www/ ：用H5编写的源代码目录，build时会被放入各个平台的assets\www目录。
+www/index.html ：App入口html文件
+
+关键类J
                       
                     </p>
                     
                     <p class="pull-right readMore">
-                        <a href="/2016/08/29/hello-world/">Read More...</a>
+                        <a href="/2016/08/29/Cordova-Source-Code-Analyse/">Read More...</a>
                     </p>
                     
                 </div>
@@ -266,7 +283,7 @@ Quick StartCreate a new p
 <section id="statement">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
         <div class="row">
-            <p>虽然还没想好写点什么，但是总觉得这里放句话比较和谐。</p>
+            <p>梦想是一场华美的旅途，每个人在找到它之前，都只是孤独的少年。</p>
         </div>
     </div>
 </section>
@@ -279,7 +296,7 @@ Quick StartCreate a new p
     <div class="container">
             <div class="copy">
                 <p>
-                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By John Doe. All Rights Reserved.
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
                 </p>
                 <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
             </div>

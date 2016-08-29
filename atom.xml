@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>流城</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-08-29T15:33:01.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>吴白</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cordova Source Code Analyse</title>
+    <link href="http://yoursite.com/2016/08/29/Cordova-Source-Code-Analyse/"/>
+    <id>http://yoursite.com/2016/08/29/Cordova-Source-Code-Analyse/</id>
+    <published>2016-08-29T15:27:36.000Z</published>
+    <updated>2016-08-29T15:33:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></p>
+<h4 id="文件分类"><a href="#文件分类" class="headerlink" title="文件分类"></a>文件分类</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
+<blockquote>
+<p>目录文件说明：</p>
+<p>conig.xml ：cordova的配置文件</p>
+<p>hooks/ ：存放自定义cordova命令的脚本文件。</p>
+<p>platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改</p>
+<p>plugins/ ：插件目录（主要是提供各个平台的原生API）</p>
+<p>www/ ：用H5编写的源代码目录，build时会被放入各个平台的assets\www目录。</p>
+<p>www/index.html ：App入口html文件</p>
+</blockquote>
+<h4 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h4><p>JS端</p>
+<ul>
+<li>cordova_plugins.js 插件配置文件</li>
+<li>exec.js 在cordova.js里复现，主要用于JS与Native的交互处理事件</li>
+<li>platform.js 在cordova.js里复现，</li>
+<li>cordova.js  JS端最重要的文件了。提供交互处理</li>
+<li>index.html 关联 index.js,index.css UI显示</li>
+</ul>
+<p>Native端</p>
+<ul>
+<li>CDVPlugin 插件类，自定义插件继承于此</li>
+<li>CDV 头文件</li>
+<li>CDVAppDelegate 入口，在didFinishLaunchingWithOptions:里初始化CDVViewController</li>
+<li>CDVAvaliability 宏定义</li>
+<li>CDVAvailabilityDeprecated 弃用提示</li>
+<li>CDVCommandDelegate 命令代理类，JS处理</li>
+<li>CDVCommandDelegateImpl 代理类实现，处理JS</li>
+<li>CDVCommandQueue 命令队列，对应于cordova.commandQueue队列</li>
+<li>CDVConfigParser config文件解析（XML格式）</li>
+<li>CDVUIWebViewEngine WebView处理机</li>
+<li>CDVWebViewEngineProtocol WebView处理机代理类</li>
+<li>CDVWhitelist 白名单（允許訪問任何網站）结合config.xml  <access> 元素</access></li>
+<li>CDVScreenOrientaitionDelegate 屏幕方向处理</li>
+<li>CDVLocalStorage 本地存储</li>
+<li>CDVTimer 计时类</li>
+<li>CDVUserAgentUtil 代理工具类</li>
+<li>CDVURLProtocol 继承于NSURLProtocol.在 Objective-C 端使用一个 NSURLProtocol 的子类来检查每个请求</li>
+<li>CDVInvokedUrlCommand js交互命令类（_callbackId;_className; _methodName;_arguments;）</li>
+<li>CDVPluginResult 组件处理完后执行类</li>
+</ul>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>参见cordova.js 595-610行。</p>
+<p>cordova的初始化包含JS端和Native端，这两端都是基于事件侦听的方式结合起来，JS端主要包含以下几个点：</p>
+<p>onDOMContentLoaded：dom载入完成</p>
+<p>onNativeReady：Native端WebUI载入完成</p>
+<p>onCordovaReady：JS端相关objects都创建完成</p>
+<p>onDeviceReady: Cordova 准备</p>
+<p>onResume: 开始/恢复生命周期事件</p>
+<p>onPause: 暂停生命周期 </p>
+<p><strong>Cordova生命周期事件：</strong></p>
+<p>（1）deviceready ：当Cordova加载完成会触发</p>
+<p>（2）pause：当应用程序进入到后台会触发</p>
+<p>（3）resumes：应用程序从后台进入到前台会触发</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+        //页面加载后添加各事件监听
+        function onLoad() {
+            document.addEventListener(&quot;deviceready&quot;, onDeviceReady, false);
+            document.addEventListener(&quot;resume&quot;, onResume, false);
+            document.addEventListener(&quot;pause&quot;, onPause, false);
+        }
+
+        //Cordova加载完毕
+        function onDeviceReady() {
+            alert(&quot;Cordova加载完毕！&quot;);
+        }
+
+        //进入后台
+        function onPause() {
+            console.log(&quot;应用进入到后台！&quot;);
+        }
+
+        //恢复到前台
+        function onResume() {
+            alert(&quot;应用回到前台运行！&quot;);
+        }
+ &lt;/script&gt;
+</code></pre><p>以上几个重要事件的先后顺序和hander侦听是通过channel组件架构，所谓的channel组件实际上就是cordova自制的保障事件侦听和触发的组件,具体代码参考cordova.js 626-820行。2百多行代码，就打造了一个JS端事件侦听的框架。</p>
+<p>其中 onNativeReady是被native端调的，当native端WebUI初始化好后就会fire JS端onNativeReady事件，native有以下几个关键的初始化节点：</p>
+<pre><code>AppDelegate.didFinishLaunchingWithOptions：App启动，初始化controller和view
+CDVViewController.viewDidLoad：view加载，初始化WebView
+CDVViewController.webviewDidFinishLoad：WebView加载，触发JS端onNativeReady
+</code></pre><p>Native端存在着App-&gt;view-&gt;webview三个层次，以上三个点正好对应着这三个层次的加载。</p>
+<p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/cordova.png" alt=""></p>
+<h4 id="加载流程"><a href="#加载流程" class="headerlink" title="加载流程"></a>加载流程</h4><p>从源码可以看出AppDelegate继承于CDVAppDelegate;MainViewController继承于CDVViewController。MainCommandDelegate继承于CDVCommandDelegateImpl,MainCommandQueue继承于CDVCommandQueue.</p>
+<p>AppDelegate是程序的入口，由此调用MainViewController,由此启动CDVViewController.</p>
+<ol>
+<li>AppDelegate的application:didFinishLaunchingWithOptions:进入</li>
+<li>从self.viewController = [[MainViewController alloc] init]；到MainViewController.</li>
+<li>CDVViewController 进入init方法</li>
+<li>initWithNibName: bundle:方法调用[self __init]</li>
+<li>__init方法监听通知，UIApplicationWillTerminateNotification（程序被杀死），UIApplicationWillResignActiveNotification（从活动状态进入非活动状态），UIApplicationDidBecomeActiveNotification（程序进入前台并处于活动状态），UIApplicationWillEnterForegroundNotification（进入前台，还没有处于活动状态时），UIApplicationDidEnterBackgroundNotification（进入后台）。在应用处于各种状态时就可以通过evalJs：方法与JS端交互。最终是通过CDVUIWebViewEngine下的evaluateJavaScript: completionHandler:的方法。最终还是用的UIWebView的stringByEvaluatingJavaScriptFromString:方法。从此可以看出，Native处理JS原理上还是用的UIWebView的方法。CDVViewController初始化完成。</li>
+<li>此时AppDelegate调用Super,进入CDVAppDelegate的application: didFinishLaunchingWithOptions:方法。对rootViewController，主window进行设置。此时App才加载MainViewController.走MainViewController生命周期。</li>
+<li>在MainViewController里其实是调用CDVViewController的。进入viewDidLoad方法，在loadSettings里加载配置文件并将index.html设为startPage。</li>
+<li>createGapVeiw初始化webView,通过CDVWebViewEngineProtocol使用CDVUIWebViewEngine使用engineWebView（这是个UIWebView）处理JS。</li>
+<li>registerPlugin: withClassName:初始化插件，此处的插件是CDVUIWebViewEngine。</li>
+<li>将handleopenurl,intentandnavigationfilter,gesturehandler插件注入。计时结束。</li>
+<li>CDVUserAgentUtil acquireLock:加锁处理，加载index.html</li>
+<li>当App进入活跃状态，接收到通知进入onAppDidBecomeActive:方法，执行JS的active事件。js为</li>
+</ol>
+<pre><code>&lt;code&gt;try{cordova.require(&apos;cordova/exec&apos;).nativeEvalAndFetch(function(){cordova.fireDocumentEvent(&apos;active&apos;);})}catch(e){console.log(&apos;exception nativeEvalAndFetch : &apos;+e);};&lt;/code&gt;
+</code></pre><p>   如此就和cordova.js发生了联系。</p>
+<ol>
+<li>此后WebView开始加载，并触发了CDVUIWebViewDelegate的webView: shouldStartLoadWithRequest: navigationType:方法。如果_delegate实现了webView:shouldStartLoadWithRequest:navigationType:此时会进入CDVUIWebViewNavigationDelegate。在此判断url的scheme是否为gap(处理加载页里的加载请求)。</li>
+<li>CDVIntentAndNavigationFilter实现了shouldOverrideLoadWithRequest:navigationType:方法，根据navigationType返回是否请求加载。</li>
+<li>允许加载后，走CDVUIWebViewDelegate的webViewDidStartLoad:方法。跳到CDVUIWebViewNavigationDelegate的webViewDidStartLoad:向enginePlugin.webView发送CDVPluginResetNotification通知。但是CDVUIWebViewEngine没有对onReset处理。其他插件根据需要处理。</li>
+<li>然后走CDVUiWebViewDelegate的webViewDidFinishLoad:方法。跳转CDVUIWebViewNavigationDelegate的webViewDidFinishLoad：方法。发送CDVPageDidLoadNotification通知。此版本未处理。</li>
+<li>iframe bridge 在 JS 端创建一个透明的 iframe，设置这个 ifame 的 src 为自定义的协议，而 ifame 的 src 更改时，UIWebView 会先回调其 delegate 的 webView:shouldStartLoadWithRequest:navigationType: 方法。此时又到了CDVUIWebViewDelegate的shouldStartLoadWithRequest：方法。此时的请求是gap://ready。</li>
+<li>CDVViewController的supportedInterfaceOrientations监听App的屏幕显示，是否左转右转等。</li>
+<li>到此，页面加载完毕。</li>
+</ol>
+<h4 id="JS调用Native"><a href="#JS调用Native" class="headerlink" title="JS调用Native"></a>JS调用Native</h4><p>IOS的UIWebViewDelegate提供了shouldStartLoadWithRequest方法，它能截获web端url请求，因此phonegap就是通过在web端构造一个不可见的iframe，并置其src为gap://ready，Native端截获这个请求后就会得知此时JS端有请求。这块代码可见”cordova/exec”模块：</p>
+<pre><code>function pokeNative() {
+// CB-5488 - Don&apos;t attempt to create iframe before document.body is available.
+if (!document.body) {
+    setTimeout(pokeNative);
+    return;
+}
+
+// Check if they&apos;ve removed it from the DOM, and put it back if so.
+if (execIframe &amp;&amp; execIframe.contentWindow) {
+    execIframe.contentWindow.location = &apos;gap://ready&apos;;
+} else {
+    execIframe = document.createElement(&apos;iframe&apos;);
+    execIframe.style.display = &apos;none&apos;;
+    execIframe.src = &apos;gap://ready&apos;;
+    document.body.appendChild(execIframe);
+}
+// Use a timer to protect against iframe being unloaded during the poke (CB-7735).
+// This makes the bridge ~ 7% slower, but works around the poke getting lost
+// when the iframe is removed from the DOM.
+// An onunload listener could be used in the case where the iframe has just been
+// created, but since unload events fire only once, it doesn&apos;t work in the normal
+// case of iframe reuse (where unload will have already fired due to the attempted
+// navigation of the page).
+failSafeTimerId = setTimeout(function() {
+    if (commandQueue.length) {
+        // CB-10106 - flush the queue on bridge change
+        if (!handleBridgeChange()) {
+            pokeNative();
+         }
+    }
+}, 50); // Making this &gt; 0 improves performance (marginally) in the normal case (where it doesn&apos;t fire).
+}
+</code></pre><p>每次在js端调用exec时，cordova会把调用信息放入commandQueue队列中，并通知native端。native端得到通知后，会调用js端的代码拿到commandQueue队列中所有调用信息，并依次调用plugin来执行请求</p>
+<pre><code>function iOSExec() {
+
+var successCallback, failCallback, service, action, actionArgs;
+var callbackId = null;
+if (typeof arguments[0] !== &apos;string&apos;) {
+    // FORMAT ONE
+    successCallback = arguments[0];
+    failCallback = arguments[1];
+    service = arguments[2];
+    action = arguments[3];
+    actionArgs = arguments[4];
+
+    // Since we need to maintain backwards compatibility, we have to pass
+    // an invalid callbackId even if no callback was provided since plugins
+    // will be expecting it. The Cordova.exec() implementation allocates
+    // an invalid callbackId and passes it even if no callbacks were given.
+    callbackId = &apos;INVALID&apos;;
+} else {
+    throw new Error(&apos;The old format of this exec call has been removed (deprecated since 2.1). Change to: &apos; +
+        &apos;cordova.exec(null, null, \&apos;Service\&apos;, \&apos;action\&apos;, [ arg1, arg2 ]);&apos;
+    );
+}
+
+// If actionArgs is not provided, default to an empty array
+actionArgs = actionArgs || [];
+
+// Register the callbacks and add the callbackId to the positional
+// arguments if given.
+if (successCallback || failCallback) {
+    callbackId = service + cordova.callbackId++;
+    cordova.callbacks[callbackId] =
+        {success:successCallback, fail:failCallback};
+}
+
+actionArgs = massageArgsJsToNative(actionArgs);
+
+var command = [callbackId, service, action, actionArgs];
+
+// Stringify and queue the command. We stringify to command now to
+// effectively clone the command arguments in case they are mutated before
+// the command is executed.
+commandQueue.push(JSON.stringify(command));
+
+// If we&apos;re in the context of a stringByEvaluatingJavaScriptFromString call,
+// then the queue will be flushed when it returns; no need for a poke.
+// Also, if there is already a command in the queue, then we&apos;ve already
+// poked the native side, so there is no reason to do so again.
+if (!isInContextOfEvalJs &amp;&amp; commandQueue.length == 1) {
+    pokeNative();
+}
+}
+</code></pre><p>Native端：shouldStartLoadWithRequest</p>
+<pre><code>if ([[url scheme] isEqualToString:@&quot;gap&quot;]) {
+    [vc.commandQueue fetchCommandsFromJs];
+    // The delegate is called asynchronously in this case, so we don&apos;t have to use
+    // flushCommandQueueWithDelayedJs (setTimeout(0)) as we do with hash changes.
+    [vc.commandQueue executePending];
+    return NO;
+}
+</code></pre><hr>
+<pre><code> // 获取 JS 的请求数据
+- (void)fetchCommandsFromJs
+{
+__weak CDVCommandQueue* weakSelf = self;
+NSString* js = @&quot;cordova.require(&apos;cordova/exec&apos;).nativeFetchMessages()&quot;;
+
+[_viewController.webViewEngine evaluateJavaScript:js
+                                completionHandler:^(id obj, NSError* error) {
+    if ((error == nil) &amp;&amp; [obj isKindOfClass:[NSString class]]) {
+        NSString* queuedCommandsJSON = (NSString*)obj;
+        CDV_EXEC_LOG(@&quot;Exec: Flushed JS-&gt;native queue (hadCommands=%d).&quot;, [queuedCommandsJSON length] &gt; 0);
+        [weakSelf enqueueCommandBatch:queuedCommandsJSON];
+        // this has to be called here now, because fetchCommandsFromJs is now async (previously: synchronous)
+        [self executePending];
+    }
+}];
+}
+
+- (void)executePending
+{
+// Make us re-entrant-safe.
+if (_startExecutionTime &gt; 0) {
+    return;
+}
+@try {
+    _startExecutionTime = [NSDate timeIntervalSinceReferenceDate];
+
+    while ([_queue count] &gt; 0) {
+        NSMutableArray* commandBatchHolder = _queue[0];
+        NSMutableArray* commandBatch = nil;
+        @synchronized(commandBatchHolder) {
+            // If the next-up command is still being decoded, wait for it.
+            if ([commandBatchHolder count] == 0) {
+                break;
+            }
+            commandBatch = commandBatchHolder[0];
+        }
+
+        while ([commandBatch count] &gt; 0) {
+            @autoreleasepool {
+                // Execute the commands one-at-a-time.
+                NSArray* jsonEntry = [commandBatch cdv_dequeue];
+                if ([commandBatch count] == 0) {
+                    [_queue removeObjectAtIndex:0];
+                }
+                CDVInvokedUrlCommand* command = [CDVInvokedUrlCommand commandFromJson:jsonEntry];
+                CDV_EXEC_LOG(@&quot;Exec(%@): Calling %@.%@&quot;, command.callbackId, command.className, command.methodName);
+
+                if (![self execute:command]) {
+#ifdef DEBUG
+                        NSString* commandJson = [jsonEntry cdv_JSONString];
+                        static NSUInteger maxLogLength = 1024;
+                        NSString* commandString = ([commandJson length] &gt; maxLogLength) ?
+                            [NSString stringWithFormat : @&quot;%@[...]&quot;, [commandJson substringToIndex:maxLogLength]] :
+                            commandJson;
+
+                        DLog(@&quot;FAILED pluginJSON = %@&quot;, commandString);
+#endif
+                }
+            }
+
+            // Yield if we&apos;re taking too long.
+            if (([_queue count] &gt; 0) &amp;&amp; ([NSDate timeIntervalSinceReferenceDate] - _startExecutionTime &gt; MAX_EXECUTION_TIME)) {
+                [self performSelector:@selector(executePending) withObject:nil afterDelay:0];
+                return;
+            }
+        }
+    }
+} @finally
+{
+    _startExecutionTime = 0;
+}
+}
+</code></pre><p>在CDVCommandQueue里的execute:方法里用objc_msgSend执行JS里需要的方法。</p>
+<h4 id="Native向JS返回结果"><a href="#Native向JS返回结果" class="headerlink" title="Native向JS返回结果"></a>Native向JS返回结果</h4><p>使用webView的 stringByEvaluatingJavaScriptFromString 方法 。native的plugin完成任务后，会在CDVPluginResult里执行initWithStatus:(CDVCommandStatus)statusOrdinal message:(id)theMessage；在CDVCommandDelegateImpl里执行sendPluginResult:(CDVPluginResult<em>)result callbackId:(NSString</em>)callbackId；返回结果给JS端。<br>通过上面，我们知道JS和Native是通过callbackId对应的，由此就建立了连接。</p>
+<pre><code>// Objective-C 返回结果给JS端
+- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(NSString*)callbackId
+{
+CDV_EXEC_LOG(@&quot;Exec(%@): Sending result. Status=%@&quot;, callbackId, result.status);
+// This occurs when there is are no win/fail callbacks for the call.
+if ([@&quot;INVALID&quot; isEqualToString:callbackId]) {
+    return;
+}
+// This occurs when the callback id is malformed.
+if (![self isValidCallbackId:callbackId]) {
+    NSLog(@&quot;Invalid callback id received by sendPluginResult&quot;);
+    return;
+}
+int status = [result.status intValue];
+BOOL keepCallback = [result.keepCallback boolValue];
+NSString* argumentsAsJSON = [result argumentsAsJSON];
+BOOL debug = NO;
+
+#ifdef DEBUG
+debug = YES;
+#endif
+ // 将请求的处理结果及 callbackId 通过调用 JS 方法返回给 JS 端
+NSString* js = [NSString stringWithFormat:@&quot;cordova.require(&apos;cordova/exec&apos;).nativeCallback(&apos;%@&apos;,%d,%@,%d, %d)&quot;, callbackId, status, argumentsAsJSON, keepCallback, debug];
+
+[self evalJsHelper:js];
+}
+</code></pre><h4 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h4><p>此处我们默认已经解决了插件的下载和制作。所要做的就是处理插件。</p>
+<p>将CordovaLib引入项目。</p>
+<p>在配置页的 Build Settings -&gt; Other Linker Flags 中添加”-ObjC -all_load”</p>
+<p>在配置页的 Build Phases 标签中添加如下两个库：</p>
+<pre><code>Target Dependencies -&gt; CordovaLib
+
+Link Binary With Libraries -&gt; libCordova.a
+</code></pre><p><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">测试</a></p>
+<p>最主要关注的是Hybrid里的跳转逻辑，用scheme跳转解决。在CDVUIWebViewNagigationDelegate 里的shouldStartLoadWithRequest：里实现自己的跳转逻辑即可，因为在cordova里触发跳转，肯定会走这里的。如果实现了CDVWKWebViewEngine,在webView: webView: decidePolicyForNavigationAction: decisionHandler: 里也要实现.</p>
+<p>其他的都是套路。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://cordova.apache.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;文件分类&quot;&gt;&lt;a href=&quot;#文件分类&quot; class=&quot;headerlink&quot; title=&quot;文件分
+    
+    </summary>
+    
+    
+      <category term="Source" scheme="http://yoursite.com/tags/Source/"/>
+    
+  </entry>
+  
+</feed>
