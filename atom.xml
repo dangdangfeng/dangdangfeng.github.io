@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2016-08-29T17:15:07.000Z</updated>
+  <updated>2016-08-29T17:20:50.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/"/>
     <id>https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/</id>
     <published>2016-08-29T15:27:36.000Z</published>
-    <updated>2016-08-29T17:15:07.000Z</updated>
+    <updated>2016-08-29T17:20:50.000Z</updated>
     
-    <content type="html"><![CDATA[<p><strong><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></strong></p>
+    <content type="html"><![CDATA[<p>  <strong><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></strong> (markdown下经常无法链接，地址在这： <a href="http://cordova.apache.org" target="_blank" rel="external">http://cordova.apache.org</a>)</p>
 <h4 id="文件分类"><a href="#文件分类" class="headerlink" title="文件分类"></a>文件分类</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
 <blockquote>
 <p>目录文件说明：</p>
@@ -334,15 +334,14 @@ NSString* js = [NSString stringWithFormat:@&quot;cordova.require(&apos;cordova/e
 <pre><code>Target Dependencies -&gt; CordovaLib
 
 Link Binary With Libraries -&gt; libCordova.a
-</code></pre><p><strong><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">测试</a></strong></p>
+</code></pre><p>  <strong><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">测试</a></strong></p>
 <p>最主要关注的是Hybrid里的跳转逻辑，用scheme跳转解决。在CDVUIWebViewNagigationDelegate 里的shouldStartLoadWithRequest：里实现自己的跳转逻辑即可，因为在cordova里触发跳转，肯定会走这里的。如果实现了CDVWKWebViewEngine,在webView: webView: decidePolicyForNavigationAction: decisionHandler: 里也要实现.</p>
 <p>其他的都是套路。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://cordova.apache.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&quot;文件分类&quot;&gt;&lt;a href=&quot;#文件分类&quot; class=&quot;heade
+      &lt;p&gt;  &lt;strong&gt;&lt;a href=&quot;http://cordova.apache.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;/strong&gt; (markdown下经常无法链接，地址在这： &lt;a href=&quot;http://cordo
     
     </summary>
     
