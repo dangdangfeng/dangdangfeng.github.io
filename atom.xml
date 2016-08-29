@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://dangdangfeng.github.io/"/>
   <updated>2016-08-29T15:33:01.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://dangdangfeng.github.io/</id>
   
   <author>
     <name>吴白</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Cordova Source Code Analyse</title>
-    <link href="http://yoursite.com/2016/08/29/Cordova-Source-Code-Analyse/"/>
-    <id>http://yoursite.com/2016/08/29/Cordova-Source-Code-Analyse/</id>
+    <link href="https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/"/>
+    <id>https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/</id>
     <published>2016-08-29T15:27:36.000Z</published>
     <updated>2016-08-29T15:33:01.000Z</updated>
     
@@ -347,7 +347,7 @@ Link Binary With Libraries -&gt; libCordova.a
     </summary>
     
     
-      <category term="Source" scheme="http://yoursite.com/tags/Source/"/>
+      <category term="Source" scheme="https://dangdangfeng.github.io/tags/Source/"/>
     
   </entry>
   
