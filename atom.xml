@@ -727,6 +727,302 @@ NSLog(@&quot;begin Background Task With Expiration Handler&quot;);
   </entry>
   
   <entry>
+    <title>iOS socket all in here</title>
+    <link href="https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/"/>
+    <id>https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/</id>
+    <published>2014-05-30T16:49:55.000Z</published>
+    <updated>2016-08-30T16:51:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>socket（套接字）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
+<p>多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
+<p>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket，另一个运行于服务器端，称为ServerSocket。套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
+<p>Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接,UDP连接同理。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6b9392fad31b711d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket使用"></p>
+<h4 id="socket使用的库函数"><a href="#socket使用的库函数" class="headerlink" title="socket使用的库函数"></a>socket使用的库函数</h4><p>1.创建套接字</p>
+<pre><code>Socket(af,type,protocol)//建立地址和套接字的联系
+
+bind(sockid, local addr, addrlen)//服务器端侦听客户端的请求
+
+listen( Sockid ,quenlen)//建立服务器/客户端的连接 (面向连接TCP）
+</code></pre><p>2.客户端请求连接</p>
+<pre><code>Connect(sockid, destaddr, addrlen)//服务器端等待从编号为Sockid的Socket上接收客户连接请求
+
+newsockid=accept(Sockid，Clientaddr, paddrlen)//发送/接收数据
+</code></pre><p>3.面向连接：</p>
+<pre><code>send(sockid, buff, bufflen) 
+recv( )
+</code></pre><p>4.面向无连接：</p>
+<pre><code>sendto(sockid,buff,…,addrlen) 
+recvfrom( )
+</code></pre><p>5.释放套接字</p>
+<pre><code>close(socked)
+</code></pre><p>在iOS中以NSStream(流)来发送和接收数据,可以设置流的代理，对流状态的变化做出相应的动作(连接建立，接收到数据，连接关闭）。</p>
+<p>NSStream：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)<br>NSInputStream：NSStream的子类，用于读取输入<br>NSOutputStream：NSSTream的子类，用于写输出。</p>
+<p>服务端先不提，客户端代码大概如下：</p>
+<pre><code>//需要导入&lt;arpa/inet.h&gt;，&lt;netdb.h&gt;
+- (void)test
+{
+NSString * host =@&quot;123.33.33.1&quot;;
+NSNumber * port = @1233;
+
+// 创建 socket
+int socketFileDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+if (-1 == socketFileDescriptor) {
+    NSLog(@&quot;创建失败&quot;);
+    return;
+}
+
+// 获取 IP 地址 
+struct hostent * remoteHostEnt = gethostbyname([host UTF8String]);
+if (NULL == remoteHostEnt) {
+    close(socketFileDescriptor);
+     NSLog(@&quot;%@&quot;,@&quot;无法解析服务器的主机名&quot;);
+    return;
+}
+
+struct in_addr * remoteInAddr = (struct in_addr *)remoteHostEnt-&gt;h_addr_list[0];
+
+// 设置 socket 参数
+struct sockaddr_in socketParameters;
+socketParameters.sin_family = AF_INET;
+socketParameters.sin_addr = *remoteInAddr;
+socketParameters.sin_port = htons([port intValue]);
+
+// 连接 socket
+int ret = connect(socketFileDescriptor, (struct sockaddr *) &amp;socketParameters, sizeof(socketParameters));
+if (-1 == ret) {
+    close(socketFileDescriptor);
+    NSLog(@&quot;连接失败&quot;);
+    return;
+}
+
+NSLog(@&quot;连接成功&quot;);
+}
+</code></pre><p>大概就是这样，因为是C语言的，所以看起来不是很方便，一般开发中都会使用比较简单的方法，如下。</p>
+<h4 id="CocoaAsyncSocket"><a href="#CocoaAsyncSocket" class="headerlink" title="CocoaAsyncSocket"></a>CocoaAsyncSocket</h4><p>iOS的socket实现是特别简单的，可以使用用github的开源类库<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="external">cocoaasyncsocket</a>简化开发，cocoaasyncsocket是支持tcp和ump的。代码大概如下：</p>
+<pre><code>- (IBAction)connectToServer:(id)sender {
+// 1.与服务器通过三次握手建立连接
+NSString *host = @&quot;133.33.33.1&quot;;
+int port = 1212;
+
+//创建一个socket对象
+_socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+
+//连接
+NSError *error = nil;
+[_socket connectToHost:host onPort:port error:&amp;error];
+
+if (error) {
+    NSLog(@&quot;%@&quot;,error);
+}
+}
+
+
+#pragma mark -socket的代理
+#pragma mark 连接成功
+-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+NSLog(@&quot;%s&quot;,__func__);
+}
+
+
+#pragma mark 断开连接
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+if (err) {
+    NSLog(@&quot;连接失败&quot;);
+}else{
+    NSLog(@&quot;正常断开&quot;);
+}
+}
+
+
+#pragma mark 数据发送成功
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+NSLog(@&quot;%s&quot;,__func__);
+
+//发送完数据手动读取，-1不设置超时
+[sock readDataWithTimeout:-1 tag:tag];
+}
+
+#pragma mark 读取数据
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+NSString *receiverStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+NSLog(@&quot;%s %@&quot;,__func__,receiverStr);
+}
+</code></pre><p>下面是原理补充，有兴趣的朋友可以细看。</p>
+<hr>
+<h4 id="网络七层协议"><a href="#网络七层协议" class="headerlink" title="网络七层协议"></a>网络七层协议</h4><p>网络七层协议由下往上分别为物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。其中物理层、数据链路层和网络层通常被称作媒体层，是网络工程师所研究的对象；传输层、会话层、表示层和应用层则被称作主机层，是用户所面向和关心的内容。</p>
+<p>HTTP协议对应于应用层，TCP协议对应于传输层，IP协议对应于网络层，HTTP协议是基于TCP连接的,三者本质上没有可比性。 TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。<strong>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，是它的一组接口</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-1ceffddc43357839.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网络七层协议"></p>
+<h4 id="TCP-IP五层模型"><a href="#TCP-IP五层模型" class="headerlink" title="TCP/IP五层模型"></a>TCP/IP五层模型</h4><p>TCP/IP五层模型的协议分为：应用层、传输层、网络层、数据链路层和物理层。中继器、集线器、还有我们通常说的双绞线也工作在物理层；网桥（现已很少使用）、以太网交换机（二层交换机）、网卡（其实网卡是一半工作在物理层、一半工作在数据链路层）在数据链路层；路由器、三层交换机在网络层；传输层主要是四层交换机、也有工作在四层的路由器。</p>
+<p>TCP/IP协议中的应用层处理七层模型中的第五层、第六层和第七层的功能。TCP/IP协议中的传输层并不能总是保证在传输层可靠地传输数据包，而七层模型可以做到。TCP/IP协议还提供一项名为UDP（用户数据报协议）的选择。UDP不能保证可靠的数据包传输。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df46648a7fadfa42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对应关系"></p>
+<blockquote>
+<p>TCP：面向连接、传输可靠(保证数据正确性,保证数据顺序)、用于传输大量数据(流模式)、速度慢，建立连接需要开销较多(时间，系统资源)。<br>UDP：面向非连接、传输不可靠、用于传输少量数据(数据包模式)、速度快。<br>TCP是一种流模式的协议，UDP是一种数据报模式的协议。</p>
+</blockquote>
+<p>在传输数据时，可以只使用传输层（TCP/IP），但是那样的话，由于没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用应用层协议（HTTP、FTP、TELNET等），也可以自己定义应用层协议。</p>
+<p>WEB使用HTTP作传输层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发送到网络上。<strong>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fe177ff611c71d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket的位置"></p>
+<h4 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h4><p>要想明白Socket连接，先要明白TCP连接。手机能够使用联网功能是因为手机底层实现了TCP/IP协议，可以使手机终端通过无线网络建立TCP连接。TCP协议可以对上层网络提供接口，使上层网络数据的传输建立在“无差别”的网络之上。</p>
+<p>建立起一个TCP连接需要经过“三次握手”：<br>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+<p>三次握手(Three-way Handshake)即建立一个TCP连接时，需要客户端和服务器总共发送3个包。三次握手的目的是连接服务器指定端口，建立TCP连接,并同步连接双方的序列号和确认号并交换TCP 窗口大小信息。<strong>在socket编程中，客户端执行connect()时,将触发三次握手</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a3120a20b9393a94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三次握手"></p>
+<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”。</p>
+<p>TCP连接的拆除需要发送四个包，因此称为四次握手(four-way handshake)。在socket编程中，任何一方执行close()操作即可产生握手（有地方称为“挥手”）操作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-26cc9a86da3d9a68.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TCP连接的拆除"></p>
+<p>之所以有“三次握手”和“四次握手”的区别，是因为连接时当Server端收到Client端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，”你发的FIN报文我收到了”。只有等到我Server端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四步握手。</p>
+<h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><p>HTTP协议即超文本传送协议(HypertextTransfer Protocol )，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</p>
+<p>HTTP连接最显著的特点是客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为“一次连接”。因此HTTP连接是一种“短连接”，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。若服务器长时间无法收到客户端的请求，则认为客户端“下线”，若客户端长时间无法收到服务器的回复，则认为网络已经断开。在HTTP 1.0中，客户端的每次请求都要求建立一次单独的连接，在处理完本次请求后，就自动释放连接。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。</p>
+<p><strong>HTTPS</strong>（Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，是HTTP的安全版。 在HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。 HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息。</p>
+<p>https协议需要到ca申请证书；http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议；http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443；http的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-0601aab8deb7df8d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTTPS"></p>
+<h4 id="Socket连接与HTTP连接的不同"><a href="#Socket连接与HTTP连接的不同" class="headerlink" title="Socket连接与HTTP连接的不同"></a>Socket连接与HTTP连接的不同</h4><p><strong>通常情况下Socket连接就是TCP连接</strong>，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际应用中，客户端到服务器之间的通信防火墙默认会关闭长时间处于非活跃状态的连接而导致 Socket 连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态。</p>
+<p>而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;socket（套接字）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。&lt;/p&gt;
+&lt;p&gt;多个TCP连接或多个应用程序进程可能需要通过同
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优秀的团队该不该使用敏捷开发</title>
+    <link href="https://dangdangfeng.github.io/2014/03/31/%E4%BC%98%E7%A7%80%E7%9A%84%E5%9B%A2%E9%98%9F%E8%AF%A5%E4%B8%8D%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/"/>
+    <id>https://dangdangfeng.github.io/2014/03/31/优秀的团队该不该使用敏捷开发/</id>
+    <published>2014-03-30T16:51:30.000Z</published>
+    <updated>2016-08-30T16:53:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。</p>
+<h4 id="敏捷开发的起源"><a href="#敏捷开发的起源" class="headerlink" title="敏捷开发的起源"></a>敏捷开发的起源</h4><p>我们大部分人都学过瀑布开发模型，它是以文档为驱动的。因为在瀑布的整个开发过程中，开发人员根据需求文档进行开发，一切以文档为依据。敏捷开发(Agile Development)是一种以人为核心、迭代、循序渐进的开发方法，是一种软件开发的流程，它会指导我们用规定的环节去一步一步完成项目的开发；而这种开发方式的主要驱动核心是人，注重的是人与人之间，面对面的交流；它只写有必要的文档，或尽量少写文档；采用的是迭代式开发。</p>
+<p>敏捷开发提倡将一个完整的软件版本划分为多个迭代，每个迭代实现不同的特性。重大的、优先级高的特性优先实现，风险高的特性优先实现。在项目的早期就将软件的原型开发出来，并基于这个原型在后续的迭代不断完善。迭代开发的好处是：尽早编码，尽早暴露项目的技术风险。尽早使客户见到可运行的软件，并提出优化意见。可以分阶段提早向不同的客户交付可用的版本。</p>
+<p>在每个迭代中，架构师负责将所有的特性分解成多个Story Card。每个Story可以视为一个独立的特性。每个Story应该可以在最多1个星期内完成开发，交付提前测试（Pre-Test）。当一个迭代中的所有Story开发完毕以后，测试组再进行完整的测试。在整个测试过程中（pre-test，test），基于Daily build，测试组永远都是每天从配置库上取下最新编译的版本进行测试，开发人员也随时修改测试人员提交的问题单，并合入配置库。</p>
+<p>敏捷开发的一个特点是开放式办公，充分沟通，包括测试人员也和开发人员一起办公。基于Story Card的开发方式，团队会在开放式办公区域放置一块白板，上面粘贴着所有的Story Card，按当前的开发状态贴在4个区域中，分别是：未开发，开发中，预测试中，测试中。Story Card的开发人员和测试人员根据开发进度在Story Wall上移动Story Card，更新Story Card的状态。这种方式可以对项目开发进度有一个非常直观的了解。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-004aa1c1a3ae64b0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Story Card"></p>
+<h4 id="敏捷开发宣言"><a href="#敏捷开发宣言" class="headerlink" title="敏捷开发宣言"></a>敏捷开发宣言</h4><p>个体和交互 胜过 过程和工具<br>可以工作的软件 胜过 面面俱到的文档<br>客户合作 胜过 合同谈判<br>响应变化 胜过 遵循计划<br>虽然右项也有价值，但是我们认为左项具有更大的价值。</p>
+<h4 id="敏捷开发的方式"><a href="#敏捷开发的方式" class="headerlink" title="敏捷开发的方式"></a>敏捷开发的方式</h4><p>敏捷开发作为一种指导思想或开发方式，Scrum和XP（Extreme Programming：极限编程）是敏捷开发的具体方式。Scrum和XP的区别是，Scrum偏重于过程，XP则偏重于实践，但是实际中，两者是结合一起应用的。</p>
+<p><strong>Scrum方式</strong><br>Scrum的英文意思是橄榄球运动的一个专业术语，表示“争球”的动作；把一个开发流程的名字取名为Scrum，大家像打橄榄球一样迅速、富有战斗激情，运用该流程，你就能看到你团队高效的工作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df04202048ac2aef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Scrum流程"></p>
+<p>Scrum整个开发过程由若干个短的迭代周期组成，一个短的迭代周期称为一个Sprint，每个Sprint的建议长度是2到4周(互联网产品研发可以使用1周的Sprint)。在Scrum中，使用Product Backlog来管理产品的需求，Product backlog是一个按照商业价值排序的需求列表，Scrum团队总是先开发对客户具有较高价值的需求。在Sprint中，Scrum团队从产品Backlog中挑选最高优先级的需求进行开发。挑选的需求在Sprint计划会议上经过讨论、分析和估算得到相应的任务列表，我们称它为Sprint backlog。在每个迭代结束时，Scrum团队将递交潜在可交付的产品增量。Scrum 采用迭代、增量的方法来优化可预见性并控制风险。</p>
+<p><strong>Scrum开发流程中的三大角色</strong></p>
+<p><strong>产品负责人（Product Owner）</strong><br>主要负责确定产品的功能和达到要求的标准，指定软件的发布日期和交付的内容，同时有权力接受或拒绝开发团队的工作成果。</p>
+<p><strong>流程管理员（Scrum Master）</strong><br>主要负责整个Scrum流程在项目中的顺利实施和进行，以及清除挡在客户和开发工作之间的沟通障碍，使得客户可以直接驱动开发。</p>
+<p><strong>开发团队（Scrum Team）</strong><br>主要负责软件产品在Scrum规定流程下进行开发工作，人数控制在5~10人左右，每个成员可能负责不同的技术方面，但要求每成员必须要有很强的自我管理能力，同时具有一定的表达能力；成员可以采用任何工作方式，只要能达到Sprint的目标。</p>
+<p><strong>进行Scrum开发的流程</strong><br>1、我们首先需要确定一个Product Backlog（按优先顺序排列的一个产品需求列表），这个是由Product Owner 负责的；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-29a29687130c198c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Product Backlog"></p>
+<p>2、Scrum Team根据Product Backlog列表，做工作量的预估和安排；</p>
+<p>3、有了Product Backlog列表，我们需要通过 Sprint Planning Meeting（Sprint计划会议） 来从中挑选出一个Story作为本次迭代完成的目标，这个目标的时间周期是1~4个星期，然后把这个Story进行细化，形成一个Sprint Backlog；</p>
+<p>4、Sprint Backlog是由Scrum Team去完成的，每个成员根据Sprint Backlog再细化成更小的任务（细到每个任务的工作量在2天内能完成）；<br><img src="http://upload-images.jianshu.io/upload_images/1170656-07a127f8cb0397f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="任务看板"><br>5、在Scrum Team完成计划会议上选出的Sprint Backlog过程中，需要进行 Daily Scrum Meeting（每日站立会议），每次会议控制在15分钟左右，每个人都必须发言，并且要向所有成员当面汇报你昨天完成了什么，并且向所有成员承诺你今天要完成什么，同时遇到不能解决的问题也可以提出，每个人回答完成后，要走到黑板前更新自己的 Sprint burn down（Sprint燃尽图）；<br><img src="http://upload-images.jianshu.io/upload_images/1170656-011cfb12ddf531b6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="每日站立会议"><br>6、做到每日集成，也就是每天都要有一个可以成功编译、并且可以演示的版本；很多人可能还没有用过自动化的每日集成，其实TFS就有这个功能，它可以支持每次有成员进行签入操作的时候，在服务器上自动获取最新版本，然后在服务器中编译，如果通过则马上再执行单元测试代码，如果也全部通过，则将该版本发布，这时一次正式的签入操作才保存到TFS中，中间有任何失败，都会用邮件通知项目管理人员；</p>
+<p>7、当一个Story完成，也就是Sprint Backlog被完成，也就表示一次Sprint完成，这时，我们要进行 Srpint Review Meeting（演示会议），也称为评审会议，产品负责人和客户都要参加（最好本公司老板也参加），每一个Scrum Team的成员都要向他们演示自己完成的软件产品（这个会议非常重要，一定不能取消）；</p>
+<p>8、最后就是 Sprint Retrospective Meeting（回顾会议），也称为总结会议，以轮流发言方式进行，每个人都要发言，总结并讨论改进的地方，放入下一轮Sprint的产品需求中；</p>
+<h4 id="XP方式"><a href="#XP方式" class="headerlink" title="XP方式"></a>XP方式</h4><p>极限编程是一个轻量级的、灵巧的软件开发方法；同时它也是一个非常严谨和周密的方法。它的基础和价值观是交流、朴素、反馈和勇气；即，任何一个软件项目都可以从四个方面入手进行改善：加强交流；从简单做起；寻求反馈；勇于实事求是。XP是一种近螺旋式的开发方法，它将复杂的开发过程分解为一个个相对比较简单的小周期；通过积极的交流、反馈以及其它一系列的方法，开发人员和客户可以非常清楚开发进度、变化、待解决的问题和潜在的困难等，并根据实际情况及时地调整开发过程。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-5c12b2fe0fe4e713.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="XP实践"><br><strong>XP的十三种核心实践</strong><br>团队协作(Whole Team)<br>规划策略(The Planning Game)；<br>结对编程(Pair programming)<br>测试驱动开发(Testing-Driven Development)<br>重构(Refactoring)<br>简单设计(Simple Design)<br>代码集体所有权(Collective Code Ownership)<br>持续集成(Continuous Integration)<br>客户测试(Customer Tests)<br>小型发布（Small Release）<br>每周40小时工作制（40-hour Week）<br>编码规范（Code Standards）<br>系统隐喻（System Metaphor）</p>
+<p>关于规划策略：计划是持续的、循序渐进的。每2周，开发人员就为下2周估算候选特性的成本，而客户则根据成本和商务价值来选择要实现的特性。</p>
+<p>关于测试驱动开发：编写单元测试是一个验证行为，更是一个设计行为。同样，它更是一种编写文档的行为。编写单元测试避免了相当数量的反馈循环，尤其是功功能能验证方面的反馈循环。程序员以非常短的循环周期工作，他们先增加一个失败的测试，然后使之通过。</p>
+<p>关于隐喻：隐喻同体系结构是同义词，隐喻用于描述项目的全貌，Story用于描述个别具体的特征。隐喻是将整个系统联系在一起的全局视图；它是系统的未来影像，是它使得所有单独模块的位置和外观变得明显直观。如果模块的外观与整个隐喻不符，那么你就知道该模块是错误的</p>
+<p>XP的一个成功因素是重视客户的反馈——开发的目的就是为了满足客户的需要。XP方法使开发人员始终都能自信地面对客户需求的变化。XP强调团队合作，经理、客户和开发人员都是开发团队中的一员。团队通过相互之间的充分交流和合作，使用XP这种简单但有效的方式，努力开发出高质量的软件。XP的设计简单而高效；程序员们通过测试获得客户反馈，并根据变化修改代码和设计，他们总是争取尽可能早地将软件交付给客户。XP程序员能够勇于面对需求和技术上的变化。</p>
+<h4 id="什么是优秀团队"><a href="#什么是优秀团队" class="headerlink" title="什么是优秀团队"></a>什么是优秀团队</h4><p>有家公司的一个团队的一个项目用的是”敏捷开发方法”，而当时公司的理念恰恰是：开放、协作性强、扁平化团队，以用户为中心；和团队使用的敏捷方法理念正好相同，结果毫无悬疑的拿到了优秀团队奖。即使开发的项目并不是很成功，但公司需要一个团队来做榜样，来激励其他团队，而那里正好有这么一个团队。</p>
+<p>如果做不了优秀的团队，那么就做一个典型的团队，公司需要这么一个做示范的话题。优秀的团队并不是拘泥于某种开发方式的，而是最适合某种方式的。希望您也能在一个优秀的团队。</p>
+<p>孰好孰坏，因人而异了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。&lt;/p&gt;
+&lt;h4 id=&quot;敏
+    
+    </summary>
+    
+    
+      <category term="skill" scheme="https://dangdangfeng.github.io/tags/skill/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何编写稳定流畅的iOS移动端应用</title>
+    <link href="https://dangdangfeng.github.io/2013/12/01/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85%E7%9A%84iOS%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BA%94%E7%94%A8/"/>
+    <id>https://dangdangfeng.github.io/2013/12/01/如何编写稳定流畅的iOS移动端应用/</id>
+    <published>2013-11-30T16:53:32.000Z</published>
+    <updated>2016-08-30T16:54:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="不忘初心"><a href="#不忘初心" class="headerlink" title="不忘初心"></a>不忘初心</h4><p>在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开发应用的时候，人们也开始考虑“移动优先”的做法。我们正在面对全新一代的移动设备，诸如可穿戴设备或众多移动配件——正是它们构成了“万物互联”的世界。我们将面对全新的用户界面，通过它们数据展示及指令接收处理。同时，我们还将看到，越来越多的公司将真正地践行“移动优先”的思路。而在未来数年中，这一切都将影响我们设计、开发和测试软件的方式。</p>
+<p>把一个客户端做得稳定、无奔溃、流畅，是写客户端朋友的梦想，但是，我们面临的结果往往是不如人意的。天下武功，唯快不破。很多公司都信奉这个教条。恨不得把app开发周期压缩到最低,这就导致了开发中隐藏了很多问题。有点经验的工程师草率的优化一下,更糟的情况是那些没有经验的工程师甚至不会对app进行任何优化，这将会使情况变的更糟。</p>
+<p>十年前,移动设备的硬件资源是非常有限的.甚至连浮点数都是被禁止的.因为浮点数能导致计算的速度变慢。科技发展如此迅速的今天,硬件很大程度上可以弥补软件的短板。但是硬件的进步终究无法掩饰软件的不足，这也是写这篇文章的初心。</p>
+<h4 id="移动端关注要点"><a href="#移动端关注要点" class="headerlink" title="移动端关注要点"></a>移动端关注要点</h4><p>在程序开发中，测试是必不可少的。移动端测试按大的类型划分可以分为白盒测试和黑盒测试。</p>
+<p>白盒测试一般是由开发人员使用编码的方式进行。测试者需要接触程序的内部代码；而黑盒测试可以在不知道程序内部结构和代码的情况下进行。</p>
+<p>下面是主要的测试流程了：<br>冒烟测试：在软件测试中，冒烟测试是指快速验证APP的主要功能（例如：微信的登陆、退出、发消息等功能） 。如果没有发现问题，再进行更加深入的测试工作；如果发现有问题，就说明APP有重大缺陷。</p>
+<p>功能测试：功能测试也叫行为测试，需要根据测试用例来验证应用预期的功能有没有实现。</p>
+<p>自由探索式测试：尝试边界条件、输入特殊符号、异常网络环境、突然中断程序等操作 。功能测试的目的是验证正常的功能有没有实现，而自由探索测试的目的就是为了试试应用在极端的操作下会不会出现问题。探索式测试就是要找到能让应用出错的操作。</p>
+<p>回归测试：对之前使用我们的服务测试过的应用，将案例复测一遍。</p>
+<p><strong>移动端关注的一些指标</strong><br>运行多少小时不崩溃；<br>多次打开页面，控制崩溃率；<br>界面优化，如何才能让用户不急躁、不烦躁；<br>服务器没有返回数据，是否会导致奔溃；<br>网络不好，数据来的太慢，界面是否不流畅；<br>从数据库读的数据太慢如何解决等。</p>
+<p>移动端界面应该有自己的逻辑，需要网络数据的地方，应该有默认值，这样在网络数据没有返回的情况下，让用户有数据可以看到。收到的网络数据应该是通过某种方式刷新到界面，而不是等到数据返回才刷新页面。当没有网络数据的时候，界面应该可以自成一体，走的通流程，不强依赖网络数据。</p>
+<p>在弱网模式下调试是我们必备的功力，因为我们要考虑用户的实施环境通常都不会很好。把经常使用的数据，存到缓存，提高APP的运行效率、界面流程度。同时，我们需要具备收集奔溃日志的功能，这样才能更好的减少崩溃，提高用户体验。</p>
+<h4 id="界面卡顿产生的原因和解决方案"><a href="#界面卡顿产生的原因和解决方案" class="headerlink" title="界面卡顿产生的原因和解决方案"></a>界面卡顿产生的原因和解决方案</h4><p>iOS界面处理是在主线程下进行的，系统图形服务通过 CADisplayLink 等机制通知 App，App 主线程开始在 CPU 中计算显示内容，比如视图的创建、布局计算、图片解码、文本绘制等。随后 CPU 会将计算好的内容提交到 GPU 去，由 GPU 进行变换、合成、渲染。随后 GPU 会把渲染结果提交到帧缓冲区去，等待下一次刷新信号到来时显示到屏幕上。显示器通常以固定频率进行刷新，如果在一个刷新时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就是界面卡顿的原因。CPU 和 GPU 不论哪个阻碍了显示流程，都会造成掉帧现象。</p>
+<p>CPU 造成的资源消耗有以下几种：</p>
+<ul>
+<li>对象创建</li>
+<li>对象调整</li>
+<li>对象销毁</li>
+<li>布局计算</li>
+<li>Autolayout</li>
+<li>文本计算</li>
+<li>文本渲染</li>
+<li>图片的绘制和解码</li>
+</ul>
+<p>GPU 资源消耗有下面几种情况：</p>
+<ul>
+<li>纹理的渲染</li>
+<li>视图的混合 (Composing)</li>
+<li>图形的生成等</li>
+</ul>
+<p>具体可以参考<a href="http://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="external">这篇文章</a></p>
+<h4 id="用-Instruments-来检验你的app"><a href="#用-Instruments-来检验你的app" class="headerlink" title="用 Instruments 来检验你的app"></a>用 Instruments 来检验你的app</h4><p><strong>时间事件查看器-Time Profiler</strong><br>在xcode的菜单中选择 product-&gt;Profile<br>我们会看到下面的界面：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-11be1e08fd9ed911.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Instruments"><br>点击Time Profiler进入。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-40bdb36ac65cdc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Time Profiler"><br>下面我们来深究如下的控制面板：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-d6755d42a68acf4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="控制面板"></p>
+<p>以下介绍下配置选项：</p>
+<ol>
+<li>Separate by Thread: 每个线程应该分开考虑。只有这样你才能揪出那些大量占用CPU的”重”线程。</li>
+<li>Invert Call Tree: 从上倒下跟踪堆栈,这意味着你看到的表中的方法,将已从第0帧开始取样,这通常你是想要的,只有这样你才能看到CPU中话费时间最深的方法.也就是说FuncA{FunB{FunC}} 勾选此项后堆栈以C-&gt;B-A 把调用层级最深的C显示在最外面。</li>
+<li>Hide System Libraries: 勾选此项你会显示你app的代码,这是非常有用的. 因为通常你只关心cpu花在自己代码上的时间不是系统上的。</li>
+<li>Flatten Recursion: 递归函数, 每个堆栈跟踪一个条目。</li>
+<li>Top Functions: 一个函数花费的时间直接在该函数中的总和，以及在函数调用该函数所花费的时间的总时间。因此，如果函数A调用B，那么A的时间报告在A花费的时间加上B.花费的时间,这非常真有用，因为它可以让你每次下到调用堆栈时挑最大的时间数字，归零在你最耗时的方法。</li>
+</ol>
+<p>找到Detail面板里最耗时的进程，点击进去可以看到代码，观察是否有异，如此便可逐步优化应用的运行效果了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-709a8715b9a6c191.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改"></p>
+<p>修改好后,在仪器重新运行该应用程序Product—Profile（或⌘I-记住，这些快捷键真的会为您节省一些时间）。<br><strong>分配工具</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-c1f214001adad7e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分配工具"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e1619715fecd3f4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击进入"></p>
+<p>这个时候你会发现两个曲目。一个叫(分配)Allocations，以及一个被称为VM Tracker(虚拟机跟踪)。</p>
+<p>内存泄漏有两种泄漏。第一个是真正的内存泄漏，一个对象尚未被释放，但是不再被引用的了。因此，存储器不能被重新使用。第二类泄漏是比较麻烦一些。这就是所谓的“无界内存增长”。这发生在内存继续分配，并永远不会有机会被释放。如果永远这样下去你的程序占用的内存会无限大,当超过一定内存的话 会被系统的看门狗给kill掉。</p>
+<p>内存警告是ios处理app最好的方式，尤其是在内存越来越吃紧的时候,你需要清除一些内存。内存一直增长其实也不一定是你的代码出了问题,也有可能是UIKit 系统框架本身导致的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a22007e5806c3b75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="尝试"><br>自己动手观察下，一切自然明了。</p>
+<p><strong>内存泄露</strong><br>这一类泄漏是前面提到的 - 当一个对象不再被引用时出现的那种,检测泄漏可以理解为一个很复杂的事情，但泄漏的工具记得已分配的所有对象，通过定期扫描每个对象以确定是否有任何不能从任何其他对象访问的。</p>
+<p>关闭仪器，回到Xcode和选择Product-&gt;Profile</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-46943f0933d55df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存泄露"></p>
+<p>点击进入，运行：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f69162d70c7f254a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行"></p>
+<p>自己动手尝试下，找到右边面板里，如果有黑色标识的方法，进入看看。学习就是多尝试。</p>
+<p>篇幅有限，更多的内容我们下次再聊。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;不忘初心&quot;&gt;&lt;a href=&quot;#不忘初心&quot; class=&quot;headerlink&quot; title=&quot;不忘初心&quot;&gt;&lt;/a&gt;不忘初心&lt;/h4&gt;&lt;p&gt;在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
     <title>从0开始看一个项目</title>
     <link href="https://dangdangfeng.github.io/2013/10/01/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9C%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/"/>
     <id>https://dangdangfeng.github.io/2013/10/01/从0开始看一个项目/</id>
@@ -1431,6 +1727,35 @@ Content-Length: 12173
 &lt;li&gt;HTTPS&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谈谈C的性能特点</title>
+    <link href="https://dangdangfeng.github.io/2010/08/31/%E8%B0%88%E8%B0%88C%E7%9A%84%E6%80%A7%E8%83%BD%E7%89%B9%E7%82%B9/"/>
+    <id>https://dangdangfeng.github.io/2010/08/31/谈谈C的性能特点/</id>
+    <published>2010-08-30T16:48:11.000Z</published>
+    <updated>2016-08-30T16:49:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional language)，如Haskell,Lisp。函数式语言更像数学，命令式语言更接近人的思维。</p>
+<h4 id="C语言的特性"><a href="#C语言的特性" class="headerlink" title="C语言的特性"></a>C语言的特性</h4><p>C语言的典型特征是编译型语言(compiled language)（相对于解释型语言来说）、命令式的、人工管理内存 。对于编译型语言，程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接运行编译的结果就行了，<strong>因此效率高</strong>。 以此相对，解释型语言程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次，因此<strong>效率比较低</strong>。由此，当涉及到速度，内存，低层次特性(low-level features)如：移动stack pointer等常会使用C语言。</p>
+<p>从内存的角度思考C语言，相对于其他语言，<strong>汇编语言直接操作内存；C、C++访问内存；Java,C#,Scheme/LISP,ML使用的是内存自动管理机制</strong>。 C语言通过堆(heap)和栈（stack）访问的内存，C函数将会分配到棧中，函数在被调用时进棧(pushed on to stack)， 函数在返回时出棧(popefd off the stack)，函数能访问当前棧顶部以下的所有内存；堆是一块儿用于动态内存分配的内存区域，可以把它想像称为一个巨大的数组 ，通过指针(pointer)来访问，如果操作系统允许，整个程序都能访问堆。C语言人工内存管理目的是允许程序能够分配内存用于当前的使用 ；当程序执行完后，能够释放内存，用于重新分配 ，C语言的标准类库中有malloc和free两个函数支持内存管理 。从内存的层面，C语言虽然使用起来更复杂些，但在可操作性上更好一些，毕竟自动内存管理，内存的释放不是立即的。</p>
+<p>C语言比起其他的高级语言来说，更接近计算机，也就是说，它介于高级语言和汇编语言之间，通常来说比其他高级语言执行效率更高一点。当然，C语言的函数化特点（即所有C程序都是由函数构成）和灵活的语法也是吸引程序设计者的地方。</p>
+<h4 id="C语言的优势"><a href="#C语言的优势" class="headerlink" title="C语言的优势"></a>C语言的优势</h4><p>C语言一共只有32个关键字，9种控制语句，程序书写形式自由，区分大小写。把高级语言的基本结构和语句与低级语言的实用性结合起来。C语言允许直接访问物理地址，可以直接对硬件进行操作，因此它既具有高级语言的功能，又具有低级语言的许多功能，C语言可以像汇编语言一样对<strong>位、字节和地址</strong>进行操作，而这三者是计算机最基本的工作单元，可用来写系统软件，又可用来开发应用软件，已成为一种通用程序设计语言。另外C语言具有强大的图形功能，支持多种显示器和驱动器。且计算功能、逻辑判断功能强大。    </p>
+<p>C语言的运算符包含的范围很广泛，共有34种运算符。C语言把括号、赋值、强制类型转换等都作为运算符处理。从而使C语言的运算类型极其丰富，表达式类型多样化。灵活使用各种运算符可以实现在其它高级语言中难以实现的运算。 C语言的数据类型有：整型、实型、字符型、数组类型、指针类型、结构体类型、共用体类型等。能用来实现各种复杂的数据结构的运算。并引入了指针概念，使程序效率更高。    </p>
+<p>C语言生成目标代码质量高，程序执行效率高，C语言描述问题比汇编语言迅速，工作量小、可读性好，易于调试、修改和移植，而代码质量与汇编语言相当。C语言一般只比汇编程序生成的目标代码效率低10%～20%。可移植性好，C语言在不同机器上的C编译程序，86%的代码是公共的，所以C语言的编译程序便于移植。在一个环境上用C语言编写的程序，不改动或稍加改动，就可移植到另一个完全不同的环境中运行。    </p>
+<h4 id="当前新发明的语言Swift的比较"><a href="#当前新发明的语言Swift的比较" class="headerlink" title="当前新发明的语言Swift的比较"></a>当前新发明的语言Swift的比较</h4><p>Swift包含了很多现代语言特性尤其是从一些脚本语言如Javascript/Ruby中汲取了营养，此外苹果发布Swift时，使用特别选用的一些例子来宣称Swift性能对于Ojbective C的大幅提升（40~50%），如复杂对象排序等。但是开发者实际测试出来的情况却相反。实际数据显示，Swift在简单循环、递增、赋值、数组扩展、字符串拼接上性能远不如Objective C。可能的一个解释是Swift使用类classes，总在执行ARC（Auto Referrence Count），而Objective C则更多使用C风格的数据类型。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ef4897116759a68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional lang
     
     </summary>
     

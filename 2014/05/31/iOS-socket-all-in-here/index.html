@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>iOS socket all in here | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2014-05-30T16:49:55.000Z" itemprop="datePublished">
+          2014-05-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>iOS socket all in here</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>socket（套接字）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
+<p>多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
+<p>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket，另一个运行于服务器端，称为ServerSocket。套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
+<p>Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接,UDP连接同理。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6b9392fad31b711d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket使用"></p>
+<h4 id="socket使用的库函数"><a href="#socket使用的库函数" class="headerlink" title="socket使用的库函数"></a>socket使用的库函数</h4><p>1.创建套接字</p>
+<pre><code>Socket(af,type,protocol)//建立地址和套接字的联系
+
+bind(sockid, local addr, addrlen)//服务器端侦听客户端的请求
+
+listen( Sockid ,quenlen)//建立服务器/客户端的连接 (面向连接TCP）
+</code></pre><p>2.客户端请求连接</p>
+<pre><code>Connect(sockid, destaddr, addrlen)//服务器端等待从编号为Sockid的Socket上接收客户连接请求
+
+newsockid=accept(Sockid，Clientaddr, paddrlen)//发送/接收数据
+</code></pre><p>3.面向连接：</p>
+<pre><code>send(sockid, buff, bufflen) 
+recv( )
+</code></pre><p>4.面向无连接：</p>
+<pre><code>sendto(sockid,buff,…,addrlen) 
+recvfrom( )
+</code></pre><p>5.释放套接字</p>
+<pre><code>close(socked)
+</code></pre><p>在iOS中以NSStream(流)来发送和接收数据,可以设置流的代理，对流状态的变化做出相应的动作(连接建立，接收到数据，连接关闭）。</p>
+<p>NSStream：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)<br>NSInputStream：NSStream的子类，用于读取输入<br>NSOutputStream：NSSTream的子类，用于写输出。</p>
+<p>服务端先不提，客户端代码大概如下：</p>
+<pre><code>//需要导入&lt;arpa/inet.h&gt;，&lt;netdb.h&gt;
+- (void)test
+{
+NSString * host =@&quot;123.33.33.1&quot;;
+NSNumber * port = @1233;
+
+// 创建 socket
+int socketFileDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+if (-1 == socketFileDescriptor) {
+    NSLog(@&quot;创建失败&quot;);
+    return;
+}
+
+// 获取 IP 地址 
+struct hostent * remoteHostEnt = gethostbyname([host UTF8String]);
+if (NULL == remoteHostEnt) {
+    close(socketFileDescriptor);
+     NSLog(@&quot;%@&quot;,@&quot;无法解析服务器的主机名&quot;);
+    return;
+}
+
+struct in_addr * remoteInAddr = (struct in_addr *)remoteHostEnt-&gt;h_addr_list[0];
+
+// 设置 socket 参数
+struct sockaddr_in socketParameters;
+socketParameters.sin_family = AF_INET;
+socketParameters.sin_addr = *remoteInAddr;
+socketParameters.sin_port = htons([port intValue]);
+
+// 连接 socket
+int ret = connect(socketFileDescriptor, (struct sockaddr *) &amp;socketParameters, sizeof(socketParameters));
+if (-1 == ret) {
+    close(socketFileDescriptor);
+    NSLog(@&quot;连接失败&quot;);
+    return;
+}
+
+NSLog(@&quot;连接成功&quot;);
+}
+</code></pre><p>大概就是这样，因为是C语言的，所以看起来不是很方便，一般开发中都会使用比较简单的方法，如下。</p>
+<h4 id="CocoaAsyncSocket"><a href="#CocoaAsyncSocket" class="headerlink" title="CocoaAsyncSocket"></a>CocoaAsyncSocket</h4><p>iOS的socket实现是特别简单的，可以使用用github的开源类库<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="external">cocoaasyncsocket</a>简化开发，cocoaasyncsocket是支持tcp和ump的。代码大概如下：</p>
+<pre><code>- (IBAction)connectToServer:(id)sender {
+// 1.与服务器通过三次握手建立连接
+NSString *host = @&quot;133.33.33.1&quot;;
+int port = 1212;
+
+//创建一个socket对象
+_socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+
+//连接
+NSError *error = nil;
+[_socket connectToHost:host onPort:port error:&amp;error];
+
+if (error) {
+    NSLog(@&quot;%@&quot;,error);
+}
+}
+
+
+#pragma mark -socket的代理
+#pragma mark 连接成功
+-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+NSLog(@&quot;%s&quot;,__func__);
+}
+
+
+#pragma mark 断开连接
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+if (err) {
+    NSLog(@&quot;连接失败&quot;);
+}else{
+    NSLog(@&quot;正常断开&quot;);
+}
+}
+
+
+#pragma mark 数据发送成功
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+NSLog(@&quot;%s&quot;,__func__);
+
+//发送完数据手动读取，-1不设置超时
+[sock readDataWithTimeout:-1 tag:tag];
+}
+
+#pragma mark 读取数据
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+NSString *receiverStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+NSLog(@&quot;%s %@&quot;,__func__,receiverStr);
+}
+</code></pre><p>下面是原理补充，有兴趣的朋友可以细看。</p>
+<hr>
+<h4 id="网络七层协议"><a href="#网络七层协议" class="headerlink" title="网络七层协议"></a>网络七层协议</h4><p>网络七层协议由下往上分别为物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。其中物理层、数据链路层和网络层通常被称作媒体层，是网络工程师所研究的对象；传输层、会话层、表示层和应用层则被称作主机层，是用户所面向和关心的内容。</p>
+<p>HTTP协议对应于应用层，TCP协议对应于传输层，IP协议对应于网络层，HTTP协议是基于TCP连接的,三者本质上没有可比性。 TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。<strong>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，是它的一组接口</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-1ceffddc43357839.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网络七层协议"></p>
+<h4 id="TCP-IP五层模型"><a href="#TCP-IP五层模型" class="headerlink" title="TCP/IP五层模型"></a>TCP/IP五层模型</h4><p>TCP/IP五层模型的协议分为：应用层、传输层、网络层、数据链路层和物理层。中继器、集线器、还有我们通常说的双绞线也工作在物理层；网桥（现已很少使用）、以太网交换机（二层交换机）、网卡（其实网卡是一半工作在物理层、一半工作在数据链路层）在数据链路层；路由器、三层交换机在网络层；传输层主要是四层交换机、也有工作在四层的路由器。</p>
+<p>TCP/IP协议中的应用层处理七层模型中的第五层、第六层和第七层的功能。TCP/IP协议中的传输层并不能总是保证在传输层可靠地传输数据包，而七层模型可以做到。TCP/IP协议还提供一项名为UDP（用户数据报协议）的选择。UDP不能保证可靠的数据包传输。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df46648a7fadfa42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对应关系"></p>
+<blockquote>
+<p>TCP：面向连接、传输可靠(保证数据正确性,保证数据顺序)、用于传输大量数据(流模式)、速度慢，建立连接需要开销较多(时间，系统资源)。<br>UDP：面向非连接、传输不可靠、用于传输少量数据(数据包模式)、速度快。<br>TCP是一种流模式的协议，UDP是一种数据报模式的协议。</p>
+</blockquote>
+<p>在传输数据时，可以只使用传输层（TCP/IP），但是那样的话，由于没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用应用层协议（HTTP、FTP、TELNET等），也可以自己定义应用层协议。</p>
+<p>WEB使用HTTP作传输层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发送到网络上。<strong>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fe177ff611c71d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket的位置"></p>
+<h4 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h4><p>要想明白Socket连接，先要明白TCP连接。手机能够使用联网功能是因为手机底层实现了TCP/IP协议，可以使手机终端通过无线网络建立TCP连接。TCP协议可以对上层网络提供接口，使上层网络数据的传输建立在“无差别”的网络之上。</p>
+<p>建立起一个TCP连接需要经过“三次握手”：<br>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+<p>三次握手(Three-way Handshake)即建立一个TCP连接时，需要客户端和服务器总共发送3个包。三次握手的目的是连接服务器指定端口，建立TCP连接,并同步连接双方的序列号和确认号并交换TCP 窗口大小信息。<strong>在socket编程中，客户端执行connect()时,将触发三次握手</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a3120a20b9393a94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三次握手"></p>
+<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”。</p>
+<p>TCP连接的拆除需要发送四个包，因此称为四次握手(four-way handshake)。在socket编程中，任何一方执行close()操作即可产生握手（有地方称为“挥手”）操作。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-26cc9a86da3d9a68.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TCP连接的拆除"></p>
+<p>之所以有“三次握手”和“四次握手”的区别，是因为连接时当Server端收到Client端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，”你发的FIN报文我收到了”。只有等到我Server端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四步握手。</p>
+<h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><p>HTTP协议即超文本传送协议(HypertextTransfer Protocol )，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</p>
+<p>HTTP连接最显著的特点是客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为“一次连接”。因此HTTP连接是一种“短连接”，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。若服务器长时间无法收到客户端的请求，则认为客户端“下线”，若客户端长时间无法收到服务器的回复，则认为网络已经断开。在HTTP 1.0中，客户端的每次请求都要求建立一次单独的连接，在处理完本次请求后，就自动释放连接。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。</p>
+<p><strong>HTTPS</strong>（Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，是HTTP的安全版。 在HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。 HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息。</p>
+<p>https协议需要到ca申请证书；http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议；http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443；http的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-0601aab8deb7df8d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTTPS"></p>
+<h4 id="Socket连接与HTTP连接的不同"><a href="#Socket连接与HTTP连接的不同" class="headerlink" title="Socket连接与HTTP连接的不同"></a>Socket连接与HTTP连接的不同</h4><p><strong>通常情况下Socket连接就是TCP连接</strong>，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际应用中，客户端到服务器之间的通信防火墙默认会关闭长时间处于非活跃状态的连接而导致 Socket 连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态。</p>
+<p>而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2014/05/31/iOS-socket-all-in-here/" data-title="iOS socket all in here" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="iOS socket all in here 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2014/08/30/如何优雅的谈论OC/" style="float: left;">
+        ← 如何优雅的谈论OC
+    </a>
+    
+    
+    <a class="pull-right" href="/2014/03/31/优秀的团队该不该使用敏捷开发/">
+        优秀的团队该不该使用敏捷开发 →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2014/05/31/iOS-socket-all-in-here/" data-title="iOS socket all in here" data-url="https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

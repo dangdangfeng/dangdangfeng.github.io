@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>About Me | 流城</title>
+  <title>谈谈C的性能特点 | 流城</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -193,104 +193,97 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1>About Me</h1>
+    			<span class="post-meta">
+      <time datetime="2010-08-30T16:48:11.000Z" itemprop="datePublished">
+          2010-08-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>谈谈C的性能特点</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <p>My name is Wu Bai(吴白). You can call me Deter. I was born in 1990s.</p>
-<p>I am an IT developer focusing on iOS technology and U3d and back-end technology, and a strong advocate and believer of Free Software. Now I am employed by Gome as an iOS engineer.I have an BE degree, and once worked for YinTai as an engineer.</p>
-<p>In spare time, I like reading book, surfing internet, watching movie and taking a leisurely walk outdoors.</p>
-<p>I love my life and I have my life.</p>
+      		<p>C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional language)，如Haskell,Lisp。函数式语言更像数学，命令式语言更接近人的思维。</p>
+<h4 id="C语言的特性"><a href="#C语言的特性" class="headerlink" title="C语言的特性"></a>C语言的特性</h4><p>C语言的典型特征是编译型语言(compiled language)（相对于解释型语言来说）、命令式的、人工管理内存 。对于编译型语言，程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接运行编译的结果就行了，<strong>因此效率高</strong>。 以此相对，解释型语言程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次，因此<strong>效率比较低</strong>。由此，当涉及到速度，内存，低层次特性(low-level features)如：移动stack pointer等常会使用C语言。</p>
+<p>从内存的角度思考C语言，相对于其他语言，<strong>汇编语言直接操作内存；C、C++访问内存；Java,C#,Scheme/LISP,ML使用的是内存自动管理机制</strong>。 C语言通过堆(heap)和栈（stack）访问的内存，C函数将会分配到棧中，函数在被调用时进棧(pushed on to stack)， 函数在返回时出棧(popefd off the stack)，函数能访问当前棧顶部以下的所有内存；堆是一块儿用于动态内存分配的内存区域，可以把它想像称为一个巨大的数组 ，通过指针(pointer)来访问，如果操作系统允许，整个程序都能访问堆。C语言人工内存管理目的是允许程序能够分配内存用于当前的使用 ；当程序执行完后，能够释放内存，用于重新分配 ，C语言的标准类库中有malloc和free两个函数支持内存管理 。从内存的层面，C语言虽然使用起来更复杂些，但在可操作性上更好一些，毕竟自动内存管理，内存的释放不是立即的。</p>
+<p>C语言比起其他的高级语言来说，更接近计算机，也就是说，它介于高级语言和汇编语言之间，通常来说比其他高级语言执行效率更高一点。当然，C语言的函数化特点（即所有C程序都是由函数构成）和灵活的语法也是吸引程序设计者的地方。</p>
+<h4 id="C语言的优势"><a href="#C语言的优势" class="headerlink" title="C语言的优势"></a>C语言的优势</h4><p>C语言一共只有32个关键字，9种控制语句，程序书写形式自由，区分大小写。把高级语言的基本结构和语句与低级语言的实用性结合起来。C语言允许直接访问物理地址，可以直接对硬件进行操作，因此它既具有高级语言的功能，又具有低级语言的许多功能，C语言可以像汇编语言一样对<strong>位、字节和地址</strong>进行操作，而这三者是计算机最基本的工作单元，可用来写系统软件，又可用来开发应用软件，已成为一种通用程序设计语言。另外C语言具有强大的图形功能，支持多种显示器和驱动器。且计算功能、逻辑判断功能强大。    </p>
+<p>C语言的运算符包含的范围很广泛，共有34种运算符。C语言把括号、赋值、强制类型转换等都作为运算符处理。从而使C语言的运算类型极其丰富，表达式类型多样化。灵活使用各种运算符可以实现在其它高级语言中难以实现的运算。 C语言的数据类型有：整型、实型、字符型、数组类型、指针类型、结构体类型、共用体类型等。能用来实现各种复杂的数据结构的运算。并引入了指针概念，使程序效率更高。    </p>
+<p>C语言生成目标代码质量高，程序执行效率高，C语言描述问题比汇编语言迅速，工作量小、可读性好，易于调试、修改和移植，而代码质量与汇编语言相当。C语言一般只比汇编程序生成的目标代码效率低10%～20%。可移植性好，C语言在不同机器上的C编译程序，86%的代码是公共的，所以C语言的编译程序便于移植。在一个环境上用C语言编写的程序，不改动或稍加改动，就可移植到另一个完全不同的环境中运行。    </p>
+<h4 id="当前新发明的语言Swift的比较"><a href="#当前新发明的语言Swift的比较" class="headerlink" title="当前新发明的语言Swift的比较"></a>当前新发明的语言Swift的比较</h4><p>Swift包含了很多现代语言特性尤其是从一些脚本语言如Javascript/Ruby中汲取了营养，此外苹果发布Swift时，使用特别选用的一些例子来宣称Swift性能对于Ojbective C的大幅提升（40~50%），如复杂对象排序等。但是开发者实际测试出来的情况却相反。实际数据显示，Swift在简单循环、递增、赋值、数组扩展、字符串拼接上性能远不如Objective C。可能的一个解释是Swift使用类classes，总在执行ARC（Auto Referrence Count），而Objective C则更多使用C风格的数据类型。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ef4897116759a68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C"></p>
 
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2010/08/31/谈谈C的性能特点/" data-title="谈谈C的性能特点" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="谈谈C的性能特点 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2010/08/31/谈谈C的性能特点/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
         
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/" style="float: left;">
+        ← 如何优雅的谈论HTTP／1.0／1.1／2.0
+    </a>
+    
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2010/08/31/谈谈C的性能特点/" data-title="谈谈C的性能特点" data-url="https://dangdangfeng.github.io/2010/08/31/谈谈C的性能特点/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2008/09/12-2012/06/12 Bachelor degree</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>YinTai</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>Gome</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
-        </div>
-    </div>
-</section>
+
 
       
 <!-- ============================ Footer =========================== -->

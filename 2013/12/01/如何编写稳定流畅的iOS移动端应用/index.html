@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>从0开始看一个项目 | 流城</title>
+  <title>如何编写稳定流畅的iOS移动端应用 | 流城</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -199,26 +199,79 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2013-10-01T02:40:37.000Z" itemprop="datePublished">
-          2013-10-01
+      <time datetime="2013-11-30T16:53:32.000Z" itemprop="datePublished">
+          2013-12-01
       </time>
     
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
 </span>
-                <h1>从0开始看一个项目</h1>
+                <h1>如何编写稳定流畅的iOS移动端应用</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>在着手一个项目前<strong>先读文档</strong>（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就看他的<strong>测试用例</strong>，也是有一样的功效的。因为测试都是从文档出发编写的，而不是从代码出发编写的。找不到文档和测试用例？那就直接Gank吧。</p>
-<p><strong>读代码要层次化、带着问题去阅读</strong>。首先整体了解这个软件是干什么？解决什么问题？包含哪些大的模块，各个模块的作用是什么，各个模块的调用关系怎么样？然后对于每一个模块，这个模块是干什么的？为什么要有这个模块？这个模块怎么实现的？最后细化到每一个包，每一个类，每一个函数方法。从上到下，一一击破每一个问题，认真去<strong>思考</strong>他这样设计、写代码的好处，因为好的软件都会满足这种从抽象-&gt;具体的原则的。</p>
-<p>在开始读具体代码前<strong>定位好所有要读的文件</strong>，知道他们的位置和名字，设计良好的工程光看工程的目录结构和文件名就能知道个大概功能了。事实上阅读代码的难易程度70%取决于代码书写的规范程度，写乱掉的代码，大师也读不懂。之后根据你对目录结构的理解确定文件阅读的顺序（我反正都是从main函数开始读的）。你最好对<strong>设计模式</strong>有一定了解，否则你读面向对象的code时会经常无法理解code为啥要弄得这么层层嵌套。阅读代码一个最重要的提升水平的地方就是理解好的代码如何合理使用设计模式。基本的阅读起点都会选择main函数或者类的构造函数。然后把自己想象成cpu执行程序那样去阅读你的代码。遇到需要跳转函数时，不要急于跳转，以了解函数功能和输入输出为目标，读代码最忌讳的是不抓结构抓细节，只见树木不见森林，<strong>比起某个函数具体功能来说对结构的全局把握更重要</strong>。功能了解清楚后继续跳回来（这里就可以区分代码写的优不优秀，优秀的代码光看函数名字就知道功能，连跳转都不用）。结构弄清楚了，知道程序怎么跑了，source code的精华你已经读了60%了，之后根据需要再对具体函数深入分析，到这里整个代码已经被你扒光了，没什么神秘了。</p>
-<p>阅读代码有两种模式：<strong>top-down</strong> 和 <strong>bottom-up</strong>。Top-down 模式，就是先设定一个 use case，比如说打开一个文件。然后静态跟着代码看，或者用 debugger 跟着看。每次出现函数调用的时候，把函数的执行层次纪录下来。大致如下：</p>
-<pre><code>func1( )
-   func2(  )
-       func(  )
-   func3(  )
-</code></pre><p>这种图表很随意，你可以根据自己的需要增加信息，可以把重要的「实际参数」一直标下来，画函数调用图，然后标注每个函数在干什么。不过这个图无法清楚地表明一个变量的轨迹，需要另外的图来标示变量的变化轨迹。要是想提高阅读代码的速度，归根结底要多读多写。熟悉程序的基本构成单元（例如循环、分支）的常见写法，各种lib, api的调用方式。这样阅读深层次代码不用再回头查形式参数到底指什么。这个图的基本作用是防止在阅读深层次代码时忘记总体执行层次。Top-down 模式进行到一定层次，往往会发现虽然图画了出来，但还是无法了解程序在干什么。这时需要转入 bottom-up 模式，一直深入到最底层，给能了解作用的底层函数一个一个的写文档。当然这时的文档是完全底层的观点。bottom-up的阅读方法，有时候会一头扎进去，出不来了。这种方式适合读一些比较优秀的开源项目的代码，也会很好地提高内功。然后就是不断在两个模式之间转换，不断的细化两种模式的理解。</p>
-<p>最后，对于OC工程可以去GitHub找<a href="https://github.com/RuiAAPeres/UIViewController-Swizzled" target="_blank" rel="external">UIViewController-Swizzled</a>这个库，拉下来放到项目里，他有什么用呢？他可以把每个页面的类名打出来。而且有层次结构，也就是说你只需要打开项目点点点，就知道这个App运行的顺序了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-299eea93eaaceba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目"></p>
+      		<h4 id="不忘初心"><a href="#不忘初心" class="headerlink" title="不忘初心"></a>不忘初心</h4><p>在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开发应用的时候，人们也开始考虑“移动优先”的做法。我们正在面对全新一代的移动设备，诸如可穿戴设备或众多移动配件——正是它们构成了“万物互联”的世界。我们将面对全新的用户界面，通过它们数据展示及指令接收处理。同时，我们还将看到，越来越多的公司将真正地践行“移动优先”的思路。而在未来数年中，这一切都将影响我们设计、开发和测试软件的方式。</p>
+<p>把一个客户端做得稳定、无奔溃、流畅，是写客户端朋友的梦想，但是，我们面临的结果往往是不如人意的。天下武功，唯快不破。很多公司都信奉这个教条。恨不得把app开发周期压缩到最低,这就导致了开发中隐藏了很多问题。有点经验的工程师草率的优化一下,更糟的情况是那些没有经验的工程师甚至不会对app进行任何优化，这将会使情况变的更糟。</p>
+<p>十年前,移动设备的硬件资源是非常有限的.甚至连浮点数都是被禁止的.因为浮点数能导致计算的速度变慢。科技发展如此迅速的今天,硬件很大程度上可以弥补软件的短板。但是硬件的进步终究无法掩饰软件的不足，这也是写这篇文章的初心。</p>
+<h4 id="移动端关注要点"><a href="#移动端关注要点" class="headerlink" title="移动端关注要点"></a>移动端关注要点</h4><p>在程序开发中，测试是必不可少的。移动端测试按大的类型划分可以分为白盒测试和黑盒测试。</p>
+<p>白盒测试一般是由开发人员使用编码的方式进行。测试者需要接触程序的内部代码；而黑盒测试可以在不知道程序内部结构和代码的情况下进行。</p>
+<p>下面是主要的测试流程了：<br>冒烟测试：在软件测试中，冒烟测试是指快速验证APP的主要功能（例如：微信的登陆、退出、发消息等功能） 。如果没有发现问题，再进行更加深入的测试工作；如果发现有问题，就说明APP有重大缺陷。</p>
+<p>功能测试：功能测试也叫行为测试，需要根据测试用例来验证应用预期的功能有没有实现。</p>
+<p>自由探索式测试：尝试边界条件、输入特殊符号、异常网络环境、突然中断程序等操作 。功能测试的目的是验证正常的功能有没有实现，而自由探索测试的目的就是为了试试应用在极端的操作下会不会出现问题。探索式测试就是要找到能让应用出错的操作。</p>
+<p>回归测试：对之前使用我们的服务测试过的应用，将案例复测一遍。</p>
+<p><strong>移动端关注的一些指标</strong><br>运行多少小时不崩溃；<br>多次打开页面，控制崩溃率；<br>界面优化，如何才能让用户不急躁、不烦躁；<br>服务器没有返回数据，是否会导致奔溃；<br>网络不好，数据来的太慢，界面是否不流畅；<br>从数据库读的数据太慢如何解决等。</p>
+<p>移动端界面应该有自己的逻辑，需要网络数据的地方，应该有默认值，这样在网络数据没有返回的情况下，让用户有数据可以看到。收到的网络数据应该是通过某种方式刷新到界面，而不是等到数据返回才刷新页面。当没有网络数据的时候，界面应该可以自成一体，走的通流程，不强依赖网络数据。</p>
+<p>在弱网模式下调试是我们必备的功力，因为我们要考虑用户的实施环境通常都不会很好。把经常使用的数据，存到缓存，提高APP的运行效率、界面流程度。同时，我们需要具备收集奔溃日志的功能，这样才能更好的减少崩溃，提高用户体验。</p>
+<h4 id="界面卡顿产生的原因和解决方案"><a href="#界面卡顿产生的原因和解决方案" class="headerlink" title="界面卡顿产生的原因和解决方案"></a>界面卡顿产生的原因和解决方案</h4><p>iOS界面处理是在主线程下进行的，系统图形服务通过 CADisplayLink 等机制通知 App，App 主线程开始在 CPU 中计算显示内容，比如视图的创建、布局计算、图片解码、文本绘制等。随后 CPU 会将计算好的内容提交到 GPU 去，由 GPU 进行变换、合成、渲染。随后 GPU 会把渲染结果提交到帧缓冲区去，等待下一次刷新信号到来时显示到屏幕上。显示器通常以固定频率进行刷新，如果在一个刷新时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就是界面卡顿的原因。CPU 和 GPU 不论哪个阻碍了显示流程，都会造成掉帧现象。</p>
+<p>CPU 造成的资源消耗有以下几种：</p>
+<ul>
+<li>对象创建</li>
+<li>对象调整</li>
+<li>对象销毁</li>
+<li>布局计算</li>
+<li>Autolayout</li>
+<li>文本计算</li>
+<li>文本渲染</li>
+<li>图片的绘制和解码</li>
+</ul>
+<p>GPU 资源消耗有下面几种情况：</p>
+<ul>
+<li>纹理的渲染</li>
+<li>视图的混合 (Composing)</li>
+<li>图形的生成等</li>
+</ul>
+<p>具体可以参考<a href="http://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="external">这篇文章</a></p>
+<h4 id="用-Instruments-来检验你的app"><a href="#用-Instruments-来检验你的app" class="headerlink" title="用 Instruments 来检验你的app"></a>用 Instruments 来检验你的app</h4><p><strong>时间事件查看器-Time Profiler</strong><br>在xcode的菜单中选择 product-&gt;Profile<br>我们会看到下面的界面：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-11be1e08fd9ed911.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Instruments"><br>点击Time Profiler进入。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-40bdb36ac65cdc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Time Profiler"><br>下面我们来深究如下的控制面板：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-d6755d42a68acf4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="控制面板"></p>
+<p>以下介绍下配置选项：</p>
+<ol>
+<li>Separate by Thread: 每个线程应该分开考虑。只有这样你才能揪出那些大量占用CPU的”重”线程。</li>
+<li>Invert Call Tree: 从上倒下跟踪堆栈,这意味着你看到的表中的方法,将已从第0帧开始取样,这通常你是想要的,只有这样你才能看到CPU中话费时间最深的方法.也就是说FuncA{FunB{FunC}} 勾选此项后堆栈以C-&gt;B-A 把调用层级最深的C显示在最外面。</li>
+<li>Hide System Libraries: 勾选此项你会显示你app的代码,这是非常有用的. 因为通常你只关心cpu花在自己代码上的时间不是系统上的。</li>
+<li>Flatten Recursion: 递归函数, 每个堆栈跟踪一个条目。</li>
+<li>Top Functions: 一个函数花费的时间直接在该函数中的总和，以及在函数调用该函数所花费的时间的总时间。因此，如果函数A调用B，那么A的时间报告在A花费的时间加上B.花费的时间,这非常真有用，因为它可以让你每次下到调用堆栈时挑最大的时间数字，归零在你最耗时的方法。</li>
+</ol>
+<p>找到Detail面板里最耗时的进程，点击进去可以看到代码，观察是否有异，如此便可逐步优化应用的运行效果了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-709a8715b9a6c191.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改"></p>
+<p>修改好后,在仪器重新运行该应用程序Product—Profile（或⌘I-记住，这些快捷键真的会为您节省一些时间）。<br><strong>分配工具</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-c1f214001adad7e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分配工具"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e1619715fecd3f4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击进入"></p>
+<p>这个时候你会发现两个曲目。一个叫(分配)Allocations，以及一个被称为VM Tracker(虚拟机跟踪)。</p>
+<p>内存泄漏有两种泄漏。第一个是真正的内存泄漏，一个对象尚未被释放，但是不再被引用的了。因此，存储器不能被重新使用。第二类泄漏是比较麻烦一些。这就是所谓的“无界内存增长”。这发生在内存继续分配，并永远不会有机会被释放。如果永远这样下去你的程序占用的内存会无限大,当超过一定内存的话 会被系统的看门狗给kill掉。</p>
+<p>内存警告是ios处理app最好的方式，尤其是在内存越来越吃紧的时候,你需要清除一些内存。内存一直增长其实也不一定是你的代码出了问题,也有可能是UIKit 系统框架本身导致的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a22007e5806c3b75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="尝试"><br>自己动手观察下，一切自然明了。</p>
+<p><strong>内存泄露</strong><br>这一类泄漏是前面提到的 - 当一个对象不再被引用时出现的那种,检测泄漏可以理解为一个很复杂的事情，但泄漏的工具记得已分配的所有对象，通过定期扫描每个对象以确定是否有任何不能从任何其他对象访问的。</p>
+<p>关闭仪器，回到Xcode和选择Product-&gt;Profile</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-46943f0933d55df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存泄露"></p>
+<p>点击进入，运行：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f69162d70c7f254a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行"></p>
+<p>自己动手尝试下，找到右边面板里，如果有黑色标识的方法，进入看看。学习就是多尝试。</p>
+<p>篇幅有限，更多的内容我们下次再聊。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -228,7 +281,7 @@
         <nav class="pagination" role="pagination">
 
 
-<div class="ds-share flat" data-thread-key="2013/10/01/从0开始看一个项目/" data-title="从0开始看一个项目" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="从0开始看一个项目 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2013/10/01/从0开始看一个项目/">
+<div class="ds-share flat" data-thread-key="2013/12/01/如何编写稳定流畅的iOS移动端应用/" data-title="如何编写稳定流畅的iOS移动端应用" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="如何编写稳定流畅的iOS移动端应用 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2013/12/01/如何编写稳定流畅的iOS移动端应用/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         
@@ -247,13 +300,13 @@
  <br/>
 
     
-    <a class="pull-left" href="/2013/12/01/如何编写稳定流畅的iOS移动端应用/" style="float: left;">
-        ← 如何编写稳定流畅的iOS移动端应用
+    <a class="pull-left" href="/2014/03/31/优秀的团队该不该使用敏捷开发/" style="float: left;">
+        ← 优秀的团队该不该使用敏捷开发
     </a>
     
     
-    <a class="pull-right" href="/2013/08/31/iOS图像处理之UI-CG和CI/">
-        iOS图像处理之UI,CG和CI →
+    <a class="pull-right" href="/2013/10/01/从0开始看一个项目/">
+        从0开始看一个项目 →
     </a>
     
 
@@ -266,7 +319,7 @@
         <div class="duoshuo">
 
 
-<div class="ds-thread" data-thread-key="2013/10/01/从0开始看一个项目/" data-title="从0开始看一个项目" data-url="https://dangdangfeng.github.io/2013/10/01/从0开始看一个项目/"></div>
+<div class="ds-thread" data-thread-key="2013/12/01/如何编写稳定流畅的iOS移动端应用/" data-title="如何编写稳定流畅的iOS移动端应用" data-url="https://dangdangfeng.github.io/2013/12/01/如何编写稳定流畅的iOS移动端应用/"></div>
 
 
 
