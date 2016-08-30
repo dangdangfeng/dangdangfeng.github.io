@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2016-08-30T15:42:03.000Z</updated>
+  <updated>2016-08-30T16:37:51.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -14,6 +14,136 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>优秀的iOS开发站点</title>
+    <link href="https://dangdangfeng.github.io/2016/08/31/%E4%BC%98%E7%A7%80%E7%9A%84iOS%E5%BC%80%E5%8F%91%E7%AB%99%E7%82%B9/"/>
+    <id>https://dangdangfeng.github.io/2016/08/31/优秀的iOS开发站点/</id>
+    <published>2016-08-30T16:37:08.000Z</published>
+    <updated>2016-08-30T16:37:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>工欲善其事必先利其器，每一次的惊叹背后都有不为人知的努力。分享和共赢，是开源的精神所在。感谢那些开诚布公，乐于助人的程序员们。从优秀到卓越，我们需要不停地向他人学习。</p>
+</blockquote>
+<ul>
+<li>国内优秀的iOS网站</li>
+<li>国外优秀的iOS网站</li>
+</ul>
+<h4 id="常用的国内网站"><a href="#常用的国内网站" class="headerlink" title="常用的国内网站"></a>常用的国内网站</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2364ba42664a3d23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>社区网站：</strong></p>
+<ul>
+<li><a href="http://www.jianshu.com" target="_blank" rel="external">简书</a></li>
+<li><a href="http://gold.xitu.io/welcome/ios" target="_blank" rel="external">稀土掘金</a></li>
+<li><a href="https://segmentfault.com" target="_blank" rel="external">SegmentFault</a></li>
+<li><a href="http://www.cnblogs.com/cate/ios/" target="_blank" rel="external">博客园</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.cocoachina.com" target="_blank" rel="external">cocoachina</a></li>
+<li><a href="http://www.iteye.com" target="_blank" rel="external">ITeye</a></li>
+<li><a href="http://www.csdn.net" target="_blank" rel="external">CSDN</a></li>
+<li><a href="http://www.51cto.com" target="_blank" rel="external">51CTO</a></li>
+<li><a href="https://www.infoq.com" target="_blank" rel="external">infoq</a></li>
+<li><a href="http://toutiao.io/subjects/12199" target="_blank" rel="external">开发者头条</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.oschina.net" target="_blank" rel="external">开源中国</a></li>
+<li><a href="http://code4app.qiniudn.com" target="_blank" rel="external">Code4App</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.imooc.com" target="_blank" rel="external">慕课网</a></li>
+<li><a href="http://www.maiziedu.com" target="_blank" rel="external">麦子学院</a></li>
+<li><a href="http://www.jikexueyuan.com" target="_blank" rel="external">极客学院</a></li>
+</ul>
+<p><strong>UI设计：</strong></p>
+<p><a href="http://www.ui4app.com" target="_blank" rel="external">UI4App</a></p>
+<blockquote>
+<p>当然还有很多有用的网站，如果您知道并愿意分享，可以在评论里提供。</p>
+</blockquote>
+<h4 id="常用的国外网站"><a href="#常用的国外网站" class="headerlink" title="常用的国外网站"></a>常用的国外网站</h4><ul>
+<li><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html" target="_blank" rel="external"> Apple Learning Objective C </a>：Apple官方文档</li>
+<li><a href="https://github.com" target="_blank" rel="external">github</a>：每天必看的吧</li>
+<li><a href="http://stackoverflow.com" target="_blank" rel="external">stackoverflow</a>：估计是最大的技术问答网站了</li>
+<li><a href="https://www.developerfeed.com/category/ios/ios-tutorials/" target="_blank" rel="external">developerfeed</a>：开发者论坛</li>
+<li><a href="https://www.objc.io" target="_blank" rel="external">objc.io</a>：经典网站，不用解释</li>
+<li><a href="http://www.cocoacontrols.com" target="_blank" rel="external">cocoacontrols</a>：优秀开源组件</li>
+<li><a href="http://cocoa.tumblr.com" target="_blank" rel="external">cocoa</a>：iOS开发源码和深度观察</li>
+<li><a href="http://maniacdev.com/open-source-iphone-app-store-apps" target="_blank" rel="external">maniacdev.com</a>：开源ios应用及其源代码</li>
+<li><a href="https://sourceforge.net" target="_blank" rel="external">sourceforge</a>：源码</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://iphonedevsdk.com/forum" target="_blank" rel="external">iphonedevsdk</a>：苹果开发论坛之一</li>
+<li><a href="https://devforums.apple.com" target="_blank" rel="external">devforums.apple.com</a>：苹果官方开发者</li>
+<li><a href="https://developer.apple.com/library/ios/navigation/index.html?section=Resource+Types&amp;topic=Sample+Code" target="_blank" rel="external">Sample+Code</a>：苹果官方的小示例项目论坛</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://subjc.com" target="_blank" rel="external">Subjective-C</a>：以解析和重构创新模式和著名应用的UI而闻名</li>
+<li><a href="http://mobile.tutsplus.com/category/tutorials/iphone/" target="_blank" rel="external">tutsplus</a>：一些不错的实例教程</li>
+<li><a href="http://nshipster.com" target="_blank" rel="external">NSHipster</a>：探讨了编程风格，以及最前沿的类的使用和实现</li>
+<li><a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>：每个iOS都应该看看</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://oleb.net" target="_blank" rel="external">oleb</a>：个人博客，在持续更新</li>
+<li><a href="http://petersteinberger.com" target="_blank" rel="external">petersteinberger</a>：个人网站</li>
+<li><a href="http://floriankugler.com/archive/" target="_blank" rel="external">floriankugler</a>：更到15年</li>
+<li><a href="https://www.mikeash.com/pyblog/" target="_blank" rel="external">NSBlog</a>：包含了关于Objective-C和其他主题的深度问题</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://iosdevweekly.com" target="_blank" rel="external">iOS Dev Weekly</a>：每天更新的iOS推送资源</li>
+<li><a href="http://ios-goodies.com" target="_blank" rel="external">iOS Goodies</a>：iOS资讯站</li>
+<li><a href="http://www.appcoda.com" target="_blank" rel="external">AppCoda</a>：产于香港，重点在用于执行的最新的API和结构上</li>
+<li><a href="http://merowing.info" target="_blank" rel="external">Krzysztof Zab?ocki</a>：提供关于代码结构、工具和Xcode的技巧</li>
+<li><a href="http://iosdevtips.co" target="_blank" rel="external">iOS Development tips</a>：一些关于使用Xcode和API的细致的提示</li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://teamtreehouse.com/techdegree" target="_blank" rel="external">Team Tree House </a>：人人都可以编程的学习网站</li>
+<li><a href="http://www.technobuffalo.com" target="_blank" rel="external">technobuffalo</a>：手机媒体网站</li>
+<li><a href="https://designthencode.com" target="_blank" rel="external">Design then Code </a>：最好的iOS界面设计和应用指导和教程</li>
+<li><a href="http://www.daleisphere.com" target="_blank" rel="external"> iPhone App Development Where to Start </a>：博客</li>
+</ul>
+<p><strong>UI设计：</strong></p>
+<ul>
+<li><a href="http://www.iosinspires.me/" target="_blank" rel="external">iosinspires</a>：优秀的iOS平台上应用的设计，icon及相关资源</li>
+<li><a href="http://www.patternsofdesign.co.uk/" target="_blank" rel="external">patternsofdesign</a>：专注于分享iOS应用UI界面的细节，按照设计元素进行分类，按照iOS常用功能对各类UI进行分类展示。</li>
+<li><a href="http://pttrns.com/" target="_blank" rel="external">iOS UI Patterns</a>：整理/罗列了许多精彩的iOS 应用界面截图，并且按照分类将这些截图分类，比如Activity，Login，About，Calendar，Seeting，Share等各种类型的不同应用的实现效果</li>
+<li><a href="http://www.appsites.com/" target="_blank" rel="external">appsites</a>：优秀移动应用网站设计</li>
+<li><a href="http://dribbble.com/" target="_blank" rel="external">dribbble</a>：设计师交流和分享自己设计作品的社区。上面有很多非常棒的移动产品设计作品。</li>
+<li><a href="http://www.tappgala.com/" target="_blank" rel="external">tappgala</a>：分享最棒的手机产品界面设计</li>
+</ul>
+<p><strong>iOS游戏</strong></p>
+<ul>
+<li><a href="http://maniacdev.com/open-source-ios-game-list-source-code-to-games-in-the-app-store" target="_blank" rel="external">open-source-ios-game</a>：iOS游戏及其源代码</li>
+<li><a href="http://mobile.tutsplus.com/tutorials/iphone/learn-ios-game-development-by-example-10-projects-to-get-you-started/" target="_blank" rel="external">iOS游戏开发可以参考的10个实例</a>：（源代码都在github上）</li>
+<li><a href="http://www.learn-cocos2d.com/blog/" target="_blank" rel="external">Kobold2d引擎</a>：cocos2d引擎的变种，主要和ios,cocos2d,kobold2d开发有关</li>
+<li><a href="https://developers.facebook.com/docs/tutorials/ios-sdk-games/" target="_blank" rel="external">facebook的游戏教程</a></li>
+<li><a href="http://www.idevgames.com/articles" target="_blank" rel="external">idevgames</a>：游戏相关的教程</li>
+</ul>
+<p>暂时统计了这么多，还有好多优秀的网站等待我们挖掘，当然有好的网站也希望可以多互相分享，此处持续添加中······。</p>
+<p>总体感觉，国外的网站并不一定比国内的好用，比如objc.io已经有了国内版。外国网站对于英语也是一种挑战，不过技术就是如此，想更上一层，总要比他人更努力一些。</p>
+<p>PS：读文章固然可以增长我们的见识，但别人的总归是别人的，只有内化成自己的，才不至于白费光阴。写博客，开源组件，都是很好的锻炼。要对得起您耗费的时间。时间不会辜负尊重它的人的，与君共勉！</p>
+<h4 id="无法访问国外网站怎么办？"><a href="#无法访问国外网站怎么办？" class="headerlink" title="无法访问国外网站怎么办？"></a>无法访问国外网站怎么办？</h4><ul>
+<li><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">hosts</a>：最新可用的google hosts文件</li>
+</ul>
+<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h5><p>请出门左拐，购买付费！世界变得无比简单。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+    
+    </summary>
+    
+    
+      <category term="helper" scheme="https://dangdangfeng.github.io/tags/helper/"/>
+    
+  </entry>
   
   <entry>
     <title>如何幽雅的谈论Hybrid App</title>
@@ -316,6 +446,102 @@ dispatch_barrier_sync(self.barrierQueue, ^{
   </entry>
   
   <entry>
+    <title>从代码看一个程序员的笔力</title>
+    <link href="https://dangdangfeng.github.io/2014/08/31/%E4%BB%8E%E4%BB%A3%E7%A0%81%E7%9C%8B%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E7%AC%94%E5%8A%9B/"/>
+    <id>https://dangdangfeng.github.io/2014/08/31/从代码看一个程序员的笔力/</id>
+    <published>2014-08-30T16:38:23.000Z</published>
+    <updated>2016-08-30T16:39:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>从代码的整洁度上就可以看出一个程序员的实力，规范其实就是让你养成一种良好习惯的标杆，在此面前我们应该顺从（本篇以OC为例）。</p>
+<ol>
+<li><p>单页代码最好控制在800行以内，每个方法最好不要超过100行，过多建议对代码进行重构</p>
+</li>
+<li><p>相同的逻辑方法定义避免在多个地方出现，尽量将公用的类、方法抽取出来</p>
+</li>
+<li><p>删除未被使用的代码，不要大片注释未被使用的代码，确定代码不会使用，请及时删除</p>
+</li>
+<li><p>对其他项目中copy过来的代码，根据具体需要更新代码风格，及时删除未被使用的代码</p>
+</li>
+<li><p>项目中所有Group或者文件名称（图片名字等），不要使用汉字命名，尽量使用英文命名，国内特有名词可以使用拼音。</p>
+</li>
+<li><p>项目中所有Group都需要在项目目录中存在一个真实的目录，Group中的文件与真实目录中文件一一对应。</p>
+</li>
+<li><p>请在项目中写必要代码的注释</p>
+</li>
+<li><p>请多使用 #pragma mark - Mark Name 对方法进行分组 。如:</p>
+<pre><code>#pragma mark - **********View lifeCycle******
+</code></pre></li>
+<li><p>所有类名称以项目工程开头命名，如：“JS”（简书）。针对不同视图控制器，在末尾添加后缀，如： UIButton 后缀添加“Button”或大家皆知的简写，NSArray的变量命名为xxxArray等。</p>
+</li>
+<li><p>类、方法、属性等命名，做到见名知意，采用驼峰式命名规则。</p>
+</li>
+<li><p>根据资源类型或者所属业务逻辑对项目资源进行分组，使得整个项目结构清晰明了；整个项目保持一种代码书写风格。</p>
+</li>
+<li><p>避免在程序中直接出现常数，使用超过一次的应以宏定义的形式来替代。常数的宏定义应与它实际使用时的类型相一致。如以3.0来定义浮点类型，用3表示整型。 常量的命名应当能够表达出它的用途，并且用大写字母表示。例如：</p>
+<pre><code>#define PI 3.1415926
+</code></pre></li>
+<li><p>当使用条件语句编码时，不要嵌套if语句，多个返回语句也是OK。</p>
+<pre><code>- (void)testMethod {
+   if (![testSome boolValue]) {// 不合适就返回，下面做处理
+   return;
+  }
+ //Do something important
+}
+</code></pre></li>
+<li><p>当方法通过引用来返回一个错误参数，判断返回值而不是错误变量。在成功的情况下，有些Apple的APIs记录垃圾值(garbage values)到错误参数(如果non-NULL)，那么判断错误值会导致false负值和crash。</p>
+<pre><code>NSError *error;
+if (![self trySomethingWithError:&amp;error]) {
+  // Handle Error
+}
+</code></pre></li>
+<li><p>当参数过长时，每个参数占用一行，以冒号对齐。如：</p>
+<pre><code>- (void)aboutFisrtNumber:(NSString *)oneStr
+          withNextNumber:(NSString *)twoStr
+          withLastNumber:(NSString *)threeStr{
+// do something
+}
+</code></pre></li>
+<li><p>一行很长的代码应该分成两行代码，下一行用两个空格隔开</p>
+<pre><code>self.productsRequest = [[JSProductsRequest alloc] 
+  initWithProductIdentifiers:productIdentifiers];
+</code></pre></li>
+<li><p>删除多余的空行，所有方法与方法之间空1行，所有代码块之间空1行。变量声明后需要空1行，如果需要分类区别，各类别之间空1行。条件、循环，选择语句，整个语句结束，需要空1行。最后一个括弧之前不空行。注释与代码之间不空行。</p>
+<pre><code>#pragma 与方法之间空1行
+</code></pre></li>
+<li><p>每行代码最多不得超过100个字</p>
+</li>
+<li><p>如果类声明中包含多个protocol，每个protocol占用一行，缩进2个字符如:</p>
+<pre><code>@interface BootViewController : UITableViewController&lt;&lt;/p&gt;
+UITableViewDelegate,
+UITableViewDataSource,
+UITextFieldDelegate,
+UITextViewDelegate
+&gt;{
+// code
+}
+</code></pre></li>
+<li><p>图片命名：采用单词全拼，或者大家公认无岐义的缩写(比如：nav，bg，btn等)；采用“模块+功能”命名法，模块分为公共模块、私有模块。公共模块主要包括统一的背景，导航条，标签，公共的按钮背景，公共的默认图等等；私有模块主要根据app的业务；功能模块划分，比如用户中心，消息中心等。建议背景图采用以bg作前缀，按钮背景采用btn作前缀。</p>
+</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-798d683d4df650ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从代码的整洁度上就可以看出一个程序员的实力，规范其实就是让你养成一种良好习惯的标杆，在此面前我们应该顺从（本篇以OC为例）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;单页代码最好控制在800行以内，每个方法最好不要超过100行，过多建议对代码进行重构&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;
+    
+    </summary>
+    
+    
+      <category term="method" scheme="https://dangdangfeng.github.io/tags/method/"/>
+    
+  </entry>
+  
+  <entry>
     <title>如何优雅的谈论OC</title>
     <link href="https://dangdangfeng.github.io/2014/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAOC/"/>
     <id>https://dangdangfeng.github.io/2014/08/30/如何优雅的谈论OC/</id>
@@ -492,6 +718,186 @@ NSLog(@&quot;begin Background Task With Expiration Handler&quot;);
 &lt;li&gt;生命周期&lt;/li&gt;
 &lt;li&gt;与其他语言的区别&lt;/li&gt;
 &lt;/u
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从0开始看一个项目</title>
+    <link href="https://dangdangfeng.github.io/2013/10/01/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9C%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/"/>
+    <id>https://dangdangfeng.github.io/2013/10/01/从0开始看一个项目/</id>
+    <published>2013-10-01T02:40:37.000Z</published>
+    <updated>2016-08-30T16:41:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在着手一个项目前<strong>先读文档</strong>（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就看他的<strong>测试用例</strong>，也是有一样的功效的。因为测试都是从文档出发编写的，而不是从代码出发编写的。找不到文档和测试用例？那就直接Gank吧。</p>
+<p><strong>读代码要层次化、带着问题去阅读</strong>。首先整体了解这个软件是干什么？解决什么问题？包含哪些大的模块，各个模块的作用是什么，各个模块的调用关系怎么样？然后对于每一个模块，这个模块是干什么的？为什么要有这个模块？这个模块怎么实现的？最后细化到每一个包，每一个类，每一个函数方法。从上到下，一一击破每一个问题，认真去<strong>思考</strong>他这样设计、写代码的好处，因为好的软件都会满足这种从抽象-&gt;具体的原则的。</p>
+<p>在开始读具体代码前<strong>定位好所有要读的文件</strong>，知道他们的位置和名字，设计良好的工程光看工程的目录结构和文件名就能知道个大概功能了。事实上阅读代码的难易程度70%取决于代码书写的规范程度，写乱掉的代码，大师也读不懂。之后根据你对目录结构的理解确定文件阅读的顺序（我反正都是从main函数开始读的）。你最好对<strong>设计模式</strong>有一定了解，否则你读面向对象的code时会经常无法理解code为啥要弄得这么层层嵌套。阅读代码一个最重要的提升水平的地方就是理解好的代码如何合理使用设计模式。基本的阅读起点都会选择main函数或者类的构造函数。然后把自己想象成cpu执行程序那样去阅读你的代码。遇到需要跳转函数时，不要急于跳转，以了解函数功能和输入输出为目标，读代码最忌讳的是不抓结构抓细节，只见树木不见森林，<strong>比起某个函数具体功能来说对结构的全局把握更重要</strong>。功能了解清楚后继续跳回来（这里就可以区分代码写的优不优秀，优秀的代码光看函数名字就知道功能，连跳转都不用）。结构弄清楚了，知道程序怎么跑了，source code的精华你已经读了60%了，之后根据需要再对具体函数深入分析，到这里整个代码已经被你扒光了，没什么神秘了。</p>
+<p>阅读代码有两种模式：<strong>top-down</strong> 和 <strong>bottom-up</strong>。Top-down 模式，就是先设定一个 use case，比如说打开一个文件。然后静态跟着代码看，或者用 debugger 跟着看。每次出现函数调用的时候，把函数的执行层次纪录下来。大致如下：</p>
+<pre><code>func1( )
+   func2(  )
+       func(  )
+   func3(  )
+</code></pre><p>这种图表很随意，你可以根据自己的需要增加信息，可以把重要的「实际参数」一直标下来，画函数调用图，然后标注每个函数在干什么。不过这个图无法清楚地表明一个变量的轨迹，需要另外的图来标示变量的变化轨迹。要是想提高阅读代码的速度，归根结底要多读多写。熟悉程序的基本构成单元（例如循环、分支）的常见写法，各种lib, api的调用方式。这样阅读深层次代码不用再回头查形式参数到底指什么。这个图的基本作用是防止在阅读深层次代码时忘记总体执行层次。Top-down 模式进行到一定层次，往往会发现虽然图画了出来，但还是无法了解程序在干什么。这时需要转入 bottom-up 模式，一直深入到最底层，给能了解作用的底层函数一个一个的写文档。当然这时的文档是完全底层的观点。bottom-up的阅读方法，有时候会一头扎进去，出不来了。这种方式适合读一些比较优秀的开源项目的代码，也会很好地提高内功。然后就是不断在两个模式之间转换，不断的细化两种模式的理解。</p>
+<p>最后，对于OC工程可以去GitHub找<a href="https://github.com/RuiAAPeres/UIViewController-Swizzled" target="_blank" rel="external">UIViewController-Swizzled</a>这个库，拉下来放到项目里，他有什么用呢？他可以把每个页面的类名打出来。而且有层次结构，也就是说你只需要打开项目点点点，就知道这个App运行的顺序了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-299eea93eaaceba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在着手一个项目前&lt;strong&gt;先读文档&lt;/strong&gt;（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS图像处理之UI,CG和CI</title>
+    <link href="https://dangdangfeng.github.io/2013/08/31/iOS%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B9%8BUI-CG%E5%92%8CCI/"/>
+    <id>https://dangdangfeng.github.io/2013/08/31/iOS图像处理之UI-CG和CI/</id>
+    <published>2013-08-30T16:35:38.000Z</published>
+    <updated>2016-08-30T16:36:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="UIImage-CGImage和CGImageRef释疑"><a href="#UIImage-CGImage和CGImageRef释疑" class="headerlink" title="UIImage,CGImage和CGImageRef释疑"></a>UIImage,CGImage和CGImageRef释疑</h4><p>UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对CGImageRef的定义为：</p>
+<pre><code>typedef struct CGImage *CGImageRef;
+</code></pre><p>CGImage和CGImageRef是用来重绘图形的类，它们在应用时是按照图像的像素矩阵来绘制图片的，它们可以用来处理bitmap。</p>
+<pre><code>//CGImageRef转换成UIImage
+CGContextRef context = UIGraphicsGetCurrentContext();
+CGImageRef ic = CGBitmapContextCreateImage(context);
+UIImage* image = [UIImage imageWithCGImage: ic];
+
+//UIImage转换成CGImageRef
+UIImage *loadImage=[UIImage imageNamed:@&quot;c.png&quot;];
+CGImageRef cgimage=loadImage.CGImage;
+</code></pre><p>系统会维护一个CGContextRef的栈，而UIGraphicsGetCurrentContext()会取栈顶的CGContextRef，正确的做法是只在drawRect里调用UIGraphicsGetCurrentContext()，因为在drawRect之前，系统会往栈里面压入一个valid的CGContextRef，除非自己去维护一个CGContextRef，否则不应该在其他地方取CGContextRef。</p>
+<h4 id="UIColor，CGColor，CIColor区别和联系"><a href="#UIColor，CGColor，CIColor区别和联系" class="headerlink" title="UIColor，CGColor，CIColor区别和联系"></a>UIColor，CGColor，CIColor区别和联系</h4><p>UIColor是UIKit中存储颜色信息的一个重要的类，一个UIColor对象包含了颜色和透明度的值，它的颜色空间已经针对iOS进行了优化。UIColor包含了一些类方法用于创建一些最常见的颜色，如白色，黑色，红色，透明色等，这些颜色的色彩空间也不尽相同（白色和黑色是kCGColorSpaceDeviceGray，红色的色彩空间是kCGColorSpaceDeviceRGB）。UIColor有两个重要的属性：一个是CGColor，一个是CIColor(5.0之后添加)。</p>
+<p>CGColor主要用于CoreGaphics框架之中，CGColor其实是个结构体，而我们通常在使用的CGColor的时候使用的是它的引用类型CGColorRef。CGColor主要由CGColorSapce和Color Components两个部分组成，同样的颜色组成，如果颜色空间不同的话，解析出来的结果可能会有所不同。这就像我们在处理图片数据的时候，如果把RGBA格式当成BGRA格式处理的结果可想而知。在Quartz 2D中CGColor常用来设置context的填充颜色，设置透明度等。</p>
+<p>CIColor主要用于和Core Image框架中其他类交互，比如CIFilter，CIContext以及CIImage。CIColor中颜色值的范围是0.0-1.0之间，0.0代表该颜色分量为最小值，1.0代表改颜色分量为最大值。其中alpha值的范围也是0.0到1.0之间，0.0代表全透明，1.0代表完全不透明，CIColor的颜色分量通常都是没有乘以alpha值。可以使用initWithCGColor:函数，通过CGColor创建一个CIColor。其中传入的CGColorRef对象可以使任何任何颜色空间，但是Core Image框架会在传入filter kernel之前把所有的颜色空间转换到Core Image工作颜色空间。Core Image工作颜色空间使用三个颜色分量加上一个alpha分量组成(其实就是kCGColorSpaceDeviceRGB)。</p>
+<p>UIColor的CGColor总是有效的，不管它是通过CGColor，CIColor，还是其他方法创建的，CGColor属性都总是有效的；但是CIColor属性就不总是有效的，只有当UIColor是通过CIColor创建的时候，它才是有效的，否则访问该属性将会抛出异常。</p>
+<pre><code>// test init uicolor with CGColor
+UIColor *color = [UIColor colorWithCGColor:[UIColor whiteColor].CGColor];
+
+// CGColor property is always valid
+NSLog(@&quot;CGColor from UIColor %@&quot;, color.CGColor);
+
+// don&apos;t use CIColor property 
+// This property throws an exception if the color object was not initialized with a Core Image color. 
+NSLog(@&quot;CIColor from UIColor %@&quot;, color.CIColor);   // crush
+</code></pre><p>当UIColor使用CGColor初始化的时候，所有CGColorRef包含的信息，都会被原封不动的保留，其中就包括Color space，而且通过下面的小例子我们还可以看到如果使用CGColor初始化UIColor的时候，UIColor其实是直接保留了一份这个CGColorRef对象。</p>
+<pre><code>// test kCGColorSpaceDeviceCMYK
+CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
+CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
+CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
+CGColorSpaceRelease(cmykSpace);
+NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
+
+// color with CGColor, uicolor will just retain it
+UIColor *color = [UIColor colorWithCGColor:colorCMYK];
+NSLog(@&quot;CGColor from UIColor: %@&quot;, color.CGColor);
+</code></pre><p>当使用CIColor来初始化一个UIColor的时候，再去访问UIColor的CGColor属性的时候，我们会发现<strong>CGColor的color Space和设置CIColor的color space的是不完全一样的</strong>，在这个过程中CIColor会为我们做一个转换。使用kCGColorSpaceDeviceGray，kCGColorSpaceDeviceRGB，kCGColorSpaceDeviceCMYK三种颜色空间来初始化一个CIColor的时候，再去使用该CIColor去初始化一个UIColor，然后在去访问其CIColor属，CGColor属性，查看颜色空间并打印颜色信息。</p>
+<p>1) 使用kCGColorSpaceDeviceGray初始化CIColor</p>
+<pre><code>// test kCGColorSpaceDeviceGray
+NSLog(@&quot;CGColor white color:%@&quot;, [UIColor whiteColor].CGColor);
+
+CIColor *ciColor = [CIColor colorWithCGColor:[UIColor whiteColor].CGColor];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;color %@&quot;, color);
+
+// Core Image converts all color spaces to the Core Image working color 
+// space before it passes the color space to the filter kernel.
+// kCGColorSpaceDeviceGray ---&gt; kCGColorSpaceDeviceRGB
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
+</code></pre><p>通过运行程序，我们看出来，如果使用一个kCGColorSpaceDeviceGray的颜色空间的CGColor来初始化CIColor的时候，我们可以看到CIColor的色彩空间一直是kCGColorSpaceDeviceGray，通过访问UIColor的CIColor属性，我们可以看到其颜色空间仍然是kCGColorSpaceDeviceGray，但是当访问UIColor的CGColor属性的时候，通过打印可以发现其色彩空间已经转变成了kCGColorSpaceDeviceRGB空间了，而颜色值也正确的从原来的颜色空间转换到了新的颜色空间。</p>
+<p>2) 使用kCGColorSpaceDeviceRGB初始化CIColor</p>
+<pre><code>//test kCGColorSpaceDeviceRGB
+NSLog(@&quot;CGColor red color:%@&quot;, [UIColor redColor].CGColor);
+
+CIColor *ciColor = [CIColor colorWithCGColor:[UIColor redColor].CGColor];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+UIColor *color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;color %@&quot;, color);
+
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
+</code></pre><p>整个过程中CIColor，以及通过UIColor的CGColor和CIColor属性访问到的值，打印出来我们可以发现它们都是kCGColorSpaceDeviceRGB空间的。</p>
+<p>3) 使用kCGColorSpaceDeviceCMYK初始化CIColor</p>
+<pre><code>// test kCGColorSpaceDeviceCMYK
+CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
+NSLog(@&quot;Components number: %zu&quot;, CGColorSpaceGetNumberOfComponents(cmykSpace));
+CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
+CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
+CGColorSpaceRelease(cmykSpace);
+NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
+
+ciColor = [CIColor colorWithCGColor:colorCMYK];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);     // in fact，the color value of CIColor has converted to RGB Colorspace
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;UIColor with CIColor: %@&quot;, color);
+
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+
+// when UIColor init with CIColor, UIColor&apos;s CGColor will convert other colorspace to kCGColorSpaceDeviceRGB
+NSLog(@&quot;cgcolor from UIColor: %@&quot;, color.CGColor);
+</code></pre><p>当我们用一个CMYK颜色空间的CGColor来初始化CIColor的时候，CIColor的颜色空间依然是CMYK，但是颜色值已经转换成RGB的颜色值。当使用该CIColor创建一个UIColor的时候，我们再通过CIColor和CGColor属性打印信息的时候，我们会发现CIColor的色彩空间依然是CMYK，但是CGColor打印所得到的信息说明它已经被转换成RGB空间了。</p>
+<p><strong>关于创建一个CGColor</strong><br>最常用的函数是CGColorCreate，该函数有两个参数：</p>
+<p>1) colorspace，指定CGColor对应的颜色空间，Quartz就会retain该对象，因此调用完之后你就可以安全的释放该对象。<br>2) components，一个CGFloat的数组，该数组的元素个数是指定色彩空间包含的颜色分量数n，加上对应的alpha值。　</p>
+<p>该函数该返回一个新创建的CGColorRef，当我们不再使用该对象的时候使用CGColorRelease函数释放该对象。</p>
+<p><strong>获取CGColor的数据</strong><br>在我们创建的时候传入两个重要的参数进去，当我们获取到了CGColorRef以后当然就可以拿到对应的ColorSpace以及Components。</p>
+<p>1) 获取ColorSpace<br>通过CGColorGetColorSpace函数我们可以获取到当前CGColorRef对应的ColorSpace，该函数只接受一个参数就是你要获取ColorSpace的CGColorRef。</p>
+<pre><code>CGColorRef cgColor = [UIColor redColor].CGColor;
+CGColorSpaceRef colorSpace = CGColorGetColorSpace(cgColor);
+NSLog(@&quot;color space: %@&quot;, colorSpace);
+</code></pre><p>2) 获取Color Components<br>要获取到CGColorRef对应的颜色值，我们需要用到CGColorGetNumberOfComponents和CGColorGetComponents两个函数。我们先来看看两个函数的函数原型：</p>
+<pre><code>size_t CGColorGetNumberOfComponents (
+CGColorRef color
+);
+
+const CGFloat * CGColorGetComponents (
+CGColorRef color
+);
+</code></pre><p>第一个函数是获得CGColorRef的中包含的颜色组成部分的个数，第二个函数就是获取实际的颜色组成部分的数组。</p>
+<pre><code>NSUInteger num = CGColorGetNumberOfComponents(cgColor);
+const CGFloat *colorComponents = CGColorGetComponents(cgColor);
+for (int i = 0; i &lt; num; ++i) {
+NSLog(@&quot;color components %d: %f&quot;, i, colorComponents[i]);
+}
+</code></pre><p><strong>判断两个颜色是否相等</strong><br>不管UIColor使用CIColor，CGColor还是其他方式初始化的，其CGColor属性都是可用的。CoreGraphics中提供一个方法可以判断两个CGColor是否相等，因此我们可以通过判断两个UIColor是否相等。</p>
+<pre><code>// judge two CGColor is equal
+if (CGColorEqualToColor([UIColor whiteColor].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
+NSLog(@&quot;The two CGColor is equal!&quot;);
+}
+else {
+NSLog(@&quot;The two CGColor is not equal!&quot;);
+}
+
+if (CGColorEqualToColor([UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
+NSLog(@&quot;The two CGColor is equal!&quot;);
+}
+else {
+NSLog(@&quot;The two CGColor is not equal!&quot;);
+}
+</code></pre><p>例子中第一部分是判断两个白色的UIColor是否相等，虽然都是白色，但是颜色空间是不一样的。例子的第二部分简单的创建了两个RGB空间的UIColor，运行程序可以看出，这两种颜色是相同的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f66427dbc02dea3c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;UIImage-CGImage和CGImageRef释疑&quot;&gt;&lt;a href=&quot;#UIImage-CGImage和CGImageRef释疑&quot; class=&quot;headerlink&quot; title=&quot;UIImage,CGImage和CGImageRef释疑&quot;&gt;&lt;/a&gt;UI
     
     </summary>
     
@@ -832,6 +1238,49 @@ Link Binary With Libraries -&gt; libCordova.a
     
     
       <category term="Source" scheme="https://dangdangfeng.github.io/tags/Source/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人生不可错过的5本书</title>
+    <link href="https://dangdangfeng.github.io/2012/08/31/%E4%BA%BA%E7%94%9F%E4%B8%8D%E5%8F%AF%E9%94%99%E8%BF%87%E7%9A%845%E6%9C%AC%E4%B9%A6/"/>
+    <id>https://dangdangfeng.github.io/2012/08/31/人生不可错过的5本书/</id>
+    <published>2012-08-31T01:39:18.000Z</published>
+    <updated>2016-08-30T16:40:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="哥德尔、艾舍尔、巴赫书：集异璧之大成"><a href="#哥德尔、艾舍尔、巴赫书：集异璧之大成" class="headerlink" title="哥德尔、艾舍尔、巴赫书：集异璧之大成"></a>哥德尔、艾舍尔、巴赫书：集异璧之大成</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-be18fef26ba9f136.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="哥德尔、艾舍尔、巴赫书：集异璧之大成"></p>
+<p>这是一本超过千页的大书，其翻译为中文的过程亦甚为坎坷。此中文版本采用了移译的翻译手法，将许多陌生的名词中国化了，所以初次阅读之体验可谓兴致盎然。巴赫、艾舍尔、哥德尔，三者的成果即为音乐、画作、逻辑（数理逻辑）上的三个怪圈，恰似原书的封面那样，投影不一，但其实内在的实质是一样的。巴赫的音符在重复中，一面唱出主题，一面扮演和声；艾舍尔的阶梯，一面无限上升，另一面无尽下降；哥德尔的不完备定理，一面作为数理逻辑的内容存在，一面作为评价数理逻辑的存在。《哥德尔、艾舍尔、巴赫书：集异璧之大成》是在英语世界中有极高评价的科普著作，曾获得普利策文学奖。它通过对哥德尔的数理逻辑，艾舍尔的版画和巴赫的音乐三者的综合阐述，引人入胜地介绍了数理逻辑学、可计算理论、人工智能学、语言学、遗传学、音乐、绘画的理论等方面，构思精巧、含义深刻、视野广阔、富于哲学韵味。</p>
+<p>关于这本书，确实只有“奇书”两个字可以形容。</p>
+<p>书籍地址：<a href="http://item.jd.com/11495462.html" target="_blank" rel="external">《哥德尔、艾舍尔、巴赫书：集异璧之大成》</a></p>
+<h4 id="禅与摩托车维修艺术"><a href="#禅与摩托车维修艺术" class="headerlink" title="禅与摩托车维修艺术"></a>禅与摩托车维修艺术</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-aedc5cb86ba95320.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="禅与摩托车维修艺术"></p>
+<p> Pirsig说,要把工作变为艺术,选择良质。在所有关乎技艺方面的工作，背后都有一个“道”或类似于“禅”的东西，一通百通。有时，你就得放弃已有的工匠情结，更多地要把自己的理念，思想都揉合在一个物件上，这时技术只是一个副产品罢了。本书探讨了有关摩托车修理艺术，禅，宗教，自然科学，教育，哲学，数学，个人修行。中间透露的对生命直相、生存本质的看法，优美、简洁而动人。不光研究形而上,思考人生意义的人可以读,而且从实用主义的角度看, 对技术人员(不光是软件开发人员)甚至任何有工作的人都有很大的启发作用。本书在美国及世界十余个国家已被当做新时代的经典之作，本书曾被“Time”为70年代十本最有影响力的书之一。</p>
+<p>书籍地址：<a href="http://item.jd.com/10839490.html" target="_blank" rel="external">《禅与摩托车维修艺术》</a></p>
+<h4 id="编程人生"><a href="#编程人生" class="headerlink" title="编程人生"></a>编程人生</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2f2bffc58eaef600.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="编程人生"></p>
+<blockquote>
+<p>Seibel: 不精通技术却擅长团队协调的人，能成为好的管理者吗？<br> Allen: 这不是不可能，不过他得首先承认自己并不精通技术，其次还要能分辨团队中谁擅长技术，谁不擅长技术。</p>
+</blockquote>
+<p>它并不是一本技术人士的八卦图书。书里面讨论的更多的是编程的习惯，对当今程序设计方法或是程序设计语言的讨论，以及这些编程大牛在成为大牛的过程中的各种经历。很多东西都值得程序员或者是有志学习计算机科学的人借鉴。这本书最大的益处就是帮助广大程序员了解大师是怎么成长过来的，学习他们的宝贵经验。大师的成长经历都隐含了一个基本规律：他们都是编程至少十几二十年以上才最终成为大师的，“十年学会编程”并不是什么天方夜谭，而是确确实实的事情！同理，任何人如果想要成为大师（或者至少是杰出的程序员），那么他首先要做的就是打好基本功。但是，算法并不是编程的前提条件，数学也不会阻碍一个人成为优秀的程序员。</p>
+<p>书籍地址：[《编程人生》](<a href="http://item.jd.com/11584262.html" target="_blank" rel="external">http://item.jd.com/11584262.html</a></p>
+<h4 id="别闹了，费曼先生"><a href="#别闹了，费曼先生" class="headerlink" title="别闹了，费曼先生"></a>别闹了，费曼先生</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-88f55c486ab4207e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="别闹了，费曼先生"></p>
+<blockquote>
+<p>一本理科生写给世界的情书。——和菜头</p>
+</blockquote>
+<p>费曼得过诺贝尔奖，是现代最伟大的理论物理学家之一。但他同时也可能是历史上唯一被按摩院请去画裸体画、偷偷打开放着原子弹机密文件的保险箱，在巴西桑巴乐团担任鼓手的科学家。他曾跟爱因斯坦和波尔等大师讨论物理问题，也曾在赌城跟职业赌徒研究输赢机率。这是费曼对世界和人生看法的总结，不是世界创造了费曼，而是费曼如此理解和对待世界，因此而有了这么一个非常独特的人。他满不在乎地活在这个世界上，靠追逐他的兴趣而指引生活的方向。如同他年幼时自己发明了一套三角函数符号一样，他对世界也有自己的一套符号。所以，大家都在意的事物他未必在意，大家不在意的事物他却穷追不舍。他也爱着这个世界，但是是用他的方式。所以他能在物理之外发现生活中诸多的乐趣和美来，所以不是人人都会到巴西讲学时跑去街头学敲鼓，而且获得了佳年华会的冠军乐队。所以不是人人都会去学绘画，然后还愿意让别人买去挂在妓院的墙上。如孩子一样的眼睛，如孩子一样的好奇心，因此世界以奇迹还赠他，于一生中成就别人的无数生，使得他周围人在失去他时如同整个世界都黯然失色。</p>
+<p>书籍地址：<a href="http://item.jd.com/16012346.html" target="_blank" rel="external">《别闹了，费曼先生》</a></p>
+<h4 id="程序员修炼之道"><a href="#程序员修炼之道" class="headerlink" title="程序员修炼之道"></a>程序员修炼之道</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-03d2d3f3a11fb52c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="程序员修炼之道"><br>一般来说，刚刚接触编程的人，更倾向于从具体的程序代码学习编程的理念，而不是从程序设计理论书籍去理解编程的概念。就像学习英语，在刚开始的时候，最重要的是扩大自己的阅读量和词汇量，而不是“钻研”各种奇淫技巧。所以，计算机编程的入门书籍里都包含了大量的示例代码片段，初学者通过模仿这些代码，在心里逐步建立起一个属于自己的程序设计模型。这是程序设计的第一个阶段，也就是入门阶段。在编写了一定量的代码，对编程有了一定的了解之后。逐渐的，我们开始对自己的编写的程序，以及程序设计进行反思：程序为什么要这么设计？以什么方式可以编写出更好的程序？如何在编写程序时少走不必要的弯路？这时我们最需要的，不再局限于某种语言的语法或者是xxAPI的使用方法，而是面对实际问题需要的灵活的处理方案，亦或是去理解被前辈所认可的相对正确的软件设计方法。在这时，我们处于程序员的第二个阶段，也就是自我提升阶段。</p>
+<p>这本书里面涉及到了在软件开发中的方方面面：从正确的理解需求到灵活的设计实现，从估算/提升程序的运行效率到提升软件的开发效率，从程序员的自身修养到与他人交流时的tips。这本书用非常短小的篇幅，覆盖了非常大的范围。</p>
+<p>书籍地址：<a href="http://item.jd.com/10393278.html" target="_blank" rel="external">《程序员修炼之道》</a></p>
+<p><strong>当然了，不是每篇文章都会投到专题里的，也算是关注的福利吧！</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;哥德尔、艾舍尔、巴赫书：集异璧之大成&quot;&gt;&lt;a href=&quot;#哥德尔、艾舍尔、巴赫书：集异璧之大成&quot; class=&quot;headerlink&quot; title=&quot;哥德尔、艾舍尔、巴赫书：集异璧之大成&quot;&gt;&lt;/a&gt;哥德尔、艾舍尔、巴赫书：集异璧之大成&lt;/h4&gt;&lt;p&gt;&lt;img s
+    
+    </summary>
+    
+    
+      <category term="book" scheme="https://dangdangfeng.github.io/tags/book/"/>
     
   </entry>
   

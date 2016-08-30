@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>iOS图像处理之UI,CG和CI | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2013-08-30T16:35:38.000Z" itemprop="datePublished">
+          2013-08-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>iOS图像处理之UI,CG和CI</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h4 id="UIImage-CGImage和CGImageRef释疑"><a href="#UIImage-CGImage和CGImageRef释疑" class="headerlink" title="UIImage,CGImage和CGImageRef释疑"></a>UIImage,CGImage和CGImageRef释疑</h4><p>UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对CGImageRef的定义为：</p>
+<pre><code>typedef struct CGImage *CGImageRef;
+</code></pre><p>CGImage和CGImageRef是用来重绘图形的类，它们在应用时是按照图像的像素矩阵来绘制图片的，它们可以用来处理bitmap。</p>
+<pre><code>//CGImageRef转换成UIImage
+CGContextRef context = UIGraphicsGetCurrentContext();
+CGImageRef ic = CGBitmapContextCreateImage(context);
+UIImage* image = [UIImage imageWithCGImage: ic];
+
+//UIImage转换成CGImageRef
+UIImage *loadImage=[UIImage imageNamed:@&quot;c.png&quot;];
+CGImageRef cgimage=loadImage.CGImage;
+</code></pre><p>系统会维护一个CGContextRef的栈，而UIGraphicsGetCurrentContext()会取栈顶的CGContextRef，正确的做法是只在drawRect里调用UIGraphicsGetCurrentContext()，因为在drawRect之前，系统会往栈里面压入一个valid的CGContextRef，除非自己去维护一个CGContextRef，否则不应该在其他地方取CGContextRef。</p>
+<h4 id="UIColor，CGColor，CIColor区别和联系"><a href="#UIColor，CGColor，CIColor区别和联系" class="headerlink" title="UIColor，CGColor，CIColor区别和联系"></a>UIColor，CGColor，CIColor区别和联系</h4><p>UIColor是UIKit中存储颜色信息的一个重要的类，一个UIColor对象包含了颜色和透明度的值，它的颜色空间已经针对iOS进行了优化。UIColor包含了一些类方法用于创建一些最常见的颜色，如白色，黑色，红色，透明色等，这些颜色的色彩空间也不尽相同（白色和黑色是kCGColorSpaceDeviceGray，红色的色彩空间是kCGColorSpaceDeviceRGB）。UIColor有两个重要的属性：一个是CGColor，一个是CIColor(5.0之后添加)。</p>
+<p>CGColor主要用于CoreGaphics框架之中，CGColor其实是个结构体，而我们通常在使用的CGColor的时候使用的是它的引用类型CGColorRef。CGColor主要由CGColorSapce和Color Components两个部分组成，同样的颜色组成，如果颜色空间不同的话，解析出来的结果可能会有所不同。这就像我们在处理图片数据的时候，如果把RGBA格式当成BGRA格式处理的结果可想而知。在Quartz 2D中CGColor常用来设置context的填充颜色，设置透明度等。</p>
+<p>CIColor主要用于和Core Image框架中其他类交互，比如CIFilter，CIContext以及CIImage。CIColor中颜色值的范围是0.0-1.0之间，0.0代表该颜色分量为最小值，1.0代表改颜色分量为最大值。其中alpha值的范围也是0.0到1.0之间，0.0代表全透明，1.0代表完全不透明，CIColor的颜色分量通常都是没有乘以alpha值。可以使用initWithCGColor:函数，通过CGColor创建一个CIColor。其中传入的CGColorRef对象可以使任何任何颜色空间，但是Core Image框架会在传入filter kernel之前把所有的颜色空间转换到Core Image工作颜色空间。Core Image工作颜色空间使用三个颜色分量加上一个alpha分量组成(其实就是kCGColorSpaceDeviceRGB)。</p>
+<p>UIColor的CGColor总是有效的，不管它是通过CGColor，CIColor，还是其他方法创建的，CGColor属性都总是有效的；但是CIColor属性就不总是有效的，只有当UIColor是通过CIColor创建的时候，它才是有效的，否则访问该属性将会抛出异常。</p>
+<pre><code>// test init uicolor with CGColor
+UIColor *color = [UIColor colorWithCGColor:[UIColor whiteColor].CGColor];
+
+// CGColor property is always valid
+NSLog(@&quot;CGColor from UIColor %@&quot;, color.CGColor);
+
+// don&apos;t use CIColor property 
+// This property throws an exception if the color object was not initialized with a Core Image color. 
+NSLog(@&quot;CIColor from UIColor %@&quot;, color.CIColor);   // crush
+</code></pre><p>当UIColor使用CGColor初始化的时候，所有CGColorRef包含的信息，都会被原封不动的保留，其中就包括Color space，而且通过下面的小例子我们还可以看到如果使用CGColor初始化UIColor的时候，UIColor其实是直接保留了一份这个CGColorRef对象。</p>
+<pre><code>// test kCGColorSpaceDeviceCMYK
+CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
+CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
+CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
+CGColorSpaceRelease(cmykSpace);
+NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
+
+// color with CGColor, uicolor will just retain it
+UIColor *color = [UIColor colorWithCGColor:colorCMYK];
+NSLog(@&quot;CGColor from UIColor: %@&quot;, color.CGColor);
+</code></pre><p>当使用CIColor来初始化一个UIColor的时候，再去访问UIColor的CGColor属性的时候，我们会发现<strong>CGColor的color Space和设置CIColor的color space的是不完全一样的</strong>，在这个过程中CIColor会为我们做一个转换。使用kCGColorSpaceDeviceGray，kCGColorSpaceDeviceRGB，kCGColorSpaceDeviceCMYK三种颜色空间来初始化一个CIColor的时候，再去使用该CIColor去初始化一个UIColor，然后在去访问其CIColor属，CGColor属性，查看颜色空间并打印颜色信息。</p>
+<p>1) 使用kCGColorSpaceDeviceGray初始化CIColor</p>
+<pre><code>// test kCGColorSpaceDeviceGray
+NSLog(@&quot;CGColor white color:%@&quot;, [UIColor whiteColor].CGColor);
+
+CIColor *ciColor = [CIColor colorWithCGColor:[UIColor whiteColor].CGColor];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;color %@&quot;, color);
+
+// Core Image converts all color spaces to the Core Image working color 
+// space before it passes the color space to the filter kernel.
+// kCGColorSpaceDeviceGray ---&gt; kCGColorSpaceDeviceRGB
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
+</code></pre><p>通过运行程序，我们看出来，如果使用一个kCGColorSpaceDeviceGray的颜色空间的CGColor来初始化CIColor的时候，我们可以看到CIColor的色彩空间一直是kCGColorSpaceDeviceGray，通过访问UIColor的CIColor属性，我们可以看到其颜色空间仍然是kCGColorSpaceDeviceGray，但是当访问UIColor的CGColor属性的时候，通过打印可以发现其色彩空间已经转变成了kCGColorSpaceDeviceRGB空间了，而颜色值也正确的从原来的颜色空间转换到了新的颜色空间。</p>
+<p>2) 使用kCGColorSpaceDeviceRGB初始化CIColor</p>
+<pre><code>//test kCGColorSpaceDeviceRGB
+NSLog(@&quot;CGColor red color:%@&quot;, [UIColor redColor].CGColor);
+
+CIColor *ciColor = [CIColor colorWithCGColor:[UIColor redColor].CGColor];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+UIColor *color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;color %@&quot;, color);
+
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
+</code></pre><p>整个过程中CIColor，以及通过UIColor的CGColor和CIColor属性访问到的值，打印出来我们可以发现它们都是kCGColorSpaceDeviceRGB空间的。</p>
+<p>3) 使用kCGColorSpaceDeviceCMYK初始化CIColor</p>
+<pre><code>// test kCGColorSpaceDeviceCMYK
+CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
+NSLog(@&quot;Components number: %zu&quot;, CGColorSpaceGetNumberOfComponents(cmykSpace));
+CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
+CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
+CGColorSpaceRelease(cmykSpace);
+NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
+
+ciColor = [CIColor colorWithCGColor:colorCMYK];
+NSLog(@&quot;cicolor: %@&quot;, ciColor);     // in fact，the color value of CIColor has converted to RGB Colorspace
+NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
+
+color = [UIColor colorWithCIColor:ciColor];
+NSLog(@&quot;UIColor with CIColor: %@&quot;, color);
+
+NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
+NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
+
+// when UIColor init with CIColor, UIColor&apos;s CGColor will convert other colorspace to kCGColorSpaceDeviceRGB
+NSLog(@&quot;cgcolor from UIColor: %@&quot;, color.CGColor);
+</code></pre><p>当我们用一个CMYK颜色空间的CGColor来初始化CIColor的时候，CIColor的颜色空间依然是CMYK，但是颜色值已经转换成RGB的颜色值。当使用该CIColor创建一个UIColor的时候，我们再通过CIColor和CGColor属性打印信息的时候，我们会发现CIColor的色彩空间依然是CMYK，但是CGColor打印所得到的信息说明它已经被转换成RGB空间了。</p>
+<p><strong>关于创建一个CGColor</strong><br>最常用的函数是CGColorCreate，该函数有两个参数：</p>
+<p>1) colorspace，指定CGColor对应的颜色空间，Quartz就会retain该对象，因此调用完之后你就可以安全的释放该对象。<br>2) components，一个CGFloat的数组，该数组的元素个数是指定色彩空间包含的颜色分量数n，加上对应的alpha值。　</p>
+<p>该函数该返回一个新创建的CGColorRef，当我们不再使用该对象的时候使用CGColorRelease函数释放该对象。</p>
+<p><strong>获取CGColor的数据</strong><br>在我们创建的时候传入两个重要的参数进去，当我们获取到了CGColorRef以后当然就可以拿到对应的ColorSpace以及Components。</p>
+<p>1) 获取ColorSpace<br>通过CGColorGetColorSpace函数我们可以获取到当前CGColorRef对应的ColorSpace，该函数只接受一个参数就是你要获取ColorSpace的CGColorRef。</p>
+<pre><code>CGColorRef cgColor = [UIColor redColor].CGColor;
+CGColorSpaceRef colorSpace = CGColorGetColorSpace(cgColor);
+NSLog(@&quot;color space: %@&quot;, colorSpace);
+</code></pre><p>2) 获取Color Components<br>要获取到CGColorRef对应的颜色值，我们需要用到CGColorGetNumberOfComponents和CGColorGetComponents两个函数。我们先来看看两个函数的函数原型：</p>
+<pre><code>size_t CGColorGetNumberOfComponents (
+CGColorRef color
+);
+
+const CGFloat * CGColorGetComponents (
+CGColorRef color
+);
+</code></pre><p>第一个函数是获得CGColorRef的中包含的颜色组成部分的个数，第二个函数就是获取实际的颜色组成部分的数组。</p>
+<pre><code>NSUInteger num = CGColorGetNumberOfComponents(cgColor);
+const CGFloat *colorComponents = CGColorGetComponents(cgColor);
+for (int i = 0; i &lt; num; ++i) {
+NSLog(@&quot;color components %d: %f&quot;, i, colorComponents[i]);
+}
+</code></pre><p><strong>判断两个颜色是否相等</strong><br>不管UIColor使用CIColor，CGColor还是其他方式初始化的，其CGColor属性都是可用的。CoreGraphics中提供一个方法可以判断两个CGColor是否相等，因此我们可以通过判断两个UIColor是否相等。</p>
+<pre><code>// judge two CGColor is equal
+if (CGColorEqualToColor([UIColor whiteColor].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
+NSLog(@&quot;The two CGColor is equal!&quot;);
+}
+else {
+NSLog(@&quot;The two CGColor is not equal!&quot;);
+}
+
+if (CGColorEqualToColor([UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
+NSLog(@&quot;The two CGColor is equal!&quot;);
+}
+else {
+NSLog(@&quot;The two CGColor is not equal!&quot;);
+}
+</code></pre><p>例子中第一部分是判断两个白色的UIColor是否相等，虽然都是白色，但是颜色空间是不一样的。例子的第二部分简单的创建了两个RGB空间的UIColor，运行程序可以看出，这两种颜色是相同的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f66427dbc02dea3c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2013/08/31/iOS图像处理之UI-CG和CI/" data-title="iOS图像处理之UI,CG和CI" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="iOS图像处理之UI,CG和CI 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2013/08/31/iOS图像处理之UI-CG和CI/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2013/10/01/从0开始看一个项目/" style="float: left;">
+        ← 从0开始看一个项目
+    </a>
+    
+    
+    <a class="pull-right" href="/2013/08/29/Cordova-Source-Code-Analyse/">
+        Cordova Source Code Analyse →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2013/08/31/iOS图像处理之UI-CG和CI/" data-title="iOS图像处理之UI,CG和CI" data-url="https://dangdangfeng.github.io/2013/08/31/iOS图像处理之UI-CG和CI/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

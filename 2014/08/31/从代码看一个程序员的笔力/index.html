@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives: 2013 | 流城</title>
+  <title>从代码看一个程序员的笔力 | 流城</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -86,7 +86,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -193,89 +193,163 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2013/10/01/从0开始看一个项目/">从0开始看一个项目</a></h4>
-                            
-                            <p><time datetime="2013-10-01T02:40:37.000Z"><a href="/2013/10/01/从0开始看一个项目/">2013-10-01</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2013/08/31/iOS图像处理之UI-CG和CI/">iOS图像处理之UI,CG和CI</a></h4>
-                            
-                            <p><time datetime="2013-08-30T16:35:38.000Z"><a href="/2013/08/31/iOS图像处理之UI-CG和CI/">2013-08-31</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2013/08/29/Cordova-Source-Code-Analyse/">Cordova Source Code Analyse</a></h4>
-                            
-                            <p><time datetime="2013-08-29T15:27:36.000Z"><a href="/2013/08/29/Cordova-Source-Code-Analyse/">2013-08-29</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2014-08-30T16:38:23.000Z" itemprop="datePublished">
+          2014-08-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/method/'>method</a>
+    
+    
+</span>
+                <h1>从代码看一个程序员的笔力</h1>
+            </div>
         </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>从代码的整洁度上就可以看出一个程序员的实力，规范其实就是让你养成一种良好习惯的标杆，在此面前我们应该顺从（本篇以OC为例）。</p>
+<ol>
+<li><p>单页代码最好控制在800行以内，每个方法最好不要超过100行，过多建议对代码进行重构</p>
+</li>
+<li><p>相同的逻辑方法定义避免在多个地方出现，尽量将公用的类、方法抽取出来</p>
+</li>
+<li><p>删除未被使用的代码，不要大片注释未被使用的代码，确定代码不会使用，请及时删除</p>
+</li>
+<li><p>对其他项目中copy过来的代码，根据具体需要更新代码风格，及时删除未被使用的代码</p>
+</li>
+<li><p>项目中所有Group或者文件名称（图片名字等），不要使用汉字命名，尽量使用英文命名，国内特有名词可以使用拼音。</p>
+</li>
+<li><p>项目中所有Group都需要在项目目录中存在一个真实的目录，Group中的文件与真实目录中文件一一对应。</p>
+</li>
+<li><p>请在项目中写必要代码的注释</p>
+</li>
+<li><p>请多使用 #pragma mark - Mark Name 对方法进行分组 。如:</p>
+<pre><code>#pragma mark - **********View lifeCycle******
+</code></pre></li>
+<li><p>所有类名称以项目工程开头命名，如：“JS”（简书）。针对不同视图控制器，在末尾添加后缀，如： UIButton 后缀添加“Button”或大家皆知的简写，NSArray的变量命名为xxxArray等。</p>
+</li>
+<li><p>类、方法、属性等命名，做到见名知意，采用驼峰式命名规则。</p>
+</li>
+<li><p>根据资源类型或者所属业务逻辑对项目资源进行分组，使得整个项目结构清晰明了；整个项目保持一种代码书写风格。</p>
+</li>
+<li><p>避免在程序中直接出现常数，使用超过一次的应以宏定义的形式来替代。常数的宏定义应与它实际使用时的类型相一致。如以3.0来定义浮点类型，用3表示整型。 常量的命名应当能够表达出它的用途，并且用大写字母表示。例如：</p>
+<pre><code>#define PI 3.1415926
+</code></pre></li>
+<li><p>当使用条件语句编码时，不要嵌套if语句，多个返回语句也是OK。</p>
+<pre><code>- (void)testMethod {
+   if (![testSome boolValue]) {// 不合适就返回，下面做处理
+   return;
+  }
+ //Do something important
+}
+</code></pre></li>
+<li><p>当方法通过引用来返回一个错误参数，判断返回值而不是错误变量。在成功的情况下，有些Apple的APIs记录垃圾值(garbage values)到错误参数(如果non-NULL)，那么判断错误值会导致false负值和crash。</p>
+<pre><code>NSError *error;
+if (![self trySomethingWithError:&amp;error]) {
+  // Handle Error
+}
+</code></pre></li>
+<li><p>当参数过长时，每个参数占用一行，以冒号对齐。如：</p>
+<pre><code>- (void)aboutFisrtNumber:(NSString *)oneStr
+          withNextNumber:(NSString *)twoStr
+          withLastNumber:(NSString *)threeStr{
+// do something
+}
+</code></pre></li>
+<li><p>一行很长的代码应该分成两行代码，下一行用两个空格隔开</p>
+<pre><code>self.productsRequest = [[JSProductsRequest alloc] 
+  initWithProductIdentifiers:productIdentifiers];
+</code></pre></li>
+<li><p>删除多余的空行，所有方法与方法之间空1行，所有代码块之间空1行。变量声明后需要空1行，如果需要分类区别，各类别之间空1行。条件、循环，选择语句，整个语句结束，需要空1行。最后一个括弧之前不空行。注释与代码之间不空行。</p>
+<pre><code>#pragma 与方法之间空1行
+</code></pre></li>
+<li><p>每行代码最多不得超过100个字</p>
+</li>
+<li><p>如果类声明中包含多个protocol，每个protocol占用一行，缩进2个字符如:</p>
+<pre><code>@interface BootViewController : UITableViewController&lt;&lt;/p&gt;
+UITableViewDelegate,
+UITableViewDataSource,
+UITextFieldDelegate,
+UITextViewDelegate
+&gt;{
+// code
+}
+</code></pre></li>
+<li><p>图片命名：采用单词全拼，或者大家公认无岐义的缩写(比如：nav，bg，btn等)；采用“模块+功能”命名法，模块分为公共模块、私有模块。公共模块主要包括统一的背景，导航条，标签，公共的按钮背景，公共的默认图等等；私有模块主要根据app的业务；功能模块划分，比如用户中心，消息中心等。建议背景图采用以bg作前缀，按钮背景采用btn作前缀。</p>
+</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-798d683d4df650ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2014/08/31/从代码看一个程序员的笔力/" data-title="从代码看一个程序员的笔力" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="从代码看一个程序员的笔力 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/08/31/从代码看一个程序员的笔力/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
     </div>
-</section> 
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2016/08/30/如何优雅的谈论源码/" style="float: left;">
+        ← 如何优雅的谈论源码
+    </a>
+    
+    
+    <a class="pull-right" href="/2014/08/30/如何优雅的谈论OC/">
+        如何优雅的谈论OC →
+    </a>
+    
+
+    
+</nav>
 
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>梦想是一场华美的旅途，每个人在找到它之前，都只是孤独的少年。</p>
-        </div>
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2014/08/31/从代码看一个程序员的笔力/" data-title="从代码看一个程序员的笔力" data-url="https://dangdangfeng.github.io/2014/08/31/从代码看一个程序员的笔力/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-
 
 
       
