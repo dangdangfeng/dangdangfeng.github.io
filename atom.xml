@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2016-08-29T17:24:47.000Z</updated>
+  <updated>2016-08-30T15:42:03.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -16,11 +16,496 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>如何幽雅的谈论Hybrid App</title>
+    <link href="https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E5%B9%BD%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHybrid-App/"/>
+    <id>https://dangdangfeng.github.io/2016/08/30/如何幽雅的谈论Hybrid-App/</id>
+    <published>2016-08-30T15:40:19.000Z</published>
+    <updated>2016-08-30T15:42:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>重要的并不是我们提供的信息量有多大，而是我们能否给他们提供真正需要的信息。             -《瞬间之美》</p>
+</blockquote>
+<p>本文涉及如下方面：</p>
+<ul>
+<li>什么是Hybrid架构(可略读)</li>
+<li>Hybrid与Native的关系</li>
+<li>设计上的考虑</li>
+<li>一句话说明白</li>
+<li>技术实现</li>
+<li>Cordova</li>
+</ul>
+<hr>
+<h4 id="Hybrid架构"><a href="#Hybrid架构" class="headerlink" title="Hybrid架构"></a>Hybrid架构</h4><blockquote>
+<p>Hybrid App：Hybrid App is a mobile application that is coded in both browser-supported language and computer language. They are available through application distribution platforms such as the Apple App Store, Google Play etc. Usually, they are downloaded from the platform to a target device, such as iPhone, Android phone or Windows Phone. The subscribers need to install to run them.</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-3b19957dce0c01d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Hybrid App（混合模式移动应用）是指介于web-app、native-app这两者之间的app，兼具“Native App良好用户交互体验的优势”和“Web App跨平台开发的优势”。Hybrid开发效率高、跨平台、低层本的特点，Hybrid从业务开发上讲，没有版本问题，对于BUG能及时修复。但Hybrid也是有缺点的，Hybrid体验比不上Native，同样的功能在性能上存在巨大差距。Web界面上JS对HTML Node的操作需要消耗大量的CPU资源，手机CPU的性能还不能与PC相提并论，就算在智能手机之间，硬件水准也参差不齐，一个可以在iPhone 6上流畅运行的界面，跑到三星上很可能就卡住不动了。所以我们经常可以发现一些富交互页面上的操作无法达到令人满意的流畅度，而流畅度也正是用户评价一款App优劣的最直观因素。所以混合式编程比较适用于需要快速试错、快速占领市场的团队，当然，也不是绝对。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-2d23bdaa9e7a426a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Hybrid App按网页语言与程序语言的混合，通常分为三种类型：多View混合型，单View混合型，Web主体型。</p>
+<p>多View混合型即Native View和Web View独立展示，交替出现。这种应用混合逻辑相对简单。即在需要的时候，将WebView当成一个独立的View（Activity）运行起来，在WebView内完成相关的展示操作。这种移动应用主体通常是Native App，Web技术只是起到补充作用。开发难度和Native App基本相当。</p>
+<p>单View混合型即在同一个View内，同时包括Native View和Web View。互相之间是覆盖（层叠）的关系。这种Hybrid App的开发成本较高，开发难度较大，但是体验较好。如百度搜索为代表的单View混合型移动应用，既可以实现充分的灵活性，又能实现较好的用户体验。</p>
+<p>Web主体型即移动应用的主体是Web View，主要以网页语言编写，穿插Native功能的Hybrid App开发类型。这种类型开发的移动应用体验相对而言存在缺陷，但整体开发难度大幅降低，并且基本可以实现跨平台。Web主体型的移动应用用户体验的好坏，主要取决于底层中间件的交互与跨平台的能力。国外的appMobi、PhoneGap和国内的WeX5、AppCan和Rexsee都属于Web主体型移动应用中间件。其中Rexsee不支持跨平台开发。appMobi和PhoneGap除基础的底层能力更多是通过<strong>插件（Plugins）</strong>扩展的机制实现Hybrid。AppCan除了插件机制，还提供了大量的单View混合型的接口来完善和弥补Web主体型Hybrid App体验差的问题，接近Native App的体验。而WeX5则在揉合PhoneGap和Bootstrap等主流技术的基础上，对性能进一步做了深度优化，不但完全具备Native App对本地资源的调用能力，性能体验也不输原生；WeX5所开发出来的app具备完全的跨端运行能力，可以无需任何修改直接运行在各种前端环境上。</p>
+<p>多主体共存型（灵活型）是一种新型的开发模式，即支持Web主体型的应用，又支持以Native主体的应用，也支持两者混合的开发模式。比如kerkee框架 ，它具有跨平台、用户体验好、性能高、扩展性好、灵活性强、易维护、规范化、具有Debug环境、彻底解决跨域问题等特点。用户体验与Native App媲美。功能方面，开发者可随意扩展接口。</p>
+<h4 id="Hybrid与Native的关系"><a href="#Hybrid与Native的关系" class="headerlink" title="Hybrid与Native的关系"></a>Hybrid与Native的关系</h4><p>在Hybrid架构设计中Native提供的是一宿主环境，实现合理的逻辑架构需要考虑：交互设计，资源访问，Hybrid开发调试，通讯设计、并发设计、异常处理、日志监控以及安全模块等问题，前端要做的事情就是封装Native提供的各种能力。</p>
+<p>处理交互设计时需要考虑前端与Native配合处理，如H5与Native的互相跳转逻辑；<br>资源访问机制需要做到既能以file的方式访问Native内部资源，又能使用url的方式访问线上资源，处理好跳转的逻辑；需要提供前端资源增量替换机制，以摆脱APP迭代发版问题，避免用户升级APP，这里将涉及到静态资源在APP中的存放策略，更新策略的设计，以及服务器端的支持等。当然，有现成框架和解决方案的支持，但这些确实是不可忽略的问题。</p>
+<p>Hybrid的交互是通过Native调用前端页面的JS方法，或者前端页面通过JS调用Native提供的接口实现的，两者交互的桥梁是Webview，iOS可以使用javascripbrige来实现（现成框架），在UIWebView的shouldStartLoadWithRequest方法里面捕获url的变化，解析出需要的参数，然后传给一个统一的处理方法。app自身可以自定义url schema，并且把自定义的url注册在调度中心。JS与Native通信可以创建这类URL被Native捕获处理，即schema跳转逻辑。APP安装后会在手机上注册一个schema，比如淘宝是taobao://，Native会有一个进程监控Webview发出的所有schema://请求，然后分发到“控制器”。hybridapi处理程序，Native控制器处理时会需要param提供的参数（encode过），根据实际需要处理业务逻辑问题。</p>
+<h4 id="设计上的考虑"><a href="#设计上的考虑" class="headerlink" title="设计上的考虑"></a>设计上的考虑</h4><p>无论在Android还是iOS平台上，都有各自的一套交互习惯，包括视觉风格，界面切换，操作习惯等，与Web习惯完全不同。以iOS界面切换为例，系统风格是新界面自右向左推入，后退时界面自左向右推出，而旧界面保持状态。Web开发的默认习惯则是刷新页面，无论新载入页面或是后退，都会对页面进行刷新。因此使用Web模式开发多界面功能就面临这样的交互习惯差异，造成体验上的损失。当然Web方式也可模拟Native的交互方式，但这样的模拟首先提高了开发成本，有悖于最初的高效原则，从效果上看，也很难达到Native的流畅性。</p>
+<h4 id="一句话说明白"><a href="#一句话说明白" class="headerlink" title="一句话说明白"></a>一句话说明白</h4><p>如果用一句话来讲明白这个问题，就是Hybrid混合式编程可以在Native原生应用的基础上通过一些Hybrid框架实现本地和JS的交互处理。在不影响性能的情况下，实现应用的动态化。</p>
+<h4 id="技术实现原理"><a href="#技术实现原理" class="headerlink" title="技术实现原理"></a>技术实现原理</h4><p>Hybrid技术将静态资源存于Native，目录结构可以如下面划分，当然不是绝对的，基本要求是将对应版本的Hybrid插件下载到本地，存放方便就好。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-17f9fb8918c3d88c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>在正式的开发中，还要考虑增量机制，因为不同的版本会对应着不同的业务逻辑，真实的增量机制需要服务器端的配合，版本映射表是每次大版本APP发布时由服务器端生成。当APP启动时，APP会读取版本信息，如果发现本地版本号比线上的小，便会下载对应的zip文件，然后解压之后并且替换整个原有的文件，本次增量结束，因为所有的版本文件不会重复，APP回滚时可用回到任意想去的版本，也可以对任意版本做BUG修复。</p>
+<p>以上，我们得知，Hybrid和Native交互可以通过两种方式：Url Schema和JavaScriptCore等地交互。H5与Native交互的桥梁为Webview，“联系”的方式以url schema的方式，在用户安装app后，app可以自定义url schema，并且把自定义的url注册在调度中心。</p>
+<pre><code>demoschema://hybridapi?callback=hybrid_1446276509894&amp;param=%7B%22data1%22%3A1%2C%22data2%22%3A2%7D
+</code></pre><p>App调用H5:将一组API绑定在webView的window对象上，App通过iOS原生方法调用window对象中的js方法。<br>H5与App通信：App实现对Webview URL的观察者模式，H5 通过改变URL的哈希值，通过解析哈希值的变化执行相应的操作。</p>
+<p>另一种是JavaScriptCore，具体的可以看之前写的文章<a href="http://www.jianshu.com/p/bbfa8dee967e" target="_blank" rel="external">JavaScriptCore框架</a>。</p>
+<pre><code>context[@&quot;makeUIColor&quot;] = ^(NSDictionary *rgbColor){
+float red = [rgbColor[@&quot;red&quot;] floatValue];
+float green = [rgbColor[@&quot;green&quot;] floatValue];
+float blue = [rgbColor[@&quot;blue&quot;] floatValue];
+return [UIColor colorWithRed:(red / 255.0)
+                   green:(green / 255.0)
+                    blue:(blue / 255.0)
+                   alpha:1];
+};
+JSValue *color = [context evaluateScript:@&quot;makeUIColor({red: 50, green: 150, blue: 250})&quot;];
+NSLog(@&quot;color:%@&quot;,[color toObject]);
+</code></pre><p>通过这种方式就可以在JavaScript中调用Objective-C。</p>
+<p>当然，除此之外也可以用JSBridge技术实现。<br>JS中：</p>
+<pre><code> button.onclick = function(e) {
+    e.preventDefault();
+    var data = &apos;Hello from JS button&apos;;
+    log(&apos;JS sending message&apos;, data);
+    window.external.test1(data, &apos;haha&apos;);
+}
+</code></pre><p>通过JSBridge,执行本地类中的test1方法。此处只是一个引子，详细的会在另一篇文章中单独引出。</p>
+<p>至于H5和Native的跳转问题，可以采用统跳协议来完成。这又是另外一个问题了。当然也可以在JS里定义跳转地址，通过JS交互来处理。</p>
+<h4 id="Cordova"><a href="#Cordova" class="headerlink" title="Cordova"></a>Cordova</h4><p>写了那么久，感觉现在才进入主题。</p>
+<p>Cordova提供了一组设备相关的API，通过这组API，移动应用能够以JavaScript访问原生的设备功能，如摄像头、麦克风等。Cordova还提供了一组统一的JavaScript类库，以及为这些类库所用的设备相关的原生后台代码。</p>
+<p>测试使用可以到Github上下载<a href="https://github.com/apache/cordova-ios" target="_blank" rel="external">源码</a>,也可以使用命令：</p>
+<pre><code>cordova create hello com.example.hello HelloWorld
+cd hello
+cordova platform add ios
+</code></pre><p>这样就创建了hello文件夹下的测试目录(com.example.hello 为应用程序的id名，与Xcode中类似，可以在 config.xml 中修改，如果不指定的话默认为 io.cordova.hellocordova)。</p>
+<blockquote>
+<p>目录文件说明：<br>config.xml ：cordova的配置文件<br>hooks/ ：存放自定义cordova命令的脚本文件。<br>platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改<br>plugins/ ：插件目录（主要是提供各个平台的原生API）<br>www/ ：用H5编写的源代码目录，build时会被放入各个平台的assets\www目录。<br>www/index.html ：App入口html文件</p>
+</blockquote>
+<p>在Xcode编译运行的话，使用的是 Staging 下面的html页面。</p>
+<p>命令安装需要安装cordova命令</p>
+<pre><code>brew install node //该命令执行后，自动装好node和npm。
+brew upgrade node //更新node(可不执行)
+</code></pre><p>为了解决校验码不正确问题。npm 使用国内镜像的方法 （三种办法任意一种都能解决问题，建议使用第三种，将配置写死，下次用的时候配置还在）:</p>
+<pre><code>1.通过config命令
+npm config set registry http://registry.cnpmjs.org npm info underscore （如果上面配置正确这个命令会有字符串response）
+2.命令行指定
+npm --registry http://registry.cnpmjs.org info underscore 
+3.编辑 ~/.npmrc 加入下面内容
+registry = http://registry.cnpmjs.org
+</code></pre><p>之后：</p>
+<pre><code>sudo npm install -g cordova
+</code></pre><p>打开platform/ios里的HelloWorld.xcodeproj即可测试。</p>
+<p>下面就是源码分析了，因为要对照着源码来说，大家可以到<a href="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse" target="_blank" rel="external">这里</a>(<a href="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse)，参考我写的详细的源码分析。通过这里，写一个混合式App应该不是问题了。" target="_blank" rel="external">https://github.com/dangdangfeng/Cordova-Source-Code-Analyse)，参考我写的详细的源码分析。通过这里，写一个混合式App应该不是问题了。</a></p>
+<p>最后，祝大家看的愉快！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;重要的并不是我们提供的信息量有多大，而是我们能否给他们提供真正需要的信息。             -《瞬间之美》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本文涉及如下方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么是Hybrid架构(可略读)&lt;/li&gt;
+
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的谈论源码</title>
+    <link href="https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BA%E6%BA%90%E7%A0%81/"/>
+    <id>https://dangdangfeng.github.io/2016/08/30/如何优雅的谈论源码/</id>
+    <published>2016-08-30T15:38:48.000Z</published>
+    <updated>2016-08-30T15:39:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要涉及一下几点：</p>
+<ul>
+<li>SDWebImage 原理</li>
+<li>SDWebImage 使用</li>
+<li>SDWebImage 源码分析</li>
+<li>一些思考</li>
+</ul>
+<hr>
+<h4 id="SDWebImage-加载图片原理"><a href="#SDWebImage-加载图片原理" class="headerlink" title="SDWebImage 加载图片原理"></a>SDWebImage 加载图片原理</h4><p><a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">具体源码分析</a>见GIT。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6971e44291c18bb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目前标注的类"></p>
+<p>通过标注的类，看懂应该没问题了。</p>
+<p>SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCache每次都要把缓存的raw  data 再转化为UIImage，就带来了数据处理和内存方面的更多操作。SDWebImage的缓存由SDImageCache类来实现，这是一个单例类，该类负责处理内存缓存及一个可选的磁盘缓存，其中磁盘缓存的写操作是异步的，这样就不会对UI操作造成影响。此外还提供了若干属性和接口来配置和操作缓存对象。包含以下功能：</p>
+<p>1.提供UIImageView的一个分类，以支持网络图片的加载与缓存管理</p>
+<p>2.一个异步的图片加载器</p>
+<p>3.一个异步的内存+磁盘图片缓存</p>
+<p>4.支持GIF图片</p>
+<p>5.支持WebP图片</p>
+<p>6.后台图片解压缩处理</p>
+<p>7.确保同一个URL的图片不被下载多次</p>
+<p>8.确保虚假的URL不会被反复加载</p>
+<p>9.确保下载及缓存时，主线程不被阻塞</p>
+<p><strong>SDWebImage底层实现原理：</strong></p>
+<p>SDWebImage有沙盒缓存机制，主要由三块组成</p>
+<p>1.内存图片缓存</p>
+<p>2.内存操作缓存</p>
+<p>3.磁盘沙盒缓存</p>
+<p>SDWebImage的大部分工作是由缓存对象SDImageCache和异步下载器管理对象SDWebImageManager来完成的。SDWebImage的图片下载是由SDWebImageDownloader这个类来实现的，它是一个异步下载管理器，下载过程中增加了对图片加载做了优化的处理。而真正实现图片下载的是自定义的一个Operation操作，将该操作加入到下载管理器的操作队列downloadQueue中，Operation操作依赖系统提供的NSURLConnection类实现图片的下载。</p>
+<p>SDWebImage提供了对图片缓存的支持，而该功能是由SDImageCache类来完成的。该类负责处理内存缓存及一个可选的磁盘缓存。内存缓存的处理是使用NSCache对象来实现的。NSCache是一个类似于集合的容器。它存储key-value对，这一点类似于NSDictionary类，用搜索文件系统的方式做管理，文件替换方式是以时间为单位。我们通常用使用缓存来临时存储短时间使用但创建昂贵的对象。重用这些对象可以优化性能，因为它们的值不需要重新计算。另外一方面，这些对象对于程序来说不是紧要的，在内存紧张时会被丢弃。</p>
+<p>磁盘缓存的处理则是使用NSFileManager对象来实现的。图片存储的位置是位于Cache文件夹。另外，SDImageCache还定义了一个串行队列，来异步存储图片。</p>
+<p>当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。使用Decoder 是因为UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，<br>所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。<br>为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。是典型的空间换时间的做法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8c5e61bb0b11d4e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>SDWebImage的原理</strong></p>
+<p>1.使用 </p>
+<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options; 
+</code></pre><p>会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
+<p>2.进入  SDWebImageManager</p>
+<pre><code>-downloadWithURL:options:progress:completed:
+</code></pre><p>交给 SDImageCache 从缓存查找图片是否已经下载。</p>
+<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，取缓存，没有从<code>- (UIImage <em>)diskImageForKey:(NSString </em>)key</code>去磁盘缓存中去查找，根据 URLKey 在硬盘缓存目录下尝试读取图片文件。在磁盘缓存中找到后，同时更新置内存缓存中（如果空闲内存过小，会先清空内存缓存），有回调则调用doneBlock回调。</p>
+<p>4.找到了就从SDWebImageQueryCompletedBlock到 UIImageView+WebCache 等前端展示图片。</p>
+<p>5.如果从硬盘缓存目录读取不到图片，说明不存在该图片，需要下载图片，共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。 图片下载由 NSURLSession 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
+<p>6.<code>URLSession:didReceiveData:</code> 中利用 ImageIO 做了按图片下载进度加载效果。数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
+<p>7.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
+<p>8.在主线程 SDWebImageDownloaderCompletedBlock里处理解码完成后的操作。回调给需要的地方展示图片。</p>
+<p>9.从SDWebImageDownloaderProgressBlock 回调给 SDWebImageManager 告知图片下载信息。</p>
+<p>10.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
+<p>11.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
+<p>12.SDWebImage 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache方便使用。 SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-bf7c86e7bd12b9c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="SDWebImage-使用"><a href="#SDWebImage-使用" class="headerlink" title="SDWebImage 使用"></a>SDWebImage 使用</h4><p><strong>常用到的对象：</strong></p>
+<p>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调。</p>
+<p>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。</p>
+<p>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。</p>
+<p>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
+<p>5、SDWebImageDecoder，异步对图像进行了一次解压</p>
+<p>使用：</p>
+<pre><code>[self.imageView sd_setImageWithURL:self.imageURL
+                      placeholderImage:nil
+                               options:SDWebImageProgressiveDownload
+                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                  ...
+                              }
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 ...
+                             }];
+</code></pre><p>调用setImageWithURL:方法的时候，SDWebImage自动做很多事，当你需要在某一具体时刻做事情的时候，你可以覆盖这些方法。比如在下载某个图片的过程中要响应一个事件，就覆盖这个方法：</p>
+<pre><code>//这个方法是下载imagePath2的时候响应
+SDWebImageManager *manager = [SDWebImageManager sharedManager];
+
+[manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+
+    NSLog(@&quot;显示当前进度&quot;);
+
+} completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+
+    NSLog(@&quot;下载完成&quot;);
+}];
+</code></pre><p><strong>基本代码：</strong></p>
+<p>使用SDWebImageManager类：可以进行一些异步加载的工作。</p>
+<pre><code>SDWebImageManager *manager = [SDWebImageManager sharedManager];
+UIImage *cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
+if (cachedImage) {
+  // 如果Cache命中，则直接利用缓存的图片进行有关操作
+  // Use the cached image immediatly
+} else {
+  // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
+  // Start an async download
+ [manager downloadWithURL:url delegate:self];
+}
+</code></pre><p>当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。</p>
+<pre><code>// 当下载完成后，调用回调方法，使下载的图片显示
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
+// Do something with the downloaded image
+}
+</code></pre><p><strong>独立的异步图像下载</strong></p>
+<p>可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。</p>
+<pre><code>downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
+</code></pre><p>这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</p>
+<p><strong>独立的异步图像缓存</strong></p>
+<p>SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。</p>
+<pre><code>UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
+</code></pre><p>存储一个图像到缓存是使用方法storeImage: forKey:</p>
+<pre><code>[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+</code></pre><p>默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值<br>来替代。</p>
+<h4 id="SDWebImage-源码分析示例"><a href="#SDWebImage-源码分析示例" class="headerlink" title="SDWebImage 源码分析示例"></a>SDWebImage 源码分析示例</h4><p>SDWebImageDownloader类</p>
+<p>SDWebImageDownloaderOptions定义：</p>
+<pre><code>typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
+SDWebImageDownloaderLowPriority = 1 &lt;&lt; 0,
+SDWebImageDownloaderProgressiveDownload = 1 &lt;&lt; 1,
+
+// 默认情况下请求不使用NSURLCache，如果设置该选项，则以默认的缓存策略来使用NSURLCache
+SDWebImageDownloaderUseNSURLCache = 1 &lt;&lt; 2,
+
+// 如果从NSURLCache缓存中读取图片，则使用nil作为参数来调用完成block
+SDWebImageDownloaderIgnoreCachedResponse = 1 &lt;&lt; 3,
+
+// 在iOS 4+系统上，允许程序进入后台后继续下载图片。该操作通过向系统申请额外的时间来完成后台下载。如果后台任务终止，则操作会被取消
+SDWebImageDownloaderContinueInBackground = 1 &lt;&lt; 4,
+
+// 通过设置NSMutableURLRequest.HTTPShouldHandleCookies = YES来处理存储在NSHTTPCookieStore中的cookie
+SDWebImageDownloaderHandleCookies = 1 &lt;&lt; 5,
+
+// 允许不受信任的SSL证书。主要用于测试目的。
+SDWebImageDownloaderAllowInvalidSSLCertificates = 1 &lt;&lt; 6,
+
+// 将图片下载放到高优先级队列中
+SDWebImageDownloaderHighPriority = 1 &lt;&lt; 7,
+};
+</code></pre><p>下载顺序：</p>
+<pre><code>typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
+// 以队列的方式，按照先进先出的顺序下载。这是默认的下载顺序
+SDWebImageDownloaderFIFOExecutionOrder,
+// 以栈的方式，按照后进先出的顺序下载。
+SDWebImageDownloaderLIFOExecutionOrder
+};
+</code></pre><p>每个下载操作都定义了回调操作，如下载进度回调，下载完成回调，头部过滤等，这些回调操作是以block形式来呈现；每个下载操作的下载进度回调和下载完成回调，这两个回调稍后将保存在下载管理器的URLCallbacks字典中，key为URL，value为一个数组，数组里面又存放一个保存了下载进度回调和完成回调代码块的字典。这个字典数组同时也保证了同一张图片只会被下载一次。</p>
+<pre><code>// 下载进度
+typedef void(^SDWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger expectedSize);
+// 下载完成
+typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
+// Header过滤
+typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
+</code></pre><p>为了保证URLCallbacks操作(添加、删除)的线程安全性，SDWebImageDownloader将这些操作作为一个个任务放到barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性。</p>
+<pre><code>- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
+...
+// 1. 以dispatch_barrier_sync操作来保证同一时间只有一个线程能对URLCallbacks进行操作
+dispatch_barrier_sync(self.barrierQueue, ^{
+...
+// 2. 处理同一URL的同步下载请求的单个下载
+});
+}
+</code></pre><p>下载请求的管理都是放在downloadImageWithURL:options:progress:completed:方法里面来处理的，该方法调用了上面所提到的addProgressCallback:andCompletedBlock:forURL:createCallback:方法来将请求的信息存入管理器中，同时在创建回调的block中创建新的操作，配置之后将其放入downloadQueue操作队列中，最后方法返回新创建的操作。</p>
+<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url options:(SDWebImageDownloaderOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageDownloaderCompletedBlock)completedBlock {
+...
+[self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url createCallback:^{
+...
+}
+</code></pre><p>下载操作的超时时间可以通过downloadTimeout属性来设置，默认值为15秒。</p>
+<p>SDWebImage定义了一个协议，即 SDWebImageOperation 作为图片下载操作的基础协议。它只声明了一个cancel方法，用于取消操作。每个图片的下载都是一个Operation操作。SDWebImage自定义了一个Operation类，即 SDWebImageDownloaderOperation ，它继承自NSOperation，并采用了SDWebImageOperation协议。除了继承而来的方法，该类只向外暴露了一个方法，initWithRequest:options:progress:completed:cancelled:。对于图片的下载，SDWebImageDownloaderOperation完全依赖于URL加载系统中的NSURLSession。具体看代码<a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">源码分析</a>.</p>
+<pre><code>- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+</code></pre><p>方法的主要任务是接收数据。每次接收到数据时，都会用现有的数据创建一个CGImageSourceRef对象以做处理。在首次获取到数据时(width+height==0)会从这些包含图像信息的数据中取出图像的长、宽、方向等信息以备使用。而后在图片下载完成之前，会使用CGImageSourceRef对象创建一个图片对象，经过缩放、解压缩操作后生成一个UIImage对象供完成回调使用。当然，在这个方法中还需要处理的就是进度信息。如果我们有设置进度回调的话，就调用这个进度回调以处理当前图片的下载进度。</p>
+<p>缩放操作可以查看SDWebImageCompat文件中的SDScaledImageForKey函数；解压缩操作可以查看SDWebImageDecoder文件+decodedImageWithImage方法。在下载完成或下载失败后，需要停止当前线程的run loop，清除连接，并抛出下载停止的通知。如果下载成功，则会处理完整的图片数据，对其进行适当的缩放与解压缩操作，以提供给完成回调使用。</p>
+<p>最重要是自己分析，看过的会忘，消化了才是自己的。学而不思则罔,思而不学则殆。每个人要了解自己的优缺点。有思考才有所得！</p>
+<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>我们应该把精力和时间投入在更值得学习的东西上。如果纯看代码而没有碰到这个场景就算看懂了也没法理解，学习的目的是为了实践，而不要为了原理而分析原理，这样就本末倒置了。对于广大程序员而言，做码农，通过低水平重复的劳动来创造价值的道路是永远不可能一劳永逸的，恰恰相反，是永劳一逸的！生产只能够惠及当下！事物的发展在于思考，可能每个人走的路径不一样，寻找到最适合自己的，坚持走下去。只要能肯定每天都是进步的，快慢又有什么关系呢。这是一个浮躁的社会，这个社会催生了无数可能，也许不是每个人都能做一辈子的程序员，但不要辜负你的时光。你之所以成为你，是因为你的时间，你的经历在哪里，你就在哪里。共勉！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要涉及一下几点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SDWebImage 原理&lt;/li&gt;
+&lt;li&gt;SDWebImage 使用&lt;/li&gt;
+&lt;li&gt;SDWebImage 源码分析&lt;/li&gt;
+&lt;li&gt;一些思考&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&quot;SDWebImage-加
+    
+    </summary>
+    
+    
+      <category term="source" scheme="https://dangdangfeng.github.io/tags/source/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的谈论OC</title>
+    <link href="https://dangdangfeng.github.io/2014/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAOC/"/>
+    <id>https://dangdangfeng.github.io/2014/08/30/如何优雅的谈论OC/</id>
+    <published>2014-08-30T15:35:30.000Z</published>
+    <updated>2016-08-30T15:37:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文包括：</p>
+<ul>
+<li>OC的面向对象</li>
+<li>运行时Runtime</li>
+<li>运行循环RunLoop</li>
+<li>事件响应链</li>
+<li>引用计数</li>
+<li>生命周期</li>
+<li>与其他语言的区别</li>
+</ul>
+<hr>
+<p>Objective-C 简称OC（下面以此代称），是在C语言的基础上，增加了一层最小的面向对象语言。是一种静态输入的语言，即“必须先声明数据中每个变量（或者容器）的数据类型”。但它是一个动态语言，代码中的某一部分可以在app运行的时候被扩展和修改（比如，在被编译之后）。OC完全兼容C语言，在代码中，可以混用c，甚至是c++代码。</p>
+<h3 id="面向对象三原则（封装，继承，多态）"><a href="#面向对象三原则（封装，继承，多态）" class="headerlink" title="面向对象三原则（封装，继承，多态）"></a>面向对象三原则（封装，继承，多态）</h3><p>面向对象具有四个基本特征：抽象，封装，继承和多态。</p>
+<p>C语言是面向过程的语言(关注的是函数)，OC,C++,JAVA,C#,PHP,Swift是面向对象的，面向过程关注的是解决问题涉及的步骤，而面向对象关注的是设计能够实现解决问题所需功能的类。抽象是面向对象的思想基础。</p>
+<p>抽象包括两个方面，一是过程抽象，二是数据抽象。过程抽象是指任何一个明确定义功能的操作都可被使用者看作单个的实体看待，尽管这个操作实际上可能由一系列更低级的操作来完成。数据抽象定义了数据类型和施加于该类型对象上的操作，并限定了对象的值只能通过使用这些操作修改和观察。抽象是一种思想，封装继承和多态是这种思想的实现。</p>
+<h5 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h5><p>封装是把过程和数据包围起来（即函数和数据结构，函数是行为，数据结构是描述），有限制的对数据的访问。面向对象基于这个基本概念开始的（<em>因为面向对象更注重的是类</em>），即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。一旦定义了一个对象的特性，则有必要决定这些特性的可见性，封装保证了模块具有较好的独立性，使得程序维护修改较为容易。对应用程序的修改仅限于类的内部，因而可以将应用程序修改带来的影响减少到最低限度。但是封装会导致并行效率问题，因为执行部分和数据部分被绑定在一起，制约了并行程度。面向对象思想将函数和数据绑在一起，扩大了代码重用时的粒度。而且封装下的拆箱装箱过程中也会导致内存的浪费。</p>
+<h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5><p>继承是一种层次模型，允许和鼓励类的<em>重用</em>，并提供了一种明确表述<em>共性</em>的方法。新类继承了原始类的特性，新类称为原始类的派生类（子类和父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。继承性很好的解决了软件的可重用性问题。但是，不恰当地使用继承导致的最大的一个缺陷特征就是高耦合（即“牵一发而动全身”，是设计类时<em>层次</em>没分清导致的）。解决方案是用组合替代继承。将模块拆开，然后通过定义好的接口进行交互，一般来说可以选择Delegate模式来交互。使用继承其实是如何给一类对象划分层次的问题。在正确的继承方式中，父类应当扮演的是底层的角色，子类是上层的业务。父类只是给子类提供服务，并不涉及子类的业务逻辑；层级关系明显，功能划分清晰；父类的所有变化，都需要在子类中体现，此时耦合已经成为需求。</p>
+<h5 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h5><p>多态性是指允许不同类的对象对同一消息作出响应。多态性包括<em>参数化多态性和包含多态性</em>。很好的解决了应用程序函数同名问题，多态一般都要跟继承结合起来说，其本质是子类通过覆盖或重载父类的方法，来使得对同一类对象同一方法的调用产生不同的结果。覆盖是对接口方法的实现，继承中也可能会在子类覆盖父类中的方法。重载，是指我们可以定义一些名称相同的方法，通过定义不同的输入参数来区分这些方法，然后再调用时，VM就会根据不同的参数样式，来选择合适的方法执行。在使用重载时只能通过不同的参数样式。例如，不同的参数类型，不同的参数个数，不同的参数顺序（当然，同一方法内的几个参数类型必须不一样）； 但继承会引入多态使用混乱的境况并产生耦合，更好的方法是使用接口。通过IOP将子类与可能被子类引入的不相关逻辑剥离开来，提高了子类的可重用性，降低了迁移时可能的耦合。接口规范了子类哪些必须实现，哪些可选实现。那些不在接口定义的方法列表里的父类方法，事实上就是不建议覆重的方法。如果引入多态之后导致对象角色不够单纯，那就不应当引入多态，如果引入多态之后依旧是单纯角色，那就可以引入多态；如果要覆重的方法是角色业务的其中一个组成部分，那么就最好不要用多态的方案，用IOP，因为在外界调用的时候其实并不需要通过多态来满足定制化的需求。</p>
+<h3 id="动态性（Runtime）"><a href="#动态性（Runtime）" class="headerlink" title="动态性（Runtime）"></a>动态性（Runtime）</h3><p>Objective-C 是面相运行时的语言，它会尽可能的把编译和链接时要执行的逻辑延迟到运行时。使用Runtime可以按需要把消息重定向给合适的对象，交换方法的实现等等。</p>
+<p>Runtime简称运行时，其中最主要的是消息机制，是一个主要使用 C 和汇编写的库，为 C 添加了面相对象的能力并创造了 Objective-C。。OC的函数调用称为消息发送。属于动态调用过程。在编译的时候并不能决定真正调用哪个函数（在编 译阶段，OC可以调用任何函数，即使这个函数并未实现，只要声明过就不会报错。而C语言在编译阶段就会报错）。只有在真正运行的时候才会根据函数的名称找 到对应的函数来调用。</p>
+<p>如：</p>
+<pre><code>[obj makeText];
+＝＝》
+objc_msgSend(obj,@selector(makeText));
+</code></pre><p>编译器执行上述转换。在objc_msgSend函数中，首先通过obj的isa指针找到obj对应的class。每个对象内部都默认有一个isa指针指向这个对象所使用的类。isa是对象中的隐藏指针，指向创建这个对象的类。在Class中先去cache中通过SEL查找对应函数method（cache中method列表是以SEL为key通过hash表来存储的，这样能提高函数查找速度），若cache中未找到,再去methodList中查找，若methodlist中未找到，则取superClass中查找。若能找到，则将method加入到cache中，以方便下次查找，并通过method中的函数指针跳转到对应的函数中去执行。</p>
+<h4 id="动态性的三方面"><a href="#动态性的三方面" class="headerlink" title="动态性的三方面"></a>动态性的三方面</h4><p>OC的动态特性表现为了三个方面：动态类型、动态绑定、动态加载。之所以叫做动态，是因为必须到运行时(runtime)才会做一些事情。</p>
+<p>动态类型，就是id类型。动态类型是跟静态类型相对的。内置的基本类型都属于静态类型(int、NSString等)。静态类型在编译的时候就能被识别出来（即前面说的静态输入）。所以，若程序发生了类型不对应，编译器就会发出警告。而动态类型就编译器编译的时候是不能被识别的，要等到运行时(runtime)，即程序运行的时候才会根据语境来识别。所以这里面就有两个概念要分清：编译时跟运行时。</p>
+<p>动态语言和静态语言的一个区别是静态语言提前编译好文件，即所有的逻辑已在编译时确定，运行时直接加载编译后的文件；而动态语言是在运行时才确定实现。典型的静态语言是C＋＋，动态语言包括OC，JAVA，C#等；因为静态语言提前编译好了执行文件，也就是通常所说的静态语言效率较高的原因。</p>
+<p>动态绑定(dynamic binding)需要用到@selector/SEL。先来看看“函数”，对于其他一些静态语言，比如c++,一般在编译的时候就已经将要调用的函数的函数签名都告诉编译器了。静态的，不能改变。而在OC中，其实是没有函数的概念的，我们叫“消息机制”，所谓的函数调用就是给对象发送一条消息。这时，动态绑定的特性就来了。OC可以先跳过编译，到运行的时候才动态地添加函数调用，在运行时才决定要调用什么方法，需要传什么参数进去，这就是动态绑定。要实现他就必须用SEL变量绑定一个方法。最终形成的这个SEL变量就代表一个方法的引用。这里要注意一点：SEL并不是C里面的函数指针，虽然很像，但真心不是函数指针。SEL变量只是一个整数，他是该方法的ID。以前的函数调用，是根据函数名，也就是字符串去查找函数体。但现在，我们是根据一个ID整数来查找方法，整数的查找自然要比字符串的查找快得多！所以，动态绑定的特定不仅方便，而且效率更高。</p>
+<p>动态加载就是根据需求动态地加载资源，在运行时加载新类。在运行时创建一个新类,只需要3步:</p>
+<p>1、为 class pair分配存储空间 ,使用 objc_allocateClassPair函数</p>
+<p>2、增加需要的方法使用class_addMethod函数,增加实例变量用class_addIvar</p>
+<p>3 、用objc_registerClassPair函数注册这个类,以便它能被别人使用。</p>
+<h5 id="Method-Swizzling"><a href="#Method-Swizzling" class="headerlink" title="Method Swizzling"></a>Method Swizzling</h5><p>在Objective-C中调用一个方法，其实是向一个对象发送消息，查找消息的唯一依据是selector的名字。利用Objective-C的动态特性，可以实现在运行时偷换selector对应的方法实现，达到给方法挂钩的目的。每个类都有一个方法列表，存放着selector的名字和方法实现的映射关系。IMP类似函数指针，指向具体的Method实现。</p>
+<p>用 method_exchangeImplementations 来交换2个方法中的IMP，<br>用 class_replaceMethod 来修改类，<br>用 method_setImplementation 来直接设置某个方法的IMP，归根结底，都是偷换了selector的IMP。</p>
+<h3 id="RunLoop"><a href="#RunLoop" class="headerlink" title="RunLoop"></a>RunLoop</h3><p>RunLoop是一让线程能随时处理事件但不退出的机制。RunLoop实际上是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行Event Loop的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。让线程在没有处理消息时休眠以避免资源占用、在有消息到来时立刻被唤醒。一个runloop就是一个事件处理循环，用来不停的监听和处理输入事件并将其分配到对应的目标上进行处理。</p>
+<p>RunLoop的四个作用为:使程序一直运行接受用户输入;决定程序在何时应该处理哪些Event;调用解耦;节省CPU时间。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其RunLoop（主线程除外）。</p>
+<p>主线程的runloop默认是启动的。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop和CFRunLoopRef。CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<p>NSRunLoop是一种更加高明的消息处理模式，在对消息处理过程进行了更好的抽象和封装，不用处理一些很琐碎很低层次的具体消息的处理，在NSRunLoop中每一个消息就被打包在input source或者是timer source中了。使用run loop可以使你的线程在有工作的时候工作，没有工作的时候休眠，可以大大节省系统资源。</p>
+<p>对其它线程来说，runloop默认是没有启动的，如果你需要更多的线程交互则可以手动配置和启动，如果线程只是去执行一个长时间的已确定的任务则不需要。在任何一个Cocoa程序的线程中，都可以通过：</p>
+<pre><code>NSRunLoop   *runloop = [NSRunLoop currentRunLoop];
+</code></pre><p>获取到当前线程的runloop。</p>
+<p>Cocoa中的NSRunLoop类并不是线程安全的<br>我们不能在一个线程中去操作另外一个线程的runloop对象，那很可能会造成意想不到的后果。但是CoreFundation中的不透明类CFRunLoopRef是线程安全的，而且两种类型的runloop完全可以混合使用。Cocoa中的NSRunLoop类可以通过实例方法：</p>
+<pre><code>- (CFRunLoopRef)getCFRunLoop;
+</code></pre><p>获取对应的CFRunLoopRef类，来达到线程安全的目的。</p>
+<p>Runloop的管理并不完全是自动的。我们仍必须设计线程代码以在适当的时候启动runloop并正确响应输入事件，当然前提是线程中需要用到runloop。而且，我们还需要使用while/for语句来驱动runloop能够循环运行，下面的代码就成功驱动了一个run loop：</p>
+<pre><code>BOOL isRunning = NO;
+do {
+ isRunning = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDatedistantFuture]];
+} while (isRunning);
+</code></pre><p>Runloop同时也负责autorelease pool的创建和释放<br>在使用手动的内存管理方式的项目中，会经常用到很多自动释放的对象，如果这些对象不能够被即时释放掉，会造成内存占用量急剧增大。Runloop就为我们做了这样的工作，每当一个运行循环结束的时候，它都会释放一次autorelease pool，同时pool中的所有自动释放类型变量都会被释放掉。</p>
+<p><strong>系统默认注册了5个Mode:</strong></p>
+<p>kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。</p>
+<p>UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</p>
+<p>UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。</p>
+<p>GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。</p>
+<p>kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。</p>
+<p><strong>轮播图中的NSTimer问题</strong><br>创建定时器：</p>
+<pre><code>1：NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+</code></pre><p>此方法创建的定时器，必须加到NSRunLoop中。</p>
+<pre><code>NSRunLoop *runLoop = [NSRunLoop currentRunLoop]; 
+[runLoop addTimer:timer forMode: NSRunLoopCommonModes];
+</code></pre><p> forMode的参数有两种类型可供选择：<code> NSDefaultRunLoopMode ， NSRunLoopCommonModes</code>，第一个参数为默认参数，当下面有textView，textfield等控件时，拖拽控件，此时轮播器会停止轮播，是因为NSRunLoop的原因，NSRunLoop为一个死循环，实时监测有无事件响应，如果当前线程就是主线程，也就是UI线程时，某些UI事件，比如UIScrollView的拖动操作，会将Run Loop切换成NSEventTrackingRunLoopMode模式，在这个过程中，默认的NSDefaultRunLoopMode模式中注册的事件是不会被执行的。NSRunLoopCommonModes 能够在多线程中起作用，这个模式等效于NSDefaultRunLoopMode和NSEventTrackingRunLoopMode的结合，这也是将modes换为NSRunLoopCommonModes便可解决的原因。</p>
+<pre><code>2： self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+</code></pre><p>此种创建定时器的方式，默认加到了runloop，且默认为第二个参数。</p>
+<p><strong>main函数的运行</strong></p>
+<p>在main.m中：</p>
+<pre><code>int main(int argc, char *argv[])
+{
+   @autoreleasepool {
+     return UIApplicationMain(argc, argv, nil, NSStringFromClass([appDelegate class]));
+  }
+}
+</code></pre><p>UIApplicationMain() 函数会为main thread 设置一个NSRunLoop 对象，这就解释了app应用可以在无人操作的时候休息，需要让它干活的时候又能立马响应。</p>
+<p>仅当在为你的程序创建辅助线程的时候，你才需要显式运行一个runloop。Runloop是程序主线程基础设施的关键部分,所以，Cocoa和Carbon程序提供了代码运行主程序的循环并自动启动runloop。IOS程序中UIApplication的run方法（或Mac OS X中的NSApplication）作为程序启动步骤的一部分，它在程序正常启动的时候就会启动程序的主循环。如果你使用xcode提供的模板创建你的程序，那你永远不需要自己去显式的调用这些例程。</p>
+<p>对于辅助线程，你需要判断一个runloop是否是必须的。如果是必须的，那么你要自己配置并启动它。你不需要在任何情况下都去启动一个线程的runloop。比如，你使用线程来处理一个预先定义的长时间运行的任务时，你应该避免启动runloop。Runloop在你要和线程有更多的交互时才需要，比如以下情况：</p>
+<p>1.使用端口或自定义输入源来和其他线程通信;</p>
+<p>2.使用线程的定时器;</p>
+<p>3.Cocoa中使用任何performSelector…的方法;</p>
+<p>4.使线程周期性工作;</p>
+<h3 id="事件响应链"><a href="#事件响应链" class="headerlink" title="事件响应链"></a>事件响应链</h3><p>对于IOS设备用户来说，操作设备的方式主要有三种：触摸屏幕、晃动设备、通过遥控设施控制设备。对应的事件类型有以下三种：</p>
+<p>1、触屏事件（Touch Event）</p>
+<p>2、运动事件（Motion Event）</p>
+<p>3、远端控制事件（Remote-Control Event）</p>
+<p>事件的传递和响应分两个链：</p>
+<p>传递链：由系统向离用户最近的view传递。</p>
+<blockquote>
+<p>UIKit –&gt; active app’s event queue –&gt; window –&gt; root view –&gt;……–&gt;lowest view</p>
+</blockquote>
+<p>响应链：由离用户最近的view向系统传递。</p>
+<blockquote>
+<p>initial view –&gt; super view –&gt; …..–&gt; view controller –&gt; window –&gt; Application</p>
+</blockquote>
+<p>响应者链（Responder Chain）:由多个响应者对象连接起来的链条，作用是能很清楚的看见每个响应者之间的联系，并且可以让一个事件多个对象处理。</p>
+<p>响应者对象（Responder Object），指的是有响应和处理事件能力的对象。响应者链就是由一系列的响应者对象构成的一个层次结构。</p>
+<p>UIResponder是所有响应对象的基类，在UIResponder类中定义了处理上述各种事件的接口。我们熟悉的UIApplication、 UIViewController、UIWindow和所有继承自UIView的UIKit类都直接或间接的继承自UIResponder，所以它们的实例都是可以构成响应者链的响应者对象。</p>
+<p><strong>响应者链有以下特点：</strong></p>
+<p>1、响应者链通常是由视图（UIView）构成的；</p>
+<p>2、一个视图的下一个响应者是它视图控制器（UIViewController）（如果有的话），然后再转给它的父视图（Super View）；</p>
+<p>3、视图控制器（如果有的话）的下一个响应者为其管理的视图的父视图；</p>
+<p>4、单例的窗口（UIWindow）的内容视图将指向窗口本身作为它的下一个响应者，Cocoa Touch应用不像Cocoa应用，它只有一个UIWindow对象，因此整个响应者链要简单一点；</p>
+<p>5、单例的应用（UIApplication）是一个响应者链的终点，它的下一个响应者指向nil，以结束整个循环。</p>
+<p>iOS系统检测到手指触摸(Touch)操作时会将其打包成一个UIEvent对象，并放入当前活动Application的事件队列，单例的UIApplication会从事件队列中取出触摸事件并传递给单例的UIWindow来处理，UIWindow对象首先会使用<code>hitTest:withEvent:</code>方法寻找此次Touch操作初始点所在的视图(View)，即需要将触摸事件传递给其处理的视图，这个过程称之为hit-test view。</p>
+<p>UIWindow实例对象会首先在它的内容视图上调用<code>hitTest:withEvent:</code>，此方法会在其视图层级结构中的每个视图上调用<code>pointInside:withEvent:</code>（该方法用来判断点击事件发生的位置是否处于当前视图范围内，以确定用户是不是点击了当前视图），如果<code>pointInside:withEvent:</code>返回YES，则继续逐级调用，直到找到touch操作发生的位置，这个视图也就是要找的hit-test view。</p>
+<p><code>hitTest:withEvent:</code>方法的处理流程如下:</p>
+<p>首先调用当前视图的<code>pointInside:withEvent:</code>方法判断触摸点是否在当前视图内；若返回NO,则<code>hitTest:withEvent:</code>返回nil;若返回YES,则向当前视图的所有子视图(subviews)发送<code>hitTest:withEvent:</code>消息，所有子视图的遍历顺序是从最顶层视图一直到到最底层视图，即从subviews数组的末尾向前遍历，直到有子视图返回非空对象或者全部子视图遍历完毕；若第一次有子视图返回非空对象，则<code>hitTest:withEvent:</code>方法返回此对象，处理结束；如所有子视图都返回非，则<code>hitTest:withEvent:</code>方法返回自身(self)。</p>
+<h3 id="引用计数器（ARC-和-MRC）"><a href="#引用计数器（ARC-和-MRC）" class="headerlink" title="引用计数器（ARC 和 MRC）"></a>引用计数器（ARC 和 MRC）</h3><p>ARC:自动引用计数器(Automatic Reference Counting)</p>
+<p>MRC:手动引用计算器（由于现在几乎不用了，不做过多解说）</p>
+<p>Objective-c中提供了两种内存管理机制MRC（MannulReference Counting）和ARC(Automatic Reference Counting)，分别提供对内存的手动和自动管理，来满足不同的需求。Xcode 4.1及其以前版本没有ARC。</p>
+<p>在MRC的内存管理模式下，与对变量的管理相关的方法有：retain,release和autorelease。retain和release方法操作的是引用记数，当引用记数为零时，便自动释放内存。并且可以用NSAutoreleasePool对象，对加入自动释放池（autorelease调用）的变量进行管理，当内存紧张时回收内存。<br>（1） retain，该方法的作用是将内存数据的所有权附给另一指针变量，引用数加1，即retainCount+= 1;<br>（2） release，该方法是释放指针变量对内存数据的所有权，引用数减1，即retainCount-= 1;<br>（3） autorelease，该方法是将该对象内存的管理放到autoreleasepool中。</p>
+<p>在ARC中与内存管理有关的标识符，可以分为变量标识符和属性标识符，对于变量默认为<code>__strong</code>，而对于属性默认为<code>unsafe_unretained</code>。也存在autoreleasepool。</p>
+<p>其中assign/retain/copy与MRC下property的标识符意义相同，strong类似与retain,assign类似于<code>unsafe_unretained</code>，<code>strong/weak/unsafe_unretained</code>与ARC下变量标识符意义相同，只是一个用于属性的标识，一个用于变量的标识(带两个下划短线__)。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><strong>app应用程序有5种状态：</strong></p>
+<p>Not running未运行：程序没启动。</p>
+<p>Inactive未激活：程序在前台运行，不过没有接收到事件。在没有事件处理情况下程序通常停留在这个状态。</p>
+<p>Active激活：程序在前台运行而且接收到了事件。这也是前台的一个正常的模式。</p>
+<p>Backgroud后台：程序在后台而且能执行代码，大多数程序进入这个状态后会在在这个状态上停留一会。时间到之后会进入挂起状态(Suspended)。有的程序经过特殊的请求后可以长期处于Backgroud状态。</p>
+<p>Suspended挂起：程序在后台不能执行代码。系统会自动把程序变成这个状态而且不会发出通知。当挂起时，程序还是停留在内存中的，当系统内存低时，系统就把挂起的程序清除掉，为前台程序提供更多的内存。</p>
+<p>iOS的入口在main.m文件的main函数，根据UIApplicationMain函数，程序将进入AppDelegate.m，这个文件是xcode新建工程时自动生成的。AppDelegate.m文件，关乎着应用程序的生命周期。</p>
+<p>1、application didFinishLaunchingWithOptions：当应用程序启动时执行，应用程序启动入口，只在应用程序启动时执行一次。若用户直接启动，lauchOptions内无数据,若通过其他方式启动应用，lauchOptions包含对应方式的内容。</p>
+<p>2、applicationWillResignActive：在应用程序将要由活动状态切换到非活动状态时候，要执行的委托调用，如 按下 home 按钮，返回主屏幕，或全屏之间切换应用程序等。</p>
+<p>3、applicationDidEnterBackground：在应用程序已进入后台程序时，要执行的委托调用。</p>
+<p>4、applicationWillEnterForeground：在应用程序将要进入前台时(被激活)，要执行的委托调用，刚好与applicationWillResignActive 方法相对应。</p>
+<p>5、applicationDidBecomeActive：在应用程序已被激活后，要执行的委托调用，刚好与applicationDidEnterBackground 方法相对应。</p>
+<p>6、applicationWillTerminate：在应用程序要完全推出的时候，要执行的委托调用，这个需要要设置UIApplicationExitsOnSuspend的键值。</p>
+<p>初次启动：</p>
+<p>iOS_didFinishLaunchingWithOptions</p>
+<p>iOS_applicationDidBecomeActive</p>
+<p>按下home键：</p>
+<p>iOS_applicationWillResignActive</p>
+<p>iOS_applicationDidEnterBackground</p>
+<p>点击程序图标进入：</p>
+<p>iOS_applicationWillEnterForeground</p>
+<p>iOS_applicationDidBecomeActive</p>
+<p>当应用程序进入后台时,应该保存用户数据或状态信息，所有没写到磁盘的文件或信息，在进入后台时，最后都写到磁盘去，因为程序可能在后台被杀死。释放尽可能释放的内存。</p>
+<pre><code>- (void)applicationDidEnterBackground:(UIApplication *)application
+</code></pre><p>方法有大概5秒的时间让你完成这些任务。如果超过时间还有未完成的任务，你的程序就会被终止而且从内存中清除。</p>
+<p>如果还需要长时间的运行任务，可以在该方法中调用</p>
+<pre><code>[application beginBackgroundTaskWithExpirationHandler:^{ 
+
+NSLog(@&quot;begin Background Task With Expiration Handler&quot;); 
+
+}];
+</code></pre><p>程序终止</p>
+<p>程序只要符合以下情况之一，只要进入后台或挂起状态就会终止：</p>
+<p>①iOS4.0以前的系统</p>
+<p>②app是基于iOS4.0之前系统开发的。</p>
+<p>③设备不支持多任务</p>
+<p>④在Info.plist文件中，程序包含了 UIApplicationExitsOnSuspend 键。</p>
+<p>系统常常是为其他app启动时由于内存不足而回收内存最后需要终止应用程序，但有时也会是由于app很长时间才响应而终止。如果app当时运行在后台并且没有暂停，系统会在应用程序终止之前调用app的代理的方法 <code>- (void)applicationWillTerminate:(UIApplication *)application</code>，这样可以让你可以做一些清理工作。你可以保存一些数据或app的状态。这个方法也有5秒钟的限制。超时后方法会返回程序从内存中清除。用户可以手工关闭应用程序。</p>
+<h3 id="和其他动态语言的区别"><a href="#和其他动态语言的区别" class="headerlink" title="和其他动态语言的区别"></a>和其他动态语言的区别</h3><p>OC中方法的实现只能写在<code>@implementation··@end</code>中，对象方法的声明只能写在<code>@interface···@end</code>中间；对象方法都以-号开头，类方法都以+号开头；函数属于整个文件，可以写在文件中的任何位置，包括<code>@interface··@end</code>中，但写在<code>@interface···@end</code>会无法识别；</p>
+<p>对象方法只能由对象来调用，类方法只能由类来调用，不能当做函数一样调用，对象方法归类\\对象所有；类方法调用不依赖于对象；类方法内部不能直接通过成员变量名访问对象的成员变量。OC只支持单继承，没有接口，但可以用delegate代替。</p>
+<p>Objective-C与其他语言最大的区别是其运行时的动态性，它能让你在运行时为类添加方法或者去除方法以及使用反射。极大的方便了程序的扩展。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-103f66199e930d9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OC的面向对象&lt;/li&gt;
+&lt;li&gt;运行时Runtime&lt;/li&gt;
+&lt;li&gt;运行循环RunLoop&lt;/li&gt;
+&lt;li&gt;事件响应链&lt;/li&gt;
+&lt;li&gt;引用计数&lt;/li&gt;
+&lt;li&gt;生命周期&lt;/li&gt;
+&lt;li&gt;与其他语言的区别&lt;/li&gt;
+&lt;/u
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Cordova Source Code Analyse</title>
-    <link href="https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/"/>
-    <id>https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/</id>
-    <published>2016-08-29T15:27:36.000Z</published>
-    <updated>2016-08-29T17:24:47.000Z</updated>
+    <link href="https://dangdangfeng.github.io/2013/08/29/Cordova-Source-Code-Analyse/"/>
+    <id>https://dangdangfeng.github.io/2013/08/29/Cordova-Source-Code-Analyse/</id>
+    <published>2013-08-29T15:27:36.000Z</published>
+    <updated>2016-08-30T15:34:42.000Z</updated>
     
     <content type="html"><![CDATA[<p>  <strong><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></strong> (markdown下经常无法链接，地址在这： <a href="http://cordova.apache.org" target="_blank" rel="external">http://cordova.apache.org</a>)</p>
 <h4 id="文件分类"><a href="#文件分类" class="headerlink" title="文件分类"></a>文件分类</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
@@ -347,6 +832,161 @@ Link Binary With Libraries -&gt; libCordova.a
     
     
       <category term="Source" scheme="https://dangdangfeng.github.io/tags/Source/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的谈论HTTP／1.0／1.1／2.0</title>
+    <link href="https://dangdangfeng.github.io/2012/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHTTP%EF%BC%8F1-0%EF%BC%8F1-1%EF%BC%8F2-0/"/>
+    <id>https://dangdangfeng.github.io/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/</id>
+    <published>2012-08-30T15:30:05.000Z</published>
+    <updated>2016-08-30T15:38:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文将涉及以下方面：</p>
+<ul>
+<li>HTTP协议</li>
+<li>HTTP1.0</li>
+<li>HTTP1.1</li>
+<li>HTTP2.0</li>
+<li>1.0和1.1和2.0之间的区别</li>
+<li>HTTPS</li>
+</ul>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>HTTP（超文本传输协议，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。是用于从WWW服务器传输超文本到本地浏览器的传输协议。默认使用80端口，HTTP客户端发起一个请求，建立一个到服务器指定端口（默认是80端口）的TCP连接。HTTP协议和TCP协议是不冲突的，HTTP定义在七层协议中的应用层，TCP解决的是传输层的逻辑。HTTP使用TCP而不是UDP的原因在于（打开）一个网页必须传送很多数据，而TCP协议提供传输控制，按顺序组织数据，和错误纠正。HTTP协议的瓶颈及其优化技巧都是基于TCP协议本身的特性。如TCP建立连接时三次握手有1.5个RTT（round-trip time）的延迟，为了避免每次请求的都经历握手带来的延迟，应用层会选择不同策略的http长链接方案。又如TCP在建立连接的初期有慢启动（slow start）的特性，所以连接的重用总是比新建连接性能要好。</p>
+<p>HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。HTTP/1.0是第一个在通讯中指定版本号的HTTP 协议版本，至今仍被广泛采用，特别是在代理服务器中。HTTP/1.1是当前版本，持久连接被默认采用，并能很好地配合代理服务器工作，还支持以管道方式同时发送多个请求，以便降低线路负载，提高传输速度。HTTP／2.0在HTTP 1.x的基础上，大幅度的提高了web性能，减少了网络延迟。HTTP1.0和1.1在之后很长的一段时间内会一直并存，这是由于网络基础设施更新缓慢所决定的。</p>
+<h4 id="HTTP1-0"><a href="#HTTP1-0" class="headerlink" title="HTTP1.0"></a>HTTP1.0</h4><p>HTTP 协议老的标准是HTTP/1.0，为了提高系统的效率，HTTP 1.0规定浏览器与服务器只保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求。但是，这也造成了一些性能上的缺陷，例如，一个包含有许多图像的网页文件中并没有包含真正的图像数据内容，而只是指明了这些图像的URL地址，当WEB浏览器访问这个网页文件时，浏览器首先要发出针对该网页文件的请求，当浏览器解析WEB服务器返回的该网页文档中的HTML内容时，发现其中的图像标签后，浏览器将根据标签中的src属性所指定的URL地址再次向服务器发出下载图像数据的请求。显 然，访问一个包含有许多图像的网页文件的整个过程包含了多次请求和响应，每次请求和响应都需要建立一个单独的连接，每次连接只是传输一个文档和图像，上一次和下一次请求完全分离。即使图像文件都很小，但是客户端和服务器端每次建立和关闭连接却是一个相对比较费时的过程，并且会严重影响客户机和服务器的性能。当一个网页文件中包含JavaScript文件，CSS文件等内容时，也会出现类似上述的情况。</p>
+<p>同时，带宽和延迟也是影响一个网络请求的重要因素。在网络基础建设已经使得带宽得到极大的提升的当下，大部分时候都是延迟在于响应速度。基于此会发现，http1.0被抱怨最多的就是<strong>连接无法复用</strong>，和<strong>head of line blocking</strong>这两个问题。理解这两个问题有一个十分重要的前提：客户端是依据域名来向服务器建立连接，一般PC端浏览器会针对单个域名的server同时建立6～8个连接，手机端的连接数则一般控制在4～6个。显然连接数并不是越多越好，资源开销和整体延迟都会随之增大。连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对文件类大请求影响较大。head of line blocking会导致带宽无法被充分利用，以及后续健康请求被阻塞。</p>
+<p>head of line blocking(holb)会导致健康的请求会被不健康的请求影响，而且这种体验的损耗受网络环境影响，出现随机且难以监控。为了解决holb带来的延迟，协议设计者设计了一种新的pipelining机制。pipelining只能适用于http1.1,而且由于使用苛刻，很多浏览器厂商并不支持。</p>
+<h4 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h4><p>为了克服HTTP 1.0的这个缺陷，HTTP 1.1支持持久连接（HTTP/1.1的默认模式使用带流水线的持久连接），在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。一个包含有许多图像的网页文件的多个请求和应答可以在一个连接中传输，但每个单独的网页文件的请求和应答仍然需要使用各自的连接。HTTP 1.1还允许客户端不用等待上一次请求结果返回，就可以发出下一次请求，但服务器端必须按照接收到客户端请求的先后顺序依次回送响应结果，以保证客户端能够区分出每次请求的响应内容，这样也显著地减少了整个下载过程所需要的时间。</p>
+<p>在http1.1，request和reponse头中都有可能出现一个connection的头，此header的含义是当client和server通信时对于长链接如何进行处理。<br>在http1.1中，client和server都是默认对方支持长链接的， 如果client使用http1.1协议，但又不希望使用长链接，则需要在header中指明connection的值为close；如果server方也不想支持长链接，则在response中也需要明确说明connection的值为close。不论request还是response的header中包含了值为close的connection，都表明当前正在使用的tcp链接在当天请求处理完毕后会被断掉。以后client再进行新的请求时就必须创建新的tcp链接了。</p>
+<p>HTTP 1.1在继承了HTTP 1.0优点的基础上，也克服了HTTP 1.0的性能问题。HTTP 1.1通过增加更多的请求头和响应头来改进和扩充HTTP 1.0的功能。如，HTTP 1.0不支持Host请求头字段，WEB浏览器无法使用主机头名来明确表示要访问服务器上的哪个WEB站点，这样就无法使用WEB服务器在同一个IP地址和端口号上配置多个虚拟WEB站点。在HTTP 1.1中增加Host请求头字段后，WEB浏览器可以使用主机头名来明确表示要访问服务器上的哪个WEB站点，这才实现了在一台WEB服务器上可以在同一个IP地址和端口号上使用不同的主机名来创建多个虚拟WEB站点。HTTP 1.1的持续连接，也需要增加新的请求头来帮助实现，例如，Connection请求头的值为Keep-Alive时，客户端通知服务器返回本次请求结果后保持连接；Connection请求头的值为close时，客户端通知服务器返回本次请求结果后关闭连接。HTTP 1.1还提供了与身份认证、状态管理和Cache缓存等机制相关的请求头和响应头。HTTP/1.0不支持文件断点续传，<code>RANGE:bytes</code>是HTTP/1.1新增内容，HTTP/1.0每次传送文件都是从文件头开始，即0字节处开始。<code>RANGE:bytes=XXXX</code>表示要求服务器从文件XXXX字节处开始传送，这就是我们平时所说的断点续传！</p>
+<p>由上，HTTP/1.1相较于 HTTP/1.0 协议的区别主要体现在：</p>
+<p>1 缓存处理</p>
+<p>2 带宽优化及网络连接的使用</p>
+<p>3 错误通知的管理</p>
+<p>4 消息在网络中的发送</p>
+<p>5 互联网地址的维护</p>
+<p>6 安全性及完整性</p>
+<p><strong>常用的请求方式</strong></p>
+<p>GET     请求获取Request-URI所标识的资源</p>
+<p>POST    在Request-URI所标识的资源后附加新的数据</p>
+<p>HEAD    请求获取由Request-URI所标识的资源的响应消息报头</p>
+<p>PUT     请求服务器存储一个资源，并用Request-URI作为其标识</p>
+<p>DELETE  请求服务器删除Request-URI所标识的资源</p>
+<p>TRACE   请求服务器回送收到的请求信息，主要用于测试或诊断</p>
+<p>CONNECT 保留将来使用</p>
+<p>OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求</p>
+<p>GET方法：在浏览器的地址栏中输入网址的方式访问网页时，浏览器采用GET方法向服务器获取资源，POST方法要求被请求服务器接受附在请求后面的数据，常用于提交表单。<strong>GET是用于获取数据的，POST一般用于将数据发给服务器之用</strong>。</p>
+<p><strong>请求头信息示例</strong></p>
+<pre><code>// 请求
+GET / HTTP/1.1
+
+Host:xxx.xxxx.com
+
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.10) Gecko/2016042316 Firefox/3.0.10
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+
+Accept-Language: en-us,en;q=0.5
+
+Accept-Encoding: gzip,deflate
+
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+
+Keep-Alive: 300
+
+Connection: keep-alive
+
+If-Modified-Since: Mon, 25 May 2016 03:19:18 GMT
+
+
+//响应
+HTTP/1.1 200 OK
+
+Cache-Control: private, max-age=30
+
+Content-Type: text/html; charset=utf-8
+
+Content-Encoding: gzip
+
+Expires: Mon, 25 May 2016 03:20:33 GMT
+
+Last-Modified: Mon, 25 May 2016 03:20:03 GMT
+
+Vary: Accept-Encoding
+
+Server: Microsoft-IIS/7.0
+
+X-AspNet-Version: 2.0.50727
+
+X-Powered-By: ASP.NET
+
+Date: Mon, 25 May 2016 03:20:02 GMT
+
+Content-Length: 12173
+
+消息体的内容（略）
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-feec1e83208a122a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
+<p> <strong>HTTP 1.1状态代码及其含义</strong></p>
+<p>状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：</p>
+<p>1xx：指示信息–表示请求已接收，继续处理</p>
+<p>2xx：成功–表示请求已被成功接收、理解、接受</p>
+<p>3xx：重定向–要完成请求必须进行更进一步的操作</p>
+<p>4xx：客户端错误–请求有语法错误或请求无法实现</p>
+<p>5xx：服务器端错误–服务器未能实现合法的请求</p>
+<blockquote>
+<p>状态代码  状态信息  含义<br>100  Continue  初始的请求已经接受，客户应当继续发送请求的其余部分。（HTTP 1.1新）<br>101  Switching Protocols  服务器将遵从客户的请求转换到另外一种协议（HTTP 1.1新）<br>200  OK  一切正常，对GET和POST请求的应答文档跟在后面。<br>201  Created  服务器已经创建了文档，Location头给出了它的URL。<br>202  Accepted  已经接受请求，但处理尚未完成。<br>203  Non-Authoritative Information  文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝（HTTP 1.1新）。<br>204  No Content  没有新文档，浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的。<br>205  Reset Content  没有新的内容，但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容（HTTP 1.1新）。<br>206  Partial Content  客户发送了一个带有Range头的GET请求，服务器完成了它（HTTP 1.1新）。<br>300  Multiple Choices  客户请求的文档可以在多个位置找到，这些位置已经在返回的文档内列出。如果服务器要提出优先选择，则应该在Location应答头指明。<br>301  Moved Permanently  客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL。<br>302  Found  类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。注意，在HTTP1.0中对应的状态信息是“Moved Temporatily”。<br>出现该状态代码时，浏览器能够自动访问新的URL，因此它是一个很有用的状态代码。<br>注意这个状态代码有时候可以和301替换使用。例如，如果浏览器错误地请求<a href="http://host/~user（缺少了后面的斜杠），有的服务器返回301，有的则返回302。" target="_blank" rel="external">http://host/~user（缺少了后面的斜杠），有的服务器返回301，有的则返回302。</a><br>严格地说，我们只能假定只有当原来的请求是GET时浏览器才会自动重定向。请参见307。 </p>
+<p>303  See Other  类似于301/302，不同之处在于，如果原来的请求是POST，Location头指定的重定向目标文档应该通过GET提取（HTTP 1.1新）。<br>304  Not Modified  客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。<br>305  Use Proxy  客户请求的文档应该通过Location头所指明的代理服务器提取（HTTP 1.1新）。<br>307  Temporary Redirect  和302（Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是POST，即使它实际上只能在POST请求的应答是303时 才能重定向。由于这个原因，HTTP 1.1新增了307，以便更加清除地区分几个状态代码：当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只能跟随对GET请求的重定向。（HTTP 1.1新）<br>400  Bad Request  请求出现语法错误。<br>401  Unauthorized  客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填写合适的Authorization头后再次发出请求。<br>403  Forbidden  资源不可用。服务器理解客户的请求，但拒绝处理它。通常由于服务器上文件或目录的权限设置导致。<br>404  Not Found  无法找到指定位置的资源。这也是一个常用的应答。<br>405  Method Not Allowed  请求方法（GET、POST、HEAD、DELETE、PUT、TRACE等）对指定的资源不适用。（HTTP 1.1新）<br>406  Not Acceptable  指定的资源已经找到，但它的MIME类型和客户在Accpet头中所指定的不兼容（HTTP 1.1新）。<br>407  Proxy Authentication Required  类似于401，表示客户必须先经过代理服务器的授权。（HTTP 1.1新）<br>408  Request Timeout  在服务器许可的等待时间内，客户一直没有发出任何请求。客户可以在以后重复同一请求。（HTTP 1.1新）<br>409  Conflict  通常和PUT请求有关。由于请求和资源的当前状态相冲突，因此请求不能成功。（HTTP 1.1新）<br>410  Gone  所请求的文档已经不再可用，而且服务器不知道应该重定向到哪一个地址。它和404的不同在于，返回407表示文档永久地离开了指定的位置，而404表示由于未知的原因文档不可用。（HTTP 1.1新）<br>411  Length Required  服务器不能处理请求，除非客户发送一个Content-Length头。（HTTP 1.1新）<br>412  Precondition Failed  请求头中指定的一些前提条件失败（HTTP 1.1新）。<br>413  Request Entity Too Large  目标文档的大小超过服务器当前愿意处理的大小。如果服务器认为自己能够稍后再处理该请求，则应该提供一个Retry-After头（HTTP 1.1新）。<br>414  Request URI Too Long  URI太长（HTTP 1.1新）。<br>416  Requested Range Not Satisfiable  服务器不能满足客户在请求中指定的Range头。（HTTP 1.1新）<br>500  Internal Server Error  服务器遇到了意料不到的情况，不能完成客户的请求。<br>501  Not Implemented  服务器不支持实现请求所需要的功能。例如，客户发出了一个服务器不支持的PUT请求。<br>502  Bad Gateway  服务器作为网关或者代理时，为了完成请求访问下一个服务器，但该服务器返回了非法的应答。<br>503  Service Unavailable  服务器由于维护或者负载过重未能应答。例如，Servlet可能在数据库连接池已满的情况下返回503。服务器返回503时可以提供一个Retry-After头。<br>504  Gateway Timeout  由作为代理或网关的服务器使用，表示不能及时地从远程服务器获得应答。（HTTP 1.1新）<br>505  HTTP Version Not Supported  服务器不支持请求中所指明的HTTP版本。（HTTP 1.1新）</p>
+</blockquote>
+<h5 id="移动app上的困难"><a href="#移动app上的困难" class="headerlink" title="移动app上的困难"></a>移动app上的困难</h5><p>一段时间内的连接复用对PC端浏览器的体验帮助很大，因为大部分的请求在集中在一小段时间以内。但对移动app来说，成效不大，app端的请求比较分散且时间跨度相对较大。所以移动端app一般会从应用层寻求其它解决方案，长连接方案或者伪长连接方案：</p>
+<p>方案一：基于tcp的长链接</p>
+<p>现在越来越多的移动端app都会建立一条自己的长链接通道，通道的实现是基于tcp协议。基于tcp的socket编程技术难度相对复杂很多，而且需要自己制定协议，但带来的回报也很大。信息的上报和推送变得更及时，在请求量爆发的时间点还能减轻服务器压力（http短连接模式会频繁的创建和销毁连接）。不止是IM app有这样的通道，像淘宝这类电商类app都有自己的专属长连接通道了。现在业界也有不少成熟的方案可供选择了，google的protobuf就是其中之一。</p>
+<p>方案二：http long-polling（推送）</p>
+<p>客户端在初始状态就会发送一个polling（轮寻）请求到服务器，服务器并不会马上返回业务数据，而是等待有新的业务数据产生的时候再返回。所以连接会一直被保持，一旦结束马上又会发起一个新的polling请求，如此反复，所以一直会有一个连接被保持。服务器有新的内容产生的时候，并不需要等待客户端建立一个新的连接。做法虽然简单，但有些难题需要攻克才能实现稳定可靠的业务框架：<br>和传统的http短链接相比，长连接会在用户增长的时候极大的增加服务器压力，<br>移动端网络环境复杂，像wifi和4g的网络切换，进电梯导致网络临时断掉等，这些场景都需要考虑怎么重建健康的连接通道。这种polling的方式稳定性并不好，需要做好数据可靠性的保证，比如重发和ack机制（ACK是一个对数据包的确认，当正确收到数据包后，接收端会发送一个ACk给发送端，里面会说明对那个数据包进行确认，每个数据包里都会有一个序列号，如果收到的数据包有误，或错序，还会申请重发，NAK是一个否定的回答，ACK是确定回答，这样保证数据的正确传输）。</p>
+<p>polling的response有可能会被中间代理cache住，要处理好业务数据的过期机制。long-polling方式还有一些缺点是无法克服的，比如每次新的请求都会带上重复的header信息，还有数据通道是单向的，主动权掌握在server这边，客户端有新的业务请求的时候无法及时传送。</p>
+<p>方案三：http streaming</p>
+<p>同long-polling不同的是，server并不会结束初始的streaming请求，而是持续的通过这个通道返回最新的业务数据。显然这个数据通道也是单向的。streaming是通过在server response的头部里增加”Transfer Encoding: chunked”来告诉客户端后续还会有新的数据到来。除了和long－polling相同的难点之外，streaming还有几个缺陷：有些代理服务器会等待服务器的response结束之后才会将结果推送到请求客户端。对于streaming这种永远不会结束的方式来说，客户端就会一直处于等待response的过程中。业务数据无法按照请求来做分割，所以客户端每收到一块数据都需要自己做协议解析，也就是说要做自己的协议定制。streaming不会产生重复的header数据。</p>
+<p>方案四：web socket</p>
+<p>WebSocket和传统的tcp socket连接相似，也是基于tcp协议，提供双向的数据通道。WebSocket优势在于提供了message的概念，比基于字节流的tcp socket使用更简单，同时又提供了传统的http所缺少的长连接功能。不过WebSocket相对较新，2010年才起草，并不是所有的浏览器都提供了支持。各大浏览器厂商最新的版本都提供了支持。</p>
+<h4 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h4><p>使用<a href="https://http2.akamai.com/demo" target="_blank" rel="external">HTTP2.o测试</a>(<a href="https://http2.akamai.com/demo)便可看出HTTP2.0比之前的协议在性能上有很大的提升。下面总结了HTTP2.0协议的几个特性。" target="_blank" rel="external">https://http2.akamai.com/demo)便可看出HTTP2.0比之前的协议在性能上有很大的提升。下面总结了HTTP2.0协议的几个特性。</a></p>
+<p><strong>多路复用 (Multiplexing)</strong></p>
+<p>多路复用允许同时通过单一的 HTTP/2 连接发起多重的请求-响应消息。在 HTTP/1.1 协议中浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞。这也是为何一些站点会有多个静态资源 CDN 域名的原因之一，拿 Twitter 为例，<a href="http://twimg.com，目的就是变相的解决浏览器针对同一域名的请求限制阻塞问题。而" target="_blank" rel="external">http://twimg.com，目的就是变相的解决浏览器针对同一域名的请求限制阻塞问题。而</a> HTTP/2 的多路复用(Multiplexing) 则允许同时通过单一的 HTTP/2 连接发起多重的请求-响应消息。因此 HTTP/2 可以很容易的去实现多流并行而不用依赖建立多个 TCP 连接，HTTP/2 把 HTTP 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 TCP 连接上双向交换消息。</p>
+<p><strong>二进制分帧</strong></p>
+<p>HTTP/2在 应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层。在不改动 HTTP/1.x 的语义、方法、状态码、URI 以及首部字段的情况下, 解决了HTTP1.1 的性能限制，改进传输性能，实现低延迟和高吞吐量。在二进制分帧层中， HTTP/2 会将所有传输的信息分割为更小的消息和帧（frame）,并对它们采用二进制格式的编码 ，其中 HTTP1.x 的首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。</p>
+<p>HTTP/2 通信都在一个连接上完成，这个连接可以承载任意数量的双向数据流。在过去， HTTP 性能优化的关键并不在于高带宽，而是低延迟。TCP 连接会随着时间进行自我调谐，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。HTTP/2 通过让所有数据流共用同一个连接，可以更有效地使用 TCP 连接，让高带宽也能真正的服务于 HTTP 的性能提升。</p>
+<p>这种单连接多资源的方式，减少服务端的链接压力,内存占用更少,连接吞吐量更大；而且由于 TCP 连接的减少而使网络拥塞状况得以改善，同时慢启动时间的减少,使拥塞和丢包恢复速度更快。<br>￼</p>
+<p><strong>首部压缩（Header Compression）</strong></p>
+<p>HTTP/1.1并不支持 HTTP 首部压缩，为此 SPDY 和 HTTP/2 应运而生， SPDY 使用的是通用的DEFLATE 算法，而 HTTP/2 则使用了专门为首部压缩而设计的 HPACK 算法。<br>￼</p>
+<p><strong>服务端推送（Server Push）</strong></p>
+<p>服务端推送是一种在客户端请求之前发送数据的机制。在 HTTP/2 中，服务器可以对客户端的一个请求发送多个响应。Server Push 让 HTTP1.x 时代使用内嵌资源的优化手段变得没有意义；如果一个请求是由你的主页发起的，服务器很可能会响应主页内容、logo 以及样式表，因为它知道客户端会用到这些东西。这相当于在一个 HTML 文档内集合了所有的资源，不过与之相比，服务器推送还有一个很大的优势：可以缓存！也让在遵循同源的情况下，不同页面之间可以共享缓存资源成为可能。</p>
+<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><p>HTTP协议传输的数据都是未加密的，也就是明文的，因此使用HTTP协议传输隐私信息非常不安全。为了保证这些隐私数据能加密传输，于是网景公司设计了SSL（Secure Sockets Layer）协议用于对HTTP协议传输的数据进行加密，从而就诞生了HTTPS。现在的HTTPS都是用的TLS协议，但是由于SSL出现的时间比较早，并且依旧被现在浏览器所支持，因此SSL依然是HTTPS的代名词。</p>
+<p>HTTPS在传输数据之前需要客户端（浏览器）与服务端（网站）之间进行一次握手，在握手过程中将确立双方加密传输数据的密码信息。TLS/SSL协议不仅仅是一套加密传输的协议，TLS/SSL中使用了非对称加密，对称加密以及HASH算法。握手过程的简单描述如下：</p>
+<p>1.浏览器将自己支持的一套加密规则发送给网站。</p>
+<p>2.网站从中选出一组加密算法与HASH算法，并将自己的身份信息以证书的形式发回给浏览器。证书里面包含了网站地址，加密公钥，以及证书的颁发机构等信息。</p>
+<p>3.获得网站证书之后浏览器要做以下工作：<br>a) 验证证书的合法性（颁发证书的机构是否合法，证书中包含的网站地址是否与正在访问的地址一致等），如果证书受信任，则浏览器栏里面会显示一个小锁头，否则会给出证书不受信的提示。<br>b) 如果证书受信任，或者是用户接受了不受信的证书，浏览器会生成一串随机数的密码，并用证书中提供的公钥加密。<br>c) 使用约定好的HASH计算握手消息，并使用生成的随机数对消息进行加密，最后将之前生成的所有信息发送给网站。</p>
+<p>4.网站接收浏览器发来的数据之后要做以下的操作：<br>a) 使用自己的私钥将信息解密取出密码，使用密码解密浏览器发来的握手消息，并验证HASH是否与浏览器发来的一致。<br>b) 使用密码加密一段握手消息，发送给浏览器。</p>
+<p>5.浏览器解密并计算握手消息的HASH，如果与服务端发来的HASH一致，此时握手过程结束，之后所有的通信数据将由之前浏览器生成的随机密码并利用对称加密算法进行加密。</p>
+<p>这里浏览器与网站互相发送加密的握手消息并验证，目的是为了保证双方都获得了一致的密码，并且可以正常的加密解密数据。其中非对称加密算法用于在握手过程中加密生成的密码，对称加密算法用于对真正传输的数据进行加密，而HASH算法用于验证数据的完整性。由于浏览器生成的密码是整个数据加密的关键，因此在传输的时候使用了非对称加密算法对其加密。非对称加密算法会生成公钥和私钥，公钥只能用于加密数据，因此可以随意传输，而网站的私钥用于对数据进行解密，所以网站都会非常小心的保管自己的私钥，防止泄漏。</p>
+<p>TLS握手过程中如果有任何错误，都会使加密连接断开，从而阻止了隐私信息的传输。正是由于HTTPS非常的安全，攻击者无法从中找到下手的地方，于是更多的是采用了假证书的手法来欺骗客户端，从而获取明文的信息。默认HTTP的端口号为80，HTTPS的端口号为443。</p>
+<p>最后，如果您有兴趣想对这方面有更加深入的了解，可以买本《HTTP权威指南》放在案边，时不时的翻翻，既能镇宅，又能深化。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文将涉及以下方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTTP协议&lt;/li&gt;
+&lt;li&gt;HTTP1.0&lt;/li&gt;
+&lt;li&gt;HTTP1.1&lt;/li&gt;
+&lt;li&gt;HTTP2.0&lt;/li&gt;
+&lt;li&gt;1.0和1.1和2.0之间的区别&lt;/li&gt;
+&lt;li&gt;HTTPS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
     
   </entry>
   

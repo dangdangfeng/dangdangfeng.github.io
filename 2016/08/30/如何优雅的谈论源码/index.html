@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>如何优雅的谈论源码 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-08-30T15:38:48.000Z" itemprop="datePublished">
+          2016-08-30
+      </time>
+    
+    
+    | 
+    <a href='/tags/source/'>source</a>
+    
+    
+</span>
+                <h1>如何优雅的谈论源码</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>本文主要涉及一下几点：</p>
+<ul>
+<li>SDWebImage 原理</li>
+<li>SDWebImage 使用</li>
+<li>SDWebImage 源码分析</li>
+<li>一些思考</li>
+</ul>
+<hr>
+<h4 id="SDWebImage-加载图片原理"><a href="#SDWebImage-加载图片原理" class="headerlink" title="SDWebImage 加载图片原理"></a>SDWebImage 加载图片原理</h4><p><a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">具体源码分析</a>见GIT。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6971e44291c18bb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目前标注的类"></p>
+<p>通过标注的类，看懂应该没问题了。</p>
+<p>SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCache每次都要把缓存的raw  data 再转化为UIImage，就带来了数据处理和内存方面的更多操作。SDWebImage的缓存由SDImageCache类来实现，这是一个单例类，该类负责处理内存缓存及一个可选的磁盘缓存，其中磁盘缓存的写操作是异步的，这样就不会对UI操作造成影响。此外还提供了若干属性和接口来配置和操作缓存对象。包含以下功能：</p>
+<p>1.提供UIImageView的一个分类，以支持网络图片的加载与缓存管理</p>
+<p>2.一个异步的图片加载器</p>
+<p>3.一个异步的内存+磁盘图片缓存</p>
+<p>4.支持GIF图片</p>
+<p>5.支持WebP图片</p>
+<p>6.后台图片解压缩处理</p>
+<p>7.确保同一个URL的图片不被下载多次</p>
+<p>8.确保虚假的URL不会被反复加载</p>
+<p>9.确保下载及缓存时，主线程不被阻塞</p>
+<p><strong>SDWebImage底层实现原理：</strong></p>
+<p>SDWebImage有沙盒缓存机制，主要由三块组成</p>
+<p>1.内存图片缓存</p>
+<p>2.内存操作缓存</p>
+<p>3.磁盘沙盒缓存</p>
+<p>SDWebImage的大部分工作是由缓存对象SDImageCache和异步下载器管理对象SDWebImageManager来完成的。SDWebImage的图片下载是由SDWebImageDownloader这个类来实现的，它是一个异步下载管理器，下载过程中增加了对图片加载做了优化的处理。而真正实现图片下载的是自定义的一个Operation操作，将该操作加入到下载管理器的操作队列downloadQueue中，Operation操作依赖系统提供的NSURLConnection类实现图片的下载。</p>
+<p>SDWebImage提供了对图片缓存的支持，而该功能是由SDImageCache类来完成的。该类负责处理内存缓存及一个可选的磁盘缓存。内存缓存的处理是使用NSCache对象来实现的。NSCache是一个类似于集合的容器。它存储key-value对，这一点类似于NSDictionary类，用搜索文件系统的方式做管理，文件替换方式是以时间为单位。我们通常用使用缓存来临时存储短时间使用但创建昂贵的对象。重用这些对象可以优化性能，因为它们的值不需要重新计算。另外一方面，这些对象对于程序来说不是紧要的，在内存紧张时会被丢弃。</p>
+<p>磁盘缓存的处理则是使用NSFileManager对象来实现的。图片存储的位置是位于Cache文件夹。另外，SDImageCache还定义了一个串行队列，来异步存储图片。</p>
+<p>当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。使用Decoder 是因为UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，<br>所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。<br>为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。是典型的空间换时间的做法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8c5e61bb0b11d4e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>SDWebImage的原理</strong></p>
+<p>1.使用 </p>
+<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options; 
+</code></pre><p>会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
+<p>2.进入  SDWebImageManager</p>
+<pre><code>-downloadWithURL:options:progress:completed:
+</code></pre><p>交给 SDImageCache 从缓存查找图片是否已经下载。</p>
+<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，取缓存，没有从<code>- (UIImage <em>)diskImageForKey:(NSString </em>)key</code>去磁盘缓存中去查找，根据 URLKey 在硬盘缓存目录下尝试读取图片文件。在磁盘缓存中找到后，同时更新置内存缓存中（如果空闲内存过小，会先清空内存缓存），有回调则调用doneBlock回调。</p>
+<p>4.找到了就从SDWebImageQueryCompletedBlock到 UIImageView+WebCache 等前端展示图片。</p>
+<p>5.如果从硬盘缓存目录读取不到图片，说明不存在该图片，需要下载图片，共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。 图片下载由 NSURLSession 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
+<p>6.<code>URLSession:didReceiveData:</code> 中利用 ImageIO 做了按图片下载进度加载效果。数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
+<p>7.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
+<p>8.在主线程 SDWebImageDownloaderCompletedBlock里处理解码完成后的操作。回调给需要的地方展示图片。</p>
+<p>9.从SDWebImageDownloaderProgressBlock 回调给 SDWebImageManager 告知图片下载信息。</p>
+<p>10.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
+<p>11.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
+<p>12.SDWebImage 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache方便使用。 SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-bf7c86e7bd12b9c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="SDWebImage-使用"><a href="#SDWebImage-使用" class="headerlink" title="SDWebImage 使用"></a>SDWebImage 使用</h4><p><strong>常用到的对象：</strong></p>
+<p>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调。</p>
+<p>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。</p>
+<p>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。</p>
+<p>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
+<p>5、SDWebImageDecoder，异步对图像进行了一次解压</p>
+<p>使用：</p>
+<pre><code>[self.imageView sd_setImageWithURL:self.imageURL
+                      placeholderImage:nil
+                               options:SDWebImageProgressiveDownload
+                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                  ...
+                              }
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 ...
+                             }];
+</code></pre><p>调用setImageWithURL:方法的时候，SDWebImage自动做很多事，当你需要在某一具体时刻做事情的时候，你可以覆盖这些方法。比如在下载某个图片的过程中要响应一个事件，就覆盖这个方法：</p>
+<pre><code>//这个方法是下载imagePath2的时候响应
+SDWebImageManager *manager = [SDWebImageManager sharedManager];
+
+[manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+
+    NSLog(@&quot;显示当前进度&quot;);
+
+} completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+
+    NSLog(@&quot;下载完成&quot;);
+}];
+</code></pre><p><strong>基本代码：</strong></p>
+<p>使用SDWebImageManager类：可以进行一些异步加载的工作。</p>
+<pre><code>SDWebImageManager *manager = [SDWebImageManager sharedManager];
+UIImage *cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
+if (cachedImage) {
+  // 如果Cache命中，则直接利用缓存的图片进行有关操作
+  // Use the cached image immediatly
+} else {
+  // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
+  // Start an async download
+ [manager downloadWithURL:url delegate:self];
+}
+</code></pre><p>当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。</p>
+<pre><code>// 当下载完成后，调用回调方法，使下载的图片显示
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
+// Do something with the downloaded image
+}
+</code></pre><p><strong>独立的异步图像下载</strong></p>
+<p>可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。</p>
+<pre><code>downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
+</code></pre><p>这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</p>
+<p><strong>独立的异步图像缓存</strong></p>
+<p>SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。</p>
+<pre><code>UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
+</code></pre><p>存储一个图像到缓存是使用方法storeImage: forKey:</p>
+<pre><code>[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+</code></pre><p>默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值<br>来替代。</p>
+<h4 id="SDWebImage-源码分析示例"><a href="#SDWebImage-源码分析示例" class="headerlink" title="SDWebImage 源码分析示例"></a>SDWebImage 源码分析示例</h4><p>SDWebImageDownloader类</p>
+<p>SDWebImageDownloaderOptions定义：</p>
+<pre><code>typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
+SDWebImageDownloaderLowPriority = 1 &lt;&lt; 0,
+SDWebImageDownloaderProgressiveDownload = 1 &lt;&lt; 1,
+
+// 默认情况下请求不使用NSURLCache，如果设置该选项，则以默认的缓存策略来使用NSURLCache
+SDWebImageDownloaderUseNSURLCache = 1 &lt;&lt; 2,
+
+// 如果从NSURLCache缓存中读取图片，则使用nil作为参数来调用完成block
+SDWebImageDownloaderIgnoreCachedResponse = 1 &lt;&lt; 3,
+
+// 在iOS 4+系统上，允许程序进入后台后继续下载图片。该操作通过向系统申请额外的时间来完成后台下载。如果后台任务终止，则操作会被取消
+SDWebImageDownloaderContinueInBackground = 1 &lt;&lt; 4,
+
+// 通过设置NSMutableURLRequest.HTTPShouldHandleCookies = YES来处理存储在NSHTTPCookieStore中的cookie
+SDWebImageDownloaderHandleCookies = 1 &lt;&lt; 5,
+
+// 允许不受信任的SSL证书。主要用于测试目的。
+SDWebImageDownloaderAllowInvalidSSLCertificates = 1 &lt;&lt; 6,
+
+// 将图片下载放到高优先级队列中
+SDWebImageDownloaderHighPriority = 1 &lt;&lt; 7,
+};
+</code></pre><p>下载顺序：</p>
+<pre><code>typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
+// 以队列的方式，按照先进先出的顺序下载。这是默认的下载顺序
+SDWebImageDownloaderFIFOExecutionOrder,
+// 以栈的方式，按照后进先出的顺序下载。
+SDWebImageDownloaderLIFOExecutionOrder
+};
+</code></pre><p>每个下载操作都定义了回调操作，如下载进度回调，下载完成回调，头部过滤等，这些回调操作是以block形式来呈现；每个下载操作的下载进度回调和下载完成回调，这两个回调稍后将保存在下载管理器的URLCallbacks字典中，key为URL，value为一个数组，数组里面又存放一个保存了下载进度回调和完成回调代码块的字典。这个字典数组同时也保证了同一张图片只会被下载一次。</p>
+<pre><code>// 下载进度
+typedef void(^SDWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger expectedSize);
+// 下载完成
+typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
+// Header过滤
+typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
+</code></pre><p>为了保证URLCallbacks操作(添加、删除)的线程安全性，SDWebImageDownloader将这些操作作为一个个任务放到barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性。</p>
+<pre><code>- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
+...
+// 1. 以dispatch_barrier_sync操作来保证同一时间只有一个线程能对URLCallbacks进行操作
+dispatch_barrier_sync(self.barrierQueue, ^{
+...
+// 2. 处理同一URL的同步下载请求的单个下载
+});
+}
+</code></pre><p>下载请求的管理都是放在downloadImageWithURL:options:progress:completed:方法里面来处理的，该方法调用了上面所提到的addProgressCallback:andCompletedBlock:forURL:createCallback:方法来将请求的信息存入管理器中，同时在创建回调的block中创建新的操作，配置之后将其放入downloadQueue操作队列中，最后方法返回新创建的操作。</p>
+<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url options:(SDWebImageDownloaderOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageDownloaderCompletedBlock)completedBlock {
+...
+[self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url createCallback:^{
+...
+}
+</code></pre><p>下载操作的超时时间可以通过downloadTimeout属性来设置，默认值为15秒。</p>
+<p>SDWebImage定义了一个协议，即 SDWebImageOperation 作为图片下载操作的基础协议。它只声明了一个cancel方法，用于取消操作。每个图片的下载都是一个Operation操作。SDWebImage自定义了一个Operation类，即 SDWebImageDownloaderOperation ，它继承自NSOperation，并采用了SDWebImageOperation协议。除了继承而来的方法，该类只向外暴露了一个方法，initWithRequest:options:progress:completed:cancelled:。对于图片的下载，SDWebImageDownloaderOperation完全依赖于URL加载系统中的NSURLSession。具体看代码<a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">源码分析</a>.</p>
+<pre><code>- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+</code></pre><p>方法的主要任务是接收数据。每次接收到数据时，都会用现有的数据创建一个CGImageSourceRef对象以做处理。在首次获取到数据时(width+height==0)会从这些包含图像信息的数据中取出图像的长、宽、方向等信息以备使用。而后在图片下载完成之前，会使用CGImageSourceRef对象创建一个图片对象，经过缩放、解压缩操作后生成一个UIImage对象供完成回调使用。当然，在这个方法中还需要处理的就是进度信息。如果我们有设置进度回调的话，就调用这个进度回调以处理当前图片的下载进度。</p>
+<p>缩放操作可以查看SDWebImageCompat文件中的SDScaledImageForKey函数；解压缩操作可以查看SDWebImageDecoder文件+decodedImageWithImage方法。在下载完成或下载失败后，需要停止当前线程的run loop，清除连接，并抛出下载停止的通知。如果下载成功，则会处理完整的图片数据，对其进行适当的缩放与解压缩操作，以提供给完成回调使用。</p>
+<p>最重要是自己分析，看过的会忘，消化了才是自己的。学而不思则罔,思而不学则殆。每个人要了解自己的优缺点。有思考才有所得！</p>
+<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>我们应该把精力和时间投入在更值得学习的东西上。如果纯看代码而没有碰到这个场景就算看懂了也没法理解，学习的目的是为了实践，而不要为了原理而分析原理，这样就本末倒置了。对于广大程序员而言，做码农，通过低水平重复的劳动来创造价值的道路是永远不可能一劳永逸的，恰恰相反，是永劳一逸的！生产只能够惠及当下！事物的发展在于思考，可能每个人走的路径不一样，寻找到最适合自己的，坚持走下去。只要能肯定每天都是进步的，快慢又有什么关系呢。这是一个浮躁的社会，这个社会催生了无数可能，也许不是每个人都能做一辈子的程序员，但不要辜负你的时光。你之所以成为你，是因为你的时间，你的经历在哪里，你就在哪里。共勉！</p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/08/30/如何幽雅的谈论Hybrid-App/" style="float: left;">
+        ← 如何幽雅的谈论Hybrid App
+    </a>
+    
+    
+    <a class="pull-right" href="/2014/08/30/如何优雅的谈论OC/">
+        如何优雅的谈论OC →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-share flat" data-thread-key="2016/08/30/如何优雅的谈论源码/" data-title="如何优雅的谈论源码" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="如何优雅的谈论源码 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2016/08/30/如何优雅的谈论源码/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      	
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+<div class="ds-thread" data-thread-key="2016/08/30/如何优雅的谈论源码/" data-title="如何优雅的谈论源码" data-url="https://dangdangfeng.github.io/2016/08/30/如何优雅的谈论源码/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

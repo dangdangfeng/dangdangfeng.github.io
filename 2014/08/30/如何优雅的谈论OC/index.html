@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>如何优雅的谈论OC | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2014-08-30T15:35:30.000Z" itemprop="datePublished">
+          2014-08-30
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>如何优雅的谈论OC</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>本文包括：</p>
+<ul>
+<li>OC的面向对象</li>
+<li>运行时Runtime</li>
+<li>运行循环RunLoop</li>
+<li>事件响应链</li>
+<li>引用计数</li>
+<li>生命周期</li>
+<li>与其他语言的区别</li>
+</ul>
+<hr>
+<p>Objective-C 简称OC（下面以此代称），是在C语言的基础上，增加了一层最小的面向对象语言。是一种静态输入的语言，即“必须先声明数据中每个变量（或者容器）的数据类型”。但它是一个动态语言，代码中的某一部分可以在app运行的时候被扩展和修改（比如，在被编译之后）。OC完全兼容C语言，在代码中，可以混用c，甚至是c++代码。</p>
+<h3 id="面向对象三原则（封装，继承，多态）"><a href="#面向对象三原则（封装，继承，多态）" class="headerlink" title="面向对象三原则（封装，继承，多态）"></a>面向对象三原则（封装，继承，多态）</h3><p>面向对象具有四个基本特征：抽象，封装，继承和多态。</p>
+<p>C语言是面向过程的语言(关注的是函数)，OC,C++,JAVA,C#,PHP,Swift是面向对象的，面向过程关注的是解决问题涉及的步骤，而面向对象关注的是设计能够实现解决问题所需功能的类。抽象是面向对象的思想基础。</p>
+<p>抽象包括两个方面，一是过程抽象，二是数据抽象。过程抽象是指任何一个明确定义功能的操作都可被使用者看作单个的实体看待，尽管这个操作实际上可能由一系列更低级的操作来完成。数据抽象定义了数据类型和施加于该类型对象上的操作，并限定了对象的值只能通过使用这些操作修改和观察。抽象是一种思想，封装继承和多态是这种思想的实现。</p>
+<h5 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h5><p>封装是把过程和数据包围起来（即函数和数据结构，函数是行为，数据结构是描述），有限制的对数据的访问。面向对象基于这个基本概念开始的（<em>因为面向对象更注重的是类</em>），即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。一旦定义了一个对象的特性，则有必要决定这些特性的可见性，封装保证了模块具有较好的独立性，使得程序维护修改较为容易。对应用程序的修改仅限于类的内部，因而可以将应用程序修改带来的影响减少到最低限度。但是封装会导致并行效率问题，因为执行部分和数据部分被绑定在一起，制约了并行程度。面向对象思想将函数和数据绑在一起，扩大了代码重用时的粒度。而且封装下的拆箱装箱过程中也会导致内存的浪费。</p>
+<h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5><p>继承是一种层次模型，允许和鼓励类的<em>重用</em>，并提供了一种明确表述<em>共性</em>的方法。新类继承了原始类的特性，新类称为原始类的派生类（子类和父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。继承性很好的解决了软件的可重用性问题。但是，不恰当地使用继承导致的最大的一个缺陷特征就是高耦合（即“牵一发而动全身”，是设计类时<em>层次</em>没分清导致的）。解决方案是用组合替代继承。将模块拆开，然后通过定义好的接口进行交互，一般来说可以选择Delegate模式来交互。使用继承其实是如何给一类对象划分层次的问题。在正确的继承方式中，父类应当扮演的是底层的角色，子类是上层的业务。父类只是给子类提供服务，并不涉及子类的业务逻辑；层级关系明显，功能划分清晰；父类的所有变化，都需要在子类中体现，此时耦合已经成为需求。</p>
+<h5 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h5><p>多态性是指允许不同类的对象对同一消息作出响应。多态性包括<em>参数化多态性和包含多态性</em>。很好的解决了应用程序函数同名问题，多态一般都要跟继承结合起来说，其本质是子类通过覆盖或重载父类的方法，来使得对同一类对象同一方法的调用产生不同的结果。覆盖是对接口方法的实现，继承中也可能会在子类覆盖父类中的方法。重载，是指我们可以定义一些名称相同的方法，通过定义不同的输入参数来区分这些方法，然后再调用时，VM就会根据不同的参数样式，来选择合适的方法执行。在使用重载时只能通过不同的参数样式。例如，不同的参数类型，不同的参数个数，不同的参数顺序（当然，同一方法内的几个参数类型必须不一样）； 但继承会引入多态使用混乱的境况并产生耦合，更好的方法是使用接口。通过IOP将子类与可能被子类引入的不相关逻辑剥离开来，提高了子类的可重用性，降低了迁移时可能的耦合。接口规范了子类哪些必须实现，哪些可选实现。那些不在接口定义的方法列表里的父类方法，事实上就是不建议覆重的方法。如果引入多态之后导致对象角色不够单纯，那就不应当引入多态，如果引入多态之后依旧是单纯角色，那就可以引入多态；如果要覆重的方法是角色业务的其中一个组成部分，那么就最好不要用多态的方案，用IOP，因为在外界调用的时候其实并不需要通过多态来满足定制化的需求。</p>
+<h3 id="动态性（Runtime）"><a href="#动态性（Runtime）" class="headerlink" title="动态性（Runtime）"></a>动态性（Runtime）</h3><p>Objective-C 是面相运行时的语言，它会尽可能的把编译和链接时要执行的逻辑延迟到运行时。使用Runtime可以按需要把消息重定向给合适的对象，交换方法的实现等等。</p>
+<p>Runtime简称运行时，其中最主要的是消息机制，是一个主要使用 C 和汇编写的库，为 C 添加了面相对象的能力并创造了 Objective-C。。OC的函数调用称为消息发送。属于动态调用过程。在编译的时候并不能决定真正调用哪个函数（在编 译阶段，OC可以调用任何函数，即使这个函数并未实现，只要声明过就不会报错。而C语言在编译阶段就会报错）。只有在真正运行的时候才会根据函数的名称找 到对应的函数来调用。</p>
+<p>如：</p>
+<pre><code>[obj makeText];
+＝＝》
+objc_msgSend(obj,@selector(makeText));
+</code></pre><p>编译器执行上述转换。在objc_msgSend函数中，首先通过obj的isa指针找到obj对应的class。每个对象内部都默认有一个isa指针指向这个对象所使用的类。isa是对象中的隐藏指针，指向创建这个对象的类。在Class中先去cache中通过SEL查找对应函数method（cache中method列表是以SEL为key通过hash表来存储的，这样能提高函数查找速度），若cache中未找到,再去methodList中查找，若methodlist中未找到，则取superClass中查找。若能找到，则将method加入到cache中，以方便下次查找，并通过method中的函数指针跳转到对应的函数中去执行。</p>
+<h4 id="动态性的三方面"><a href="#动态性的三方面" class="headerlink" title="动态性的三方面"></a>动态性的三方面</h4><p>OC的动态特性表现为了三个方面：动态类型、动态绑定、动态加载。之所以叫做动态，是因为必须到运行时(runtime)才会做一些事情。</p>
+<p>动态类型，就是id类型。动态类型是跟静态类型相对的。内置的基本类型都属于静态类型(int、NSString等)。静态类型在编译的时候就能被识别出来（即前面说的静态输入）。所以，若程序发生了类型不对应，编译器就会发出警告。而动态类型就编译器编译的时候是不能被识别的，要等到运行时(runtime)，即程序运行的时候才会根据语境来识别。所以这里面就有两个概念要分清：编译时跟运行时。</p>
+<p>动态语言和静态语言的一个区别是静态语言提前编译好文件，即所有的逻辑已在编译时确定，运行时直接加载编译后的文件；而动态语言是在运行时才确定实现。典型的静态语言是C＋＋，动态语言包括OC，JAVA，C#等；因为静态语言提前编译好了执行文件，也就是通常所说的静态语言效率较高的原因。</p>
+<p>动态绑定(dynamic binding)需要用到@selector/SEL。先来看看“函数”，对于其他一些静态语言，比如c++,一般在编译的时候就已经将要调用的函数的函数签名都告诉编译器了。静态的，不能改变。而在OC中，其实是没有函数的概念的，我们叫“消息机制”，所谓的函数调用就是给对象发送一条消息。这时，动态绑定的特性就来了。OC可以先跳过编译，到运行的时候才动态地添加函数调用，在运行时才决定要调用什么方法，需要传什么参数进去，这就是动态绑定。要实现他就必须用SEL变量绑定一个方法。最终形成的这个SEL变量就代表一个方法的引用。这里要注意一点：SEL并不是C里面的函数指针，虽然很像，但真心不是函数指针。SEL变量只是一个整数，他是该方法的ID。以前的函数调用，是根据函数名，也就是字符串去查找函数体。但现在，我们是根据一个ID整数来查找方法，整数的查找自然要比字符串的查找快得多！所以，动态绑定的特定不仅方便，而且效率更高。</p>
+<p>动态加载就是根据需求动态地加载资源，在运行时加载新类。在运行时创建一个新类,只需要3步:</p>
+<p>1、为 class pair分配存储空间 ,使用 objc_allocateClassPair函数</p>
+<p>2、增加需要的方法使用class_addMethod函数,增加实例变量用class_addIvar</p>
+<p>3 、用objc_registerClassPair函数注册这个类,以便它能被别人使用。</p>
+<h5 id="Method-Swizzling"><a href="#Method-Swizzling" class="headerlink" title="Method Swizzling"></a>Method Swizzling</h5><p>在Objective-C中调用一个方法，其实是向一个对象发送消息，查找消息的唯一依据是selector的名字。利用Objective-C的动态特性，可以实现在运行时偷换selector对应的方法实现，达到给方法挂钩的目的。每个类都有一个方法列表，存放着selector的名字和方法实现的映射关系。IMP类似函数指针，指向具体的Method实现。</p>
+<p>用 method_exchangeImplementations 来交换2个方法中的IMP，<br>用 class_replaceMethod 来修改类，<br>用 method_setImplementation 来直接设置某个方法的IMP，归根结底，都是偷换了selector的IMP。</p>
+<h3 id="RunLoop"><a href="#RunLoop" class="headerlink" title="RunLoop"></a>RunLoop</h3><p>RunLoop是一让线程能随时处理事件但不退出的机制。RunLoop实际上是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行Event Loop的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。让线程在没有处理消息时休眠以避免资源占用、在有消息到来时立刻被唤醒。一个runloop就是一个事件处理循环，用来不停的监听和处理输入事件并将其分配到对应的目标上进行处理。</p>
+<p>RunLoop的四个作用为:使程序一直运行接受用户输入;决定程序在何时应该处理哪些Event;调用解耦;节省CPU时间。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其RunLoop（主线程除外）。</p>
+<p>主线程的runloop默认是启动的。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop和CFRunLoopRef。CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<p>NSRunLoop是一种更加高明的消息处理模式，在对消息处理过程进行了更好的抽象和封装，不用处理一些很琐碎很低层次的具体消息的处理，在NSRunLoop中每一个消息就被打包在input source或者是timer source中了。使用run loop可以使你的线程在有工作的时候工作，没有工作的时候休眠，可以大大节省系统资源。</p>
+<p>对其它线程来说，runloop默认是没有启动的，如果你需要更多的线程交互则可以手动配置和启动，如果线程只是去执行一个长时间的已确定的任务则不需要。在任何一个Cocoa程序的线程中，都可以通过：</p>
+<pre><code>NSRunLoop   *runloop = [NSRunLoop currentRunLoop];
+</code></pre><p>获取到当前线程的runloop。</p>
+<p>Cocoa中的NSRunLoop类并不是线程安全的<br>我们不能在一个线程中去操作另外一个线程的runloop对象，那很可能会造成意想不到的后果。但是CoreFundation中的不透明类CFRunLoopRef是线程安全的，而且两种类型的runloop完全可以混合使用。Cocoa中的NSRunLoop类可以通过实例方法：</p>
+<pre><code>- (CFRunLoopRef)getCFRunLoop;
+</code></pre><p>获取对应的CFRunLoopRef类，来达到线程安全的目的。</p>
+<p>Runloop的管理并不完全是自动的。我们仍必须设计线程代码以在适当的时候启动runloop并正确响应输入事件，当然前提是线程中需要用到runloop。而且，我们还需要使用while/for语句来驱动runloop能够循环运行，下面的代码就成功驱动了一个run loop：</p>
+<pre><code>BOOL isRunning = NO;
+do {
+ isRunning = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDatedistantFuture]];
+} while (isRunning);
+</code></pre><p>Runloop同时也负责autorelease pool的创建和释放<br>在使用手动的内存管理方式的项目中，会经常用到很多自动释放的对象，如果这些对象不能够被即时释放掉，会造成内存占用量急剧增大。Runloop就为我们做了这样的工作，每当一个运行循环结束的时候，它都会释放一次autorelease pool，同时pool中的所有自动释放类型变量都会被释放掉。</p>
+<p><strong>系统默认注册了5个Mode:</strong></p>
+<p>kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。</p>
+<p>UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</p>
+<p>UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。</p>
+<p>GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。</p>
+<p>kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。</p>
+<p><strong>轮播图中的NSTimer问题</strong><br>创建定时器：</p>
+<pre><code>1：NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+</code></pre><p>此方法创建的定时器，必须加到NSRunLoop中。</p>
+<pre><code>NSRunLoop *runLoop = [NSRunLoop currentRunLoop]; 
+[runLoop addTimer:timer forMode: NSRunLoopCommonModes];
+</code></pre><p> forMode的参数有两种类型可供选择：<code> NSDefaultRunLoopMode ， NSRunLoopCommonModes</code>，第一个参数为默认参数，当下面有textView，textfield等控件时，拖拽控件，此时轮播器会停止轮播，是因为NSRunLoop的原因，NSRunLoop为一个死循环，实时监测有无事件响应，如果当前线程就是主线程，也就是UI线程时，某些UI事件，比如UIScrollView的拖动操作，会将Run Loop切换成NSEventTrackingRunLoopMode模式，在这个过程中，默认的NSDefaultRunLoopMode模式中注册的事件是不会被执行的。NSRunLoopCommonModes 能够在多线程中起作用，这个模式等效于NSDefaultRunLoopMode和NSEventTrackingRunLoopMode的结合，这也是将modes换为NSRunLoopCommonModes便可解决的原因。</p>
+<pre><code>2： self.timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeImage) userInfo:nil repeats:YES];
+</code></pre><p>此种创建定时器的方式，默认加到了runloop，且默认为第二个参数。</p>
+<p><strong>main函数的运行</strong></p>
+<p>在main.m中：</p>
+<pre><code>int main(int argc, char *argv[])
+{
+   @autoreleasepool {
+     return UIApplicationMain(argc, argv, nil, NSStringFromClass([appDelegate class]));
+  }
+}
+</code></pre><p>UIApplicationMain() 函数会为main thread 设置一个NSRunLoop 对象，这就解释了app应用可以在无人操作的时候休息，需要让它干活的时候又能立马响应。</p>
+<p>仅当在为你的程序创建辅助线程的时候，你才需要显式运行一个runloop。Runloop是程序主线程基础设施的关键部分,所以，Cocoa和Carbon程序提供了代码运行主程序的循环并自动启动runloop。IOS程序中UIApplication的run方法（或Mac OS X中的NSApplication）作为程序启动步骤的一部分，它在程序正常启动的时候就会启动程序的主循环。如果你使用xcode提供的模板创建你的程序，那你永远不需要自己去显式的调用这些例程。</p>
+<p>对于辅助线程，你需要判断一个runloop是否是必须的。如果是必须的，那么你要自己配置并启动它。你不需要在任何情况下都去启动一个线程的runloop。比如，你使用线程来处理一个预先定义的长时间运行的任务时，你应该避免启动runloop。Runloop在你要和线程有更多的交互时才需要，比如以下情况：</p>
+<p>1.使用端口或自定义输入源来和其他线程通信;</p>
+<p>2.使用线程的定时器;</p>
+<p>3.Cocoa中使用任何performSelector…的方法;</p>
+<p>4.使线程周期性工作;</p>
+<h3 id="事件响应链"><a href="#事件响应链" class="headerlink" title="事件响应链"></a>事件响应链</h3><p>对于IOS设备用户来说，操作设备的方式主要有三种：触摸屏幕、晃动设备、通过遥控设施控制设备。对应的事件类型有以下三种：</p>
+<p>1、触屏事件（Touch Event）</p>
+<p>2、运动事件（Motion Event）</p>
+<p>3、远端控制事件（Remote-Control Event）</p>
+<p>事件的传递和响应分两个链：</p>
+<p>传递链：由系统向离用户最近的view传递。</p>
+<blockquote>
+<p>UIKit –&gt; active app’s event queue –&gt; window –&gt; root view –&gt;……–&gt;lowest view</p>
+</blockquote>
+<p>响应链：由离用户最近的view向系统传递。</p>
+<blockquote>
+<p>initial view –&gt; super view –&gt; …..–&gt; view controller –&gt; window –&gt; Application</p>
+</blockquote>
+<p>响应者链（Responder Chain）:由多个响应者对象连接起来的链条，作用是能很清楚的看见每个响应者之间的联系，并且可以让一个事件多个对象处理。</p>
+<p>响应者对象（Responder Object），指的是有响应和处理事件能力的对象。响应者链就是由一系列的响应者对象构成的一个层次结构。</p>
+<p>UIResponder是所有响应对象的基类，在UIResponder类中定义了处理上述各种事件的接口。我们熟悉的UIApplication、 UIViewController、UIWindow和所有继承自UIView的UIKit类都直接或间接的继承自UIResponder，所以它们的实例都是可以构成响应者链的响应者对象。</p>
+<p><strong>响应者链有以下特点：</strong></p>
+<p>1、响应者链通常是由视图（UIView）构成的；</p>
+<p>2、一个视图的下一个响应者是它视图控制器（UIViewController）（如果有的话），然后再转给它的父视图（Super View）；</p>
+<p>3、视图控制器（如果有的话）的下一个响应者为其管理的视图的父视图；</p>
+<p>4、单例的窗口（UIWindow）的内容视图将指向窗口本身作为它的下一个响应者，Cocoa Touch应用不像Cocoa应用，它只有一个UIWindow对象，因此整个响应者链要简单一点；</p>
+<p>5、单例的应用（UIApplication）是一个响应者链的终点，它的下一个响应者指向nil，以结束整个循环。</p>
+<p>iOS系统检测到手指触摸(Touch)操作时会将其打包成一个UIEvent对象，并放入当前活动Application的事件队列，单例的UIApplication会从事件队列中取出触摸事件并传递给单例的UIWindow来处理，UIWindow对象首先会使用<code>hitTest:withEvent:</code>方法寻找此次Touch操作初始点所在的视图(View)，即需要将触摸事件传递给其处理的视图，这个过程称之为hit-test view。</p>
+<p>UIWindow实例对象会首先在它的内容视图上调用<code>hitTest:withEvent:</code>，此方法会在其视图层级结构中的每个视图上调用<code>pointInside:withEvent:</code>（该方法用来判断点击事件发生的位置是否处于当前视图范围内，以确定用户是不是点击了当前视图），如果<code>pointInside:withEvent:</code>返回YES，则继续逐级调用，直到找到touch操作发生的位置，这个视图也就是要找的hit-test view。</p>
+<p><code>hitTest:withEvent:</code>方法的处理流程如下:</p>
+<p>首先调用当前视图的<code>pointInside:withEvent:</code>方法判断触摸点是否在当前视图内；若返回NO,则<code>hitTest:withEvent:</code>返回nil;若返回YES,则向当前视图的所有子视图(subviews)发送<code>hitTest:withEvent:</code>消息，所有子视图的遍历顺序是从最顶层视图一直到到最底层视图，即从subviews数组的末尾向前遍历，直到有子视图返回非空对象或者全部子视图遍历完毕；若第一次有子视图返回非空对象，则<code>hitTest:withEvent:</code>方法返回此对象，处理结束；如所有子视图都返回非，则<code>hitTest:withEvent:</code>方法返回自身(self)。</p>
+<h3 id="引用计数器（ARC-和-MRC）"><a href="#引用计数器（ARC-和-MRC）" class="headerlink" title="引用计数器（ARC 和 MRC）"></a>引用计数器（ARC 和 MRC）</h3><p>ARC:自动引用计数器(Automatic Reference Counting)</p>
+<p>MRC:手动引用计算器（由于现在几乎不用了，不做过多解说）</p>
+<p>Objective-c中提供了两种内存管理机制MRC（MannulReference Counting）和ARC(Automatic Reference Counting)，分别提供对内存的手动和自动管理，来满足不同的需求。Xcode 4.1及其以前版本没有ARC。</p>
+<p>在MRC的内存管理模式下，与对变量的管理相关的方法有：retain,release和autorelease。retain和release方法操作的是引用记数，当引用记数为零时，便自动释放内存。并且可以用NSAutoreleasePool对象，对加入自动释放池（autorelease调用）的变量进行管理，当内存紧张时回收内存。<br>（1） retain，该方法的作用是将内存数据的所有权附给另一指针变量，引用数加1，即retainCount+= 1;<br>（2） release，该方法是释放指针变量对内存数据的所有权，引用数减1，即retainCount-= 1;<br>（3） autorelease，该方法是将该对象内存的管理放到autoreleasepool中。</p>
+<p>在ARC中与内存管理有关的标识符，可以分为变量标识符和属性标识符，对于变量默认为<code>__strong</code>，而对于属性默认为<code>unsafe_unretained</code>。也存在autoreleasepool。</p>
+<p>其中assign/retain/copy与MRC下property的标识符意义相同，strong类似与retain,assign类似于<code>unsafe_unretained</code>，<code>strong/weak/unsafe_unretained</code>与ARC下变量标识符意义相同，只是一个用于属性的标识，一个用于变量的标识(带两个下划短线__)。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><strong>app应用程序有5种状态：</strong></p>
+<p>Not running未运行：程序没启动。</p>
+<p>Inactive未激活：程序在前台运行，不过没有接收到事件。在没有事件处理情况下程序通常停留在这个状态。</p>
+<p>Active激活：程序在前台运行而且接收到了事件。这也是前台的一个正常的模式。</p>
+<p>Backgroud后台：程序在后台而且能执行代码，大多数程序进入这个状态后会在在这个状态上停留一会。时间到之后会进入挂起状态(Suspended)。有的程序经过特殊的请求后可以长期处于Backgroud状态。</p>
+<p>Suspended挂起：程序在后台不能执行代码。系统会自动把程序变成这个状态而且不会发出通知。当挂起时，程序还是停留在内存中的，当系统内存低时，系统就把挂起的程序清除掉，为前台程序提供更多的内存。</p>
+<p>iOS的入口在main.m文件的main函数，根据UIApplicationMain函数，程序将进入AppDelegate.m，这个文件是xcode新建工程时自动生成的。AppDelegate.m文件，关乎着应用程序的生命周期。</p>
+<p>1、application didFinishLaunchingWithOptions：当应用程序启动时执行，应用程序启动入口，只在应用程序启动时执行一次。若用户直接启动，lauchOptions内无数据,若通过其他方式启动应用，lauchOptions包含对应方式的内容。</p>
+<p>2、applicationWillResignActive：在应用程序将要由活动状态切换到非活动状态时候，要执行的委托调用，如 按下 home 按钮，返回主屏幕，或全屏之间切换应用程序等。</p>
+<p>3、applicationDidEnterBackground：在应用程序已进入后台程序时，要执行的委托调用。</p>
+<p>4、applicationWillEnterForeground：在应用程序将要进入前台时(被激活)，要执行的委托调用，刚好与applicationWillResignActive 方法相对应。</p>
+<p>5、applicationDidBecomeActive：在应用程序已被激活后，要执行的委托调用，刚好与applicationDidEnterBackground 方法相对应。</p>
+<p>6、applicationWillTerminate：在应用程序要完全推出的时候，要执行的委托调用，这个需要要设置UIApplicationExitsOnSuspend的键值。</p>
+<p>初次启动：</p>
+<p>iOS_didFinishLaunchingWithOptions</p>
+<p>iOS_applicationDidBecomeActive</p>
+<p>按下home键：</p>
+<p>iOS_applicationWillResignActive</p>
+<p>iOS_applicationDidEnterBackground</p>
+<p>点击程序图标进入：</p>
+<p>iOS_applicationWillEnterForeground</p>
+<p>iOS_applicationDidBecomeActive</p>
+<p>当应用程序进入后台时,应该保存用户数据或状态信息，所有没写到磁盘的文件或信息，在进入后台时，最后都写到磁盘去，因为程序可能在后台被杀死。释放尽可能释放的内存。</p>
+<pre><code>- (void)applicationDidEnterBackground:(UIApplication *)application
+</code></pre><p>方法有大概5秒的时间让你完成这些任务。如果超过时间还有未完成的任务，你的程序就会被终止而且从内存中清除。</p>
+<p>如果还需要长时间的运行任务，可以在该方法中调用</p>
+<pre><code>[application beginBackgroundTaskWithExpirationHandler:^{ 
+
+NSLog(@&quot;begin Background Task With Expiration Handler&quot;); 
+
+}];
+</code></pre><p>程序终止</p>
+<p>程序只要符合以下情况之一，只要进入后台或挂起状态就会终止：</p>
+<p>①iOS4.0以前的系统</p>
+<p>②app是基于iOS4.0之前系统开发的。</p>
+<p>③设备不支持多任务</p>
+<p>④在Info.plist文件中，程序包含了 UIApplicationExitsOnSuspend 键。</p>
+<p>系统常常是为其他app启动时由于内存不足而回收内存最后需要终止应用程序，但有时也会是由于app很长时间才响应而终止。如果app当时运行在后台并且没有暂停，系统会在应用程序终止之前调用app的代理的方法 <code>- (void)applicationWillTerminate:(UIApplication *)application</code>，这样可以让你可以做一些清理工作。你可以保存一些数据或app的状态。这个方法也有5秒钟的限制。超时后方法会返回程序从内存中清除。用户可以手工关闭应用程序。</p>
+<h3 id="和其他动态语言的区别"><a href="#和其他动态语言的区别" class="headerlink" title="和其他动态语言的区别"></a>和其他动态语言的区别</h3><p>OC中方法的实现只能写在<code>@implementation··@end</code>中，对象方法的声明只能写在<code>@interface···@end</code>中间；对象方法都以-号开头，类方法都以+号开头；函数属于整个文件，可以写在文件中的任何位置，包括<code>@interface··@end</code>中，但写在<code>@interface···@end</code>会无法识别；</p>
+<p>对象方法只能由对象来调用，类方法只能由类来调用，不能当做函数一样调用，对象方法归类\\对象所有；类方法调用不依赖于对象；类方法内部不能直接通过成员变量名访问对象的成员变量。OC只支持单继承，没有接口，但可以用delegate代替。</p>
+<p>Objective-C与其他语言最大的区别是其运行时的动态性，它能让你在运行时为类添加方法或者去除方法以及使用反射。极大的方便了程序的扩展。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-103f66199e930d9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/08/30/如何优雅的谈论源码/" style="float: left;">
+        ← 如何优雅的谈论源码
+    </a>
+    
+    
+    <a class="pull-right" href="/2013/08/29/Cordova-Source-Code-Analyse/">
+        Cordova Source Code Analyse →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-share flat" data-thread-key="2014/08/30/如何优雅的谈论OC/" data-title="如何优雅的谈论OC" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="如何优雅的谈论OC 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/08/30/如何优雅的谈论OC/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      	
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+<div class="ds-thread" data-thread-key="2014/08/30/如何优雅的谈论OC/" data-title="如何优雅的谈论OC" data-url="https://dangdangfeng.github.io/2014/08/30/如何优雅的谈论OC/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

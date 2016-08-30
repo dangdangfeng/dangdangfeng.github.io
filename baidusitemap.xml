@@ -3,14 +3,81 @@
 
 
     
+  <url>
+    <loc>https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E5%B9%BD%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHybrid-App/</loc>
+    <lastmod>2016-08-30T15:42:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何幽雅的谈论Hybrid App</title>
+        <pubTime>2016-08-30T15:40:19.000Z</pubTime>
+        
+        <tag>technology</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
     
   <url>
-    <loc>https://dangdangfeng.github.io/2016/08/29/Cordova-Source-Code-Analyse/</loc>
-    <lastmod>2016-08-29T17:24:47.000Z</lastmod>
+    <loc>https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BA%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2016-08-30T15:39:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何优雅的谈论源码</title>
+        <pubTime>2016-08-30T15:38:48.000Z</pubTime>
+        
+        <tag>source</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://dangdangfeng.github.io/2012/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHTTP%EF%BC%8F1-0%EF%BC%8F1-1%EF%BC%8F2-0/</loc>
+    <lastmod>2016-08-30T15:38:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何优雅的谈论HTTP／1.0／1.1／2.0</title>
+        <pubTime>2012-08-30T15:30:05.000Z</pubTime>
+        
+        <tag>technology</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://dangdangfeng.github.io/2014/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAOC/</loc>
+    <lastmod>2016-08-30T15:37:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何优雅的谈论OC</title>
+        <pubTime>2014-08-30T15:35:30.000Z</pubTime>
+        
+        <tag>technology</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://dangdangfeng.github.io/2013/08/29/Cordova-Source-Code-Analyse/</loc>
+    <lastmod>2016-08-30T15:34:42.000Z</lastmod>
     <data>
         <display>
         <title>Cordova Source Code Analyse</title>
-        <pubTime>2016-08-29T15:27:36.000Z</pubTime>
+        <pubTime>2013-08-29T15:27:36.000Z</pubTime>
         
         <tag>Source</tag>
          
@@ -20,4 +87,5 @@
     </data>
     </url>
 
+    
 </urlset>
