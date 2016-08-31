@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>React Native的极简手册 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-10-01T14:53:33.000Z" itemprop="datePublished">
+          2015-10-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>React Native的极简手册</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h4 id="安装入门"><a href="#安装入门" class="headerlink" title="安装入门"></a>安装入门</h4><p>安装入门可以参考：<a href="http://reactnative.cn/docs/0.31/tutorial.html#content" target="_blank" rel="external">React Native官方文档</a>。</p>
+<p>NodeJS知识储备：参考<a href="https://leanpub.com/nodebeginner-chinese" target="_blank" rel="external">《NodeJS入门》</a>。（尊重知识，请购买原版）。</p>
+<p>书籍：<a href="http://item.jd.com/11844102.html" target="_blank" rel="external">《React Native入门与实战》</a></p>
+<p>代码示例：<a href="https://github.com/fangwei716/30-days-of-react-native" target="_blank" rel="external">30天学习React Native教程</a></p>
+<p>看到这里，对React Native的使用就有了一些认识了。</p>
+<h4 id="React-and-React-Native-and-NodeJS"><a href="#React-and-React-Native-and-NodeJS" class="headerlink" title="React and React Native and NodeJS"></a>React and React Native and NodeJS</h4><p><a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React</a>是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。</p>
+<p>React的世界里，一切都是组件。你可以构建任何直接的HTML没有的组件，例如下拉菜单、导航菜单等。同时，组件里也可以包含其它组件。每一个组件都有一个render方法，用于呈现该组件。同时，每一个组件都有属于自己的scope，从而与其它的组件界定开来，用于构建属于该组件的方法，以方便复用。JSX是基于JS的扩展，它允许你在JS里直接写HTML的代码，而不用像我们过去一样要想在JS里写HTML不得不拼接一大堆的字符串。React不直接操作DOM，频繁的操作DOM会非常影响性能和体验。React将DOM结构储存在内存中，与render方法的返回值进行比较，通过其自由的diff算法计算出不同的地方，然后反应到真实的DOM当中。也就是说，大多数情况我们渲染组件、更改组件状态等都是操作的虚拟DOM，只有在有所改变的情况下，才会反应到真实的DOM当中。React Native基于ReacJS，把 React 编程模式的能力带到移动开发,用来开发iOS和Android原生应用.</p>
+<p>NodeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。</p>
+<p>总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。</p>
+<h4 id="构建原理"><a href="#构建原理" class="headerlink" title="构建原理"></a>构建原理</h4><p>在AppDelegate.m里，找到 </p>
+<pre><code>application:didFinishLaunchingWithOptions：
+</code></pre><p>在这个方法中，主要做了几件事：</p>
+<ul>
+<li>定义了 JS 代码所在的位置，它在 dev 环境下是一个 URL，通过 development server 访问；在生产环境下则从磁盘读取，当然前提是已经手动生成过了 bundle 文件；</li>
+<li>创建了一个 RCTRootView 对象，该类继承于 UIView，处理程序所有 View 的最外层；</li>
+<li>调用 RCTRootView 的 initWithBundleURL 方法。在该方法中，创建了 bridge 对象。顾名思义，bridge 起着两个端之间的桥接作用，其中真正工作的是类就是大名鼎鼎的 RCTBatchedBridge。RCTBatchedBridge 是初始化时通信的核心，我们重点关注的是 start 方法。在 start 方法中，会创建一个 GCD 线程，该线程通过串行队列调度了以下几个关键的任务。</li>
+</ul>
+<p>RCTRootView 用于加载 JavaScript 应用以及渲染最后的视图的。当应用开始运行的时候，RCTRootView将会从以下的URL中加载应用：</p>
+<pre><code>http://localhost:8081/index.ios.bundle
+</code></pre><p>重新调用了你运行这个App时打开的终端窗口，它开启了一个 packager 和 server 来处理上面的请求。在 Safari 中打开那个 URL；你将会看到这个 App 的 JavaScript 代码。你也可以在 React Native 框架中找到你的代码。当你的App开始运行了以后，这段代码将会被加载进来，然后 JavaScriptCore 框架将会执行它。在程序里，它将会加载 功能 组件，然后构建出原生的 UIKit 视图。JavaScript应用运行在模拟器上，使用的是原生UI，没有任何内嵌的浏览器。应用程序会使用 React.createElement 来构建应用 UI ,React会将其转换到原生环境中。</p>
+<p>当 UI 渲染出来后,render 方法会返回一颗视图渲染树,并与当前的 UIKit 视图进行比较。这个称之为 reconciliation 的过程的输出是一个简单的更新列表, React 会将这个列表应用到当前视图。只有实际改变了的部分才会重新绘制。即ReactJS独特的——virtual-DOM(文档对象模型,一个web文档的视图树)和 reconciliation概念。</p>
+<h4 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h4><p>组件的生命周期分成三个状态：</p>
+<pre><code>Mounting：已插入真实 DOM
+Updating：正在被重新渲染
+Unmounting：已移出真实 DOM
+</code></pre><p>React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。</p>
+<pre><code>componentWillMount()
+componentDidMount()
+componentWillUpdate(object nextProps, object nextState)
+componentDidUpdate(object prevProps, object prevState)
+componentWillUnmount()
+</code></pre><p>此外，React 还提供两种特殊状态的处理函数。</p>
+<pre><code>componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+</code></pre><p>这些方法的详细说明，可以参考<a href="https://facebook.github.io/react/docs/working-with-the-browser.html#component-lifecycle" target="_blank" rel="external">官方文档</a>。</p>
+<p>另外一个需要关注的点是，组件的style属性的设置方式不能写成</p>
+<pre><code>style=&quot;opacity:{this.state.opacity};&quot;
+</code></pre><p>而要写成</p>
+<pre><code>style={{opacity: this.state.opacity}}
+</code></pre><p>这是因为 React 组件样式是一个对象，所以第一重大括号表示这是 JavaScript 语法，第二重大括号表示样式对象。</p>
+<h4 id="JS-和-Native-交互"><a href="#JS-和-Native-交互" class="headerlink" title="JS 和 Native 交互"></a>JS 和 Native 交互</h4><p>xcode启动后会执行 ../node_modules/react-native/packager/react-native-xcode.sh文件。脚步中主要是读取 Xcode 带过来的环境变量，同时加载 nvm 包使得 Node.js 环境可用，最后执行 react-native-cli 的命令：</p>
+<pre><code>$NODE_BINARY &quot;$REACT_NATIVE_DIR/local-cli/cli.js&quot; bundle \
+  --entry-file index.ios.js \
+  --platform ios \
+  --dev $DEV \
+  --bundle-output &quot;$DEST/main.jsbundle&quot; \
+  --assets-dest &quot;$DEST&quot;
+</code></pre><p>通过此处，index.ios.js和main.jsbundle就可以使用了。</p>
+<p>通过../react-native/local-cli/cli.js 中的 run 方法，进入/bundle/bundle.js ,由此进入了 /bundle/buildBundle.js。从js脚本中可以看出大体做了下面的工作：</p>
+<ul>
+<li>从入口文件开始分析模块之间的依赖关系；</li>
+<li>对 JS 文件转化，比如 JSX 语法的转化等；</li>
+<li>把转化后的各个模块一起合并为一个 bundle.js。</li>
+</ul>
+<p>React Native对模块的分析和编译做了不少优化，大大提升了打包的速度，这样能够保证在 liveReload 时用户及时得到响应。</p>
+<p>在应用程序启动之后，其中的 didFinishLaunchingWithOptions 方法会被调用，通过上面的分析，我们可以看到自己实现的页面就被加入到应用程序中了。JS 引擎，在调试环境下，对应的 Executor 为 RCTWebSocketExecutor，它通过 WebSocket 连接到 Chrome 中，在 Chrome 里运行 JS;在生产环境下，对应的 Executor 为 RCTContextExecutor，这应该就是传说中的 javascriptcore。</p>
+<p>Native 调用 JS 是通过发送消息到 Chrome 触发执行、或者直接通过 javascriptcore 执行 JS 代码的。在 JS 端调用 Native 一般都是直接通过引用模块名，JS 把(调用模块、调用方法、调用参数) 保存到队列中；Native 调用 JS 时，顺便把队列返回过来；Native 处理队列中的参数，同样解析出(模块、方法、参数)，并通过 NSInvocation 动态调用；Native方法调用完毕后，再次主动调用 JS。JS 端通过 callbackID，找到对应JS端的 callback，进行一次调用。两端都保存了所有暴露的 Native 模块信息表作为通信的基础。</p>
+<p>JS不会主动传递数据给OC，在调OC方法时，会把ModuleID,MethodID等数据加到一个队列里，等OC过来调JS的任意方法时，再把这个队列返回给OC，此时OC再执行这个队列里要调用的方法。native开发里，只在有事件触发的时候才执行代码。在React Native里，事件发生时OC都会调用JS相应的模块方法去处理，处理完这些事件后再执行JS想让OC执行的方法，而没有事件发生的时候，是不会执行任何代码的。</p>
+<p>另外，一个 Native 模块如果想要暴露给 JS，需要在声明时显示地调用 RCT_EXPORT_MODULE。宏定义了 load 方法，该方法会自动被调用，在方法中对当前类进行注册。模块如果要暴露出指定的方法，需要通过 RCT_EXPORT_METHOD 宏进行声明。</p>
+<p>总结：整个启动过程就是，JS端先把代码大包成bundle.js传到Native端的主函数，主函数创建RCTRootView.在RCTRootView里使用GCD扫描暴露的模块，创建JS引擎，将模块信息序列化为json.此时加载JS代码，在JS引擎中执行bundle.js,将json对象反序列化保存为NativeModules对象。</p>
+<p>JS 和 Native 的交互过程中， RCTBatchedBridge 在两端通信过程中扮演了重要的角色。</p>
+<pre><code>//RCTBatchedBridge.m
+- (void)start
+{
+  dispatch_queue_t bridgeQueue = dispatch_queue_create(&quot;com.facebook.react.RCTBridgeQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+
+  // 异步的加载打包完成的js文件，也就是main.jsbundle，如果包文件在本地则直接加载，否则根据URL通过NSURLSession方式去下载
+  [self loadSource:^(NSError *error, NSData *source) {}];
+
+  // 同步初始化需要暴露给给js层的native模块
+  [self initModules];
+
+  //异步初始化JS Executor，也就是js引擎
+  dispatch_group_async(setupJSExecutorAndModuleConfig, bridgeQueue, ^{
+[weakSelf setUpExecutor];
+  });
+
+  //异步获取各个模块的配置信息
+  dispatch_group_async(setupJSExecutorAndModuleConfig, bridgeQueue, ^{
+config = [weakSelf moduleConfig];
+  });
+
+  //获取各模块的配置信息后，将这些信息注入到JS环境中
+  [self injectJSONConfiguration:config onComplete:^(NSError *error) {}];
+
+  //开始执行main.jsbundle
+  [self executeSourceCode:sourceCode];
+}
+</code></pre><p>js为了桥接native层也引入了BatchedBridge，BatchedBridge是MessageQueue的一个实例，而且是全局唯一的一个实例。：</p>
+<pre><code>//BatchedBridge.js
+const MessageQueue = require(&apos;MessageQueue&apos;);
+const BatchedBridge = new MessageQueue(
+  __fbBatchedBridgeConfig.remoteModuleConfig,
+  __fbBatchedBridgeConfig.localModulesConfig,
+);
+//将BatchedBridge添加到js的全局global对象中，
+Object.defineProperty(global, &apos;__fbBatchedBridge&apos;, { value: BatchedBridge });
+module.exports = BatchedBridge;
+</code></pre><p><code><strong>fbBatchedBridgeConfig</strong></code>是一个全局的js变量，<code>fbBatchedBridgeConfig.remoteModuleConfig</code>就是之前我们在native层导出的模块配置表.</p>
+<p>messageQueue保存着js跟native的模块交互的所有信息。<code>_genModules</code>方法，该方法会根据config解析每个模块的信息并保存到this.RemoteModules中.<code>_genModules</code>会历遍所有的remoteModules,根据每个模块的配置信息(如何生成配置信息下面会提到)和module索引ID来创建每个模块.</p>
+<p>react为了性能的优化，当js两次调用方法的间隔小于MIN_TIME_BETWEEN_FLUSHES_MS(5ms)时间，会将调用信息先缓存到_queue中，等待下次在一并提交给native层执行.</p>
+<h4 id="Navigator组件到NavigationExperimental组件"><a href="#Navigator组件到NavigationExperimental组件" class="headerlink" title="Navigator组件到NavigationExperimental组件"></a>Navigator组件到NavigationExperimental组件</h4><p>Navigator and NavigatorIOS两个都是有状态(即保存各个导航的序顺)的组件，允许你的APP在多个不同的场景(屏幕）之间管理你的导航。这两个导航管理了一个路由栈(route stack)，这样就允许我们使用pop(), push()和replace()来管理状态。NavigatorIOS是使用了iOS的 UINavigationController类，而Navigator都是基于Javascript。 Navigator适用于两个平台，而NavigatorIOS只能适用于iOS. 如果在一个APP中应用了多个导航组件(Navigator and NavigatorIOS一起使用). 那么在两者之间进行导航过渡，会变得非常困难.</p>
+<p>ＮavigationExperimental以一种新的方法实现导航逻辑，这样允许任何的视图都可以作为导航的视图 。它包含了一个预编异的组件NavigationAnimatedView来管理场景间的动画。它内部的每一个视图都可以有自己的手势和动画。</p>
+<p>React Native项目已经不再维护Navigator组件而全面转向NavigationExperimental组件了。NavigationExperimental改进了Navigator组件的一下几个方面：</p>
+<ul>
+<li><p>单向数据流, 它使用reducers 来操作最顶层的state 对像，而在Navigator中，当你在子导航页中，不可能操作到app最初打开页面时的state对像，除非，一级级的通过props传递过方法名或函数名，然后在子页面中调用这些方法或者函数，来修改某个顶层的数据。</p>
+</li>
+<li><p>为了允许存在本地和基于 js的导航视图，导航的逻辑和路由，必须从视图逻辑中独立出来。</p>
+</li>
+<li><p>改进了切换时的场景动画，手势和导航栏</p>
+</li>
+</ul>
+<p><a href="http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental" target="_blank" rel="external">NavigationExperimental</a>(<a href="http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental)的使用：" target="_blank" rel="external">http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental)的使用：</a><br>实现方案可参考<a href="https://rnplay.org/apps/nT-EnA" target="_blank" rel="external">此处</a>(<a href="https://rnplay.org/apps/nT-EnA)。" target="_blank" rel="external">https://rnplay.org/apps/nT-EnA)。</a></p>
+<p>具体使用也可以看<a href="https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html" target="_blank" rel="external">这里</a>(<a href="https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html" target="_blank" rel="external">https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html</a>).</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-3c800f024a2bb20f.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2015/10/01/React-Native的极简手册/" data-title="React Native的极简手册" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="React Native的极简手册 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2015/10/01/React-Native的极简手册/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    
+    <a class="pull-right" href="/2015/09/11/10道经典的iOS面试题/">
+        10道经典的iOS面试题 →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2015/10/01/React-Native的极简手册/" data-title="React Native的极简手册" data-url="https://dangdangfeng.github.io/2015/10/01/React-Native的极简手册/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2016-08-30T16:37:51.000Z</updated>
+  <updated>2016-08-31T15:08:34.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -16,141 +16,324 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>优秀的iOS开发站点</title>
-    <link href="https://dangdangfeng.github.io/2016/08/31/%E4%BC%98%E7%A7%80%E7%9A%84iOS%E5%BC%80%E5%8F%91%E7%AB%99%E7%82%B9/"/>
-    <id>https://dangdangfeng.github.io/2016/08/31/优秀的iOS开发站点/</id>
-    <published>2016-08-30T16:37:08.000Z</published>
-    <updated>2016-08-30T16:37:51.000Z</updated>
+    <title>React Native的极简手册</title>
+    <link href="https://dangdangfeng.github.io/2015/10/01/React-Native%E7%9A%84%E6%9E%81%E7%AE%80%E6%89%8B%E5%86%8C/"/>
+    <id>https://dangdangfeng.github.io/2015/10/01/React-Native的极简手册/</id>
+    <published>2015-10-01T14:53:33.000Z</published>
+    <updated>2016-08-31T15:08:34.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<blockquote>
-<p>工欲善其事必先利其器，每一次的惊叹背后都有不为人知的努力。分享和共赢，是开源的精神所在。感谢那些开诚布公，乐于助人的程序员们。从优秀到卓越，我们需要不停地向他人学习。</p>
-</blockquote>
+    <content type="html"><![CDATA[<h4 id="安装入门"><a href="#安装入门" class="headerlink" title="安装入门"></a>安装入门</h4><p>安装入门可以参考：<a href="http://reactnative.cn/docs/0.31/tutorial.html#content" target="_blank" rel="external">React Native官方文档</a>。</p>
+<p>NodeJS知识储备：参考<a href="https://leanpub.com/nodebeginner-chinese" target="_blank" rel="external">《NodeJS入门》</a>。（尊重知识，请购买原版）。</p>
+<p>书籍：<a href="http://item.jd.com/11844102.html" target="_blank" rel="external">《React Native入门与实战》</a></p>
+<p>代码示例：<a href="https://github.com/fangwei716/30-days-of-react-native" target="_blank" rel="external">30天学习React Native教程</a></p>
+<p>看到这里，对React Native的使用就有了一些认识了。</p>
+<h4 id="React-and-React-Native-and-NodeJS"><a href="#React-and-React-Native-and-NodeJS" class="headerlink" title="React and React Native and NodeJS"></a>React and React Native and NodeJS</h4><p><a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React</a>是由Facebook开发出来的用于开发用户交互界面的JS库。其源码由Facebook和社区优秀的程序员维护。React带来了很多新的东西，例如组件化、JSX、虚拟DOM等。其提供的虚拟DOM使得我们渲染组件呈现非常之快，让我们从频繁操作DOM的繁重工作之中解脱。它做的工作更多偏重于MVC中的V层，结合其它如Flux等一起，你可以非常容易构建强大的应用。</p>
+<p>React的世界里，一切都是组件。你可以构建任何直接的HTML没有的组件，例如下拉菜单、导航菜单等。同时，组件里也可以包含其它组件。每一个组件都有一个render方法，用于呈现该组件。同时，每一个组件都有属于自己的scope，从而与其它的组件界定开来，用于构建属于该组件的方法，以方便复用。JSX是基于JS的扩展，它允许你在JS里直接写HTML的代码，而不用像我们过去一样要想在JS里写HTML不得不拼接一大堆的字符串。React不直接操作DOM，频繁的操作DOM会非常影响性能和体验。React将DOM结构储存在内存中，与render方法的返回值进行比较，通过其自由的diff算法计算出不同的地方，然后反应到真实的DOM当中。也就是说，大多数情况我们渲染组件、更改组件状态等都是操作的虚拟DOM，只有在有所改变的情况下，才会反应到真实的DOM当中。React Native基于ReacJS，把 React 编程模式的能力带到移动开发,用来开发iOS和Android原生应用.</p>
+<p>NodeJs 是基于JavaScript的,可以做为后台开发的语言. 提供了很多系统级的API，如文件操作、网络编程等. 用事件驱动, 异步编程,主要是为后台网络服务设计.React Native 借助 Node.js，即 JavaScript 运行时来创建 JavaScript 代码。</p>
+<p>总结来说，React Native使用NodeJS来做系统处理，使用React来渲染。</p>
+<h4 id="构建原理"><a href="#构建原理" class="headerlink" title="构建原理"></a>构建原理</h4><p>在AppDelegate.m里，找到 </p>
+<pre><code>application:didFinishLaunchingWithOptions：
+</code></pre><p>在这个方法中，主要做了几件事：</p>
 <ul>
-<li>国内优秀的iOS网站</li>
-<li>国外优秀的iOS网站</li>
+<li>定义了 JS 代码所在的位置，它在 dev 环境下是一个 URL，通过 development server 访问；在生产环境下则从磁盘读取，当然前提是已经手动生成过了 bundle 文件；</li>
+<li>创建了一个 RCTRootView 对象，该类继承于 UIView，处理程序所有 View 的最外层；</li>
+<li>调用 RCTRootView 的 initWithBundleURL 方法。在该方法中，创建了 bridge 对象。顾名思义，bridge 起着两个端之间的桥接作用，其中真正工作的是类就是大名鼎鼎的 RCTBatchedBridge。RCTBatchedBridge 是初始化时通信的核心，我们重点关注的是 start 方法。在 start 方法中，会创建一个 GCD 线程，该线程通过串行队列调度了以下几个关键的任务。</li>
 </ul>
-<h4 id="常用的国内网站"><a href="#常用的国内网站" class="headerlink" title="常用的国内网站"></a>常用的国内网站</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2364ba42664a3d23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>社区网站：</strong></p>
+<p>RCTRootView 用于加载 JavaScript 应用以及渲染最后的视图的。当应用开始运行的时候，RCTRootView将会从以下的URL中加载应用：</p>
+<pre><code>http://localhost:8081/index.ios.bundle
+</code></pre><p>重新调用了你运行这个App时打开的终端窗口，它开启了一个 packager 和 server 来处理上面的请求。在 Safari 中打开那个 URL；你将会看到这个 App 的 JavaScript 代码。你也可以在 React Native 框架中找到你的代码。当你的App开始运行了以后，这段代码将会被加载进来，然后 JavaScriptCore 框架将会执行它。在程序里，它将会加载 功能 组件，然后构建出原生的 UIKit 视图。JavaScript应用运行在模拟器上，使用的是原生UI，没有任何内嵌的浏览器。应用程序会使用 React.createElement 来构建应用 UI ,React会将其转换到原生环境中。</p>
+<p>当 UI 渲染出来后,render 方法会返回一颗视图渲染树,并与当前的 UIKit 视图进行比较。这个称之为 reconciliation 的过程的输出是一个简单的更新列表, React 会将这个列表应用到当前视图。只有实际改变了的部分才会重新绘制。即ReactJS独特的——virtual-DOM(文档对象模型,一个web文档的视图树)和 reconciliation概念。</p>
+<h4 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h4><p>组件的生命周期分成三个状态：</p>
+<pre><code>Mounting：已插入真实 DOM
+Updating：正在被重新渲染
+Unmounting：已移出真实 DOM
+</code></pre><p>React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。</p>
+<pre><code>componentWillMount()
+componentDidMount()
+componentWillUpdate(object nextProps, object nextState)
+componentDidUpdate(object prevProps, object prevState)
+componentWillUnmount()
+</code></pre><p>此外，React 还提供两种特殊状态的处理函数。</p>
+<pre><code>componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+</code></pre><p>这些方法的详细说明，可以参考<a href="https://facebook.github.io/react/docs/working-with-the-browser.html#component-lifecycle" target="_blank" rel="external">官方文档</a>。</p>
+<p>另外一个需要关注的点是，组件的style属性的设置方式不能写成</p>
+<pre><code>style=&quot;opacity:{this.state.opacity};&quot;
+</code></pre><p>而要写成</p>
+<pre><code>style={{opacity: this.state.opacity}}
+</code></pre><p>这是因为 React 组件样式是一个对象，所以第一重大括号表示这是 JavaScript 语法，第二重大括号表示样式对象。</p>
+<h4 id="JS-和-Native-交互"><a href="#JS-和-Native-交互" class="headerlink" title="JS 和 Native 交互"></a>JS 和 Native 交互</h4><p>xcode启动后会执行 ../node_modules/react-native/packager/react-native-xcode.sh文件。脚步中主要是读取 Xcode 带过来的环境变量，同时加载 nvm 包使得 Node.js 环境可用，最后执行 react-native-cli 的命令：</p>
+<pre><code>$NODE_BINARY &quot;$REACT_NATIVE_DIR/local-cli/cli.js&quot; bundle \
+  --entry-file index.ios.js \
+  --platform ios \
+  --dev $DEV \
+  --bundle-output &quot;$DEST/main.jsbundle&quot; \
+  --assets-dest &quot;$DEST&quot;
+</code></pre><p>通过此处，index.ios.js和main.jsbundle就可以使用了。</p>
+<p>通过../react-native/local-cli/cli.js 中的 run 方法，进入/bundle/bundle.js ,由此进入了 /bundle/buildBundle.js。从js脚本中可以看出大体做了下面的工作：</p>
 <ul>
-<li><a href="http://www.jianshu.com" target="_blank" rel="external">简书</a></li>
-<li><a href="http://gold.xitu.io/welcome/ios" target="_blank" rel="external">稀土掘金</a></li>
-<li><a href="https://segmentfault.com" target="_blank" rel="external">SegmentFault</a></li>
-<li><a href="http://www.cnblogs.com/cate/ios/" target="_blank" rel="external">博客园</a></li>
+<li>从入口文件开始分析模块之间的依赖关系；</li>
+<li>对 JS 文件转化，比如 JSX 语法的转化等；</li>
+<li>把转化后的各个模块一起合并为一个 bundle.js。</li>
 </ul>
-<hr>
+<p>React Native对模块的分析和编译做了不少优化，大大提升了打包的速度，这样能够保证在 liveReload 时用户及时得到响应。</p>
+<p>在应用程序启动之后，其中的 didFinishLaunchingWithOptions 方法会被调用，通过上面的分析，我们可以看到自己实现的页面就被加入到应用程序中了。JS 引擎，在调试环境下，对应的 Executor 为 RCTWebSocketExecutor，它通过 WebSocket 连接到 Chrome 中，在 Chrome 里运行 JS;在生产环境下，对应的 Executor 为 RCTContextExecutor，这应该就是传说中的 javascriptcore。</p>
+<p>Native 调用 JS 是通过发送消息到 Chrome 触发执行、或者直接通过 javascriptcore 执行 JS 代码的。在 JS 端调用 Native 一般都是直接通过引用模块名，JS 把(调用模块、调用方法、调用参数) 保存到队列中；Native 调用 JS 时，顺便把队列返回过来；Native 处理队列中的参数，同样解析出(模块、方法、参数)，并通过 NSInvocation 动态调用；Native方法调用完毕后，再次主动调用 JS。JS 端通过 callbackID，找到对应JS端的 callback，进行一次调用。两端都保存了所有暴露的 Native 模块信息表作为通信的基础。</p>
+<p>JS不会主动传递数据给OC，在调OC方法时，会把ModuleID,MethodID等数据加到一个队列里，等OC过来调JS的任意方法时，再把这个队列返回给OC，此时OC再执行这个队列里要调用的方法。native开发里，只在有事件触发的时候才执行代码。在React Native里，事件发生时OC都会调用JS相应的模块方法去处理，处理完这些事件后再执行JS想让OC执行的方法，而没有事件发生的时候，是不会执行任何代码的。</p>
+<p>另外，一个 Native 模块如果想要暴露给 JS，需要在声明时显示地调用 RCT_EXPORT_MODULE。宏定义了 load 方法，该方法会自动被调用，在方法中对当前类进行注册。模块如果要暴露出指定的方法，需要通过 RCT_EXPORT_METHOD 宏进行声明。</p>
+<p>总结：整个启动过程就是，JS端先把代码大包成bundle.js传到Native端的主函数，主函数创建RCTRootView.在RCTRootView里使用GCD扫描暴露的模块，创建JS引擎，将模块信息序列化为json.此时加载JS代码，在JS引擎中执行bundle.js,将json对象反序列化保存为NativeModules对象。</p>
+<p>JS 和 Native 的交互过程中， RCTBatchedBridge 在两端通信过程中扮演了重要的角色。</p>
+<pre><code>//RCTBatchedBridge.m
+- (void)start
+{
+  dispatch_queue_t bridgeQueue = dispatch_queue_create(&quot;com.facebook.react.RCTBridgeQueue&quot;, DISPATCH_QUEUE_CONCURRENT);
+
+  // 异步的加载打包完成的js文件，也就是main.jsbundle，如果包文件在本地则直接加载，否则根据URL通过NSURLSession方式去下载
+  [self loadSource:^(NSError *error, NSData *source) {}];
+
+  // 同步初始化需要暴露给给js层的native模块
+  [self initModules];
+
+  //异步初始化JS Executor，也就是js引擎
+  dispatch_group_async(setupJSExecutorAndModuleConfig, bridgeQueue, ^{
+[weakSelf setUpExecutor];
+  });
+
+  //异步获取各个模块的配置信息
+  dispatch_group_async(setupJSExecutorAndModuleConfig, bridgeQueue, ^{
+config = [weakSelf moduleConfig];
+  });
+
+  //获取各模块的配置信息后，将这些信息注入到JS环境中
+  [self injectJSONConfiguration:config onComplete:^(NSError *error) {}];
+
+  //开始执行main.jsbundle
+  [self executeSourceCode:sourceCode];
+}
+</code></pre><p>js为了桥接native层也引入了BatchedBridge，BatchedBridge是MessageQueue的一个实例，而且是全局唯一的一个实例。：</p>
+<pre><code>//BatchedBridge.js
+const MessageQueue = require(&apos;MessageQueue&apos;);
+const BatchedBridge = new MessageQueue(
+  __fbBatchedBridgeConfig.remoteModuleConfig,
+  __fbBatchedBridgeConfig.localModulesConfig,
+);
+//将BatchedBridge添加到js的全局global对象中，
+Object.defineProperty(global, &apos;__fbBatchedBridge&apos;, { value: BatchedBridge });
+module.exports = BatchedBridge;
+</code></pre><p><code><strong>fbBatchedBridgeConfig</strong></code>是一个全局的js变量，<code>fbBatchedBridgeConfig.remoteModuleConfig</code>就是之前我们在native层导出的模块配置表.</p>
+<p>messageQueue保存着js跟native的模块交互的所有信息。<code>_genModules</code>方法，该方法会根据config解析每个模块的信息并保存到this.RemoteModules中.<code>_genModules</code>会历遍所有的remoteModules,根据每个模块的配置信息(如何生成配置信息下面会提到)和module索引ID来创建每个模块.</p>
+<p>react为了性能的优化，当js两次调用方法的间隔小于MIN_TIME_BETWEEN_FLUSHES_MS(5ms)时间，会将调用信息先缓存到_queue中，等待下次在一并提交给native层执行.</p>
+<h4 id="Navigator组件到NavigationExperimental组件"><a href="#Navigator组件到NavigationExperimental组件" class="headerlink" title="Navigator组件到NavigationExperimental组件"></a>Navigator组件到NavigationExperimental组件</h4><p>Navigator and NavigatorIOS两个都是有状态(即保存各个导航的序顺)的组件，允许你的APP在多个不同的场景(屏幕）之间管理你的导航。这两个导航管理了一个路由栈(route stack)，这样就允许我们使用pop(), push()和replace()来管理状态。NavigatorIOS是使用了iOS的 UINavigationController类，而Navigator都是基于Javascript。 Navigator适用于两个平台，而NavigatorIOS只能适用于iOS. 如果在一个APP中应用了多个导航组件(Navigator and NavigatorIOS一起使用). 那么在两者之间进行导航过渡，会变得非常困难.</p>
+<p>ＮavigationExperimental以一种新的方法实现导航逻辑，这样允许任何的视图都可以作为导航的视图 。它包含了一个预编异的组件NavigationAnimatedView来管理场景间的动画。它内部的每一个视图都可以有自己的手势和动画。</p>
+<p>React Native项目已经不再维护Navigator组件而全面转向NavigationExperimental组件了。NavigationExperimental改进了Navigator组件的一下几个方面：</p>
 <ul>
-<li><a href="http://www.cocoachina.com" target="_blank" rel="external">cocoachina</a></li>
-<li><a href="http://www.iteye.com" target="_blank" rel="external">ITeye</a></li>
-<li><a href="http://www.csdn.net" target="_blank" rel="external">CSDN</a></li>
-<li><a href="http://www.51cto.com" target="_blank" rel="external">51CTO</a></li>
-<li><a href="https://www.infoq.com" target="_blank" rel="external">infoq</a></li>
-<li><a href="http://toutiao.io/subjects/12199" target="_blank" rel="external">开发者头条</a></li>
+<li><p>单向数据流, 它使用reducers 来操作最顶层的state 对像，而在Navigator中，当你在子导航页中，不可能操作到app最初打开页面时的state对像，除非，一级级的通过props传递过方法名或函数名，然后在子页面中调用这些方法或者函数，来修改某个顶层的数据。</p>
+</li>
+<li><p>为了允许存在本地和基于 js的导航视图，导航的逻辑和路由，必须从视图逻辑中独立出来。</p>
+</li>
+<li><p>改进了切换时的场景动画，手势和导航栏</p>
+</li>
 </ul>
-<hr>
-<ul>
-<li><a href="http://www.oschina.net" target="_blank" rel="external">开源中国</a></li>
-<li><a href="http://code4app.qiniudn.com" target="_blank" rel="external">Code4App</a></li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://www.imooc.com" target="_blank" rel="external">慕课网</a></li>
-<li><a href="http://www.maiziedu.com" target="_blank" rel="external">麦子学院</a></li>
-<li><a href="http://www.jikexueyuan.com" target="_blank" rel="external">极客学院</a></li>
-</ul>
-<p><strong>UI设计：</strong></p>
-<p><a href="http://www.ui4app.com" target="_blank" rel="external">UI4App</a></p>
-<blockquote>
-<p>当然还有很多有用的网站，如果您知道并愿意分享，可以在评论里提供。</p>
-</blockquote>
-<h4 id="常用的国外网站"><a href="#常用的国外网站" class="headerlink" title="常用的国外网站"></a>常用的国外网站</h4><ul>
-<li><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html" target="_blank" rel="external"> Apple Learning Objective C </a>：Apple官方文档</li>
-<li><a href="https://github.com" target="_blank" rel="external">github</a>：每天必看的吧</li>
-<li><a href="http://stackoverflow.com" target="_blank" rel="external">stackoverflow</a>：估计是最大的技术问答网站了</li>
-<li><a href="https://www.developerfeed.com/category/ios/ios-tutorials/" target="_blank" rel="external">developerfeed</a>：开发者论坛</li>
-<li><a href="https://www.objc.io" target="_blank" rel="external">objc.io</a>：经典网站，不用解释</li>
-<li><a href="http://www.cocoacontrols.com" target="_blank" rel="external">cocoacontrols</a>：优秀开源组件</li>
-<li><a href="http://cocoa.tumblr.com" target="_blank" rel="external">cocoa</a>：iOS开发源码和深度观察</li>
-<li><a href="http://maniacdev.com/open-source-iphone-app-store-apps" target="_blank" rel="external">maniacdev.com</a>：开源ios应用及其源代码</li>
-<li><a href="https://sourceforge.net" target="_blank" rel="external">sourceforge</a>：源码</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://iphonedevsdk.com/forum" target="_blank" rel="external">iphonedevsdk</a>：苹果开发论坛之一</li>
-<li><a href="https://devforums.apple.com" target="_blank" rel="external">devforums.apple.com</a>：苹果官方开发者</li>
-<li><a href="https://developer.apple.com/library/ios/navigation/index.html?section=Resource+Types&amp;topic=Sample+Code" target="_blank" rel="external">Sample+Code</a>：苹果官方的小示例项目论坛</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://subjc.com" target="_blank" rel="external">Subjective-C</a>：以解析和重构创新模式和著名应用的UI而闻名</li>
-<li><a href="http://mobile.tutsplus.com/category/tutorials/iphone/" target="_blank" rel="external">tutsplus</a>：一些不错的实例教程</li>
-<li><a href="http://nshipster.com" target="_blank" rel="external">NSHipster</a>：探讨了编程风格，以及最前沿的类的使用和实现</li>
-<li><a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>：每个iOS都应该看看</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://oleb.net" target="_blank" rel="external">oleb</a>：个人博客，在持续更新</li>
-<li><a href="http://petersteinberger.com" target="_blank" rel="external">petersteinberger</a>：个人网站</li>
-<li><a href="http://floriankugler.com/archive/" target="_blank" rel="external">floriankugler</a>：更到15年</li>
-<li><a href="https://www.mikeash.com/pyblog/" target="_blank" rel="external">NSBlog</a>：包含了关于Objective-C和其他主题的深度问题</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://iosdevweekly.com" target="_blank" rel="external">iOS Dev Weekly</a>：每天更新的iOS推送资源</li>
-<li><a href="http://ios-goodies.com" target="_blank" rel="external">iOS Goodies</a>：iOS资讯站</li>
-<li><a href="http://www.appcoda.com" target="_blank" rel="external">AppCoda</a>：产于香港，重点在用于执行的最新的API和结构上</li>
-<li><a href="http://merowing.info" target="_blank" rel="external">Krzysztof Zab?ocki</a>：提供关于代码结构、工具和Xcode的技巧</li>
-<li><a href="http://iosdevtips.co" target="_blank" rel="external">iOS Development tips</a>：一些关于使用Xcode和API的细致的提示</li>
-</ul>
-<hr>
-<ul>
-<li><a href="https://teamtreehouse.com/techdegree" target="_blank" rel="external">Team Tree House </a>：人人都可以编程的学习网站</li>
-<li><a href="http://www.technobuffalo.com" target="_blank" rel="external">technobuffalo</a>：手机媒体网站</li>
-<li><a href="https://designthencode.com" target="_blank" rel="external">Design then Code </a>：最好的iOS界面设计和应用指导和教程</li>
-<li><a href="http://www.daleisphere.com" target="_blank" rel="external"> iPhone App Development Where to Start </a>：博客</li>
-</ul>
-<p><strong>UI设计：</strong></p>
-<ul>
-<li><a href="http://www.iosinspires.me/" target="_blank" rel="external">iosinspires</a>：优秀的iOS平台上应用的设计，icon及相关资源</li>
-<li><a href="http://www.patternsofdesign.co.uk/" target="_blank" rel="external">patternsofdesign</a>：专注于分享iOS应用UI界面的细节，按照设计元素进行分类，按照iOS常用功能对各类UI进行分类展示。</li>
-<li><a href="http://pttrns.com/" target="_blank" rel="external">iOS UI Patterns</a>：整理/罗列了许多精彩的iOS 应用界面截图，并且按照分类将这些截图分类，比如Activity，Login，About，Calendar，Seeting，Share等各种类型的不同应用的实现效果</li>
-<li><a href="http://www.appsites.com/" target="_blank" rel="external">appsites</a>：优秀移动应用网站设计</li>
-<li><a href="http://dribbble.com/" target="_blank" rel="external">dribbble</a>：设计师交流和分享自己设计作品的社区。上面有很多非常棒的移动产品设计作品。</li>
-<li><a href="http://www.tappgala.com/" target="_blank" rel="external">tappgala</a>：分享最棒的手机产品界面设计</li>
-</ul>
-<p><strong>iOS游戏</strong></p>
-<ul>
-<li><a href="http://maniacdev.com/open-source-ios-game-list-source-code-to-games-in-the-app-store" target="_blank" rel="external">open-source-ios-game</a>：iOS游戏及其源代码</li>
-<li><a href="http://mobile.tutsplus.com/tutorials/iphone/learn-ios-game-development-by-example-10-projects-to-get-you-started/" target="_blank" rel="external">iOS游戏开发可以参考的10个实例</a>：（源代码都在github上）</li>
-<li><a href="http://www.learn-cocos2d.com/blog/" target="_blank" rel="external">Kobold2d引擎</a>：cocos2d引擎的变种，主要和ios,cocos2d,kobold2d开发有关</li>
-<li><a href="https://developers.facebook.com/docs/tutorials/ios-sdk-games/" target="_blank" rel="external">facebook的游戏教程</a></li>
-<li><a href="http://www.idevgames.com/articles" target="_blank" rel="external">idevgames</a>：游戏相关的教程</li>
-</ul>
-<p>暂时统计了这么多，还有好多优秀的网站等待我们挖掘，当然有好的网站也希望可以多互相分享，此处持续添加中······。</p>
-<p>总体感觉，国外的网站并不一定比国内的好用，比如objc.io已经有了国内版。外国网站对于英语也是一种挑战，不过技术就是如此，想更上一层，总要比他人更努力一些。</p>
-<p>PS：读文章固然可以增长我们的见识，但别人的总归是别人的，只有内化成自己的，才不至于白费光阴。写博客，开源组件，都是很好的锻炼。要对得起您耗费的时间。时间不会辜负尊重它的人的，与君共勉！</p>
-<h4 id="无法访问国外网站怎么办？"><a href="#无法访问国外网站怎么办？" class="headerlink" title="无法访问国外网站怎么办？"></a>无法访问国外网站怎么办？</h4><ul>
-<li><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">hosts</a>：最新可用的google hosts文件</li>
-</ul>
-<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h5><p>请出门左拐，购买付费！世界变得无比简单。</p>
+<p><a href="http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental" target="_blank" rel="external">NavigationExperimental</a>(<a href="http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental)的使用：" target="_blank" rel="external">http://facebook.github.io/react-native/releases/0.32/docs/navigation.html#navigationexperimental)的使用：</a><br>实现方案可参考<a href="https://rnplay.org/apps/nT-EnA" target="_blank" rel="external">此处</a>(<a href="https://rnplay.org/apps/nT-EnA)。" target="_blank" rel="external">https://rnplay.org/apps/nT-EnA)。</a></p>
+<p>具体使用也可以看<a href="https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html" target="_blank" rel="external">这里</a>(<a href="https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html" target="_blank" rel="external">https://www.zfanw.com/blog/react-native-navigator-experimental-usage.html</a>).</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-3c800f024a2bb20f.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+      &lt;h4 id=&quot;安装入门&quot;&gt;&lt;a href=&quot;#安装入门&quot; class=&quot;headerlink&quot; title=&quot;安装入门&quot;&gt;&lt;/a&gt;安装入门&lt;/h4&gt;&lt;p&gt;安装入门可以参考：&lt;a href=&quot;http://reactnative.cn/docs/0.31/tutorial.htm
     
     </summary>
     
     
-      <category term="helper" scheme="https://dangdangfeng.github.io/tags/helper/"/>
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10道经典的iOS面试题</title>
+    <link href="https://dangdangfeng.github.io/2015/09/11/10%E9%81%93%E7%BB%8F%E5%85%B8%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>https://dangdangfeng.github.io/2015/09/11/10道经典的iOS面试题/</id>
+    <published>2015-09-11T15:00:36.000Z</published>
+    <updated>2016-08-31T15:07:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于众所周知的原因，最近的移动端开发有点供大于求，鉴于当前残酷的商业现状，向往年那样的需求量也不大可能，尤其是15年B和A都停止了社招工作，但是现在的大厂都不招人了吗？显然，那也未必，需求总是有的，不过是需求有了限制。</p>
+<p>一般接到面试邀请，公司已经默认您基本达到了他们的要求，要么学历好，要么经历好。互联网公司都是极其有效率的，虽然各公司各部门的流程不一定相同，但大概都是一样的，如果遇到合适的优秀求职者都是先拿下再说，流程慢慢走，因为优秀的程序员都是转瞬即逝（当然只是社招）。一般都会有一面二面三面（T有五面，A四面），J的有些部门就是一二三一遍过，或者至少是一面二面，当然前提是技术面表现不错。</p>
+<p>公司一般考察三点：人是否聪明？基础是否扎实？知识是否有深度和广度？技术面一般会遇到偏理论型的或实战型的，理论型的会着重在基础知识，原理的理解，算法，系统优化等方面深入；实战型的或许有白板编程，大概就是“Talk is easy, show me the code”。因为公司已经默认面试者拥有了相关知识，所以深度和广度是有的，面试下来也不轻松。</p>
+<h4 id="一些偏理论的问题"><a href="#一些偏理论的问题" class="headerlink" title="一些偏理论的问题"></a>一些偏理论的问题</h4><ol>
+<li><p>什么是OC</p>
+</li>
+<li><p>什么是面向对象</p>
+</li>
+<li><p>OC和传统的面向对象语言有什么区别和优势</p>
+</li>
+<li><p>HTTP协议及HTTPS，能否保持长连接等</p>
+</li>
+<li><p>TCP/IP协议</p>
+</li>
+<li><p>设计模式</p>
+</li>
+<li><p>算法及数据结构</p>
+</li>
+<li><p>系统优化及界面优化等</p>
+</li>
+<li><p>block及delegate的深入理解</p>
+</li>
+<li><p>数据库相关</p>
+</li>
+</ol>
+<p>抛出问题不是我们的风格，试着深入浅出的解决这些问题才是我们的目的。当然这些不会是全部，只是限于篇幅，本次先谈这些。更加详细的，我们下篇再谈。</p>
+<h4 id="深入浅出，详细解答"><a href="#深入浅出，详细解答" class="headerlink" title="深入浅出，详细解答"></a>深入浅出，详细解答</h4><p><strong>1. 什么是OC</strong></p>
+<p>OC语言在c语言的基础上，增加了一层最小的面向对象语法，完全兼容C语言，在OC代码中，可以混用c，甚至是c++代码。可以使用OC开发mac osx平台和iOS平台的应用程序。拓展名：c语言.c  OC语言.m  兼容C++.mm。</p>
+<p>为了与c语言的关键字区分开来,基本上所有的关键字都是以@开头。基本类型：5种，增加了布尔类型，BOOL类型与其他类型的用法一致，BOOL类型的本质是char类型的，定义如下：</p>
+<pre><code>Typedef signed char BOOL
+</code></pre><p>宏定义:</p>
+<pre><code>#define YES  (BOOL)1
+#define NO   (BOOL)0
+</code></pre><p>布尔类型的输出一般当做整数来用。</p>
+<p>在OC中Nil相当于是null,也就是0（具体可以参考之前写的<a href="http://www.jianshu.com/p/9c0310845286" target="_blank" rel="external">《您所不知道的nil/Nil/NULL/NSNull的空与空》</a>）。程序编译连接过程为：源文件（.m）—(编译)—-&gt;目标文件（.0）—–（链接）—-&gt;可执行文件（.out）。</p>
+<p>每个对象内部都默认有一个isa指针指向这个对象所使用的类。isa是对象中的隐藏指针，指向创建这个对象的类。OC做为一门面向对象语言，具有面向对象的语言特性，如封装、继承、多态。也具有静态语言的特性(如C++)，又有动态语言的效率(动态绑定、动态加载等)。</p>
+<p>Apple公司领导着Objective-C语言的发展与维护，包括Objective-C运行时，Cocoa/Cocoa-Touch框架以及Objective-C语言的编译器。看上去Objective-C就如同以下一个云状图： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-7e363cd917357952.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="云状图"></p>
+<p>这个问题很大，可谈的东西很多，当面试者问这样的问题时，其实他不单单是想知道这个语言的一些知识点，除此之外是想了解您对OC的理解深度，更深的一层是想与面试者产生共鸣。基本上一个问题下来，面试者的水分就能挤出不少。这是不是一个好的问题，我不知道，但这确实是一个会被问到的问题。</p>
+<p><strong>2. 什么是面向对象</strong></p>
+<p>OC语言是面向对象的，c语言是面向过程的，面向对象和面向过程只是解决问题的两种思考方式，面向过程关注的是解决问题涉及的步骤，面向对象关注的是设计能够实现解决问题所需功能的类。</p>
+<p>面向对象的编程方法具有四个基本特征：抽象，封装，继承和多态。</p>
+<p>抽象是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象包括两个方面，一是过程抽象，二是数据抽象。过程抽象是指任何一个明确定义功能的操作都可被使用者看作单个的实体看待，尽管这个操作实际上可能由一系列更低级的操作来完成。数据抽象定义了数据类型和施加于该类型对象上的操作，并限定了对象的值只能通过使用这些操作修改和观察。</p>
+<p>继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。继承性很好的解决了软件的可重用性问题。</p>
+<p>封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。一旦定义了一个对象的特性，则有必要决定这些特性的可见性，封装保证了模块具有较好的独立性，使得程序维护修改较为容易。对应用程序的修改仅限于类的内部，因而可以将应用程序修改带来的影响减少到最低限度。</p>
+<p>多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。<strong>多态是依赖于接口的</strong>。</p>
+<p>但是，在C++使用OOP的编程方式在一些场合未能提供最高性能。现在内存存取成为计算机性能的重要瓶颈，这个问题在C++设计OOP编程范式的实现方式之初并未能考虑周全。现时的OOP编程有可能不缓存友好（cache friendly），导致有时候并不能发挥硬件最佳性能。大概就是过度封装，多态增加cache miss的可能性，数据存取时导致载入缓存的浪费等。</p>
+<p><strong>3. OC和传统的面向对象语言有什么区别和优势</strong></p>
+<p>OC中方法的实现只能写在@implementation··@end中，对象方法的声明只能写在@interface···@end中间；对象方法都以-号开头，类方法都以+号开头；对象方法只能由对象来调用，类方法只能由类来调用，不能当做函数一样调用。函数属于整个文件，可以写在文件中的任何位置，包括@implementation··@end中，但写在@interface···@end会无法识别，函数的声明可以在main函数内部也可以在main函数外部。对象方法归类\对象所有；函数调用不依赖于对象；函数内部不能直接通过成员变量名访问对象的成员变量。</p>
+<p>Objective-C的运行时是动态的，它能让你在运行时为类添加方法或者去除方法以及使用反射。 OC的动态特性表现为了三个方面：动态类型、动态绑定、动态加载。之所以叫做动态，是因为必须到运行时(run time)才会做一些事情。</p>
+<p>动态类型，说简单点就是id类型。动态类型是跟静态类型相对的。像内置的明确的基本类型都属于静态类型(int、NSString等)。静态类型在编译的时候就能被识别出来。所以，若程序发生了类型不对应，编译器就会发出警告。而动态类型就编译器编译的时候是不能被识别的，要等到运行时(run time)，即程序运行的时候才会根据语境来识别。所以这里面就有两个概念要分清：编译时跟运行时。</p>
+<p>动态绑定(dynamic binding)需要用到@selector/SEL。先来看看“函数”，对于其他一些静态语言，比如c++,一般在编译的时候就已经将要调用的函数的函数签名都告诉编译器了。静态的，不能改变。而在OC中，其实是没有函数的概念的，我们叫“消息机制”，所谓的函数调用就是给对象发送一条消息。这时，动态绑定的特性就来了。OC可以先跳过编译，到运行的时候才动态地添加函数调用，在运行时才决定要调用什么方法，需要传什么参数进去。这就是动态绑定，要实现他就必须用SEL变量绑定一个方法。最终形成的这个SEL变量就代表一个方法的引用。这里要注意一点：<strong>SEL并不是C里面的函数指针</strong>，虽然很像，但真心不是函数指针。SEL变量只是一个整数，他是该方法的ID。以前的函数调用，是根据函数名，也就是字符串去查找函数体。但现在，我们是根据一个ID整数来查找方法，整数的查找字自然要比字符串的查找快得多！所以，动态绑定的特定不仅方便，而且效率更高。</p>
+<p>动态加载就是根据需求动态地加载资源，在运行时加载新类。在运行时创建一个新类,只需要3步:<br>1、为 class pair分配存储空间 ,使用 objc_allocateClassPair函数<br>2、增加需要的方法使用class_addMethod函数,增加实例变量用class_addIvar<br>3 、用objc_registerClassPair函数注册这个类,以便它能被别人使用。</p>
+<blockquote>
+<p>使用这些函数请引#import <objc runtime.h=""></objc></p>
+</blockquote>
+<p><strong>4. HTTP协议及HTTPS，能否保持长连接等</strong></p>
+<p>HTTP协议是客户端最常用到的协议了，HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。HTTPS是以安全为目标的HTTP通道，是HTTP的安全版。 在HTTP下加入SSL层。 HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息。http的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议。</p>
+<p>Request和Response的格式：</p>
+<pre><code>// 请求
+GET / HTTP/1.1
+
+Host:xxx.xxxx.com
+
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.10) Gecko/2016042316 Firefox/3.0.10
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+
+Accept-Language: en-us,en;q=0.5
+
+Accept-Encoding: gzip,deflate
+
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+
+Keep-Alive: 300
+
+Connection: keep-alive
+
+If-Modified-Since: Mon, 25 May 2016 03:19:18 GMT
+
+
+//响应
+HTTP/1.1 200 OK
+
+Cache-Control: private, max-age=30
+
+Content-Type: text/html; charset=utf-8
+
+Content-Encoding: gzip
+
+Expires: Mon, 25 May 2016 03:20:33 GMT
+
+Last-Modified: Mon, 25 May 2016 03:20:03 GMT
+
+Vary: Accept-Encoding
+
+Server: Microsoft-IIS/7.0
+
+X-AspNet-Version: 2.0.50727
+
+X-Powered-By: ASP.NET
+
+Date: Mon, 25 May 2016 03:20:02 GMT
+
+Content-Length: 12173
+
+消息体的内容（略）
+</code></pre><p>HTTP/1.1的默认模式使用带流水线的持久连接。这种情况下，HTTP客户每碰到一个引用就立即发出一个请求，因而HTTP客户可以一个接一个紧挨着发出各个引用对象的请求。服务器收到这些请求后，也可以一个接一个紧挨着发出各个对象。如果所有的请求和响应都是紧挨着发送的，那么所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)。另外，带流水线的持久连接中服务器空等请求的时间比较少。与非持久连接相比，持久连接(不论是否带流水线)除降低了1个RTT的响应延迟外，缓启动延迟也比较小。其原因在于既然各个对象使用同一个TCP连接，服务器发出第一个对象后就不必再以一开始的缓慢速率发送后续对象。相反，服务器可以按照第一个对象发送完毕时的速率开始发送下一个对象。</p>
+<p>参考书目：<a href="http://item.jd.com/11056556.html" target="_blank" rel="external">《HTTP权威指南》</a></p>
+<p><strong>5. TCP/IP协议</strong></p>
+<p>此处参考之前写的文章<a href="http://www.jianshu.com/p/3e4f3de18e3b" target="_blank" rel="external">《关于iOS socket都在这里了》</a> 。里面涵盖了常用到的TCP/IP协议的一些原理型知识。</p>
+<p>参考书目：<a href="http://item.jd.com/11311644.html" target="_blank" rel="external">《TCP/IP详解》</a></p>
+<p><strong>6. 设计模式</strong><br>代理模式：当一个类的某些功能需要由别的类来实现，但是又不确定具体会是哪个类实现，即常用的delegate。优势是解耦合，敏捷原则是开放-封闭原则。</p>
+<p>观察者模式：是一种通知方式，不关心谁去接收，只负责发布信息，即Notification通知中心、KVO。可以解耦合，实现的敏捷原则是接口隔离原则，开放-封闭原则。</p>
+<p>单例模式：确保程序运行期某个类，只有一份实例，用于进行资源共享控制，使用简单，延时求值，易于跨模块。实现的敏捷原则是单一职责原则，例如[UIApplication sharedApplication]。</p>
+<p>策略模式：定义算法族，封装起来，使他们之间可以相互替换，使算法的变化独立于使用算法的用户，如排序算法，NSArray的sortedArrayUsingSelector等，<strong>controller对view的实现也是一种策略模式</strong>。实现了接口隔离原则；多用组合，少用继承；针对接口编程，而非实现。</p>
+<p>工厂模式：工厂方式创建类的实例，多与proxy模式配合，创建可替换代理类。优势是易于替换，面向抽象编程，工厂模式是抽象工厂的一部分，抽象工厂的实现依赖于具体工厂，工厂模式产生特定的品类，而抽象工厂可以产生很多不同的品类。实现了DIP依赖倒置原则。</p>
+<p>参考书目：<a href="http://item.jd.com/10871643.html" target="_blank" rel="external">《Objective-C编程之道：iOS设计模式解析》</a><br><strong>7. 算法及数据结构</strong></p>
+<p>技术运用得多熟练，决定你的当下水准，基础打得多好，决定你的发展上限。</p>
+<p>最经典的就是反转二叉树了：</p>
+<pre><code>+ (BinaryTreeNode *)invertBinaryTree:(BinaryTreeNode *)rootNode {
+if (!rootNode) {  return nil; }
+if (!rootNode.leftNode &amp;&amp; !rootNode.rightNode) {  return rootNode; }
+NSMutableArray *queueArray = [NSMutableArray array]; //数组当成队列
+[queueArray addObject:rootNode]; //压入根节点
+while (queueArray.count &gt; 0) {
+BinaryTreeNode *node = [queueArray firstObject];
+[queueArray removeObjectAtIndex:0]; //弹出最前面的节点，仿照队列先进先出原则
+BinaryTreeNode *pLeft = node.leftNode;
+node.leftNode = node.rightNode;
+node.rightNode = pLeft;
+
+if (node.leftNode) {
+    [queueArray addObject:node.leftNode];
+}
+if (node.rightNode) {
+    [queueArray addObject:node.rightNode];
+}
+
+}
+
+return rootNode;
+}
+</code></pre><p>IOS常用数据结构有NSArray、NSMutableArray、NSDictionary、NSMutableDictionary等，这些基础知识就不细说了。不过，单向链表和双向链表关于插入和查询的效率问题还是要了解一些的。单向链表存储结构的节点中只有一个指向直接后继的指针域，双向链表的节点中有两个指针域，其中一个指向直接后继，另一个指向直接前驱。</p>
+<p>单向链表增加删除节点简单，遍历时候不会死循环（双向也不会死循环，循环链表忘了进行控制的话很容易进入死循环）。缺点是只能从头到尾遍历。只能找到后继，无法找到前驱，也就是只能前进。</p>
+<p>双向链表可以找到前驱和后继，可进可退，缺点是增加删除节点复杂（其实就复杂一点点）</p>
+<p>参考书目：<a href="http://item.jd.com/11098789.html" target="_blank" rel="external">《算法 第4版》</a><br><strong>8. 系统优化及界面优化等</strong></p>
+<p>此处可以参考之前的文章<a href="http://www.jianshu.com/p/f4adce56166f" target="_blank" rel="external">《如何编写稳定流畅的iOS移动端应用》</a>,<a href="http://www.jianshu.com/p/d74398c50fe1" target="_blank" rel="external">《深刻理解移动端优化之离屏渲染》</a>,<a href="http://www.jianshu.com/p/393920b15539" target="_blank" rel="external">《不要过多的或者低效的使用NSNotification》</a>,这几篇文章对某些关键点已经尽力讲清楚了，篇幅有限，这里就不再复述了。</p>
+<p><strong>9. block及delegate的深入理解</strong></p>
+<p>此处可以参考我之前写的<a href="http://www.jianshu.com/p/bbccac805641" target="_blank" rel="external">block和delegate傻傻分不清楚</a>，自认为已经尽力讲清楚了一些原理，希望对您有所帮助。</p>
+<p><strong>10. 数据库相关</strong></p>
+<p>表面上SQLite将数据分为以下几种类型：integer : 整数、real : 实数（浮点数）、text : 文本字符串、blob : 二进制数据，比如文件，图片之类的。实际上SQLite是无类型的。即不管你在创表时指定的字段类型是什么，存储是依然可以存储任意类型的数据。而且在创表时也可以不指定字段类型。SQLite之所以设置类型就是为了良好的编程规范和方便开发人员交流，所以平时在使用时最好设置正确的字段类型！主键必须设置成integer。</p>
+<p>在一般开发过程中，使用的都是第三方开源库 <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB</a>，封装了基本的c语言方法，使得我们在使用时更加容易理解，提高开发效率。FMDB有三个主要的类：FMDatabase,一个FMDatabase对象就代表一个单独的SQLite数据库，用来执行SQL语句。FMResultSet，使用FMDatabase执行查询后的结果集。FMDatabaseQueue，用于在多线程中执行多个查询或更新，它是线程安全的。具体操作请移步gitHub。</p>
+<hr>
+<p>自认为问的太大的问题不是好问题，然而这些问题在大厂里确实是存在的。最后，您也可以参考我之前写的三篇文章，<a href="http://www.jianshu.com/p/8f16613861fa" target="_blank" rel="external">《那些著名或非著名的iOS面试题－前编》</a>,<a href="http://www.jianshu.com/p/7214f164141b" target="_blank" rel="external">《那些著名或非著名的iOS面试题－中编》</a>,<a href="http://www.jianshu.com/p/5178204a58d6" target="_blank" rel="external">《那些著名或非著名的iOS面试题－后编》</a>。这些从术的方面详细的介绍了一些iOS面试中常见的问题，当然在追求“术“的同时也不能忽略了”道“。</p>
+<p>不论面试什么公司，态度一定要好，我不止一次的听同事说起“某某面试者太XX了”，虽然做技术的有些孤傲可以理解，但毕竟是工作嘛，工作时还是要一团和气。面试着装上自然就好，如果不是高级管理岗，西装革履的也没必要。怀着一颗阳光的心去拥抱一切吧。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-d7ab3168fa9a5a0c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="看起来好累"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于众所周知的原因，最近的移动端开发有点供大于求，鉴于当前残酷的商业现状，向往年那样的需求量也不大可能，尤其是15年B和A都停止了社招工作，但是现在的大厂都不招人了吗？显然，那也未必，需求总是有的，不过是需求有了限制。&lt;/p&gt;
+&lt;p&gt;一般接到面试邀请，公司已经默认您基本达到
+    
+    </summary>
+    
+    
+      <category term="Interview" scheme="https://dangdangfeng.github.io/tags/Interview/"/>
     
   </entry>
   
   <entry>
     <title>如何幽雅的谈论Hybrid App</title>
-    <link href="https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E5%B9%BD%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHybrid-App/"/>
-    <id>https://dangdangfeng.github.io/2016/08/30/如何幽雅的谈论Hybrid-App/</id>
-    <published>2016-08-30T15:40:19.000Z</published>
-    <updated>2016-08-30T15:42:03.000Z</updated>
+    <link href="https://dangdangfeng.github.io/2015/08/21/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHybrid-App/"/>
+    <id>https://dangdangfeng.github.io/2015/08/21/如何优雅的谈论Hybrid-App/</id>
+    <published>2015-08-21T15:40:19.000Z</published>
+    <updated>2016-08-31T14:50:51.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>重要的并不是我们提供的信息量有多大，而是我们能否给他们提供真正需要的信息。             -《瞬间之美》</p>
@@ -254,194 +437,329 @@ registry = http://registry.cnpmjs.org
   </entry>
   
   <entry>
-    <title>如何优雅的谈论源码</title>
-    <link href="https://dangdangfeng.github.io/2016/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BA%E6%BA%90%E7%A0%81/"/>
-    <id>https://dangdangfeng.github.io/2016/08/30/如何优雅的谈论源码/</id>
-    <published>2016-08-30T15:38:48.000Z</published>
-    <updated>2016-08-30T15:39:49.000Z</updated>
+    <title>谈谈C的性能特点</title>
+    <link href="https://dangdangfeng.github.io/2015/07/01/%E8%B0%88%E8%B0%88C%E7%9A%84%E6%80%A7%E8%83%BD%E7%89%B9%E7%82%B9/"/>
+    <id>https://dangdangfeng.github.io/2015/07/01/谈谈C的性能特点/</id>
+    <published>2015-06-30T16:48:11.000Z</published>
+    <updated>2016-08-31T14:51:23.000Z</updated>
     
-    <content type="html"><![CDATA[<p>本文主要涉及一下几点：</p>
-<ul>
-<li>SDWebImage 原理</li>
-<li>SDWebImage 使用</li>
-<li>SDWebImage 源码分析</li>
-<li>一些思考</li>
-</ul>
-<hr>
-<h4 id="SDWebImage-加载图片原理"><a href="#SDWebImage-加载图片原理" class="headerlink" title="SDWebImage 加载图片原理"></a>SDWebImage 加载图片原理</h4><p><a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">具体源码分析</a>见GIT。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6971e44291c18bb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目前标注的类"></p>
-<p>通过标注的类，看懂应该没问题了。</p>
-<p>SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCache每次都要把缓存的raw  data 再转化为UIImage，就带来了数据处理和内存方面的更多操作。SDWebImage的缓存由SDImageCache类来实现，这是一个单例类，该类负责处理内存缓存及一个可选的磁盘缓存，其中磁盘缓存的写操作是异步的，这样就不会对UI操作造成影响。此外还提供了若干属性和接口来配置和操作缓存对象。包含以下功能：</p>
-<p>1.提供UIImageView的一个分类，以支持网络图片的加载与缓存管理</p>
-<p>2.一个异步的图片加载器</p>
-<p>3.一个异步的内存+磁盘图片缓存</p>
-<p>4.支持GIF图片</p>
-<p>5.支持WebP图片</p>
-<p>6.后台图片解压缩处理</p>
-<p>7.确保同一个URL的图片不被下载多次</p>
-<p>8.确保虚假的URL不会被反复加载</p>
-<p>9.确保下载及缓存时，主线程不被阻塞</p>
-<p><strong>SDWebImage底层实现原理：</strong></p>
-<p>SDWebImage有沙盒缓存机制，主要由三块组成</p>
-<p>1.内存图片缓存</p>
-<p>2.内存操作缓存</p>
-<p>3.磁盘沙盒缓存</p>
-<p>SDWebImage的大部分工作是由缓存对象SDImageCache和异步下载器管理对象SDWebImageManager来完成的。SDWebImage的图片下载是由SDWebImageDownloader这个类来实现的，它是一个异步下载管理器，下载过程中增加了对图片加载做了优化的处理。而真正实现图片下载的是自定义的一个Operation操作，将该操作加入到下载管理器的操作队列downloadQueue中，Operation操作依赖系统提供的NSURLConnection类实现图片的下载。</p>
-<p>SDWebImage提供了对图片缓存的支持，而该功能是由SDImageCache类来完成的。该类负责处理内存缓存及一个可选的磁盘缓存。内存缓存的处理是使用NSCache对象来实现的。NSCache是一个类似于集合的容器。它存储key-value对，这一点类似于NSDictionary类，用搜索文件系统的方式做管理，文件替换方式是以时间为单位。我们通常用使用缓存来临时存储短时间使用但创建昂贵的对象。重用这些对象可以优化性能，因为它们的值不需要重新计算。另外一方面，这些对象对于程序来说不是紧要的，在内存紧张时会被丢弃。</p>
-<p>磁盘缓存的处理则是使用NSFileManager对象来实现的。图片存储的位置是位于Cache文件夹。另外，SDImageCache还定义了一个串行队列，来异步存储图片。</p>
-<p>当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。使用Decoder 是因为UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，<br>所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。<br>为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。是典型的空间换时间的做法。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8c5e61bb0b11d4e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>SDWebImage的原理</strong></p>
-<p>1.使用 </p>
-<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options; 
-</code></pre><p>会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
-<p>2.进入  SDWebImageManager</p>
-<pre><code>-downloadWithURL:options:progress:completed:
-</code></pre><p>交给 SDImageCache 从缓存查找图片是否已经下载。</p>
-<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，取缓存，没有从<code>- (UIImage <em>)diskImageForKey:(NSString </em>)key</code>去磁盘缓存中去查找，根据 URLKey 在硬盘缓存目录下尝试读取图片文件。在磁盘缓存中找到后，同时更新置内存缓存中（如果空闲内存过小，会先清空内存缓存），有回调则调用doneBlock回调。</p>
-<p>4.找到了就从SDWebImageQueryCompletedBlock到 UIImageView+WebCache 等前端展示图片。</p>
-<p>5.如果从硬盘缓存目录读取不到图片，说明不存在该图片，需要下载图片，共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。 图片下载由 NSURLSession 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
-<p>6.<code>URLSession:didReceiveData:</code> 中利用 ImageIO 做了按图片下载进度加载效果。数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
-<p>7.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
-<p>8.在主线程 SDWebImageDownloaderCompletedBlock里处理解码完成后的操作。回调给需要的地方展示图片。</p>
-<p>9.从SDWebImageDownloaderProgressBlock 回调给 SDWebImageManager 告知图片下载信息。</p>
-<p>10.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
-<p>11.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
-<p>12.SDWebImage 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache方便使用。 SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-bf7c86e7bd12b9c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h4 id="SDWebImage-使用"><a href="#SDWebImage-使用" class="headerlink" title="SDWebImage 使用"></a>SDWebImage 使用</h4><p><strong>常用到的对象：</strong></p>
-<p>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调。</p>
-<p>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。</p>
-<p>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。</p>
-<p>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
-<p>5、SDWebImageDecoder，异步对图像进行了一次解压</p>
-<p>使用：</p>
-<pre><code>[self.imageView sd_setImageWithURL:self.imageURL
-                      placeholderImage:nil
-                               options:SDWebImageProgressiveDownload
-                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                  ...
-                              }
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 ...
-                             }];
-</code></pre><p>调用setImageWithURL:方法的时候，SDWebImage自动做很多事，当你需要在某一具体时刻做事情的时候，你可以覆盖这些方法。比如在下载某个图片的过程中要响应一个事件，就覆盖这个方法：</p>
-<pre><code>//这个方法是下载imagePath2的时候响应
-SDWebImageManager *manager = [SDWebImageManager sharedManager];
-
-[manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-
-    NSLog(@&quot;显示当前进度&quot;);
-
-} completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-
-    NSLog(@&quot;下载完成&quot;);
-}];
-</code></pre><p><strong>基本代码：</strong></p>
-<p>使用SDWebImageManager类：可以进行一些异步加载的工作。</p>
-<pre><code>SDWebImageManager *manager = [SDWebImageManager sharedManager];
-UIImage *cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
-if (cachedImage) {
-  // 如果Cache命中，则直接利用缓存的图片进行有关操作
-  // Use the cached image immediatly
-} else {
-  // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
-  // Start an async download
- [manager downloadWithURL:url delegate:self];
-}
-</code></pre><p>当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。</p>
-<pre><code>// 当下载完成后，调用回调方法，使下载的图片显示
-- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
-// Do something with the downloaded image
-}
-</code></pre><p><strong>独立的异步图像下载</strong></p>
-<p>可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。</p>
-<pre><code>downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
-</code></pre><p>这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</p>
-<p><strong>独立的异步图像缓存</strong></p>
-<p>SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。</p>
-<pre><code>UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
-</code></pre><p>存储一个图像到缓存是使用方法storeImage: forKey:</p>
-<pre><code>[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
-</code></pre><p>默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值<br>来替代。</p>
-<h4 id="SDWebImage-源码分析示例"><a href="#SDWebImage-源码分析示例" class="headerlink" title="SDWebImage 源码分析示例"></a>SDWebImage 源码分析示例</h4><p>SDWebImageDownloader类</p>
-<p>SDWebImageDownloaderOptions定义：</p>
-<pre><code>typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
-SDWebImageDownloaderLowPriority = 1 &lt;&lt; 0,
-SDWebImageDownloaderProgressiveDownload = 1 &lt;&lt; 1,
-
-// 默认情况下请求不使用NSURLCache，如果设置该选项，则以默认的缓存策略来使用NSURLCache
-SDWebImageDownloaderUseNSURLCache = 1 &lt;&lt; 2,
-
-// 如果从NSURLCache缓存中读取图片，则使用nil作为参数来调用完成block
-SDWebImageDownloaderIgnoreCachedResponse = 1 &lt;&lt; 3,
-
-// 在iOS 4+系统上，允许程序进入后台后继续下载图片。该操作通过向系统申请额外的时间来完成后台下载。如果后台任务终止，则操作会被取消
-SDWebImageDownloaderContinueInBackground = 1 &lt;&lt; 4,
-
-// 通过设置NSMutableURLRequest.HTTPShouldHandleCookies = YES来处理存储在NSHTTPCookieStore中的cookie
-SDWebImageDownloaderHandleCookies = 1 &lt;&lt; 5,
-
-// 允许不受信任的SSL证书。主要用于测试目的。
-SDWebImageDownloaderAllowInvalidSSLCertificates = 1 &lt;&lt; 6,
-
-// 将图片下载放到高优先级队列中
-SDWebImageDownloaderHighPriority = 1 &lt;&lt; 7,
-};
-</code></pre><p>下载顺序：</p>
-<pre><code>typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
-// 以队列的方式，按照先进先出的顺序下载。这是默认的下载顺序
-SDWebImageDownloaderFIFOExecutionOrder,
-// 以栈的方式，按照后进先出的顺序下载。
-SDWebImageDownloaderLIFOExecutionOrder
-};
-</code></pre><p>每个下载操作都定义了回调操作，如下载进度回调，下载完成回调，头部过滤等，这些回调操作是以block形式来呈现；每个下载操作的下载进度回调和下载完成回调，这两个回调稍后将保存在下载管理器的URLCallbacks字典中，key为URL，value为一个数组，数组里面又存放一个保存了下载进度回调和完成回调代码块的字典。这个字典数组同时也保证了同一张图片只会被下载一次。</p>
-<pre><code>// 下载进度
-typedef void(^SDWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger expectedSize);
-// 下载完成
-typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
-// Header过滤
-typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
-</code></pre><p>为了保证URLCallbacks操作(添加、删除)的线程安全性，SDWebImageDownloader将这些操作作为一个个任务放到barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性。</p>
-<pre><code>- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
-...
-// 1. 以dispatch_barrier_sync操作来保证同一时间只有一个线程能对URLCallbacks进行操作
-dispatch_barrier_sync(self.barrierQueue, ^{
-...
-// 2. 处理同一URL的同步下载请求的单个下载
-});
-}
-</code></pre><p>下载请求的管理都是放在downloadImageWithURL:options:progress:completed:方法里面来处理的，该方法调用了上面所提到的addProgressCallback:andCompletedBlock:forURL:createCallback:方法来将请求的信息存入管理器中，同时在创建回调的block中创建新的操作，配置之后将其放入downloadQueue操作队列中，最后方法返回新创建的操作。</p>
-<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url options:(SDWebImageDownloaderOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageDownloaderCompletedBlock)completedBlock {
-...
-[self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url createCallback:^{
-...
-}
-</code></pre><p>下载操作的超时时间可以通过downloadTimeout属性来设置，默认值为15秒。</p>
-<p>SDWebImage定义了一个协议，即 SDWebImageOperation 作为图片下载操作的基础协议。它只声明了一个cancel方法，用于取消操作。每个图片的下载都是一个Operation操作。SDWebImage自定义了一个Operation类，即 SDWebImageDownloaderOperation ，它继承自NSOperation，并采用了SDWebImageOperation协议。除了继承而来的方法，该类只向外暴露了一个方法，initWithRequest:options:progress:completed:cancelled:。对于图片的下载，SDWebImageDownloaderOperation完全依赖于URL加载系统中的NSURLSession。具体看代码<a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">源码分析</a>.</p>
-<pre><code>- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-</code></pre><p>方法的主要任务是接收数据。每次接收到数据时，都会用现有的数据创建一个CGImageSourceRef对象以做处理。在首次获取到数据时(width+height==0)会从这些包含图像信息的数据中取出图像的长、宽、方向等信息以备使用。而后在图片下载完成之前，会使用CGImageSourceRef对象创建一个图片对象，经过缩放、解压缩操作后生成一个UIImage对象供完成回调使用。当然，在这个方法中还需要处理的就是进度信息。如果我们有设置进度回调的话，就调用这个进度回调以处理当前图片的下载进度。</p>
-<p>缩放操作可以查看SDWebImageCompat文件中的SDScaledImageForKey函数；解压缩操作可以查看SDWebImageDecoder文件+decodedImageWithImage方法。在下载完成或下载失败后，需要停止当前线程的run loop，清除连接，并抛出下载停止的通知。如果下载成功，则会处理完整的图片数据，对其进行适当的缩放与解压缩操作，以提供给完成回调使用。</p>
-<p>最重要是自己分析，看过的会忘，消化了才是自己的。学而不思则罔,思而不学则殆。每个人要了解自己的优缺点。有思考才有所得！</p>
-<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>我们应该把精力和时间投入在更值得学习的东西上。如果纯看代码而没有碰到这个场景就算看懂了也没法理解，学习的目的是为了实践，而不要为了原理而分析原理，这样就本末倒置了。对于广大程序员而言，做码农，通过低水平重复的劳动来创造价值的道路是永远不可能一劳永逸的，恰恰相反，是永劳一逸的！生产只能够惠及当下！事物的发展在于思考，可能每个人走的路径不一样，寻找到最适合自己的，坚持走下去。只要能肯定每天都是进步的，快慢又有什么关系呢。这是一个浮躁的社会，这个社会催生了无数可能，也许不是每个人都能做一辈子的程序员，但不要辜负你的时光。你之所以成为你，是因为你的时间，你的经历在哪里，你就在哪里。共勉！</p>
+    <content type="html"><![CDATA[<p>C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional language)，如Haskell,Lisp。函数式语言更像数学，命令式语言更接近人的思维。</p>
+<h4 id="C语言的特性"><a href="#C语言的特性" class="headerlink" title="C语言的特性"></a>C语言的特性</h4><p>C语言的典型特征是编译型语言(compiled language)（相对于解释型语言来说）、命令式的、人工管理内存 。对于编译型语言，程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接运行编译的结果就行了，<strong>因此效率高</strong>。 以此相对，解释型语言程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次，因此<strong>效率比较低</strong>。由此，当涉及到速度，内存，低层次特性(low-level features)如：移动stack pointer等常会使用C语言。</p>
+<p>从内存的角度思考C语言，相对于其他语言，<strong>汇编语言直接操作内存；C、C++访问内存；Java,C#,Scheme/LISP,ML使用的是内存自动管理机制</strong>。 C语言通过堆(heap)和栈（stack）访问的内存，C函数将会分配到棧中，函数在被调用时进棧(pushed on to stack)， 函数在返回时出棧(popefd off the stack)，函数能访问当前棧顶部以下的所有内存；堆是一块儿用于动态内存分配的内存区域，可以把它想像称为一个巨大的数组 ，通过指针(pointer)来访问，如果操作系统允许，整个程序都能访问堆。C语言人工内存管理目的是允许程序能够分配内存用于当前的使用 ；当程序执行完后，能够释放内存，用于重新分配 ，C语言的标准类库中有malloc和free两个函数支持内存管理 。从内存的层面，C语言虽然使用起来更复杂些，但在可操作性上更好一些，毕竟自动内存管理，内存的释放不是立即的。</p>
+<p>C语言比起其他的高级语言来说，更接近计算机，也就是说，它介于高级语言和汇编语言之间，通常来说比其他高级语言执行效率更高一点。当然，C语言的函数化特点（即所有C程序都是由函数构成）和灵活的语法也是吸引程序设计者的地方。</p>
+<h4 id="C语言的优势"><a href="#C语言的优势" class="headerlink" title="C语言的优势"></a>C语言的优势</h4><p>C语言一共只有32个关键字，9种控制语句，程序书写形式自由，区分大小写。把高级语言的基本结构和语句与低级语言的实用性结合起来。C语言允许直接访问物理地址，可以直接对硬件进行操作，因此它既具有高级语言的功能，又具有低级语言的许多功能，C语言可以像汇编语言一样对<strong>位、字节和地址</strong>进行操作，而这三者是计算机最基本的工作单元，可用来写系统软件，又可用来开发应用软件，已成为一种通用程序设计语言。另外C语言具有强大的图形功能，支持多种显示器和驱动器。且计算功能、逻辑判断功能强大。    </p>
+<p>C语言的运算符包含的范围很广泛，共有34种运算符。C语言把括号、赋值、强制类型转换等都作为运算符处理。从而使C语言的运算类型极其丰富，表达式类型多样化。灵活使用各种运算符可以实现在其它高级语言中难以实现的运算。 C语言的数据类型有：整型、实型、字符型、数组类型、指针类型、结构体类型、共用体类型等。能用来实现各种复杂的数据结构的运算。并引入了指针概念，使程序效率更高。    </p>
+<p>C语言生成目标代码质量高，程序执行效率高，C语言描述问题比汇编语言迅速，工作量小、可读性好，易于调试、修改和移植，而代码质量与汇编语言相当。C语言一般只比汇编程序生成的目标代码效率低10%～20%。可移植性好，C语言在不同机器上的C编译程序，86%的代码是公共的，所以C语言的编译程序便于移植。在一个环境上用C语言编写的程序，不改动或稍加改动，就可移植到另一个完全不同的环境中运行。    </p>
+<h4 id="当前新发明的语言Swift的比较"><a href="#当前新发明的语言Swift的比较" class="headerlink" title="当前新发明的语言Swift的比较"></a>当前新发明的语言Swift的比较</h4><p>Swift包含了很多现代语言特性尤其是从一些脚本语言如Javascript/Ruby中汲取了营养，此外苹果发布Swift时，使用特别选用的一些例子来宣称Swift性能对于Ojbective C的大幅提升（40~50%），如复杂对象排序等。但是开发者实际测试出来的情况却相反。实际数据显示，Swift在简单循环、递增、赋值、数组扩展、字符串拼接上性能远不如Objective C。可能的一个解释是Swift使用类classes，总在执行ARC（Auto Referrence Count），而Objective C则更多使用C风格的数据类型。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ef4897116759a68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C"></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;本文主要涉及一下几点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SDWebImage 原理&lt;/li&gt;
-&lt;li&gt;SDWebImage 使用&lt;/li&gt;
-&lt;li&gt;SDWebImage 源码分析&lt;/li&gt;
-&lt;li&gt;一些思考&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;SDWebImage-加
+      &lt;p&gt;C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional lang
     
     </summary>
     
     
-      <category term="source" scheme="https://dangdangfeng.github.io/tags/source/"/>
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS开发的奇技淫巧</title>
+    <link href="https://dangdangfeng.github.io/2015/03/25/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
+    <id>https://dangdangfeng.github.io/2015/03/25/iOS开发的奇技淫巧/</id>
+    <published>2015-03-25T15:09:53.000Z</published>
+    <updated>2016-08-31T15:15:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-c0163bdc4c2cce56.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="JSON返回空值"><a href="#JSON返回空值" class="headerlink" title="JSON返回空值"></a>JSON返回空值</h4><p>开发过程中，我们通过http请求，后台返回json数据，而有时数据里某一字段的值为null，然后我们把此值赋值给NSArray,NSdictionary,或是NSString会判断此值为null，做的处理通常是：</p>
+<pre><code>if(dict == nil)或是if(dict == Nil)或是if(dict == NULL)再或是if(dict isEqual nil)
+</code></pre><p>但事实并不这么简单。<br>当字典，数组为null时，后台打印的输出结果是这样：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fb00347741f564bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这就需要在代码判断时利用[NSNull null]来判断。</p>
+<pre><code>if(![location isEqual:[NSNull null]]){
+ NSLog(@&quot;YES&quot;);
+}
+</code></pre><p>空字符串或数组中一个为空，会打印:<null> 。代表着这是一个空字符串，赋值为空，指针是存在的，只是内容为空。在iOS上，内容为空不能简单的判断str==null（null 在ios上得用[NSNull null]）。</null></p>
+<p>赋值为nil,可以直接用＝＝nil来判断，相当于空指针。打印为：（null）</p>
+<p>控制台打印：</p>
+<pre><code>str=（null） 
+</code></pre><p>代表着 字符串或数组或字典是一个空指针，（而非空字符串）判断的时候，直接用：</p>
+<pre><code>if(str == nil)
+</code></pre><p>就可以了。</p>
+<h4 id="内存泄露压力测试"><a href="#内存泄露压力测试" class="headerlink" title="内存泄露压力测试"></a>内存泄露压力测试</h4><p>用 dispatch 写个小函数，方便测试。</p>
+<pre><code>func dipatch_forever(duration: Double, _ queue : dispatch_queue_t, _ block : dispatch_block_t){ 
+   let time = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC))) 
+       dispatch_after(time, queue) {
+        block() 
+        dipatch_forever(duration, queue, block) 
+      }
+}
+
+func main_dipatch_forever(duration: Double, _ block : dispatch_block_t) { 
+ dipatch_forever(duration, dispatch_get_main_queue(), block)
+ }
+</code></pre><p>每当怀疑某界面或函数有问题。就随手写个回调，不断地 push 界面，pop 界面。或者不断地用随机数调用某些函数。或者创建删除对象。</p>
+<pre><code>main_dipatch_forever(0.0) {
+// Do something
+}
+</code></pre><p>这样界面或函数中稍微有内存泄露，或者程序不稳定。就会很容易看到内存飞快地涨或程序直接崩掉。经得起这种压力测试的，那段程序基本会很稳定（正确性需要额外测）。</p>
+<h4 id="更改iphone的键盘颜色："><a href="#更改iphone的键盘颜色：" class="headerlink" title="更改iphone的键盘颜色："></a>更改iphone的键盘颜色：</h4><p>UIKeyboardTypeNumberPad，UIKeyboardTypePhonePad只有这2种数字键盘才有效果。</p>
+<p><strong>键盘外观</strong></p>
+<pre><code>typedef enum {
+UIKeyboardAppearanceDefault, // 默认外观：浅灰色
+UIKeyboardAppearanceAlert, //深灰/石墨色
+} UIKeyboardAppearance;
+
+ textView.keyboardAppearance ＝ UIKeyboardAppearanceAlert ;
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+
+NSArray *ws = [[UIApplication sharedApplication] windows];
+
+for(UIView *w in ws){
+
+NSArray *vs = [w subviews];
+
+for(UIView *v in vs) {
+if([[NSString stringWithUTF8String:object_getClassName(v)] isEqualToString:@&quot;UIKeyboard&quot;]){
+v.backgroundColor = [UIColor redColor];
+}
+}
+}
+</code></pre><p><strong>自动大写</strong></p>
+<pre><code>typedef enum {
+UITextAutocapitalizationTypeNone, //不自动大写
+UITextAutocapitalizationTypeWords, //单词首字母大写
+UITextAutocapitalizationTypeSentences, //句子首字母大写
+UITextAutocapitalizationTypeAllCharacters, //所有字母大写
+} UITextAutocapitalizationType;
+
+用法用例：textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+</code></pre><p><strong>自动更正</strong></p>
+<pre><code>typedef enum {
+UITextAutocorrectionTypeDefault,//默认
+UITextAutocorrectionTypeNo,//不自动更正
+UITextAutocorrectionTypeYes,//自动更正
+} UITextAutocorrectionType;
+
+用法用例：textField.autocorrectionType = UITextAutocorrectionTypeYes;
+</code></pre><p>####查看一段代码的执行时间</p>
+<pre><code>#define Begin   NSDate *startTime = [NSDate date]
+#define Go   NSLog(@&quot;Time: %f&quot;, -[startTime timeIntervalSinceNow])
+</code></pre><p>查看执行时间的代码的地方进行这么处理</p>
+<pre><code>Begin
+//do your work here
+Go
+</code></pre><h4 id="锯齿化问题"><a href="#锯齿化问题" class="headerlink" title="锯齿化问题"></a>锯齿化问题</h4><p>在使用view的缩放的时候，layer.border.width随着view的放大，会出现锯齿化的问题，解决这个问题需要设置这个属性。</p>
+<pre><code>self.layer.allowsEdgeAntialiasing = YES;
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-f253d04c96ef1226.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>####关于关键字volatile</p>
+<p>一个定义为volatile的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。就像大家更熟悉的const一样，volatile是一个类型修饰符。它是被设计用来修饰被不同线程访问和修改的变量。如果不加入volatile，基本上会导致这样的结果：要么无法编写多线程程序，要么编译器失去大量优化的机会。</p>
+<p>Volatile变量具有 synchronized 的可见性特性，但是不具备原子特性。这就是说线程能够自动发现 volatile变量的最新值。Volatile变量可用于提供线程安全，但是只能应用于非常有限的一组用例：多个变量之间或者某个变量的当前值与修改后值之间没有约束。因此，单独使用 volatile 还不足以实现计数器、互斥锁或任何具有与多个变量相关的不变式（Invariants）的类（例如 “start &lt;=end”）。</p>
+<p>出于简易性或可伸缩性的考虑，您可能倾向于使用 volatile变量而不是锁。当使用 volatile变量而非锁时，某些习惯用法更加易于编码和阅读。此外，volatile变量不会像锁那样造成线程阻塞，因此也很少造成可伸缩性问题。在某些情况下，如果读操作远远大于写操作，volatile变量还可以提供优于锁的性能优势。</p>
+<p><strong>代码示例</strong></p>
+<pre><code>volatile int i=10; 
+int j = i; 
+... 
+int k = i; 
+</code></pre><p>volatile 告诉编译器i是随时可能发生变化的，每次使用它的时候必须从i的地址中读取，因而编译器生成的可执行码会重新从i的地址读取数据放在k中。编译器在产生release版可执行码时会进行编译优化，加volatile关键字的变量有关的运算，将不进行编译优化。而优化做法是，由于编译器发现两次从i读数据的代码之间的代码没有对i进行过操作，它会自动把上次读的数据放在k中。而不是重新从i里面读。这样以来，如果i是一个寄存器变量或者表示一个端口数据就容易出错，所以说volatile可以保证对特殊地址的稳定访问，不会出错。</p>
+<pre><code>int square(volatile int *ptr) { return *ptr * *ptr; } 
+</code></pre><p>这段代码的目的是用来返指针<em>ptr指向值的平方，但是，由于</em>ptr指向一个volatile型参数，编译器将产生类似下面的代码： </p>
+<pre><code>int square(volatile int *ptr) { 
+int a,b; 
+a = *ptr; 
+b = *ptr; 
+return a * b;
+} 
+</code></pre><p>由于*ptr的值可能被意想不到地该变，因此a和b可能是不同的。结果，这段代码可能返不是你所期望的平方值！正确的代码如下：</p>
+<pre><code>long square(volatile int *ptr) { int a; a = *ptr; return a * a; } 
+</code></pre><p><strong>下面是volatile变量的几个使用：</strong><br>• 并行设备的硬件寄存器（如：状态寄存器）<br>• 一个中断服务子程序中会访问到的非自动变量(Non-automatic variables)<br>• 多线程应用中被几个任务共享的变量</p>
+<p><strong>那么问题来了：</strong><br>• 一个参数既可以是const还可以是volatile吗？答案是是的。一个例子是只读的状态寄存器。它是volatile因为它可能被意想不到地改变。它是const因为程序不应该试图去修改它。</p>
+<p>• 一个指针可以是volatile 吗？答案是是的。尽管这并不很常见。一个例子是当一个中服务子程序修该一个指向一个buffer的指针时。</p>
+<p><strong>在编写多线程程序中使用volatile的关键点：</strong><br>1.将所有的共享对象声明为volatile；<br>2.不要将volatile直接作用于基本类型；<br>3.当定义了共享类的时候，用volatile成员函数来保证线程安全；<br>在多线程中，我们可以利用锁的机制来保护好资源临界区。在临界区的外面操作共享变量则需要volatile，在临界区的里面则non-volatile了。</p>
+<h4 id="关键字const的位置"><a href="#关键字const的位置" class="headerlink" title="关键字const的位置"></a>关键字const的位置</h4><p>const意味着”只读”，分析下面的含义：</p>
+<pre><code>const int a;
+int const a;// 前两个的作用是一样，a是一个常整型数。
+const int *a;// 第三个意味着a是一个指向常整型数的指针（整型数是不可修改的，但指针可以）
+int * const a;// 第四个意思a是一个指向整型数的常指针（指针指向的整型数是可以修改的，但指针是不可修改的）
+int const * const a;// a是一个指向常整型数的常指针（指针指向的整型数是不可修改的，同时指针也是不可修改的）。表示a是一个指针常量，初始化的时候必须固定指向一个int常量或者int变量，之后就不能再指向别的地方了，它总是把它所指向的目标当作一个int常量。也可以写成const int* const a;含义相同。
+</code></pre><p>合理地使用关键字const可以使编译器很自然地保护那些不希望被改变的参数，防止其被无意的代码修改。这样可以减少bug的出现。欲阻止一个变量被改变，可以使用 const 关键字。</p>
+<p>在定义 const 变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；对指针来说，可以指定指针本身为 const，也可以指定指针所指的数据为 const，或二者同时指定为 const；在一个函数声明中，const 可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；对于类的成员函数，若指定其为 const 类型，则表明其是一个常函数，不能修改类的成员变量；对于类的成员函数，有时候必须指定其返回值为 const 类型，以使得其返回值不为“左值”。</p>
+<h4 id="滑动的时候隐藏navigation-bar"><a href="#滑动的时候隐藏navigation-bar" class="headerlink" title="滑动的时候隐藏navigation bar"></a>滑动的时候隐藏navigation bar</h4><pre><code>navigationController.hidesBarsOnSwipe = Yes;
+</code></pre><h4 id="消除导航条返回键带的title"><a href="#消除导航条返回键带的title" class="headerlink" title="消除导航条返回键带的title"></a>消除导航条返回键带的title</h4><pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                 forBarMetrics:UIBarMetricsDefault];
+</code></pre><h4 id="将Navigationbar变成透明而不模糊"><a href="#将Navigationbar变成透明而不模糊" class="headerlink" title="将Navigationbar变成透明而不模糊"></a>将Navigationbar变成透明而不模糊</h4><pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                         forBarMetrics:UIBarMetricsDefault];
+self.navigationController.navigationBar .shadowImage = [UIImage new];
+self.navigationController.navigationBar .translucent = YES;
+</code></pre><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>函数体内 static 变量的作用范围为该函数体，不同于 auto 变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；在模块内的 static 全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；在模块内的 static 函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；在类中的 static 成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；在类中的 static 成员函数属于整个类所拥有，这个函数不接收 this 指针，因而只能访问类的static 成员变量。</p>
+<h4 id="用一个pan手势来代替UISwipegesture的各个方向"><a href="#用一个pan手势来代替UISwipegesture的各个方向" class="headerlink" title="用一个pan手势来代替UISwipegesture的各个方向"></a>用一个pan手势来代替UISwipegesture的各个方向</h4><pre><code>- (void)pan:(UIPanGestureRecognizer *)sender
+{
+typedef NS_ENUM(NSUInteger, UIPanGestureRecognizerDirection) {
+UIPanGestureRecognizerDirectionUndefined,
+UIPanGestureRecognizerDirectionUp,
+UIPanGestureRecognizerDirectionDown,
+UIPanGestureRecognizerDirectionLeft,
+UIPanGestureRecognizerDirectionRight
+};
+
+static  UIPanGestureRecognizerDirection direction = UIPanGestureRecognizerDirectionUndefined;
+
+switch (sender.state) {
+case  UIGestureRecognizerStateBegan: {
+if  (direction == UIPanGestureRecognizerDirectionUndefined) {
+CGPoint velocity = [sender velocityInView:recognizer.view];
+BOOL isVerticalGesture = fabs(velocity.y) &gt; fabs(velocity.x);
+if (isVerticalGesture) {
+    if (velocity.y &gt; 0) {
+    direction = UIPanGestureRecognizerDirectionDown;
+    }    
+    else  {
+    direction = UIPanGestureRecognizerDirectionUp;
+    }
+}
+else{ 
+if (velocity.x &gt; 0) {
+direction = UIPanGestureRecognizerDirectionRight;
+}
+else
+{
+direction = UIPanGestureRecognizerDirectionLeft;
+}
+}
+}
+break ;
+}
+
+case UIGestureRecognizerStateChanged: {
+switch (direction) {
+case UIPanGestureRecognizerDirectionUp: {
+[self handleUpwardsGesture:sender];
+break ;
+}
+
+case UIPanGestureRecognizerDirectionDown: {
+[self handleDownwardsGesture:sender];
+break;
+}
+
+case  UIPanGestureRecognizerDirectionLeft: {
+[self handleLeftGesture:sender];
+break;
+}
+
+case UIPanGestureRecognizerDirectionRight: {
+[self handleRightGesture:sender];
+break ;
+}
+default : {
+break;
+}
+}
+break;
+}
+
+case  UIGestureRecognizerStateEnded: {
+direction = UIPanGestureRecognizerDirectionUndefined;  
+break;
+}
+
+default:
+break;
+}
+}
+</code></pre><h4 id="拉伸图片不变形"><a href="#拉伸图片不变形" class="headerlink" title="拉伸图片不变形"></a>拉伸图片不变形</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-9c32b9138380e54c.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<p>等同于：</p>
+<pre><code>[[UIImage imageNamed:@&quot;&quot;] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+[[UIImage imageNamed:@&quot;&quot;] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-c0163bdc4c2cce56.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot;
+    
+    </summary>
+    
+    
+      <category term="skill" scheme="https://dangdangfeng.github.io/tags/skill/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Category不会想当然</title>
+    <link href="https://dangdangfeng.github.io/2014/10/31/Category%E4%B8%8D%E4%BC%9A%E6%83%B3%E5%BD%93%E7%84%B6/"/>
+    <id>https://dangdangfeng.github.io/2014/10/31/Category不会想当然/</id>
+    <published>2014-10-31T15:19:54.000Z</published>
+    <updated>2016-08-31T15:20:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-b15065b256cabc84.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Category用于向已经存在的类添加方法从而达到扩展已有类的目的，在很多情形下Category也是比创建子类更优的选择。Category用于大型类有效分解。新添加的方法会被被扩展的类的所有子类自动继承。Category也可以用于替代这个已有类中某个方法的实体，从而达到修复BUG的目的。如此就不能去调用已有类中原有的那个被替换掉方法实体了。需要注意的是，当准备有Category来替换某一个方法的时候，一定要保证实现原来方法的所有功能，否则这种替代就是没有意义而且会引起新的BUG。</p>
+<p>Category的方法不一定非要在@implementation中实现，也可以在其他位置实现，但是当调用Category的方法时，依据继承树没有找到该方法的实现，程序则会崩溃。Category理论上不能添加变量，但是可以使用@dynamic 来弥补这种不足。</p>
+<pre><code> @implementation NSObject (Category)
+ @dynamic variable;
+ - (id) variable
+ {
+ return objc_getAssociatedObject(self, externVariableKey);
+ }
+ - (void)setVariable:(id) variable
+{
+ objc_setAssociatedObject(self, externVariableKey, variable,
+ OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+</code></pre><p>和子类不同的是，Category不能用于向被扩展类添加实例变量。Category通常作为一种组织框架代码的工具来使用。如果需要添加一个新的变量，则需添加子类。如果只是添加一个新的方法，用Category是比较好的选择。</p>
+<h4 id="runtime对category的加载过程"><a href="#runtime对category的加载过程" class="headerlink" title="runtime对category的加载过程"></a>runtime对category的加载过程</h4><p>下面是runtime中category的结构：</p>
+<pre><code>struct _category_t {
+const char *name; // 类的名字
+struct _class_t *cls; // 要扩展的类对象，编译期间这个值是不会有的，在app被runtime加载时才会根据name对应到类对象
+const struct _method_list_t *instance_methods; // 实例方法
+const struct _method_list_t *class_methods; // 类方法
+const struct _protocol_list_t *protocols; // 这个category实现的protocol，比较不常用在category里面实现协议，但是确实支持的
+const struct _prop_list_t *properties; // 这个category所有的property，这也是category里面可以定义属性的原因，不过这个property不会@synthesize实例变量，一般有需求添加实例变量属性时会采用objc_setAssociatedObject和objc_getAssociatedObject方法绑定方法绑定，不过这种方法生成的与一个普通的实例变量完全是两码事。
+};
+</code></pre><p>category动态扩展了原来类的方法，在调用者看来好像原来类本来就有这些方法似的，不论有没有import category 的.h，都可以成功调用category的方法，都影响不到category的加载流程，import只是帮助了编译检查和链接过程。runtime加载完成后，category的原始信息在类结构里将不会存在。</p>
+<p>objc runtime的加载入口是一个叫_objc_init的方法，在library加载前由libSystem dyld调用，进行初始化操作。调用map_images方法将文件中的image map到内存。调用_read_images方法初始化map后的image，这里面干了很多的事情，像load所有的类、协议和category，著名的+ load方法就是这一步调用的。category的初始化，循环调用了_getObjc2CategoryList方法。</p>
+<p>在调用完_getObjc2CategoryList后，runtime终于开始了category的处理，首先分成两拨，一拨是实例对象相关的调用addUnattachedCategoryForClass，一拨是类对象相关的调用addUnattachedCategoryForClass，然后会调到attachCategoryMethods方法，这个方法把一个类所有的category_list的所有方法取出来组成一个method_list_t ，这里是倒序添加的，也就是说，新生成的category的方法会先于旧的category的方法插入。</p>
+<p>生成了所有method的list之后，调用attachMethodLists将所有方法前序添加进类的方法的数组中，也就是说，如果原来类的方法是a,b,c，类别的方法是1,2,3，那么插入之后的方法将会是1,2,3,a,b,c，也就是说，原来类的方法被category的方法覆盖了，但被覆盖的方法确实还在那里。</p>
+<pre><code>static void attachCategoryMethods(class_t *cls, category_list *cats,
+                  BOOL *inoutVtablesAffected)
+{
+if (!cats) return;
+if (PrintReplacedMethods) printReplacements(cls, cats);
+
+BOOL isMeta = isMetaClass(cls);
+method_list_t **mlists = (method_list_t **)
+    _malloc_internal(cats-&gt;count * sizeof(*mlists));
+
+// Count backwards through cats to get newest categories first
+int mcount = 0;
+int i = cats-&gt;count;
+BOOL fromBundle = NO;
+while (i--) {
+    method_list_t *mlist = cat_method_list(cats-&gt;list[i].cat, isMeta);
+    if (mlist) {
+        mlists[mcount++] = mlist;
+        fromBundle |= cats-&gt;list[i].fromBundle;
+    }
+}
+
+attachMethodLists(cls, mlists, mcount, NO, fromBundle, inoutVtablesAffected);
+
+_free_internal(mlists);
+
+}
+</code></pre><p>这也即是我们上面说的Category修复Bug的原理。</p>
+<h4 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h4><p>Extension非常像是没有命名的类别。扩展只是用来定义类的私有方法的，实现要在原始的.m里面。还以用来改变原始属性的一些性质。一般的时候，Extension都是放在.m文件中@implementation的上方。 Extension中的方法必须在@implementation中实现，否则编译会报错。Category没有源代码的类添加方法，格式：定义一对.h和.m。Extension作用于管理类的所有方法，格式：把代码写到原始类的.m文件中。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-b15065b256cabc84.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot;
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
     
   </entry>
   
@@ -727,6 +1045,587 @@ NSLog(@&quot;begin Background Task With Expiration Handler&quot;);
   </entry>
   
   <entry>
+    <title>那些著名或非著名的iOS面试题－后编</title>
+    <link href="https://dangdangfeng.github.io/2014/07/24/%E9%82%A3%E4%BA%9B%E8%91%97%E5%90%8D%E6%88%96%E9%9D%9E%E8%91%97%E5%90%8D%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8D%E5%90%8E%E7%BC%96/"/>
+    <id>https://dangdangfeng.github.io/2014/07/24/那些著名或非著名的iOS面试题－后编/</id>
+    <published>2014-07-24T14:58:40.000Z</published>
+    <updated>2016-08-31T15:07:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-Runtime"><a href="#1-Runtime" class="headerlink" title="1. Runtime"></a>1. Runtime</h4><p>Objective-C 是面相运行时的语言（runtime oriented language），就是说它会尽可能的把编译和链接时要执行的逻辑延迟到运行时。这就给了你很大的灵活性，你可以按需要把消息重定向给合适的对象，你甚 至可以交换方法的实现，等等。</p>
+<p>RunTime简称运行时。就是系统在运行的时候的一些机制，其中最主要的是消息机制。OC的函数调用成为消息发送。属于动态调用过程。在编译的时候并不能决定真正调用哪个函数（事实证明，在编 译阶段，OC可以调用任何函数，即使这个函数并未实现，只要申明过就不会报错。而C语言在编译阶段就会报错）。只有在真正运行的时候才会根据函数的名称找 到对应的函数来调用。</p>
+<p>以下面的代码为例：</p>
+<pre><code>[obj makeText];
+</code></pre><p>其中obj是一个对象，makeText是一个函数名称。对于这样一个简单的调用。在编译时RunTime会将上述代码转化成</p>
+<pre><code>objc_msgSend(obj,@selector(makeText));
+</code></pre><p>首先，编译器将代码[obj makeText];转化为objc_msgSend(obj, @selector (makeText));，在objc_msgSend函数中。首先通过obj的isa指针找到obj对应的class。在Class中先去cache中 通过SEL查找对应函数method（猜测cache中method列表是以SEL为key通过hash表来存储的，这样能提高函数查找速度），若 cache中未找到。再去methodList中查找，若methodlist中未找到，则取superClass中查找。若能找到，则将method加 入到cache中，以方便下次查找，并通过method中的函数指针跳转到对应的函数中去执行。</p>
+<p><strong>Objective-C Runtime 是什么？</strong><br>Objective-C 的 Runtime 是一个运行时库（Runtime Library），它是一个主要使用 C 和汇编写的库，为 C 添加了面相对象的能力并创造了 Objective-C。这就是说它在类信息（Class information） 中被加载，完成所有的方法分发，方法转发，等等。Objective-C runtime 创建了所有需要的结构体，让 Objective-C 的面相对象编程变为可能。</p>
+<p><strong>Method Swizzling 原理</strong></p>
+<p>在Objective-C中调用一个方法，其实是向一个对象发送消息，查找消息的唯一依据是selector的名字。利用Objective-C的动态特性，可以实现在运行时偷换selector对应的方法实现，达到给方法挂钩的目的。每个类都有一个方法列表，存放着selector的名字和方法实现的映射关系。IMP有点类似函数指针，指向具体的Method实现。</p>
+<p>我们可以利用 method_exchangeImplementations 来交换2个方法中的IMP，<br>我们可以利用 class_replaceMethod 来修改类，<br>我们可以利用 method_setImplementation 来直接设置某个方法的IMP，……<br>归根结底，都是偷换了selector的IMP。</p>
+<h4 id="2-GCD实现1，2并行和3串行和45串行，4，5是并行。即3依赖1，2的执行，45依赖3的执行。"><a href="#2-GCD实现1，2并行和3串行和45串行，4，5是并行。即3依赖1，2的执行，45依赖3的执行。" class="headerlink" title="2. GCD实现1，2并行和3串行和45串行，4，5是并行。即3依赖1，2的执行，45依赖3的执行。"></a>2. GCD实现1，2并行和3串行和45串行，4，5是并行。即3依赖1，2的执行，45依赖3的执行。</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2fe2e7b2c01a9252.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="关系"><br><strong>队列组的方式</strong></p>
+<pre><code>- (void) methodone{
+dispatch_group_t group = dispatch_group_create();
+
+dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@&quot;%d&quot;,1);
+});
+
+dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@&quot;%d&quot;,2);
+});
+
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+    NSLog(@&quot;3&quot;);
+
+    dispatch_group_t group1 = dispatch_group_create();
+
+    dispatch_group_async(group1, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@&quot;%d&quot;,4);
+    });
+
+    dispatch_group_async(group1, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@&quot;%d&quot;,5);
+    });
+
+});
+
+}
+</code></pre><p>串行队列：队列中的任务只会顺序执行</p>
+<pre><code>dispatch_queue_t q = dispatch_queue_create(“....”, dispatch_queue_serial);
+</code></pre><p>并行队列： 队列中的任务通常会并发执行。
+　　　　　　　</p>
+<pre><code>dispatch_queue_t q = dispatch_queue_create(&quot;......&quot;, dispatch_queue_concurrent);
+</code></pre><p>全局队列：是系统开发的，直接拿过来用就可以；与并行队列类似，但调试时，无法确认操作所在队列　。</p>
+<pre><code>dispatch_queue_t q = dispatch_get_global_queue(dispatch_queue_priority_default, 0);
+</code></pre><p>主队列：每一个应用开发程序对应唯一一个主队列，直接get即可；在多线程开发中，使用主队列更新UI。</p>
+<pre><code>dispatch_queue_t q = dispatch_get_main_queue();
+</code></pre><p>主队列是GCD自带的串行队列，会在主线程中执行。异步全局并发队列  开启新线程，并发执行。</p>
+<p>并行队列里开启同步任务是有执行顺序的，只有异步才没有顺序。</p>
+<p>串行队列开启异步任务，是有顺序的。</p>
+<p>串行队列开启异步任务后嵌套同步任务造成死锁。</p>
+<h4 id="3-深浅复制和属性为copy，strong值的变化问题"><a href="#3-深浅复制和属性为copy，strong值的变化问题" class="headerlink" title="3. 深浅复制和属性为copy，strong值的变化问题"></a>3. 深浅复制和属性为copy，strong值的变化问题</h4><p>浅复制：只复制指向对象的指针，而不复制引用对象本身。对于浅复制来说，A和A_copy指向的是同一个内存资源，复制的只不个是一个指针，对象本身资源还是只有一份，那如果我们对A_copy执行了修改操作，那么发现A引用的对象同样被修改了。深复制就好理解了，内存中存在了两份独立对象本身。</p>
+<p>在Objective-C中并不是所有的对象都支持Copy，MutableCopy，遵守NSCopying协议的类才可以发送Copy消息，遵守NSMutableCopying协议的类才可以发送MutableCopy消息。</p>
+<p>[immutableObject copy] // 浅拷贝<br>[immutableObject mutableCopy] //深拷贝<br>[mutableObject copy] //深拷贝<br>[mutableObject mutableCopy] //深拷贝</p>
+<p>属性设为copy,指定此属性的值不可更改，防止可变字符串更改自身的值的时候不会影响到对象属性（如NSString,NSArray,NSDictionary）的值。strong此属性的指会随着变化而变化。copy是内容拷贝，strong是指针拷贝。</p>
+<h4 id="4-NSTimer创建后，会在哪个线程运行。"><a href="#4-NSTimer创建后，会在哪个线程运行。" class="headerlink" title="4.NSTimer创建后，会在哪个线程运行。"></a>4.NSTimer创建后，会在哪个线程运行。</h4><p>用scheduledTimerWithTimeInterval创建的，在哪个线程创建就会被加入哪个线程的RunLoop中就运行在哪个线程。</p>
+<p>自己创建的Timer，加入到哪个线程的RunLoop中就运行在哪个线程。</p>
+<h4 id="5-KVO，NSNotification，delegate及block区别"><a href="#5-KVO，NSNotification，delegate及block区别" class="headerlink" title="5. KVO，NSNotification，delegate及block区别"></a>5. KVO，NSNotification，delegate及block区别</h4><p>KVO就是cocoa框架实现的观察者模式，一般同KVC搭配使用，通过KVO可以监测一个值的变化，比如View的高度变化。是一对多的关系，一个值的变化会通知所有的观察者。</p>
+<p>NSNotification是通知，也是一对多的使用场景。在某些情况下，KVO和NSNotification是一样的，都是状态变化之后告知对方。NSNotification的特点，就是需要被观察者先主动发出通知，然后观察者注册监听后再来进行响应，比KVO多了发送通知的一步，但是其优点是监听不局限于属性的变化，还可以对多种多样的状态变化进行监听，监听范围广，使用也更灵活。</p>
+<p>delegate 是代理，就是我不想做的事情交给别人做。比如狗需要吃饭，就通过delegate通知主人，主人就会给他做饭、盛饭、倒水，这些操作，这些狗都不需要关心，只需要调用delegate（代理人）就可以了，由其他类完成所需要的操作。所以delegate是一对一关系。</p>
+<p>block是delegate的另一种形式，是函数式编程的一种形式。使用场景跟delegate一样，相比delegate更灵活，而且代理的实现更直观。</p>
+<p>KVO一般的使用场景是数据，需求是数据变化，比如股票价格变化，我们一般使用KVO（观察者模式）。delegate一般的使用场景是行为，需求是需要别人帮我做一件事情，比如买卖股票，我们一般使用delegate。Notification一般是进行全局通知，比如利好消息一出，通知大家去买入。delegate是强关联，就是委托和代理双方互相知道，你委托别人买股票你就需要知道经纪人，经纪人也不要知道自己的顾客。Notification是弱关联，利好消息发出，你不需要知道是谁发的也可以做出相应的反应，同理发消息的人也不需要知道接收的人也可以正常发出消息。</p>
+<h4 id="6-如何让计时器调用一个类方法"><a href="#6-如何让计时器调用一个类方法" class="headerlink" title="6. 如何让计时器调用一个类方法"></a>6. 如何让计时器调用一个类方法</h4><p>计时器只能调用实例方法，但是可以在这个实例方法里面调用静态方法。</p>
+<p>使用计时器需要注意，计时器一定要加入RunLoop中，并且选好model才能运行。scheduledTimerWithTimeInterval方法创建一个计时器并加入到RunLoop中所以可以直接使用。</p>
+<p>如果计时器的repeats选择YES说明这个计时器会重复执行，一定要在合适的时机调用计时器的invalid。不能在dealloc中调用，因为一旦设置为repeats 为yes，计时器会强持有self，导致dealloc永远不会被调用，这个类就永远无法被释放。比如可以在viewDidDisappear中调用，这样当类需要被回收的时候就可以正常进入dealloc中了。</p>
+<h4 id="7-调用一个类的静态方法需不需要release？"><a href="#7-调用一个类的静态方法需不需要release？" class="headerlink" title="7. 调用一个类的静态方法需不需要release？"></a>7. 调用一个类的静态方法需不需要release？</h4><p>静态方法，就是类方法，不需要，类方法对象放在autorelease中</p>
+<h4 id="8-static作用？"><a href="#8-static作用？" class="headerlink" title="8. static作用？"></a>8. static作用？</h4><p>（1）函数体内 static 变量的作用范围为该函数体，不同于 auto 变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；<br>（2）在模块内的 static 全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；<br>（3）在模块内的 static 函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明<br>它的模块内；<br>（4）在类中的 static 成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；<br>（5）在类中的 static 成员函数属于整个类所拥有，这个函数不接收 this 指针，因而只能访问类的static 成员变量。</p>
+<h4 id="9-NSObject的load和initialize方法"><a href="#9-NSObject的load和initialize方法" class="headerlink" title="9. NSObject的load和initialize方法"></a>9. NSObject的load和initialize方法</h4><p><strong>load和initialize的共同特点</strong><br>在不考虑开发者主动使用的情况下，系统最多会调用一次<br>如果父类和子类都被调用，父类的调用一定在子类之前<br>都是为了应用运行提前创建合适的运行环境<br>在使用时都不要过重地依赖于这两个方法，除非真正必要</p>
+<p><strong>load和initialize的区别</strong><br><strong>load方法</strong></p>
+<p>调用时机比较早，运行环境有不确定因素。具体说来，在iOS上通常就是App启动时进行加载，但当load调用的时候，并不能保证所有类都加载完成且可用，必要时还要自己负责做auto release处理。对于有依赖关系的两个库中，被依赖的类的load会优先调用。但在一个库之内，调用顺序是不确定的。</p>
+<p>对于一个类而言，没有load方法实现就不会调用，不会考虑对NSObject的继承。</p>
+<p>一个类的load方法不用写明[super load]，父类就会收到调用，并且在子类之前。</p>
+<p>Category的load也会收到调用，但顺序上在主类的load调用之后。</p>
+<p>不会直接触发initialize的调用。</p>
+<p><strong>initialize方法相关要点</strong></p>
+<p>initialize的自然调用是在第一次主动使用当前类的时候。</p>
+<p>在initialize方法收到调用时，运行环境基本健全。</p>
+<p>initialize的运行过程中是能保证线程安全的。</p>
+<p>和load不同，即使子类不实现initialize方法，会把父类的实现继承过来调用一遍。注意的是在此之前，父类的方法已经被执行过一次了，同样不需要super调用。</p>
+<p>由于initialize的这些特点，使得其应用比load要略微广泛一些。可用来做一些初始化工作，或者单例模式的一种实现方案。</p>
+<h4 id="10-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"><a href="#10-能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？" class="headerlink" title="10. 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？"></a>10. 能否向编译后得到的类中增加实例变量？能否向运行时创建的类中添加实例变量？为什么？</h4><p>不能向编译后得到的类中增加实例变量；<br>能向运行时创建的类中添加实例变量；</p>
+<p>因为编译后的类已经注册在 runtime 中，类结构体中的 objc_ivar_list 实例变量的链表 和 instance_size 实例变量的内存大小已经确定，同时runtime 会调用 class_setIvarLayout 或 class_setWeakIvarLayout 来处理 strong weak 引用。所以不能向存在的类中添加实例变量；</p>
+<p>运行时创建的类是可以添加实例变量，调用 class_addIvar 函数。但是得在调用 objc_allocateClassPair 之后，objc_registerClassPair 之前，原因同上。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a87cffd6913fdd25.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对，就是这样"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-Runtime&quot;&gt;&lt;a href=&quot;#1-Runtime&quot; class=&quot;headerlink&quot; title=&quot;1. Runtime&quot;&gt;&lt;/a&gt;1. Runtime&lt;/h4&gt;&lt;p&gt;Objective-C 是面相运行时的语言（runtime oriented l
+    
+    </summary>
+    
+    
+      <category term="Interview" scheme="https://dangdangfeng.github.io/tags/Interview/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>那些著名或非著名的iOS面试题－中编</title>
+    <link href="https://dangdangfeng.github.io/2014/07/10/%E9%82%A3%E4%BA%9B%E8%91%97%E5%90%8D%E6%88%96%E9%9D%9E%E8%91%97%E5%90%8D%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8D%E4%B8%AD%E7%BC%96/"/>
+    <id>https://dangdangfeng.github.io/2014/07/10/那些著名或非著名的iOS面试题－中编/</id>
+    <published>2014-07-10T14:56:55.000Z</published>
+    <updated>2016-08-31T15:08:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-反转二叉树，不用递归"><a href="#1-反转二叉树，不用递归" class="headerlink" title="1. 反转二叉树，不用递归"></a>1. 反转二叉树，不用递归</h4><pre><code>/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+</code></pre><p>递归方式：</p>
+<pre><code>public class Solution {
+public TreeNode invertTree(TreeNode root) {
+    if (root == null) {
+        return null;
+    }
+    root.left = invertTree(root.left);
+    root.right = invertTree(root.right);
+    TreeNode tmp = root.left;
+    root.left = root.right;
+    root.right = tmp;
+    return root;
+}
+}
+</code></pre><p>object-c实现：</p>
+<pre><code>/** 
+ * 翻转二叉树（又叫：二叉树的镜像） 
+ *
+ * @param rootNode 根节点
+ *
+ * @return 翻转后的树根节点（其实就是原二叉树的根节点） 
+ */
+ + (BinaryTreeNode *)invertBinaryTree:(BinaryTreeNode *)rootNode {
+    if (!rootNode) {  return nil; } 
+    if (!rootNode.leftNode &amp;&amp; !rootNode.rightNode) {  return rootNode; } 
+    [self invertBinaryTree:rootNode.leftNode];
+    [self invertBinaryTree:rootNode.rightNode]; 
+    BinaryTreeNode *tempNode = rootNode.leftNode; 
+    rootNode.leftNode = rootNode.rightNode;
+    rootNode.rightNode = tempNode; 
+    return rootNode;
+  }
+</code></pre><p>非递归方式：</p>
+<pre><code>+ (BinaryTreeNode *)invertBinaryTree:(BinaryTreeNode *)rootNode {
+if (!rootNode) {  return nil; }
+if (!rootNode.leftNode &amp;&amp; !rootNode.rightNode) {  return rootNode; }
+NSMutableArray *queueArray = [NSMutableArray array]; //数组当成队列
+[queueArray addObject:rootNode]; //压入根节点
+while (queueArray.count &gt; 0) {
+    BinaryTreeNode *node = [queueArray firstObject];
+    [queueArray removeObjectAtIndex:0]; //弹出最前面的节点，仿照队列先进先出原则
+    BinaryTreeNode *pLeft = node.leftNode;
+    node.leftNode = node.rightNode;
+    node.rightNode = pLeft;
+
+    if (node.leftNode) {
+        [queueArray addObject:node.leftNode];
+    }
+    if (node.rightNode) {
+        [queueArray addObject:node.rightNode];
+    }
+
+}
+
+return rootNode;
+}
+</code></pre><p>示例代码参考：<a href="https://github.com/dangdangfeng/-/blob/master/ttt/ttt/ViewController.m" target="_blank" rel="external">二叉树</a></p>
+<h4 id="2-写一个单例模式"><a href="#2-写一个单例模式" class="headerlink" title="2. 写一个单例模式"></a>2. 写一个单例模式</h4><pre><code>+ (AccountManager *)sharedManager
+{
+    static AccountManager *sharedAccountManagerInstance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&amp;predicate, ^{
+            sharedAccountManagerInstance = [[self alloc] init]; 
+    });
+return sharedAccountManagerInstance;
+}
+</code></pre><h4 id="3-iOS应用生命周期"><a href="#3-iOS应用生命周期" class="headerlink" title="3. iOS应用生命周期"></a>3. iOS应用生命周期</h4><p><strong>应用程序的状态</strong><br><strong>Not running未运行</strong>：程序没启动。<br><strong>Inactive未激活</strong>：程序在前台运行，不过没有接收到事件。在没有事件处理情况下程序通常停留在这个状态。<br><strong>Active激活</strong>：程序在前台运行而且接收到了事件。这也是前台的一个正常的模式。<br><strong>Backgroud后台</strong>：程序在后台而且能执行代码，大多数程序进入这个状态后会在在这个状态上停留一会。时间到之后会进入挂起状态(Suspended)。有的程序经过特殊的请求后可以长期处于Backgroud状态。<br><strong>Suspended挂起</strong>：程序在后台不能执行代码。系统会自动把程序变成这个状态而且不会发出通知。当挂起时，程序还是停留在内存中的，当系统内存低时，系统就把挂起的程序清除掉，为前台程序提供更多的内存。</p>
+<p>iOS的入口在main.m文件：</p>
+<pre><code>int main(int argc, char *argv[])
+{
+@autoreleasepool {
+    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+}
+}
+</code></pre><p>main函数的两个参数，iOS中没有用到，包括这两个参数是为了与标准ANSI C保持一致。 UIApplicationMain函数，前两个和main函数一样，重点是后两个。</p>
+<p>后两个参数分别表示程序的主要类(principal class)和代理类(delegate class)。如果主要类(principal class)为nil，将从Info.plist中获取，如果Info.plist中不存在对应的key，则默认为UIApplication；如果代理类(delegate class)将在新建工程时创建。<br>       根据UIApplicationMain函数，程序将进入AppDelegate.m，这个文件是xcode新建工程时自动生成的。下面看一下AppDelegate.m文件，这个关乎着应用程序的生命周期。</p>
+<p>1、<strong>application didFinishLaunchingWithOptions：</strong>当应用程序启动时执行，应用程序启动入口，只在应用程序启动时执行一次。若用户直接启动，lauchOptions内无数据,若通过其他方式启动应用，<strong>lauchOptions</strong>包含对应方式的内容。<br>2、<strong>applicationWillResignActive：</strong>在应用程序将要由活动状态切换到非活动状态时候，要执行的委托调用，如 按下 home 按钮，返回主屏幕，或全屏之间切换应用程序等。<br><strong>     3、applicationDidEnterBackground：</strong>在应用程序已进入后台程序时，要执行的委托调用。<br><strong>     4、applicationWillEnterForeground：</strong>在应用程序将要进入前台时(被激活)，要执行的委托调用，刚好与applicationWillResignActive 方法相对应。<br><strong>     5、applicationDidBecomeActive：</strong>在应用程序已被激活后，要执行的委托调用，刚好与applicationDidEnterBackground 方法相对应。<br>     <strong>6、applicationWillTerminate：</strong>在应用程序要完全推出的时候，要执行的委托调用，这个需要要设置UIApplicationExitsOnSuspend的键值。 </p>
+<p><strong>初次启动：</strong><br>iOS_didFinishLaunchingWithOptions<br>iOS_applicationDidBecomeActive<br><strong>按下home键：</strong><br>iOS_applicationWillResignActive<br>iOS_applicationDidEnterBackground<br><strong>点击程序图标进入：</strong><br>iOS_applicationWillEnterForeground<br>iOS_applicationDidBecomeActive</p>
+<p>当应用程序进入后台时,应该保存用户数据或状态信息，所有没写到磁盘的文件或信息，在进入后台时，最后都写到磁盘去，因为程序可能在后台被杀死。释放尽可能释放的内存。</p>
+<pre><code>- (void)applicationDidEnterBackground:(UIApplication *)application
+</code></pre><p>方法有大概5秒的时间让你完成这些任务。如果超过时间还有未完成的任务，你的程序就会被终止而且从内存中清除。</p>
+<p>如果还需要长时间的运行任务，可以在该方法中调用 </p>
+<pre><code>[application beginBackgroundTaskWithExpirationHandler:^{ 
+
+    NSLog(@&quot;begin Background Task With Expiration Handler&quot;); 
+
+}];
+</code></pre><p><strong>程序终止</strong></p>
+<p>程序只要符合以下情况之一，只要进入后台或挂起状态就会终止：</p>
+<p>①iOS4.0以前的系统</p>
+<p>②app是基于iOS4.0之前系统开发的。</p>
+<p>③设备不支持多任务</p>
+<p>④在Info.plist文件中，程序包含了 UIApplicationExitsOnSuspend  键。</p>
+<p>系统常常是为其他app启动时由于内存不足而回收内存最后需要终止应用程序，但有时也会是由于app很长时间才响应而终止。如果app当时运行在后台并且没有暂停，系统会在应用程序终止之前调用app的代理的方法 - (void)applicationWillTerminate:(UIApplication *)application，这样可以让你可以做一些清理工作。你可以保存一些数据或app的状态。这个方法也有5秒钟的限制。超时后方法会返回程序从内存中清除。</p>
+<p>注意：用户可以手工关闭应用程序。</p>
+<h4 id="4-一工人给老板打7天工要求一块金条-这金条只能切2次-工人每天要1-7金条-怎么分"><a href="#4-一工人给老板打7天工要求一块金条-这金条只能切2次-工人每天要1-7金条-怎么分" class="headerlink" title="4. 一工人给老板打7天工要求一块金条 这金条只能切2次 工人每天要1/7金条 怎么分?"></a>4. 一工人给老板打7天工要求一块金条 这金条只能切2次 工人每天要1/7金条 怎么分?</h4><p>这道题解决的主要难点在于：不是给出去的就收不回来了，可以用交换的方法。　　</p>
+<p>把金条分成三段（就是分两次，或者切两刀），分别是整根金条的1/7、2/7、 4/7。　　</p>
+<p>第一天：给1/7的， 第二天：给2/7的，收回1/7的； 第三天，给1/7的； 第四天：给4/7的，收回1/7和2/7的 ；第五天：给1/7的 ；第六天：给2/7的，收回1/7的；第七天发1/7。</p>
+<h4 id="5-iOS中socket使用"><a href="#5-iOS中socket使用" class="headerlink" title="5. iOS中socket使用"></a>5. iOS中socket使用</h4><p>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议。</p>
+<p> http协议   对应于应用层<br> tcp协议    对应于传输层<br> ip协议     对应于网络层<br> 三者本质上没有可比性。  何况HTTP协议是基于TCP连接的。 </p>
+<p> TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。</p>
+<p> 我 们在传输数据时，可以只使用传输层（TCP/IP），但是那样的话，由于没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用应用层 协议，应用层协议很多，有HTTP、FTP、TELNET等等，也可以自己定义应用层协议。WEB使用HTTP作传输层协议，以封装HTTP文本信息，然 后使用TCP/IP做传输层协议将它发送到网络上。</p>
+<p><strong>SOCKET原理</strong><br>1、套接字（socket）概念<br>套接字（socket）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元。它是网络通信过程中端点的抽象表示，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
+<p>应 用层通过传输层进行数据通信时，TCP会遇到同时为多个应用程序进程提供并发服务的问题。多个TCP连接或多个应用程序进程可能需要通过同一个 TCP协议端口传输数据。为了区别不同的应用程序进程和连接，许多计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应 用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
+<p>2 、建立socket连接<br>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket，另一个运行于服务器端，称为ServerSocket。</p>
+<p>套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
+<p>服务器监听：服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
+<p>客户端请求：指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
+<p>连 接确认：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户 端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
+<p>3、SOCKET连接与TCP连接<br>创建Socket连接时，可以指定使用的传输层协议，Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接。</p>
+<p>4、Socket连接与HTTP连接<br>由 于通常情况下Socket连接就是TCP连接，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际网络应用 中，客户端到服务器之间的通信往往需要穿越多个中间节点，例如路由器、网关、防火墙等，大部分防火墙默认会关闭长时间处于非活跃状态的连接而导致 Socket 连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态。</p>
+<p>而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。</p>
+<p>很 多情况下，需要服务器端主动向客户端推送数据，保持客户端与服务器数据的实时与同步。此时若双方建立的是Socket连接，服务器就可以直接将数据传送给 客户端；若双方建立的是HTTP连接，则服务器需要等到客户端发送一次请求后才能将数据传回给客户端，因此，客户端定时向服务器端发送连接请求，不仅可以 保持在线，同时也是在“询问”服务器是否有新的数据，如果有就将数据传给客户端。</p>
+<p>下面这篇<a href="http://my.oschina.net/joanfen/blog/287238" target="_blank" rel="external">文章</a>是AsyncSocket的使用教程，大家可以看看。</p>
+<h4 id="6-网络请求中post和get的区别"><a href="#6-网络请求中post和get的区别" class="headerlink" title="6. 网络请求中post和get的区别"></a>6. 网络请求中post和get的区别</h4><p>GET是用于获取数据的，POST一般用于将数据发给服务器之用。</p>
+<p><strong>普遍答案</strong><br>1.GET使用URL或Cookie传参。而POST将数据放在BODY中。<br>2.GET的URL会有长度上的限制，则POST的数据则可以非常大。<br>3.POST比GET安全，因为数据在地址栏上不可见。</p>
+<p>不过也有文章说其实上面的是错误的，具体参考这篇<a href="http://www.nowamagic.net/librarys/veda/detail/1919" target="_blank" rel="external">文章</a></p>
+<h4 id="7-时间复杂度和空间复杂度"><a href="#7-时间复杂度和空间复杂度" class="headerlink" title="7. 时间复杂度和空间复杂度"></a>7. 时间复杂度和空间复杂度</h4><p>由于打不出数字符号，只能贴图了。<br><img src="http://upload-images.jianshu.io/upload_images/1170656-21358344d6f9d53e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="时间复杂度"></p>
+<p><strong>求时间复杂度</strong><br>【1】如果算法的执行时间不随着问题规模n的增加而增长，即使算法中有上千条语句，其执行时间也不过是一个较大的常数。此类算法的时间复杂度是O(1)。</p>
+<pre><code>x=91; y=100;while(y&gt;0) if(x&gt;100) {x=x-10;y--;} else x++;解答： T(n)=O(1)
+</code></pre><p>这段程序的运行是和n无关的，就算它再循环一万年，我们也不管他，只是一个常数阶的函数。</p>
+<p>【2】当有若干个循环语句时，算法的时间复杂度是由嵌套层数最多的循环语句中最内层语句的频度f(n)决定的。</p>
+<pre><code> x=1; 
+for(i=1;i&lt;=n;i++) 
+    for(j=1;j&lt;=i;j++)
+       for(k=1;k&lt;=j;k++)
+           x++; 　　
+</code></pre><p>该程序段中频度最大的语句是(5)，内循环的执行次数虽然与问题规模n没有直接关系，但是却与外层循环的变量取值有关，而最外层循环的次数直接与n有关，因此可以从内层循环向外层分析语句(5)的执行次数：  则该程序段的时间复杂度为</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-b640f2553e52fe12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2"></p>
+<p>【3】算法的时间复杂度不仅仅依赖于问题的规模，还与输入实例的初始状态有关。<br>在数值A[0..n-1]中查找给定值K的算法大致如下：   </p>
+<pre><code>i=n-1;            
+while(i&gt;=0&amp;&amp;(A[i]!=k))       
+  i--;        
+return i;        
+</code></pre><p>此算法中的语句(3)的频度不仅与问题规模n有关，还与输入实例中A的各元素取值及K的取值有关: ①若A中没有与K相等的元素，则语句(3)的频度f(n)=n； ②若A的最后一个元素等于K,则语句(3)的频度f(n)是常数0。</p>
+<p><strong>空间复杂度</strong><br>一个程序的空间复杂度是指运行完一个程序所需内存的大小。利用程序的空间复杂度，可以对程序的运行所需要的内存多少有个预先估计。一个程序执行时除了需要存储空间和存储本身所使用的指令、常数、变量和输入数据外，还需要一些对数据进行操作的工作单元和存储一些为现实计算所需信息的辅助空间。程序执行时所需存储空间包括以下两部分。　<br>　<br>（1）固定部分。这部分空间的大小与输入/输出的数据的个数多少、数值无关。主要包括指令空间（即代码空间）、数据空间（常量、简单变量）等所占的空间。这部分属于静态空间。<br>（2）可变空间，这部分空间的主要包括动态分配的空间，以及递归栈所需的空间等。这部分的空间大小与算法有关。</p>
+<p>一个算法所需的存储空间用f(n)表示。S(n)=O(f(n))　　其中n为问题的规模，S(n)表示空间复杂度。</p>
+<h4 id="8-支付宝SDK使用"><a href="#8-支付宝SDK使用" class="headerlink" title="8. 支付宝SDK使用"></a>8. 支付宝SDK使用</h4><p>使用支付宝进行一个完整的支付功能，大致有以下步骤：向支付宝申请, 与支付宝签约，获得商户ID（partner）和账号ID（seller）和私钥(privateKey)。下载支付宝SDK，生成订单信息,签名加密调用支付宝客户端，由支付宝客户端跟支付宝安全服务器打交道。支付完毕后,支付宝客户端会自动跳回到原来的应用程序，在原来的应用程序中显示支付结果给用户看。</p>
+<p><strong>集成之后可能遇到的问题</strong><br>1）集成SDK编译时找不到 openssl/asn1.h 文件<br><img src="http://upload-images.jianshu.io/upload_images/1170656-9cd15fc846eef8ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="技术分享">解决方案：Build Settings –&gt; Search Paths –&gt; Header Search paths : $(SRCROOT)/支付宝集成/Classes/Alipay<br><img src="http://upload-images.jianshu.io/upload_images/1170656-0c846782413bc42c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="技术分享"></p>
+<p>2）链接时：找不到 SystemConfiguration.framework 这个库 <img src="http://upload-images.jianshu.io/upload_images/1170656-017d3f15dea91b82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="技术分享"><br>解决方案：<img src="http://upload-images.jianshu.io/upload_images/1170656-9c1c8eb51640d3a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="技术分享"></p>
+<p>打开支付宝客户端进行支付(用户没有安装支付宝客户端,直接在应用程序中添加一个WebView,通过网页让用户进行支付)<br>// 注意:如果是通过网页支付完成,那么会回调该block:callback</p>
+<pre><code>[[AlipaySDK defaultService] payOrder:orderString fromScheme:@&quot;jingdong&quot; callback:^(NSDictionary *resultDic) { }];
+</code></pre><p>在AppDelegate.m</p>
+<pre><code>// 当通过别的应用程序,将该应用程序打开时,会调用该方法
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options{ // 当用户通过支付宝客户端进行支付时,会回调该block:standbyCallback 
+[[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) { NSLog(@&quot;result = %@&quot;,resultDic); }]; return YES;}
+</code></pre><h4 id="9-远程推送"><a href="#9-远程推送" class="headerlink" title="9. 远程推送"></a>9. 远程推送</h4><p>当服务端远程向APNS推送至一台离线的设备时，苹果服务器Qos组件会自动保留一份最新的通知，等设备上线后，Qos将把推送发送到目标设备上</p>
+<p>远程推送的基本过程<br>1.客户端的app需要将用户的UDID和app的bundleID发送给apns服务器,进行注册,apns将加密后的device Token返回给app<br>2.app获得device Token后,上传到公司服务器<br>3.当需要推送通知时,公司服务器会将推送内容和device Token一起发给apns服务器<br>4.apns再将推送内容送到客户端上</p>
+<p>创建证书的流程：<br>1.打开钥匙串，生成CertificateSigningRequest.certSigningRequest文件<br>2.将CertificateSigningRequest.certSigningRequest上传进developer，导出.cer文件<br>3.利用CSR导出P12文件<br>4.需要准备下设备token值（无空格）<br>5.使用OpenSSL合成服务器所使用的推送证书</p>
+<p>本地app代码参考<br>1.注册远程通知</p>
+<pre><code> - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions//中注册远程通知
+{
+[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+}
+</code></pre><p>2,实现几个代理方法：</p>
+<pre><code>//获取deviceToken令牌  
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  
+{  
+//获取设备的deviceToken唯一编号  
+NSLog(@&quot;deviceToken=%@&quot;,deviceToken);  
+NSString *realDeviceToken=[NSString stringWithFormat:@&quot;%@&quot;,deviceToken];  
+//去除&lt;&gt;  
+realDeviceToken = [realDeviceToken stringByReplacingOccurrencesOfString:@&quot;&lt;&quot; withString:@&quot;&quot;];  
+realDeviceToken = [realDeviceToken stringByReplacingOccurrencesOfString:@&quot;&gt;&quot; withString:@&quot;&quot;];  
+NSLog(@&quot;realDeviceToken=%@&quot;,realDeviceToken);  
+[[NSUserDefaults standardUserDefaults] setValue:realDeviceToken forKey:@&quot;DeviceToken&quot;];  //要发送给服务器
+}  
+
+ //获取令牌出错  
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error  
+{  
+//注册远程通知设备出错  
+NSLog(@&quot;RegisterForRemoteNotification error=%@&quot;,error);  
+}  
+//在应用在前台时受到消息调用  
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo  
+{  
+ //打印推送的消息  
+NSLog(@&quot;%@&quot;,[[userInfo objectForKey:@&quot;aps&quot;] objectForKey:@&quot;alert&quot;]):  
+}  
+</code></pre><p>配置后台模式<img src="http://upload-images.jianshu.io/upload_images/1170656-d955d43170b41c11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>一般我们是使用开发版本的Provisioning做推送测试,如果没有问题,再使用发布版本证书的时候一般也应该是没有问题的。为了以防万一,我们可以在越狱的手机上安装我们的使用发布版证书的ipa文件(最好使用debug版本,并打印出获取到的deviceToken),安装成功后在;XCode-&gt;Window-&gt;Organizer-找到对应的设备查看console找到打印的deviceToken。</p>
+<p>在后台的推送程序中使用发布版制作的证书并使用该deviceToken做推送服务.<br>使用开发和发布证书获取到的deviceToken是不一样的。</p>
+<h4 id="10-protocol-和-category-中如何使用-property"><a href="#10-protocol-和-category-中如何使用-property" class="headerlink" title="10.  @protocol 和 category 中如何使用 @property"></a>10.  @protocol 和 category 中如何使用 @property</h4><p>1）在protocol中使用property只会生成setter和getter方法声明,我们使用属性的目的,是希望遵守我协议的对象能实现该属性</p>
+<p>2）category 使用 @property 也是只会生成setter和getter方法的声明,如果我们真的需要给category增加属性的实现,需要借助于运行时的两个函数：</p>
+<p>①objc_setAssociatedObject</p>
+<p>②objc_getAssociatedObject</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-反转二叉树，不用递归&quot;&gt;&lt;a href=&quot;#1-反转二叉树，不用递归&quot; class=&quot;headerlink&quot; title=&quot;1. 反转二叉树，不用递归&quot;&gt;&lt;/a&gt;1. 反转二叉树，不用递归&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;/**
+ * Definition fo
+    
+    </summary>
+    
+    
+      <category term="Interview" scheme="https://dangdangfeng.github.io/tags/Interview/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>那些著名或非著名的iOS面试题－前编</title>
+    <link href="https://dangdangfeng.github.io/2014/07/01/%E9%82%A3%E4%BA%9B%E8%91%97%E5%90%8D%E6%88%96%E9%9D%9E%E8%91%97%E5%90%8D%E7%9A%84iOS%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%8D%E5%89%8D%E7%BC%96/"/>
+    <id>https://dangdangfeng.github.io/2014/07/01/那些著名或非著名的iOS面试题－前编/</id>
+    <published>2014-07-01T14:55:06.000Z</published>
+    <updated>2016-08-31T15:07:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-如何追踪app崩溃率，如何解决线上闪退"><a href="#1-如何追踪app崩溃率，如何解决线上闪退" class="headerlink" title="1.如何追踪app崩溃率，如何解决线上闪退"></a>1.如何追踪app崩溃率，如何解决线上闪退</h4><p>当iOS设备上的App应用闪退时，操作系统会生成一个crash日志，保存在设备上。crash日志上有很多有用的信息，比如每个正在执行线程的完整堆栈跟踪信息和内存映像，这样就能够通过解析这些信息进而定位crash发生时的代码逻辑，从而找到App闪退的原因。通常来说，crash产生来源于两种问题：违反iOS系统规则导致的crash和App代码逻辑BUG导致的crash，下面分别对他们进行分析。</p>
+<p><strong>违反iOS系统规则产生crash的三种类型</strong></p>
+<p>(1) 内存报警闪退<br>当iOS检测到内存过低时，它的VM系统会发出低内存警告通知，尝试回收一些内存；如果情况没有得到足够的改善，iOS会终止后台应用以回收更多内存；最后，如果内存还是不足，那么正在运行的应用可能会被终止掉。在Debug模式下，可以主动将客户端执行的动作逻辑写入一个log文件中，这样程序童鞋可以将内存预警的逻辑写入该log文件，当发生如下截图中的内存报警时，就是提醒当前客户端性能内存吃紧，可以通过Instruments工具中的Allocations 和 Leaks模块库来发现内存分配问题和内存泄漏问题。</p>
+<p>(2) 响应超时<br>当应用程序对一些特定的事件（比如启动、挂起、恢复、结束）响应不及时，苹果的Watchdog机制会把应用程序干掉，并生成一份相应的crash日志。这些事件与下列UIApplicationDelegate方法相对应，当遇到Watchdog日志时，可以检查上图中的几个方法是否有比较重的阻塞UI的动作。　</p>
+<pre><code>application:didFinishLaunchingWithOptions:　
+applicationWillResignActive:
+applicationDidEnterBackground:　
+applicationWillEnterForeground:
+applicationDidBecomeActive:
+applicationWillTerminate:　　
+</code></pre><p>(3) 用户强制退出<br>一看到“用户强制退出”，首先可能想到的双击Home键，然后关闭应用程序。不过这种场景一般是不会产生crash日志的，因为双击Home键后，所有的应用程序都处于后台状态，而iOS随时都有可能关闭后台进程，当应用阻塞界面并停止响应时这种场景才会产生crash日志。这里指的“用户强制退出”场景，是稍微比较复杂点的操作：先按住电源键，直到出现“滑动关机”的界面时，再按住Home键，这时候当前应用程序会被终止掉，并且产生一份相应事件的crash日志。</p>
+<p><strong>应用逻辑的Bug</strong><br>大多数闪退崩溃日志的产生都是因为应用中的Bug，这种Bug的错误种类有很多，比如　　</p>
+<pre><code>SEGV：（Segmentation Violation，段违例），无效内存地址，比如空指针，未初始化指针，栈溢出等；
+SIGABRT：收到Abort信号，可能自身调用abort()或者收到外部发送过来的信号；
+SIGBUS：总线错误。与SIGSEGV不同的是，SIGSEGV访问的是无效地址（比如虚存映射不到物理内存），而SIGBUS访问的是有效地址，但总线访问异常（比如地址对齐问题）；
+SIGILL：尝试执行非法的指令，可能不被识别或者没有权限；
+SIGFPE：Floating Point Error，数学计算相关问题（可能不限于浮点计算），比如除零操作；
+SIGPIPE：管道另一端没有进程接手数据；
+</code></pre><p>　　常见的崩溃原因基本都是代码逻辑问题或资源问题，比如数组越界，访问野指针或者资源不存在，或资源大小写错误等。</p>
+<p><strong>crash的收集</strong></p>
+<p>如果是在windows上你可以通过itools或pp助手等辅助工具查看系统产生的历史crash日志，然后再根据app来查看。如果是在Mac 系统上，只需要打开xcode-&gt;windows-&gt;devices，选择device logs进行查看，如下图，这些crash文件都可以导出来，然后再单独对这个crash文件做处理分析。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-834619bd37e5cba8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="看日志"></p>
+<p>市场上已有的商业软件提供crash收集服务，这些软件基本都提供了日志存储，日志符号化解析和服务端可视化管理等服务：</p>
+<p>Crashlytics (<a href="http://www.crashlytics.com/" target="_blank" rel="external">www.crashlytics.com</a>)<br>Crittercism (<a href="http://www.crittercism.com/" target="_blank" rel="external">www.crittercism.com</a>)<br>Bugsense (<a href="http://www.bugsense.com/" target="_blank" rel="external">www.bugsense.com</a>)　　<br>HockeyApp (<a href="http://www.hockeyapp.net/" target="_blank" rel="external">www.hockeyapp.net</a>)　　<br>Flurry(<a href="http://www.flurry.com/" target="_blank" rel="external">www.flurry.com</a>)</p>
+<p>开源的软件也可以拿来收集crash日志，比如Razor,QuincyKit（git链接）等，这些软件收集crash的原理其实大同小异，都是根据系统产生的crash日志进行了一次提取或封装，然后将封装后的crash文件上传到对应的服务端进行解析处理。很多商业软件都采用了Plcrashreporter这个开源工具来上传和解析crash，比如HockeyApp,Flurry和crittercism等。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a8b82f0317591a3a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="crash信息"></p>
+<p>由于自己的crash信息太长，找了一张示例：　　<br>1)crash标识是应用进程产生crash时的一些标识信息，它描述了该crash的唯一标识（E838FEFB-ECF6-498C-8B35-D40F0F9FEAE4），所发生的硬件设备类型（iphone3,1代表iphone4），以及App进程相关的信息等；<br>2）基本信息描述的是crash发生的时间和系统版本；　　<br>3）异常类型描述的是crash发生时抛出的异常类型和错误码；　　<br>4）线程回溯描述了crash发生时所有线程的回溯信息，每个线程在每一帧对应的函数调用信息（这里由于空间限制没有全部列出）；　　<br>5）二进制映像是指crash发生时已加载的二进制文件。以上就是一份crash日志包含的所有信息，接下来就需要根据这些信息去解析定位导致crash发生的代码逻辑， 这就需要用到符号化解析的过程（洋名叫：symbolication)。</p>
+<p><strong>解决线上闪退</strong><br>首先保证，发布前充分测试。发布后依然有闪退现象，查看崩溃日志，及时修复并发布。</p>
+<h4 id="2-什么是事件响应链，点击屏幕时是如何互动的，事件的传递。"><a href="#2-什么是事件响应链，点击屏幕时是如何互动的，事件的传递。" class="headerlink" title="2.什么是事件响应链，点击屏幕时是如何互动的，事件的传递。"></a>2.什么是事件响应链，点击屏幕时是如何互动的，事件的传递。</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-e5b08d215be73490.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="事件响应链"></p>
+<p>对于IOS设备用户来说，他们操作设备的方式主要有三种：触摸屏幕、晃动设备、通过遥控设施控制设备。对应的事件类型有以下三种：</p>
+<p>1、触屏事件（Touch Event）</p>
+<p>2、运动事件（Motion Event）</p>
+<p>3、远端控制事件（Remote-Control Event）</p>
+<p><strong>响应者链（Responder Chain）</strong><br>响应者对象（Responder Object），指的是有响应和处理事件能力的对象。响应者链就是由一系列的响应者对象构成的一个层次结构。</p>
+<p>UIResponder是所有响应对象的基类，在UIResponder类中定义了处理上述各种事件的接口。我们熟悉的UIApplication、 UIViewController、UIWindow和所有继承自UIView的UIKit类都直接或间接的继承自UIResponder，所以它们的实例都是可以构成响应者链的响应者对象。</p>
+<p>响应者链有以下特点：<br>1、响应者链通常是由视图（UIView）构成的；<br>2、一个视图的下一个响应者是它视图控制器（UIViewController）（如果有的话），然后再转给它的父视图（Super View）；<br>3、视图控制器（如果有的话）的下一个响应者为其管理的视图的父视图；<br>4、单例的窗口（UIWindow）的内容视图将指向窗口本身作为它的下一个响应者<br>需要指出的是，Cocoa Touch应用不像Cocoa应用，它只有一个UIWindow对象，因此整个响应者链要简单一点；<br>5、单例的应用（UIApplication）是一个响应者链的终点，它的下一个响应者指向nil，以结束整个循环。</p>
+<p><strong>点击屏幕时是如何互动的</strong><br>iOS系统检测到手指触摸(Touch)操作时会将其打包成一个UIEvent对象，并放入当前活动Application的事件队列，单例的UIApplication会从事件队列中取出触摸事件并传递给单例的UIWindow来处理，UIWindow对象首先会使用hitTest:withEvent:方法寻找此次Touch操作初始点所在的视图(View)，即需要将触摸事件传递给其处理的视图，这个过程称之为hit-test view。</p>
+<p>UIWindow实例对象会首先在它的内容视图上调用hitTest:withEvent:，此方法会在其视图层级结构中的每个视图上调用pointInside:withEvent:（该方法用来判断点击事件发生的位置是否处于当前视图范围内，以确定用户是不是点击了当前视图），如果pointInside:withEvent:返回YES，则继续逐级调用，直到找到touch操作发生的位置，这个视图也就是要找的hit-test view。</p>
+<p>hitTest:withEvent:方法的处理流程如下:首先调用当前视图的pointInside:withEvent:方法判断触摸点是否在当前视图内；若返回NO,则hitTest:withEvent:返回nil;若返回YES,则向当前视图的所有子视图(subviews)发送hitTest:withEvent:消息，所有子视图的遍历顺序是从最顶层视图一直到到最底层视图，即从subviews数组的末尾向前遍历，直到有子视图返回非空对象或者全部子视图遍历完毕；若第一次有子视图返回非空对象，则hitTest:withEvent:方法返回此对象，处理结束；如所有子视图都返回非，则hitTest:withEvent:方法返回自身(self)。</p>
+<p>事件的传递和响应分两个链：</p>
+<p>传递链：由系统向离用户最近的view传递。UIKit –&gt; active app’s event queue –&gt; window –&gt; root view –&gt;……–&gt;lowest view<br>响应链：由离用户最近的view向系统传递。initial view –&gt; super view –&gt; …..–&gt; view controller –&gt; window –&gt; Application</p>
+<h4 id="3-Run-Loop是什么，使用的目的，何时使用和关注点"><a href="#3-Run-Loop是什么，使用的目的，何时使用和关注点" class="headerlink" title="3.Run Loop是什么，使用的目的，何时使用和关注点"></a>3.Run Loop是什么，使用的目的，何时使用和关注点</h4><p>Run Loop是一让线程能随时处理事件但不退出的机制。RunLoop 实际上是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。让线程在没有处理消息时休眠以避免资源占用、在有消息到来时立刻被唤醒。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</p>
+<p><strong>系统默认注册了5个Mode:</strong></p>
+<ol>
+<li>kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。</li>
+<li>UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</li>
+<li>UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。</li>
+<li>GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。</li>
+<li>kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。</li>
+</ol>
+<p><strong>Run Loop的四个作用:</strong></p>
+<p>使程序一直运行接受用户输入<br>决定程序在何时应该处理哪些Event<br>调用解耦<br>节省CPU时间</p>
+<p>主线程的run loop默认是启动的。iOS的应用程序里面，程序启动后会有一个如下的main() 函数：</p>
+<pre><code>int main(int argc, char *argv[])
+{
+       @autoreleasepool {
+         return UIApplicationMain(argc, argv, nil, NSStringFromClass([appDelegate class]));
+      }
+ }
+</code></pre><p>重点是UIApplicationMain() 函数，这个方法会为main thread 设置一个NSRunLoop 对象，这就解释了本文开始说的为什么我们的应用可以在无人操作的时候休息，需要让它干活的时候又能立马响应。</p>
+<p>对其它线程来说，run loop默认是没有启动的，如果你需要更多的线程交互则可以手动配置和启动，如果线程只是去执行一个长时间的已确定的任务则不需要。在任何一个Cocoa程序的线程中，都可以通过：</p>
+<pre><code>NSRunLoop   *runloop = [NSRunLoop currentRunLoop];
+</code></pre><p>来获取到当前线程的run loop。</p>
+<p>一个run loop就是一个事件处理循环，用来不停的监听和处理输入事件并将其分配到对应的目标上进行处理。</p>
+<p>NSRunLoop是一种更加高明的消息处理模式，他就高明在对消息处理过程进行了更好的抽象和封装，这样才能是的你不用处理一些很琐碎很低层次的具体消息的处理，在NSRunLoop中每一个消息就被打包在input source或者是timer source中了。使用run loop可以使你的线程在有工作的时候工作，没有工作的时候休眠，这可以大大节省系统资源。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-81b8810296457210.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RunLoop"></p>
+<p><strong>什么时候使用run loop</strong><br>仅当在为你的程序创建辅助线程的时候，你才需要显式运行一个run loop。Run loop是程序主线程基础设施的关键部分。所以，Cocoa和Carbon程序提供了代码运行主程序的循环并自动启动run loop。IOS程序中UIApplication的run方法（或Mac OS X中的NSApplication）作为程序启动步骤的一部分，它在程序正常启动的时候就会启动程序的主循环。类似的，RunApplicationEventLoop函数为Carbon程序启动主循环。如果你使用xcode提供的模板创建你的程序，那你永远不需要自己去显式的调用这些例程。</p>
+<p>对于辅助线程，你需要判断一个run loop是否是必须的。如果是必须的，那么你要自己配置并启动它。你不需要在任何情况下都去启动一个线程的run loop。比如，你使用线程来处理一个预先定义的长时间运行的任务时，你应该避免启动run loop。Run loop在你要和线程有更多的交互时才需要，比如以下情况：<br>使用端口或自定义输入源来和其他线程通信<br>使用线程的定时器<br>Cocoa中使用任何performSelector…的方法<br>使线程周期性工作</p>
+<p><strong>关注点</strong></p>
+<ol>
+<li><p>Cocoa中的NSRunLoop类并不是线程安全的<br>我们不能再一个线程中去操作另外一个线程的run loop对象，那很可能会造成意想不到的后果。不过幸运的是CoreFundation中的不透明类CFRunLoopRef是线程安全的，而且两种类型的run loop完全可以混合使用。Cocoa中的NSRunLoop类可以通过实例方法：</p>
+<pre><code>- (CFRunLoopRef)getCFRunLoop;
+</code></pre><p>获取对应的CFRunLoopRef类，来达到线程安全的目的。</p>
+</li>
+<li><p>Run loop的管理并不完全是自动的。<br>我们仍必须设计线程代码以在适当的时候启动run loop并正确响应输入事件，当然前提是线程中需要用到run loop。而且，我们还需要使用while/for语句来驱动run loop能够循环运行，下面的代码就成功驱动了一个run loop：</p>
+<pre><code>BOOL isRunning = NO;
+do {
+     isRunning = [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDatedistantFuture]];
+} while (isRunning);
+</code></pre></li>
+<li><p>Run loop同时也负责autorelease pool的创建和释放<br>在使用手动的内存管理方式的项目中，会经常用到很多自动释放的对象，如果这些对象不能够被即时释放掉，会造成内存占用量急剧增大。Run loop就为我们做了这样的工作，每当一个运行循环结束的时候，它都会释放一次autorelease pool，同时pool中的所有自动释放类型变量都会被释放掉。</p>
+</li>
+</ol>
+<h4 id="4-ARC和MRC"><a href="#4-ARC和MRC" class="headerlink" title="4. ARC和MRC"></a>4. ARC和MRC</h4><p>Objective-c中提供了两种内存管理机制MRC（MannulReference Counting）和ARC(Automatic Reference Counting)，分别提供对内存的手动和自动管理，来满足不同的需求。Xcode 4.1及其以前版本没有ARC。</p>
+<p>在MRC的内存管理模式下，与对变量的管理相关的方法有：retain,release和autorelease。retain和release方法操作的是引用记数，当引用记数为零时，便自动释放内存。并且可以用NSAutoreleasePool对象，对加入自动释放池（autorelease调用）的变量进行管理，当drain时回收内存。<br>（1）      retain，该方法的作用是将内存数据的所有权附给另一指针变量，引用数加1，即retainCount+= 1;<br>（2）      release，该方法是释放指针变量对内存数据的所有权，引用数减1，即retainCount-= 1;<br>（3）      autorelease，该方法是将该对象内存的管理放到autoreleasepool中。</p>
+<p>在ARC中与内存管理有关的标识符，可以分为变量标识符和属性标识符，对于变量默认为__strong，而对于属性默认为unsafe_unretained。也存在autoreleasepool。</p>
+<p>其中assign/retain/copy与MRC下property的标识符意义相同，strong类似与retain,assign类似于unsafe_unretained，strong/weak/unsafe_unretained与ARC下变量标识符意义相同，只是一个用于属性的标识，一个用于变量的标识(带两个下划短线__)。所列出的其他的标识符与MRC下意义相同。</p>
+<h4 id="5-线程和进程"><a href="#5-线程和进程" class="headerlink" title="5. 线程和进程"></a>5. 线程和进程</h4><p>进程，是并发执行的程序在执行过程中分配和管理资源的基本单位，是一个动态概念，竟争计算机系统资源的基本单位。每一个进程都有一个自己的地址空间，即进程空间或（虚空间）。进程空间的大小 只与处理机的位数有关，一个 16 位长处理机的进程空间大小为 216 ，而 32 位处理机的进程空间大小为 232 。进程至少有 5 种基本状态，它们是：初始态，执行态，等待状态，就绪状态，终止状态。</p>
+<p>线程，在网络或多用户环境下，一个服务器通常需要接收大量且不确定数量用户的并发请求，为每一个请求都创建一个进程显然是行不通的，——无论是从系统资源开销方面或是响应用户请求的效率方面来看。因此，操作系统中线程的概念便被引进了。线程，是进程的一部分，一个没有线程的进程可以被看作是单线程的。线程有时又被称为轻权进程或轻量级进程，也是 CPU 调度的一个基本单位。</p>
+<p><strong>进程的执行过程是线状的</strong>，尽管中间会发生中断或暂停，但该进程所拥有的资源只为该线状执行过程服务。一旦发生进程上下文切换，这些资源都是要被保护起来的。这是进程宏观上的执行过程。而进程又可有单线程进程与多线程进程两种。我们知道，进程有 一个进程控制块 PCB ，相关程序段 和 该程序段对其进行操作的数据结构集 这三部分，单线程进程的执行过程在宏观上是线性的，微观上也只有单一的执行过程；而多线程进程在宏观上的执行过程同样为线性的，但微观上却可以有多个执行操作（线程），如不同代码片段以及相关的数据结构集。<strong>线程的改变只代表了 CPU 执行过程的改变，而没有发生进程所拥有的资源变化。</strong>除了 CPU 之外，<strong>计算机内的软硬件资源的分配与线程无关</strong>，线程只能共享它所属进程的资源。与进程控制表和 PCB 相似，每个线程也有自己的线程控制表 TCB ，而这个 TCB 中所保存的线程状态信息则要比 PCB 表少得多，这些信息主要是相关指针用堆栈（系统栈和用户栈），寄存器中的状态数据。<strong>进程拥有一个完整的虚拟地址空间，不依赖于线程而独立存在；反之，线程是进程的一部分，没有自己的地址空间，与进程内的其他线程一起共享分配给该进程的所有资源</strong>。</p>
+<p>线程可以有效地提高系统的执行效率，但并不是在所有计算机系统中都是适用的，如某些很少做进程调度和切换的实时系统。使用线程的好处是有多个任务需要处理机处理时，减少处理机的切换时间；而且，线程的创建和结束所需要的系统开销也比进程的创建和结束要小得多。最适用使用线程的系统是多处理机系统和网络系统或分布式系统。</p>
+<h4 id="6-平常常用的多线程处理方式及优缺点"><a href="#6-平常常用的多线程处理方式及优缺点" class="headerlink" title="6. 平常常用的多线程处理方式及优缺点"></a>6. 平常常用的多线程处理方式及优缺点</h4><p>iOS有四种多线程编程的技术，分别是：NSThread，Cocoa NSOperation，GCD（全称：Grand Central Dispatch）,pthread。</p>
+<p><strong>四种方式的优缺点介绍:</strong></p>
+<p>1）NSThread<strong>优点：NSThread 比其他两个轻量级</strong>。<strong>缺点：</strong>需要自己管理线程的生命周期，线程同步。线程同步对数据的加锁会有一定的系统开销。</p>
+<p>2）Cocoa  NSOperation<strong>优点:</strong>不需要关心线程管理， 数据同步的事情，可以把精力放在自己需要执行的操作上。Cocoa operation相关的类是NSOperation, NSOperationQueue.NSOperation是个抽象类,使用它必须用它的子类，可以实现它或者使用它定义好的两个子类: NSInvocationOperation和NSBlockOperation.创建NSOperation子类的对象，把对象添加到NSOperationQueue队列里执行。</p>
+<p>3)<strong>GCD</strong>(全优点)Grand Central dispatch(GCD)是Apple开发的一个多核编程的解决方案。在iOS4.0开始之后才能使用。GCD是一个替代NSThread, NSOperationQueue,NSInvocationOperation等技术的很高效强大的技术。</p>
+<p>4) pthread是一套通用的多线程API，适用于Linux\Windows\Unix,跨平台，可移植，使用C语言，生命周期需要程序员管理，IOS开发中使用很少。</p>
+<p><strong>GCD线程死锁</strong></p>
+<p>GCD 确实好用 ，很强大，相比NSOpretion 无法提供 取消任务的功能。<br>如此强大的工具用不好可能会出现线程死锁。 如下代码：</p>
+<pre><code>- (void)viewDidLoad{ 
+[super viewDidLoad];     
+NSLog(@&quot;=================4&quot;);
+dispatch_sync(dispatch_get_main_queue(), 
+             ^{ NSLog(@&quot;=================5&quot;); }); 
+NSLog(@&quot;=================6&quot;);
+}
+</code></pre><p><strong>GCD Queue 分为三种：</strong><br>1，The main queue  ：主队列，主线程就是在个队列中。<br>2，Global queues ： 全局并发队列。<br>3，用户队列:是用函数 dispatch_queue_create创建的自定义队列</p>
+<p><strong><strong>dispatch_sync 和  dispatch_async 区别：</strong></strong></p>
+<p>dispatch_async(queue,block)  async 异步队列，dispatch_async<br> 函数会立即返回, block会在后台异步执行。</p>
+<p>dispatch_sync(queue,block)   sync 同步队列，dispatch_sync<br> 函数不会立即返回，及阻塞当前线程,等待 block同步执行完成。</p>
+<p><strong>分析上面代码：</strong><br>viewDidLoad 在主线程中， 及在dispatch_get_main_queue() 中，执行到sync 时 向<br>dispatch_get_main_queue()插入 同步 threed。sync 会等到 后面block 执行完成才返回， sync 又再 dispatch_get_main_queue() 队列中，它是串行队列，sync 是后加入的，前一个是主线程，所以 sync 想执行 block 必须等待主线程执行完成，主线程等待 sync 返回，去执行后续内容。照成死锁，sync 等待mainThread 执行完成， mianThread 等待sync 函数返回。下面例子：</p>
+<pre><code>- (void)viewDidLoad{ 
+[super viewDidLoad]; 
+dispatch_async(dispatch_get_global_queue(0, 0), ^{ 
+               NSLog(@&quot;=================1&quot;);
+              dispatch_sync(dispatch_get_main_queue(), ^{ 
+              NSLog(@&quot;=================2&quot;); }); 
+NSLog(@&quot;=================3&quot;); });
+}
+</code></pre><p>程序会完成执行，为什么不会出现死锁。<br>首先： async 在主线程中  创建了一个异步线程 加入  全局并发队列，async 不会等待block 执行完成，立即返回，<br>1，async 立即返回， viewDidLoad 执行完毕，及主线程执行完毕。<br>2，同时，全局并发队列立即执行异步 block ， 打印 1， 当执行到 sync 它会等待 block 执行完成才返回， 及等待dispatch_get_main_queue() 队列中的 mianThread 执行完成， 然后才开始调用block 。因为1 和 2 几乎同时执行，因为2 在全局并发队列上， 2 中执行到sync 时 1 可能已经执行完成或 等了一会，mainThread 很快退出， 2 等已执行后继续内容。如果阻塞了主线程，2 中的sync 就无法执行啦，mainThread 永远不会退出， sync 就永远等待着。</p>
+<h4 id="7-大量数据表的优化方案"><a href="#7-大量数据表的优化方案" class="headerlink" title="7. 大量数据表的优化方案"></a>7. 大量数据表的优化方案</h4><p>1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</p>
+<p>2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<pre><code>select id from t where num is null
+</code></pre><p>最好不要给数据库留NULL，尽可能的使用 NOT NULL填充数据库.</p>
+<p>备注、描述、评论之类的可以设置为 NULL，其他的，最好不要使用NULL。</p>
+<p>不要以为 NULL 不需要空间，比如：char(100) 型，在字段建立时，空间就固定了， 不管是否插入值（NULL也包含在内），都是占用 100个字符的空间的，如果是varchar这样的变长字段， null 不占用空间。</p>
+<p>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：</p>
+<pre><code>select id from t where num=0
+</code></pre><p>3.应尽量避免在 where 子句中使用 != 或 &lt;&gt; 操作符，否则将引擎放弃使用索引而进行全表扫描。</p>
+<p>4.应尽量避免在 where 子句中使用 or 来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描，如：</p>
+<pre><code>select id from t where num=10 or Name=&apos;admin&apos;
+</code></pre><p>可以这样查询：</p>
+<pre><code>select id from t where num=10 union all select id from t where Name=&apos;admin&apos;
+</code></pre><p>5.in 和 not in 也要慎用，否则会导致全表扫描，如：</p>
+<pre><code>select id from t where num in (1,2,3)
+</code></pre><p>对于连续的数值，能用 between 就不要用 in 了：</p>
+<pre><code>select id from t where num between 1 and 3
+</code></pre><p>很多时候用 exists 代替 in 是一个好的选择：</p>
+<pre><code>select num from a where num in (select num from b)
+</code></pre><p>用下面的语句替换：</p>
+<pre><code>select num from a where exists (select 1 from b where num=a.num)
+</code></pre><p>6.下面的查询也将导致全表扫描：</p>
+<pre><code>select id from t where name like ‘%abc%’
+</code></pre><p>若要提高效率，可以考虑全文检索。</p>
+<p>7.如果在 where 子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然 而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
+<pre><code>select id from t where num=@num
+</code></pre><p>可以改为强制查询使用索引：</p>
+<pre><code>select id from t with (index(索引名)) where num=@num
+</code></pre><p>应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
+<pre><code>select id from t where num/2=100
+</code></pre><p>应改为:</p>
+<pre><code>select id from t where num=100*2
+</code></pre><p>9.应尽量避免在where子句中对字段进行函数操作，这将导致引擎放弃使用索引而进行全表扫描。如：</p>
+<pre><code>select id from t where substring(name,1,3)=’abc’ -–name以abc开头的id
+select id from t where datediff(day,createdate,’2015-11-30′)=0 -–‘2015-11-30’ --生成的id
+</code></pre><p>应改为:</p>
+<pre><code>select id from t where name like&apos;abc%&apos; 
+select id from t where createdate&gt;=&apos;2005-11-30&apos; and createdate&lt;&apos;2005-12-1&apos;
+</code></pre><p>10.不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p>
+<p>11.在使用索引字段作为条件时，如果该索引是复合索引，那么必须使用到该索引中的第一个字段作为条件时才能保证系统使用该索引，否则该索引将不会被使用，并且应尽可能的让字段顺序与索引顺序相一致。</p>
+<p>12.不要写一些没有意义的查询，如需要生成一个空表结构：</p>
+<pre><code>select col1,col2 into #t from t where1=0
+</code></pre><p>这类代码不会返回任何结果集，但是会消耗系统资源的，应改成这样：</p>
+<pre><code>create table #t(…)
+</code></pre><p>13.Update 语句，如果只更改1、2个字段，不要Update全部字段，否则频繁调用会引起明显的性能消耗，同时带来大量日志。</p>
+<p>14.对于多张大数据量（这里几百条就算大了）的表JOIN，要先分页再JOIN，否则逻辑读会很高，性能很差。</p>
+<p>15.select count(*) from table；这样不带任何条件的count会引起全表扫描，并且没有任何业务意义，是一定要杜绝的。</p>
+<p>16.索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有 必要。</p>
+<p>17.应尽可能的避免更新 clustered 索引数据列，因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，那么需要考虑是否应将该索引建为 clustered 索引。</p>
+<p>18.尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连 接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</p>
+<p>19.尽可能的使用 varchar/nvarchar 代替 char/nchar ，因为首先变长字段存储空间小，可以节省存储空间，其次对于查询来说，在一个相对较小的字段内搜索效率显然要高些。</p>
+<p>20.任何地方都不要使用</p>
+<pre><code>select * from t 
+</code></pre><p>用具体的字段列表代替“*”，不要返回用不到的任何字段。</p>
+<p>21.尽量使用表变量来代替临时表。如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。</p>
+<p>22.避免频繁创建和删除临时表，以减少系统表资源的消耗。临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件， 最好使用导出表。</p>
+<p>23.在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log ，以提高速度；如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。</p>
+<p>24.如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先 truncate table ，然后 drop table ，这样可以避免系统表的较长时间锁定。</p>
+<p>25.尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写。</p>
+<p>26.使用基于游标的方法或临时表方法之前，应先寻找基于集的解决方案来解决问题，基于集的方法通常更有效。</p>
+<p>27.与临时表一样，游标并不是不可使用。对小型数据集使用 FAST_FORWARD 游标通常要优于其他逐行处理方法，尤其是在必须引用几个表才能获得所需的数据时。在结果集中包括“合计”的例程通常要比使用游标执行的速度快。如果开发时 间允许，基于游标的方法和基于集的方法都可以尝试一下，看哪一种方法的效果更好。</p>
+<p>28.在所有的存储过程和触发器的开始处设置 SET NOCOUNT ON ，在结束时设置 SET NOCOUNT OFF 。无需在执行存储过程和触发器的每个语句后向客户端发送 DONE_IN_PROC 消息。</p>
+<p>29.尽量避免大事务操作，提高系统并发能力。</p>
+<p>30.尽量避免向客户端返回大数据量，若数据量过大，应该考虑相应需求是否合理。</p>
+<p>实际案例分析：拆分大的 DELETE 或INSERT 语句，批量提交SQL语句</p>
+<p>如果你需要在一个在线的网站上去执行一个大的 DELETE 或 INSERT 查询，你需要非常小心，要避免你的操作让你的整个网站停止相应。因为这两个操作是会锁表的，表一锁住了，别的操作都进不来了。</p>
+<p>Apache 会有很多的子进程或线程。所以，其工作起来相当有效率，而我们的服务器也不希望有太多的子进程，线程和数据库链接，这是极大的占服务器资源的事情，尤其是内存。</p>
+<p>如果你把你的表锁上一段时间，比如30秒钟，那么对于一个有很高访问量的站点来说，这30秒所积累的访问进程/线程，数据库链接，打开的文件数，可能不仅仅会让你的WEB服务崩溃，还可能会让你的整台服务器马上挂了。</p>
+<p>所以，如果你有一个大的处理，你一定把其拆分，使用 LIMIT oracle(rownum),sqlserver(top)条件是一个好的方法。下面是一个mysql示例：</p>
+<pre><code>while(1){//每次只做1000条
+mysql_query(“delete from logs where log_date &lt;= ’2015-11-01’ limit 1000”);
+if(mysql_affected_rows() == 0){//删除完成，退出！break；
+}//每次暂停一段时间，释放表让其他进程/线程访问。
+usleep(50000)
+}
+</code></pre><h4 id="8-常用到的动画库"><a href="#8-常用到的动画库" class="headerlink" title="8. 常用到的动画库"></a>8. 常用到的动画库</h4><p>Facebook 开源动画库 Pop 的 GitHub 主页：<a href="https://github.com/facebook/pop" target="_blank" rel="external">facebook/pop · GitHub</a>，介绍：<a href="http://codeplease.io/playing-with-pop-i/" target="_blank" rel="external">Playing with Pop (i)</a></p>
+<p>Canvas 项目主页：<a href="http://canvaspod.io/" target="_blank" rel="external">Canvas - Simplify iOS Development</a>，介绍：<a href="https://medium.com/learning-xcode-as-a-designer/20c82a904164" target="_blank" rel="external">Animate in Xcode Without Code</a></p>
+<p>拿 Canvas 来和 Pop 比其实不大合适，虽然两者都自称「动画库」，但是「库」这个词的含义有所区别。本质上 Canvas 是一个「动画合集」而 Pop 是一个「动画引擎」。</p>
+<p>先说 Canvas。Canvas 的目的是「Animate in Xcode Without Code」。开发者可以通过在 Storyboard 中指定 User Defined Runtime Attributes 来实现一些 Canvas 中预设的动画，也就是他网站上能看到的那些。但是除了更改动画的 delay 和 duration 基本上不能调整其他的参数。</p>
+<p>Pop 就不一样了。如果说 Canvas 是对 Core Animation 的封装，Pop 则是对 Core Animation（以及 UIDynamics）的再实现。</p>
+<p>Pop 语法上和 Core Animation 相似，效果上则不像 Canvas 那么生硬（时间四等分，振幅硬编码）。这使得对 Core Animation 有了解的程序员可以很轻松地把原来的「静态动画」转换成「动态动画」。</p>
+<p>同时 Pop 又往前多走了一步。既然动画的本质是根据时间函数来做插值，那么理论上任何一个对象的任何一个值都可以用来做插值，而不仅仅是 Core Animation 里定死的那一堆大小、位移、旋转、缩放等 animatable properties。</p>
+<h4 id="9-Restful架构"><a href="#9-Restful架构" class="headerlink" title="9. Restful架构"></a>9. Restful架构</h4><p>REST是一种架构风格，其核心是面向资源，REST专门针对网络应用设计和开发方式，以降低开发的复杂性，提高系统的可伸缩性。REST提出设计概念和准则为：</p>
+<pre><code>1.网络上的所有事物都可以被抽象为资源(resource)
+2.每一个资源都有唯一的资源标识(resource identifier)，对资源的操作不会改变这些标识
+3.所有的操作都是无状态的
+</code></pre><p>REST简化开发，其架构遵循CRUD原则，该原则告诉我们对于资源(包括网络资源)只需要四种行为：创建，获取，更新和删除就可以完成相关的操作和处理。您可以通过统一资源标识符（Universal Resource Identifier，URI）来识别和定位资源，并且针对这些资源而执行的操作是通过 HTTP 规范定义的。其核心操作只有GET,PUT,POST,DELETE。</p>
+<p>由于REST强制所有的操作都必须是stateless的，这就没有上下文的约束，如果做分布式，集群都不需要考虑上下文和会话保持的问题。极大的提高系统的可伸缩性。</p>
+<p>RESTful架构：<br>　　（1）每一个URI代表一种资源；<br>　　（2）客户端和服务器之间，传递这种资源的某种表现层；<br>　　（3）客户端通过四个HTTP动词，对服务器端资源进行操作，实现”表现层状态转化”。</p>
+<h4 id="10-请分析下SDWebImage的原理"><a href="#10-请分析下SDWebImage的原理" class="headerlink" title="10. 请分析下SDWebImage的原理"></a>10. 请分析下SDWebImage的原理</h4><p>这个类库提供一个UIImageView类别以支持加载来自网络的远程图片。具有缓存管理、异步下载、同一个URL下载次数控制和优化等特征。</p>
+<p><strong>SDWebImage 加载图片的流程</strong><br>1.入口 setImageWithURL:placeholderImage:options: 会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
+<p>2.进入 SDWebImageManager-downloadWithURL:delegate:options:userInfo:，交给 SDImageCache 从缓存查找图片是否已经下载 queryDiskCacheForKey:delegate:userInfo:.</p>
+<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo: 到 SDWebImageManager。</p>
+<p>4.SDWebImageManagerDelegate 回调 webImageManager:didFinishWithImage: 到 UIImageView+WebCache 等前端展示图片。</p>
+<p>5.如果内存缓存中没有，生成 NSInvocationOperation 添加到队列开始从硬盘查找图片是否已经缓存。</p>
+<p>6.根据 URLKey 在硬盘缓存目录下尝试读取图片文件。这一步是在 NSOperation 进行的操作，所以回主线程进行结果回调 notifyDelegate:。</p>
+<p>7.如果上一操作从硬盘读取到了图片，将图片添加到内存缓存中（如果空闲内存过小，会先清空内存缓存）。SDImageCacheDelegate 回调 imageCache:didFindImage:forKey:userInfo:。进而回调展示图片。</p>
+<p>8.如果从硬盘缓存目录读取不到图片，说明所有缓存都不存在该图片，需要下载图片，回调 imageCache:didNotFindImageForKey:userInfo:。</p>
+<p>9.共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。</p>
+<p>10.图片下载由 NSURLConnection 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
+<p>11.connection:didReceiveData: 中利用 ImageIO 做了按图片下载进度加载效果。</p>
+<p>12.connectionDidFinishLoading: 数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
+<p>13.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
+<p>14.在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，imageDecoder:didFinishDecodingImage:userInfo: 回调给 SDWebImageDownloader。</p>
+<p>15.imageDownloader:didFinishWithImage: 回调给 SDWebImageManager 告知图片下载完成。</p>
+<p>16.通知所有的 downloadDelegates 下载完成，回调给需要的地方展示图片。</p>
+<p>17.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
+<p>18.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
+<p>19.SDWI 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache，方便使用。</p>
+<p>20.SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p><strong>SDWebImage库的作用</strong></p>
+<p>通过对UIImageView的类别扩展来实现异步加载替换图片的工作。</p>
+<p>主要用到的对象：<br>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调<br>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。<br>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。<br>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
+<p>其他类：<br>SDWebImageDecoder，异步对图像进行了一次解压⋯⋯</p>
+<p><strong>1、SDImageCache是怎么做数据管理的?</strong></p>
+<p>SDImageCache分两个部分，一个是内存层面的，一个是硬盘层面的。内存层面的相当是个缓存器，以Key-Value的形式存储图片。当内存不够的时候会清除所有缓存图片。用搜索文件系统的方式做管理，文件替换方式是以时间为单位，剔除时间大于一周的图片文件。当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。</p>
+<p><strong>2、为啥必须做Decoder?</strong><br>由于UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。<br>这种做法是典型的空间换时间的做法。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-如何追踪app崩溃率，如何解决线上闪退&quot;&gt;&lt;a href=&quot;#1-如何追踪app崩溃率，如何解决线上闪退&quot; class=&quot;headerlink&quot; title=&quot;1.如何追踪app崩溃率，如何解决线上闪退&quot;&gt;&lt;/a&gt;1.如何追踪app崩溃率，如何解决线上闪退&lt;/
+    
+    </summary>
+    
+    
+      <category term="Interview" scheme="https://dangdangfeng.github.io/tags/Interview/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS socket all in here</title>
     <link href="https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/"/>
     <id>https://dangdangfeng.github.io/2014/05/31/iOS-socket-all-in-here/</id>
@@ -892,54 +1791,515 @@ NSLog(@&quot;%s %@&quot;,__func__,receiverStr);
   </entry>
   
   <entry>
-    <title>优秀的团队该不该使用敏捷开发</title>
-    <link href="https://dangdangfeng.github.io/2014/03/31/%E4%BC%98%E7%A7%80%E7%9A%84%E5%9B%A2%E9%98%9F%E8%AF%A5%E4%B8%8D%E8%AF%A5%E4%BD%BF%E7%94%A8%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91/"/>
-    <id>https://dangdangfeng.github.io/2014/03/31/优秀的团队该不该使用敏捷开发/</id>
-    <published>2014-03-30T16:51:30.000Z</published>
-    <updated>2016-08-30T16:53:04.000Z</updated>
+    <title>OC攻与伐</title>
+    <link href="https://dangdangfeng.github.io/2014/03/31/OC%E6%94%BB%E4%B8%8E%E4%BC%90/"/>
+    <id>https://dangdangfeng.github.io/2014/03/31/OC攻与伐/</id>
+    <published>2014-03-31T15:18:27.000Z</published>
+    <updated>2016-08-31T15:19:13.000Z</updated>
     
-    <content type="html"><![CDATA[<p>在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。</p>
-<h4 id="敏捷开发的起源"><a href="#敏捷开发的起源" class="headerlink" title="敏捷开发的起源"></a>敏捷开发的起源</h4><p>我们大部分人都学过瀑布开发模型，它是以文档为驱动的。因为在瀑布的整个开发过程中，开发人员根据需求文档进行开发，一切以文档为依据。敏捷开发(Agile Development)是一种以人为核心、迭代、循序渐进的开发方法，是一种软件开发的流程，它会指导我们用规定的环节去一步一步完成项目的开发；而这种开发方式的主要驱动核心是人，注重的是人与人之间，面对面的交流；它只写有必要的文档，或尽量少写文档；采用的是迭代式开发。</p>
-<p>敏捷开发提倡将一个完整的软件版本划分为多个迭代，每个迭代实现不同的特性。重大的、优先级高的特性优先实现，风险高的特性优先实现。在项目的早期就将软件的原型开发出来，并基于这个原型在后续的迭代不断完善。迭代开发的好处是：尽早编码，尽早暴露项目的技术风险。尽早使客户见到可运行的软件，并提出优化意见。可以分阶段提早向不同的客户交付可用的版本。</p>
-<p>在每个迭代中，架构师负责将所有的特性分解成多个Story Card。每个Story可以视为一个独立的特性。每个Story应该可以在最多1个星期内完成开发，交付提前测试（Pre-Test）。当一个迭代中的所有Story开发完毕以后，测试组再进行完整的测试。在整个测试过程中（pre-test，test），基于Daily build，测试组永远都是每天从配置库上取下最新编译的版本进行测试，开发人员也随时修改测试人员提交的问题单，并合入配置库。</p>
-<p>敏捷开发的一个特点是开放式办公，充分沟通，包括测试人员也和开发人员一起办公。基于Story Card的开发方式，团队会在开放式办公区域放置一块白板，上面粘贴着所有的Story Card，按当前的开发状态贴在4个区域中，分别是：未开发，开发中，预测试中，测试中。Story Card的开发人员和测试人员根据开发进度在Story Wall上移动Story Card，更新Story Card的状态。这种方式可以对项目开发进度有一个非常直观的了解。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-004aa1c1a3ae64b0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Story Card"></p>
-<h4 id="敏捷开发宣言"><a href="#敏捷开发宣言" class="headerlink" title="敏捷开发宣言"></a>敏捷开发宣言</h4><p>个体和交互 胜过 过程和工具<br>可以工作的软件 胜过 面面俱到的文档<br>客户合作 胜过 合同谈判<br>响应变化 胜过 遵循计划<br>虽然右项也有价值，但是我们认为左项具有更大的价值。</p>
-<h4 id="敏捷开发的方式"><a href="#敏捷开发的方式" class="headerlink" title="敏捷开发的方式"></a>敏捷开发的方式</h4><p>敏捷开发作为一种指导思想或开发方式，Scrum和XP（Extreme Programming：极限编程）是敏捷开发的具体方式。Scrum和XP的区别是，Scrum偏重于过程，XP则偏重于实践，但是实际中，两者是结合一起应用的。</p>
-<p><strong>Scrum方式</strong><br>Scrum的英文意思是橄榄球运动的一个专业术语，表示“争球”的动作；把一个开发流程的名字取名为Scrum，大家像打橄榄球一样迅速、富有战斗激情，运用该流程，你就能看到你团队高效的工作。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df04202048ac2aef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Scrum流程"></p>
-<p>Scrum整个开发过程由若干个短的迭代周期组成，一个短的迭代周期称为一个Sprint，每个Sprint的建议长度是2到4周(互联网产品研发可以使用1周的Sprint)。在Scrum中，使用Product Backlog来管理产品的需求，Product backlog是一个按照商业价值排序的需求列表，Scrum团队总是先开发对客户具有较高价值的需求。在Sprint中，Scrum团队从产品Backlog中挑选最高优先级的需求进行开发。挑选的需求在Sprint计划会议上经过讨论、分析和估算得到相应的任务列表，我们称它为Sprint backlog。在每个迭代结束时，Scrum团队将递交潜在可交付的产品增量。Scrum 采用迭代、增量的方法来优化可预见性并控制风险。</p>
-<p><strong>Scrum开发流程中的三大角色</strong></p>
-<p><strong>产品负责人（Product Owner）</strong><br>主要负责确定产品的功能和达到要求的标准，指定软件的发布日期和交付的内容，同时有权力接受或拒绝开发团队的工作成果。</p>
-<p><strong>流程管理员（Scrum Master）</strong><br>主要负责整个Scrum流程在项目中的顺利实施和进行，以及清除挡在客户和开发工作之间的沟通障碍，使得客户可以直接驱动开发。</p>
-<p><strong>开发团队（Scrum Team）</strong><br>主要负责软件产品在Scrum规定流程下进行开发工作，人数控制在5~10人左右，每个成员可能负责不同的技术方面，但要求每成员必须要有很强的自我管理能力，同时具有一定的表达能力；成员可以采用任何工作方式，只要能达到Sprint的目标。</p>
-<p><strong>进行Scrum开发的流程</strong><br>1、我们首先需要确定一个Product Backlog（按优先顺序排列的一个产品需求列表），这个是由Product Owner 负责的；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-29a29687130c198c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Product Backlog"></p>
-<p>2、Scrum Team根据Product Backlog列表，做工作量的预估和安排；</p>
-<p>3、有了Product Backlog列表，我们需要通过 Sprint Planning Meeting（Sprint计划会议） 来从中挑选出一个Story作为本次迭代完成的目标，这个目标的时间周期是1~4个星期，然后把这个Story进行细化，形成一个Sprint Backlog；</p>
-<p>4、Sprint Backlog是由Scrum Team去完成的，每个成员根据Sprint Backlog再细化成更小的任务（细到每个任务的工作量在2天内能完成）；<br><img src="http://upload-images.jianshu.io/upload_images/1170656-07a127f8cb0397f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="任务看板"><br>5、在Scrum Team完成计划会议上选出的Sprint Backlog过程中，需要进行 Daily Scrum Meeting（每日站立会议），每次会议控制在15分钟左右，每个人都必须发言，并且要向所有成员当面汇报你昨天完成了什么，并且向所有成员承诺你今天要完成什么，同时遇到不能解决的问题也可以提出，每个人回答完成后，要走到黑板前更新自己的 Sprint burn down（Sprint燃尽图）；<br><img src="http://upload-images.jianshu.io/upload_images/1170656-011cfb12ddf531b6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="每日站立会议"><br>6、做到每日集成，也就是每天都要有一个可以成功编译、并且可以演示的版本；很多人可能还没有用过自动化的每日集成，其实TFS就有这个功能，它可以支持每次有成员进行签入操作的时候，在服务器上自动获取最新版本，然后在服务器中编译，如果通过则马上再执行单元测试代码，如果也全部通过，则将该版本发布，这时一次正式的签入操作才保存到TFS中，中间有任何失败，都会用邮件通知项目管理人员；</p>
-<p>7、当一个Story完成，也就是Sprint Backlog被完成，也就表示一次Sprint完成，这时，我们要进行 Srpint Review Meeting（演示会议），也称为评审会议，产品负责人和客户都要参加（最好本公司老板也参加），每一个Scrum Team的成员都要向他们演示自己完成的软件产品（这个会议非常重要，一定不能取消）；</p>
-<p>8、最后就是 Sprint Retrospective Meeting（回顾会议），也称为总结会议，以轮流发言方式进行，每个人都要发言，总结并讨论改进的地方，放入下一轮Sprint的产品需求中；</p>
-<h4 id="XP方式"><a href="#XP方式" class="headerlink" title="XP方式"></a>XP方式</h4><p>极限编程是一个轻量级的、灵巧的软件开发方法；同时它也是一个非常严谨和周密的方法。它的基础和价值观是交流、朴素、反馈和勇气；即，任何一个软件项目都可以从四个方面入手进行改善：加强交流；从简单做起；寻求反馈；勇于实事求是。XP是一种近螺旋式的开发方法，它将复杂的开发过程分解为一个个相对比较简单的小周期；通过积极的交流、反馈以及其它一系列的方法，开发人员和客户可以非常清楚开发进度、变化、待解决的问题和潜在的困难等，并根据实际情况及时地调整开发过程。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-5c12b2fe0fe4e713.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="XP实践"><br><strong>XP的十三种核心实践</strong><br>团队协作(Whole Team)<br>规划策略(The Planning Game)；<br>结对编程(Pair programming)<br>测试驱动开发(Testing-Driven Development)<br>重构(Refactoring)<br>简单设计(Simple Design)<br>代码集体所有权(Collective Code Ownership)<br>持续集成(Continuous Integration)<br>客户测试(Customer Tests)<br>小型发布（Small Release）<br>每周40小时工作制（40-hour Week）<br>编码规范（Code Standards）<br>系统隐喻（System Metaphor）</p>
-<p>关于规划策略：计划是持续的、循序渐进的。每2周，开发人员就为下2周估算候选特性的成本，而客户则根据成本和商务价值来选择要实现的特性。</p>
-<p>关于测试驱动开发：编写单元测试是一个验证行为，更是一个设计行为。同样，它更是一种编写文档的行为。编写单元测试避免了相当数量的反馈循环，尤其是功功能能验证方面的反馈循环。程序员以非常短的循环周期工作，他们先增加一个失败的测试，然后使之通过。</p>
-<p>关于隐喻：隐喻同体系结构是同义词，隐喻用于描述项目的全貌，Story用于描述个别具体的特征。隐喻是将整个系统联系在一起的全局视图；它是系统的未来影像，是它使得所有单独模块的位置和外观变得明显直观。如果模块的外观与整个隐喻不符，那么你就知道该模块是错误的</p>
-<p>XP的一个成功因素是重视客户的反馈——开发的目的就是为了满足客户的需要。XP方法使开发人员始终都能自信地面对客户需求的变化。XP强调团队合作，经理、客户和开发人员都是开发团队中的一员。团队通过相互之间的充分交流和合作，使用XP这种简单但有效的方式，努力开发出高质量的软件。XP的设计简单而高效；程序员们通过测试获得客户反馈，并根据变化修改代码和设计，他们总是争取尽可能早地将软件交付给客户。XP程序员能够勇于面对需求和技术上的变化。</p>
-<h4 id="什么是优秀团队"><a href="#什么是优秀团队" class="headerlink" title="什么是优秀团队"></a>什么是优秀团队</h4><p>有家公司的一个团队的一个项目用的是”敏捷开发方法”，而当时公司的理念恰恰是：开放、协作性强、扁平化团队，以用户为中心；和团队使用的敏捷方法理念正好相同，结果毫无悬疑的拿到了优秀团队奖。即使开发的项目并不是很成功，但公司需要一个团队来做榜样，来激励其他团队，而那里正好有这么一个团队。</p>
-<p>如果做不了优秀的团队，那么就做一个典型的团队，公司需要这么一个做示范的话题。优秀的团队并不是拘泥于某种开发方式的，而是最适合某种方式的。希望您也能在一个优秀的团队。</p>
-<p>孰好孰坏，因人而异了。</p>
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e32064a1fdf12f76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>Objective-C是非常“实际”的语言。它使用一个用C写成、很小的运行库，只会令应用程序的大小增加很小，和大部分OO（面向对象）系统使用极大的VM（如JVM等）执行取代了整个系统的运作相反。OC写成的程序通常不会比其原始码大很多。 Objective-C的最初版本并不支持垃圾回收。即是鉴于当时的面向对象语言回收时有漫长的“死亡时间”，令整个系统失去功用。Objective-C为避免此问题才不拥有这个功能。Objective-C的内存管理采用引用计数的方式，后期引入ARC（自动引用计数）。</p>
+<p>ObjC不包括命名空间机制(namespace mechanism)。取而代之的是必须在其类别名称加上前缀，时常引致冲突。所有Mac OS X类别和函式均有“NS”作为前缀，使用“NS”是由于这些类别的名称在NeXTSTEP开发时定下。虽然Objective-C是C的母集，但它也不视C的基本型别为第一级的对象。 和C++不同，Objective-C不支援运算子多载(它不支持ad-hoc多型)。但和Java相同，Objective-C只容许对象继承一个类别(不设多重继承)。不过可以使用Categories和protocols实现多重继承。</p>
+<p>由于Obj-C使用动态运行时类型，而且所有的方法都是函数调用（有时甚至连系统调用（syscalls）也如此），很多常见的编译时性能优化方法都不能应用于Obj-C（例如：内联函数、常数传播、交互式优化、纯量取代与聚集等）。这使得Obj-C性能劣于类似的对象抽象语言（如C++）。Obj-C运行时消耗较大，Obj-C本来就不应应用于C++或Java常见的底层抽象。这也静态处理和动态处理的重要区别。</p>
+<h4 id="关于OC弱类型性的一个思考"><a href="#关于OC弱类型性的一个思考" class="headerlink" title="关于OC弱类型性的一个思考"></a>关于OC弱类型性的一个思考</h4><p>我们可以把任何想要的消息发送给代码中类型为“id”的变量，然后Objective-C的动态消息处理就会在运行时让这一调用正确地工作。但在实际情况中，即使方法的查找是发生在运行时期，这也只够确保正确的方法被调用，但却不足以确保参数是有效的。编译器肯定是需要推断出一些与所涉及的方法签名有关的信息的，即使编译器不需要知道id的类型，但它确实需要知道所有参数的字节长度，以及任何返回值的确切类型。这是因为参数的列集（marshal）（压入栈以及从栈中弹出它们）是在编译时配置的。然而通常情况下，我们不需要采取任何步骤来使之发生，参数的信息是通过查看你试图调用的方法的名称来获取的，搜索整个被包含进来的头文件查找与被调用方法的名称吻合的方法，然后从其找到的第一个匹配方法中获取参数的长度。即使你真正指向的确切方法不能被明确分辨出来，匹配方法之间的参数也有可能会是相同的，因为Objective-C中的方法名称通常就暗示了数据的类型。</p>
+<p>设想你有一个类MyClass，该类有一个名为currentPoint的实例方法，该方法返回一个int类型的值。你希望调用保存在数组中的对象的currentPoint，于是使用了这样的代码：</p>
+<pre><code>int result = [[someArray objectAtIndex:0] currentPoint];
+</code></pre><p>运行时调用的方法是正确的，问题是编译器为这一调用列集的参数是不正确的，这导致了数据的返回类型被破坏。[someArray objectAtIndex:0]不能明确的指出得到的一定是类MyClass，解决办法就是强制转换。</p>
+<pre><code>int result = [(MyClass *)[someArray objectAtIndex:0] currentPoint];
+</code></pre><p>在消息发送之前，编译器需要正确地把参数压入到栈中，然后执行消息发送，使用正确的objc_msgSend来取回返回值，而这就是出现故障的地方。</p>
+<p>编译器使用方法签名（通过查看接收者的类型和该接收者的所有有效方法名称来获取的）来准备参数，并试图找出你可能想要调用的方法是哪一个。由于接收者的类型（比如说objectAtIndex:的调用结果）仅为id，这样的话我们就没有显式的类型信息，因此编译器就会查看所有已知方法的一个列表。不幸的是，编译器找到的不是我们的MyClass的方法，其决定匹配NSBezierPath的名为currentPoint的方法，并准备了与该方法的签名相匹配的参数。NSBezierPath的方法返回一个struct类型的NSPoint，而这就导致我们的返回类型被破坏了。</p>
+<p>对于实例方法来说，我们是通过强制转换成所需的特定对象类型来修正问题的，但在两个对象都是类方法的情况下，就不可能强制转换所涉及的特定Class了，在Objective-C中，你不能强制转换类方法。如果你不能够改变方法的名称的话，那么唯一的权变之法看起来就像是这个样子：</p>
+<pre><code>int result = objc_msgSend([someArray objectAtIndex:0], @selector(currentPoint));
+</code></pre><h4 id="一道题的分析"><a href="#一道题的分析" class="headerlink" title="一道题的分析"></a>一道题的分析</h4><pre><code>@implementation Son : Father
+- (id)init {
+self = [super init];
+if (self) {
+    NSLog(@&quot;%@&quot;, NSStringFromClass([self class]));
+    NSLog(@&quot;%@&quot;, NSStringFromClass([super class]));
+}
+return self;
+}
+@end
+</code></pre><p>答案：都输出”Son”</p>
+<p>因为oc的方法寻找是在编译期执行的，self表示本类Son，super表示父类Father，NSObject是Son和Father的父类。class方法在NSObject中定义，并且没有被Father和Son覆盖。[self class]的方法寻找方式是：Son,Father,NSObject，[super class]的方法寻找方式是：Father，NSObject，最终执行的都是NSObject里面定义的class方法。要执行的方法找完之后，程序进入运行期，即执行刚才找到的方法。而方法的实际调用者是对象。[super class]和[self class]的实际调用者都是Son对象。因此最后的打印结果应该都是Son。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。&lt;/p&gt;
-&lt;h4 id=&quot;敏
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-e32064a1fdf12f76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
     
     </summary>
     
     
-      <category term="skill" scheme="https://dangdangfeng.github.io/tags/skill/"/>
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的谈论源码</title>
+    <link href="https://dangdangfeng.github.io/2014/03/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BA%E6%BA%90%E7%A0%81/"/>
+    <id>https://dangdangfeng.github.io/2014/03/30/如何优雅的谈论源码/</id>
+    <published>2014-03-30T15:38:48.000Z</published>
+    <updated>2016-08-31T14:50:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文主要涉及一下几点：</p>
+<ul>
+<li>SDWebImage 原理</li>
+<li>SDWebImage 使用</li>
+<li>SDWebImage 源码分析</li>
+<li>一些思考</li>
+</ul>
+<hr>
+<h4 id="SDWebImage-加载图片原理"><a href="#SDWebImage-加载图片原理" class="headerlink" title="SDWebImage 加载图片原理"></a>SDWebImage 加载图片原理</h4><p><a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">具体源码分析</a>见GIT。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6971e44291c18bb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目前标注的类"></p>
+<p>通过标注的类，看懂应该没问题了。</p>
+<p>SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCache每次都要把缓存的raw  data 再转化为UIImage，就带来了数据处理和内存方面的更多操作。SDWebImage的缓存由SDImageCache类来实现，这是一个单例类，该类负责处理内存缓存及一个可选的磁盘缓存，其中磁盘缓存的写操作是异步的，这样就不会对UI操作造成影响。此外还提供了若干属性和接口来配置和操作缓存对象。包含以下功能：</p>
+<p>1.提供UIImageView的一个分类，以支持网络图片的加载与缓存管理</p>
+<p>2.一个异步的图片加载器</p>
+<p>3.一个异步的内存+磁盘图片缓存</p>
+<p>4.支持GIF图片</p>
+<p>5.支持WebP图片</p>
+<p>6.后台图片解压缩处理</p>
+<p>7.确保同一个URL的图片不被下载多次</p>
+<p>8.确保虚假的URL不会被反复加载</p>
+<p>9.确保下载及缓存时，主线程不被阻塞</p>
+<p><strong>SDWebImage底层实现原理：</strong></p>
+<p>SDWebImage有沙盒缓存机制，主要由三块组成</p>
+<p>1.内存图片缓存</p>
+<p>2.内存操作缓存</p>
+<p>3.磁盘沙盒缓存</p>
+<p>SDWebImage的大部分工作是由缓存对象SDImageCache和异步下载器管理对象SDWebImageManager来完成的。SDWebImage的图片下载是由SDWebImageDownloader这个类来实现的，它是一个异步下载管理器，下载过程中增加了对图片加载做了优化的处理。而真正实现图片下载的是自定义的一个Operation操作，将该操作加入到下载管理器的操作队列downloadQueue中，Operation操作依赖系统提供的NSURLConnection类实现图片的下载。</p>
+<p>SDWebImage提供了对图片缓存的支持，而该功能是由SDImageCache类来完成的。该类负责处理内存缓存及一个可选的磁盘缓存。内存缓存的处理是使用NSCache对象来实现的。NSCache是一个类似于集合的容器。它存储key-value对，这一点类似于NSDictionary类，用搜索文件系统的方式做管理，文件替换方式是以时间为单位。我们通常用使用缓存来临时存储短时间使用但创建昂贵的对象。重用这些对象可以优化性能，因为它们的值不需要重新计算。另外一方面，这些对象对于程序来说不是紧要的，在内存紧张时会被丢弃。</p>
+<p>磁盘缓存的处理则是使用NSFileManager对象来实现的。图片存储的位置是位于Cache文件夹。另外，SDImageCache还定义了一个串行队列，来异步存储图片。</p>
+<p>当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。使用Decoder 是因为UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，<br>所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。<br>为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。是典型的空间换时间的做法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8c5e61bb0b11d4e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><strong>SDWebImage的原理</strong></p>
+<p>1.使用 </p>
+<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options; 
+</code></pre><p>会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
+<p>2.进入  SDWebImageManager</p>
+<pre><code>-downloadWithURL:options:progress:completed:
+</code></pre><p>交给 SDImageCache 从缓存查找图片是否已经下载。</p>
+<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，取缓存，没有从<code>- (UIImage <em>)diskImageForKey:(NSString </em>)key</code>去磁盘缓存中去查找，根据 URLKey 在硬盘缓存目录下尝试读取图片文件。在磁盘缓存中找到后，同时更新置内存缓存中（如果空闲内存过小，会先清空内存缓存），有回调则调用doneBlock回调。</p>
+<p>4.找到了就从SDWebImageQueryCompletedBlock到 UIImageView+WebCache 等前端展示图片。</p>
+<p>5.如果从硬盘缓存目录读取不到图片，说明不存在该图片，需要下载图片，共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。 图片下载由 NSURLSession 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
+<p>6.<code>URLSession:didReceiveData:</code> 中利用 ImageIO 做了按图片下载进度加载效果。数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
+<p>7.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
+<p>8.在主线程 SDWebImageDownloaderCompletedBlock里处理解码完成后的操作。回调给需要的地方展示图片。</p>
+<p>9.从SDWebImageDownloaderProgressBlock 回调给 SDWebImageManager 告知图片下载信息。</p>
+<p>10.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
+<p>11.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
+<p>12.SDWebImage 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache方便使用。 SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-bf7c86e7bd12b9c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="SDWebImage-使用"><a href="#SDWebImage-使用" class="headerlink" title="SDWebImage 使用"></a>SDWebImage 使用</h4><p><strong>常用到的对象：</strong></p>
+<p>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调。</p>
+<p>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。</p>
+<p>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。</p>
+<p>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
+<p>5、SDWebImageDecoder，异步对图像进行了一次解压</p>
+<p>使用：</p>
+<pre><code>[self.imageView sd_setImageWithURL:self.imageURL
+                      placeholderImage:nil
+                               options:SDWebImageProgressiveDownload
+                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                  ...
+                              }
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 ...
+                             }];
+</code></pre><p>调用setImageWithURL:方法的时候，SDWebImage自动做很多事，当你需要在某一具体时刻做事情的时候，你可以覆盖这些方法。比如在下载某个图片的过程中要响应一个事件，就覆盖这个方法：</p>
+<pre><code>//这个方法是下载imagePath2的时候响应
+SDWebImageManager *manager = [SDWebImageManager sharedManager];
+
+[manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+
+    NSLog(@&quot;显示当前进度&quot;);
+
+} completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+
+    NSLog(@&quot;下载完成&quot;);
+}];
+</code></pre><p><strong>基本代码：</strong></p>
+<p>使用SDWebImageManager类：可以进行一些异步加载的工作。</p>
+<pre><code>SDWebImageManager *manager = [SDWebImageManager sharedManager];
+UIImage *cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
+if (cachedImage) {
+  // 如果Cache命中，则直接利用缓存的图片进行有关操作
+  // Use the cached image immediatly
+} else {
+  // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
+  // Start an async download
+ [manager downloadWithURL:url delegate:self];
+}
+</code></pre><p>当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。</p>
+<pre><code>// 当下载完成后，调用回调方法，使下载的图片显示
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
+// Do something with the downloaded image
+}
+</code></pre><p><strong>独立的异步图像下载</strong></p>
+<p>可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。</p>
+<pre><code>downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
+</code></pre><p>这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</p>
+<p><strong>独立的异步图像缓存</strong></p>
+<p>SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。</p>
+<pre><code>UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
+</code></pre><p>存储一个图像到缓存是使用方法storeImage: forKey:</p>
+<pre><code>[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+</code></pre><p>默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值<br>来替代。</p>
+<h4 id="SDWebImage-源码分析示例"><a href="#SDWebImage-源码分析示例" class="headerlink" title="SDWebImage 源码分析示例"></a>SDWebImage 源码分析示例</h4><p>SDWebImageDownloader类</p>
+<p>SDWebImageDownloaderOptions定义：</p>
+<pre><code>typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
+SDWebImageDownloaderLowPriority = 1 &lt;&lt; 0,
+SDWebImageDownloaderProgressiveDownload = 1 &lt;&lt; 1,
+
+// 默认情况下请求不使用NSURLCache，如果设置该选项，则以默认的缓存策略来使用NSURLCache
+SDWebImageDownloaderUseNSURLCache = 1 &lt;&lt; 2,
+
+// 如果从NSURLCache缓存中读取图片，则使用nil作为参数来调用完成block
+SDWebImageDownloaderIgnoreCachedResponse = 1 &lt;&lt; 3,
+
+// 在iOS 4+系统上，允许程序进入后台后继续下载图片。该操作通过向系统申请额外的时间来完成后台下载。如果后台任务终止，则操作会被取消
+SDWebImageDownloaderContinueInBackground = 1 &lt;&lt; 4,
+
+// 通过设置NSMutableURLRequest.HTTPShouldHandleCookies = YES来处理存储在NSHTTPCookieStore中的cookie
+SDWebImageDownloaderHandleCookies = 1 &lt;&lt; 5,
+
+// 允许不受信任的SSL证书。主要用于测试目的。
+SDWebImageDownloaderAllowInvalidSSLCertificates = 1 &lt;&lt; 6,
+
+// 将图片下载放到高优先级队列中
+SDWebImageDownloaderHighPriority = 1 &lt;&lt; 7,
+};
+</code></pre><p>下载顺序：</p>
+<pre><code>typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
+// 以队列的方式，按照先进先出的顺序下载。这是默认的下载顺序
+SDWebImageDownloaderFIFOExecutionOrder,
+// 以栈的方式，按照后进先出的顺序下载。
+SDWebImageDownloaderLIFOExecutionOrder
+};
+</code></pre><p>每个下载操作都定义了回调操作，如下载进度回调，下载完成回调，头部过滤等，这些回调操作是以block形式来呈现；每个下载操作的下载进度回调和下载完成回调，这两个回调稍后将保存在下载管理器的URLCallbacks字典中，key为URL，value为一个数组，数组里面又存放一个保存了下载进度回调和完成回调代码块的字典。这个字典数组同时也保证了同一张图片只会被下载一次。</p>
+<pre><code>// 下载进度
+typedef void(^SDWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger expectedSize);
+// 下载完成
+typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
+// Header过滤
+typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
+</code></pre><p>为了保证URLCallbacks操作(添加、删除)的线程安全性，SDWebImageDownloader将这些操作作为一个个任务放到barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性。</p>
+<pre><code>- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
+...
+// 1. 以dispatch_barrier_sync操作来保证同一时间只有一个线程能对URLCallbacks进行操作
+dispatch_barrier_sync(self.barrierQueue, ^{
+...
+// 2. 处理同一URL的同步下载请求的单个下载
+});
+}
+</code></pre><p>下载请求的管理都是放在downloadImageWithURL:options:progress:completed:方法里面来处理的，该方法调用了上面所提到的addProgressCallback:andCompletedBlock:forURL:createCallback:方法来将请求的信息存入管理器中，同时在创建回调的block中创建新的操作，配置之后将其放入downloadQueue操作队列中，最后方法返回新创建的操作。</p>
+<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url options:(SDWebImageDownloaderOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageDownloaderCompletedBlock)completedBlock {
+...
+[self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url createCallback:^{
+...
+}
+</code></pre><p>下载操作的超时时间可以通过downloadTimeout属性来设置，默认值为15秒。</p>
+<p>SDWebImage定义了一个协议，即 SDWebImageOperation 作为图片下载操作的基础协议。它只声明了一个cancel方法，用于取消操作。每个图片的下载都是一个Operation操作。SDWebImage自定义了一个Operation类，即 SDWebImageDownloaderOperation ，它继承自NSOperation，并采用了SDWebImageOperation协议。除了继承而来的方法，该类只向外暴露了一个方法，initWithRequest:options:progress:completed:cancelled:。对于图片的下载，SDWebImageDownloaderOperation完全依赖于URL加载系统中的NSURLSession。具体看代码<a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">源码分析</a>.</p>
+<pre><code>- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+</code></pre><p>方法的主要任务是接收数据。每次接收到数据时，都会用现有的数据创建一个CGImageSourceRef对象以做处理。在首次获取到数据时(width+height==0)会从这些包含图像信息的数据中取出图像的长、宽、方向等信息以备使用。而后在图片下载完成之前，会使用CGImageSourceRef对象创建一个图片对象，经过缩放、解压缩操作后生成一个UIImage对象供完成回调使用。当然，在这个方法中还需要处理的就是进度信息。如果我们有设置进度回调的话，就调用这个进度回调以处理当前图片的下载进度。</p>
+<p>缩放操作可以查看SDWebImageCompat文件中的SDScaledImageForKey函数；解压缩操作可以查看SDWebImageDecoder文件+decodedImageWithImage方法。在下载完成或下载失败后，需要停止当前线程的run loop，清除连接，并抛出下载停止的通知。如果下载成功，则会处理完整的图片数据，对其进行适当的缩放与解压缩操作，以提供给完成回调使用。</p>
+<p>最重要是自己分析，看过的会忘，消化了才是自己的。学而不思则罔,思而不学则殆。每个人要了解自己的优缺点。有思考才有所得！</p>
+<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>我们应该把精力和时间投入在更值得学习的东西上。如果纯看代码而没有碰到这个场景就算看懂了也没法理解，学习的目的是为了实践，而不要为了原理而分析原理，这样就本末倒置了。对于广大程序员而言，做码农，通过低水平重复的劳动来创造价值的道路是永远不可能一劳永逸的，恰恰相反，是永劳一逸的！生产只能够惠及当下！事物的发展在于思考，可能每个人走的路径不一样，寻找到最适合自己的，坚持走下去。只要能肯定每天都是进步的，快慢又有什么关系呢。这是一个浮躁的社会，这个社会催生了无数可能，也许不是每个人都能做一辈子的程序员，但不要辜负你的时光。你之所以成为你，是因为你的时间，你的经历在哪里，你就在哪里。共勉！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要涉及一下几点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SDWebImage 原理&lt;/li&gt;
+&lt;li&gt;SDWebImage 使用&lt;/li&gt;
+&lt;li&gt;SDWebImage 源码分析&lt;/li&gt;
+&lt;li&gt;一些思考&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&quot;SDWebImage-加
+    
+    </summary>
+    
+    
+      <category term="source" scheme="https://dangdangfeng.github.io/tags/source/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优秀的iOS开发站点</title>
+    <link href="https://dangdangfeng.github.io/2014/03/03/%E4%BC%98%E7%A7%80%E7%9A%84iOS%E5%BC%80%E5%8F%91%E7%AB%99%E7%82%B9/"/>
+    <id>https://dangdangfeng.github.io/2014/03/03/优秀的iOS开发站点/</id>
+    <published>2014-03-02T16:37:08.000Z</published>
+    <updated>2016-08-31T14:49:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>工欲善其事必先利其器，每一次的惊叹背后都有不为人知的努力。分享和共赢，是开源的精神所在。感谢那些开诚布公，乐于助人的程序员们。从优秀到卓越，我们需要不停地向他人学习。</p>
+</blockquote>
+<ul>
+<li>国内优秀的iOS网站</li>
+<li>国外优秀的iOS网站</li>
+</ul>
+<h4 id="常用的国内网站"><a href="#常用的国内网站" class="headerlink" title="常用的国内网站"></a>常用的国内网站</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2364ba42664a3d23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>社区网站：</strong></p>
+<ul>
+<li><a href="http://www.jianshu.com" target="_blank" rel="external">简书</a></li>
+<li><a href="http://gold.xitu.io/welcome/ios" target="_blank" rel="external">稀土掘金</a></li>
+<li><a href="https://segmentfault.com" target="_blank" rel="external">SegmentFault</a></li>
+<li><a href="http://www.cnblogs.com/cate/ios/" target="_blank" rel="external">博客园</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.cocoachina.com" target="_blank" rel="external">cocoachina</a></li>
+<li><a href="http://www.iteye.com" target="_blank" rel="external">ITeye</a></li>
+<li><a href="http://www.csdn.net" target="_blank" rel="external">CSDN</a></li>
+<li><a href="http://www.51cto.com" target="_blank" rel="external">51CTO</a></li>
+<li><a href="https://www.infoq.com" target="_blank" rel="external">infoq</a></li>
+<li><a href="http://toutiao.io/subjects/12199" target="_blank" rel="external">开发者头条</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.oschina.net" target="_blank" rel="external">开源中国</a></li>
+<li><a href="http://code4app.qiniudn.com" target="_blank" rel="external">Code4App</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://www.imooc.com" target="_blank" rel="external">慕课网</a></li>
+<li><a href="http://www.maiziedu.com" target="_blank" rel="external">麦子学院</a></li>
+<li><a href="http://www.jikexueyuan.com" target="_blank" rel="external">极客学院</a></li>
+</ul>
+<p><strong>UI设计：</strong></p>
+<p><a href="http://www.ui4app.com" target="_blank" rel="external">UI4App</a></p>
+<blockquote>
+<p>当然还有很多有用的网站，如果您知道并愿意分享，可以在评论里提供。</p>
+</blockquote>
+<h4 id="常用的国外网站"><a href="#常用的国外网站" class="headerlink" title="常用的国外网站"></a>常用的国外网站</h4><ul>
+<li><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html" target="_blank" rel="external"> Apple Learning Objective C </a>：Apple官方文档</li>
+<li><a href="https://github.com" target="_blank" rel="external">github</a>：每天必看的吧</li>
+<li><a href="http://stackoverflow.com" target="_blank" rel="external">stackoverflow</a>：估计是最大的技术问答网站了</li>
+<li><a href="https://www.developerfeed.com/category/ios/ios-tutorials/" target="_blank" rel="external">developerfeed</a>：开发者论坛</li>
+<li><a href="https://www.objc.io" target="_blank" rel="external">objc.io</a>：经典网站，不用解释</li>
+<li><a href="http://www.cocoacontrols.com" target="_blank" rel="external">cocoacontrols</a>：优秀开源组件</li>
+<li><a href="http://cocoa.tumblr.com" target="_blank" rel="external">cocoa</a>：iOS开发源码和深度观察</li>
+<li><a href="http://maniacdev.com/open-source-iphone-app-store-apps" target="_blank" rel="external">maniacdev.com</a>：开源ios应用及其源代码</li>
+<li><a href="https://sourceforge.net" target="_blank" rel="external">sourceforge</a>：源码</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://iphonedevsdk.com/forum" target="_blank" rel="external">iphonedevsdk</a>：苹果开发论坛之一</li>
+<li><a href="https://devforums.apple.com" target="_blank" rel="external">devforums.apple.com</a>：苹果官方开发者</li>
+<li><a href="https://developer.apple.com/library/ios/navigation/index.html?section=Resource+Types&amp;topic=Sample+Code" target="_blank" rel="external">Sample+Code</a>：苹果官方的小示例项目论坛</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://subjc.com" target="_blank" rel="external">Subjective-C</a>：以解析和重构创新模式和著名应用的UI而闻名</li>
+<li><a href="http://mobile.tutsplus.com/category/tutorials/iphone/" target="_blank" rel="external">tutsplus</a>：一些不错的实例教程</li>
+<li><a href="http://nshipster.com" target="_blank" rel="external">NSHipster</a>：探讨了编程风格，以及最前沿的类的使用和实现</li>
+<li><a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>：每个iOS都应该看看</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://oleb.net" target="_blank" rel="external">oleb</a>：个人博客，在持续更新</li>
+<li><a href="http://petersteinberger.com" target="_blank" rel="external">petersteinberger</a>：个人网站</li>
+<li><a href="http://floriankugler.com/archive/" target="_blank" rel="external">floriankugler</a>：更到15年</li>
+<li><a href="https://www.mikeash.com/pyblog/" target="_blank" rel="external">NSBlog</a>：包含了关于Objective-C和其他主题的深度问题</li>
+</ul>
+<hr>
+<ul>
+<li><a href="http://iosdevweekly.com" target="_blank" rel="external">iOS Dev Weekly</a>：每天更新的iOS推送资源</li>
+<li><a href="http://ios-goodies.com" target="_blank" rel="external">iOS Goodies</a>：iOS资讯站</li>
+<li><a href="http://www.appcoda.com" target="_blank" rel="external">AppCoda</a>：产于香港，重点在用于执行的最新的API和结构上</li>
+<li><a href="http://merowing.info" target="_blank" rel="external">Krzysztof Zab?ocki</a>：提供关于代码结构、工具和Xcode的技巧</li>
+<li><a href="http://iosdevtips.co" target="_blank" rel="external">iOS Development tips</a>：一些关于使用Xcode和API的细致的提示</li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://teamtreehouse.com/techdegree" target="_blank" rel="external">Team Tree House </a>：人人都可以编程的学习网站</li>
+<li><a href="http://www.technobuffalo.com" target="_blank" rel="external">technobuffalo</a>：手机媒体网站</li>
+<li><a href="https://designthencode.com" target="_blank" rel="external">Design then Code </a>：最好的iOS界面设计和应用指导和教程</li>
+<li><a href="http://www.daleisphere.com" target="_blank" rel="external"> iPhone App Development Where to Start </a>：博客</li>
+</ul>
+<p><strong>UI设计：</strong></p>
+<ul>
+<li><a href="http://www.iosinspires.me/" target="_blank" rel="external">iosinspires</a>：优秀的iOS平台上应用的设计，icon及相关资源</li>
+<li><a href="http://www.patternsofdesign.co.uk/" target="_blank" rel="external">patternsofdesign</a>：专注于分享iOS应用UI界面的细节，按照设计元素进行分类，按照iOS常用功能对各类UI进行分类展示。</li>
+<li><a href="http://pttrns.com/" target="_blank" rel="external">iOS UI Patterns</a>：整理/罗列了许多精彩的iOS 应用界面截图，并且按照分类将这些截图分类，比如Activity，Login，About，Calendar，Seeting，Share等各种类型的不同应用的实现效果</li>
+<li><a href="http://www.appsites.com/" target="_blank" rel="external">appsites</a>：优秀移动应用网站设计</li>
+<li><a href="http://dribbble.com/" target="_blank" rel="external">dribbble</a>：设计师交流和分享自己设计作品的社区。上面有很多非常棒的移动产品设计作品。</li>
+<li><a href="http://www.tappgala.com/" target="_blank" rel="external">tappgala</a>：分享最棒的手机产品界面设计</li>
+</ul>
+<p><strong>iOS游戏</strong></p>
+<ul>
+<li><a href="http://maniacdev.com/open-source-ios-game-list-source-code-to-games-in-the-app-store" target="_blank" rel="external">open-source-ios-game</a>：iOS游戏及其源代码</li>
+<li><a href="http://mobile.tutsplus.com/tutorials/iphone/learn-ios-game-development-by-example-10-projects-to-get-you-started/" target="_blank" rel="external">iOS游戏开发可以参考的10个实例</a>：（源代码都在github上）</li>
+<li><a href="http://www.learn-cocos2d.com/blog/" target="_blank" rel="external">Kobold2d引擎</a>：cocos2d引擎的变种，主要和ios,cocos2d,kobold2d开发有关</li>
+<li><a href="https://developers.facebook.com/docs/tutorials/ios-sdk-games/" target="_blank" rel="external">facebook的游戏教程</a></li>
+<li><a href="http://www.idevgames.com/articles" target="_blank" rel="external">idevgames</a>：游戏相关的教程</li>
+</ul>
+<p>暂时统计了这么多，还有好多优秀的网站等待我们挖掘，当然有好的网站也希望可以多互相分享，此处持续添加中······。</p>
+<p>总体感觉，国外的网站并不一定比国内的好用，比如objc.io已经有了国内版。外国网站对于英语也是一种挑战，不过技术就是如此，想更上一层，总要比他人更努力一些。</p>
+<p>PS：读文章固然可以增长我们的见识，但别人的总归是别人的，只有内化成自己的，才不至于白费光阴。写博客，开源组件，都是很好的锻炼。要对得起您耗费的时间。时间不会辜负尊重它的人的，与君共勉！</p>
+<h4 id="无法访问国外网站怎么办？"><a href="#无法访问国外网站怎么办？" class="headerlink" title="无法访问国外网站怎么办？"></a>无法访问国外网站怎么办？</h4><ul>
+<li><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">hosts</a>：最新可用的google hosts文件</li>
+</ul>
+<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h5><p>请出门左拐，购买付费！世界变得无比简单。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+    
+    </summary>
+    
+    
+      <category term="helper" scheme="https://dangdangfeng.github.io/tags/helper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>block和delegate相对论</title>
+    <link href="https://dangdangfeng.github.io/2014/01/31/block%E5%92%8Cdelegate%E7%9B%B8%E5%AF%B9%E8%AE%BA/"/>
+    <id>https://dangdangfeng.github.io/2014/01/31/block和delegate相对论/</id>
+    <published>2014-01-31T15:21:23.000Z</published>
+    <updated>2016-08-31T15:22:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h4><p>委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中的变化做出反应或者影响另一个对象的行为。其基本思想是：两个对象协同解决问题，并且打算在广泛的情形中重用。委托指向另一个对象（即它的委托）的引用，并在关键时刻给委托发消息。消息可能只是通知委托发生了某件事情，给委托提供机会执行额外的处理，或者消息可能要求委托提供一些关键的信息以控制所发生的事情。委托的作用主要有两个，一个是传值，一个是传事件。</p>
+<p>传值常用在B类要把自己的一个数据或者对象传给A类，让A类去展示或者处理（切分紧耦合，和代码分块时常用）。传事件是A类发生了什么事，把这件事告诉关注自己的类，也就是委托的对象，由委托的对象去考虑发生这个事件后应该做出什么反映（例如在异步请求中，界面事件触发数据层改变等）。利用委托赋值，这种方法是为了不暴露自己的属性就可以给自己赋值，这样方便了类的管理，只有在你想要让别人给你赋值的时候才调用，这样的赋值更可控一些。（如tableView中的委托dateSource等）。</p>
+<p>在iOS中委托通过一种@protocol的方式实现,所以又称为协议。协议是多个类共享的一个方法列表,在协议中所列出的方法没有响应的实现，由其它类来实现。delegate是“一对一”的关系，对同一个协议，一个对象只能设置一个代理delegate，所以<strong>单例对象就不能用代理</strong>。代理更注重过程信息的传输：如发起一个网络请求，是否此时请求已经开始、是否收到了数据、数据是否已经接受完成、数据接收失败等。</p>
+<p>从委托类的定义可以看出，委托与协议有一定的相似性。都采用protocol关键字来声明，并且其中的方法都有optional和required，都需要对required方法和调用的optional方法进行实现。而不同的是在委托对象所在的类中需要定义一个delegate对象，并且为id类型。但是delegate与protocol本质上是不同的。Delegate本身应该称为一种设计模式，是把一个类自己需要做的一部分事情，让另一个类（也可以就是自己本身）来完成，而实际做事的类为delegate。而protocol是一种语法，它的主要目标是提供接口给遵守协议的类使用，而这种方式提供了一个很方便的、实现delegate模式的机会。</p>
+<p><strong>委托模式的实现思路：</strong></p>
+<p>1、通常是在对象主体包含一个委托对象的弱引用：</p>
+<pre><code>@property (nonatomic, weak, nullable) id &lt;UITableViewDelegate&gt; delegate;
+</code></pre><p>2、委托对象的实现有两种方式：一种是必须实现，一种是可选实现，即@required和@optional的区别。</p>
+<pre><code>@protocol UITableViewDelegate&lt;NSObject, UIScrollViewDelegate&gt;
+
+@optional
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+</code></pre><p>3、判断触发委托方法。</p>
+<pre><code>//确定委托是否存在Entered方法
+if([delegate respondsToSelector:@selector(method:)])
+{
+    //发送委托方法，方法的参数为用户的输入
+    [delegate method:xxx];
+}
+</code></pre><p>4、连接对象主体和委托，通过setDelegate:(id)obj来实现。</p>
+<pre><code>_test.delegate = self;
+</code></pre><p>5、如果实现委托的类有委托需要的方法就执行方法。大概就是这样。</p>
+<h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block是Apple Inc.为C、C++以及Objective-C添加的特性，使得这些语言可以用类lambda表达式的语法来创建闭包，是iOS4.0以后和Mac OS X 10.6以后引进的对C语言的扩展，用来实现匿名函数的特性。 Block能够读取其它函数内部变量的函数,在一段请求连续代码中可以看到调用参数（如发送请求）和响应结果。采用Block技术能够抽象出很多共用函数，提高了代码的可读性，可维护性，封装性。 </p>
+<p>block写法更简练，不需要写protocol、函数等等；block注重结果的传输：比如对于一个事件，只想知道成功或者失败，并不需要知道进行了多少或者额外的一些信息；block需要注意防止循环引用。</p>
+<p>block的写法大概就是这样：</p>
+<pre><code>void (^blockTest)(void) = ^{
+    NSLog(@&quot;block&quot;);
+};
+
+blockTest();
+</code></pre><p>如果用block进行两个类之间的互动，需要这样：<br>BLOCK首先你在.h文件中声明BLOCK对象，当然返回的参数你可以自己定义： </p>
+<pre><code>typedef void (^blockTest)(); 
+
+@property (nonatomic,copy) blockTest myblock;  
+</code></pre><p>在.m文件中执行时：</p>
+<pre><code>if(_myblock){
+_myblock();
+}
+</code></pre><p>其他类执行block时是这样的：</p>
+<pre><code>_testClass.myblock = ^{
+ NSLog(@&quot;block&quot;);
+}
+</code></pre><p>需要注意的是：<br>1.循环引用问题，如果block里用了self，需要替换为</p>
+<pre><code>__weak typeof(self) weakSelf = self;
+</code></pre><p>2.block所在函数中的，捕获自动变量,但是不能修改它，不然就是编译错误。但是可以改变全局变量、静态变量、全局静态变量。为何不让修改变量：这个是编译器决定的。理论上当然可以修改变量了，只不过block捕获的是自动变量的副本，名字一样。为了不给开发者迷惑，干脆不让赋值。静态变量属于类的，不是某一个变量。所以block内部不用调用self指针,所以block可以调用。解决block不能保存值这一问题的另外一个办法是使用__block修饰符。 </p>
+<h4 id="block和delegate的区别"><a href="#block和delegate的区别" class="headerlink" title="block和delegate的区别"></a>block和delegate的区别</h4><p>block不像代理声明了一个代理函数，在调用的类内部还要实现该函数，若一个页面能发送多个请求，并且用多点触控同时触发发送多个请求，那个这个页面的代理函数很难区分是那个请求的结果,只有你的响应消息中带有消息类型可能会分出来，若服务器做的不够强大，当出现异常时，找不发送请求，对于开发来说是个问题。这样多个消息在一个函数里解析也不利于封装。 Block比代理更清晰, Block可以在创建事件的时候区分开来。这也是为什么现在苹果 API 中越来越多地使用 Block而不是 Delegate。</p>
+<p>block有三个存储区域_NSConcretStackBlock ，_NSConcretGlobalBlock和_NSConcretMallocBlock。正如它们名字说的那样，说明了block的三种存储方式：栈、全局、堆。如果是定义在函数外面的block是global的，另外如果函数内部的block但是没有捕获任何自动变量，那么它也是全局的。</p>
+<pre><code>typedef  int  (^blk_test)( int );
+
+for(...){
+
+blk_test blk = ^(int count) {return count;};
+}
+</code></pre><p>虽然，这个block在循环内，但是blk的地址总是不变的。说明这个block在全局段。在栈上block调用copy那么复制到堆上，在全局block调用copy什么也不做，在堆上调用block引用计数增加。</p>
+<p>测试方法如下：</p>
+<pre><code>typedef  int  (^blkt1)(void) ;
+
+-(void) stackOrHeap{
+
+__block int val =10;
+
+int *valPtr = &amp;val;//使用int的指针，来检测block到底在栈上，还是堆上
+
+blkt1 s= ^{
+
+    NSLog(@&quot;val_block = %d&quot;,++val);
+
+    return val;};
+
+s();
+
+NSLog(@&quot;valPointer = %d&quot;,*valPtr);
+
+}
+</code></pre><p>int val肯定是在栈上的，我保存了val的地址，看看block调用前后是否变化。输出一致说明是栈上，不一致说明是堆上。有兴趣的可以手动试一下ARC和MRC下的结果。</p>
+<p>由此我们可以看到delegate运行成本低，block成本很高。block出栈需要将使用的数据从栈内存拷贝到堆内存，当然对象的话就是加计数，使用完或者block置nil后才消除；delegate只是保存了一个对象指针，直接回调，没有额外消耗。相对C的函数指针，只多做了一个查表动作 。</p>
+<p>一般来说公共接口，方法也较多用delegate进行解耦 ，iOS有很多例子如最常用tableViewDelegate，textViewDelegate等。异步和简单的回调用block更好 ，iOS有很多例子如常用的网络库AFNetwork等。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-dc4d5077aa5ab178.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来自网络"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;delegate&quot;&gt;&lt;a href=&quot;#delegate&quot; class=&quot;headerlink&quot; title=&quot;delegate&quot;&gt;&lt;/a&gt;delegate&lt;/h4&gt;&lt;p&gt;委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OC中的Class</title>
+    <link href="https://dangdangfeng.github.io/2013/12/13/OC%E4%B8%AD%E7%9A%84Class/"/>
+    <id>https://dangdangfeng.github.io/2013/12/13/OC中的Class/</id>
+    <published>2013-12-13T15:16:11.000Z</published>
+    <updated>2016-08-31T15:17:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-84cca5ea0efe20f7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="先看一个示例"><a href="#先看一个示例" class="headerlink" title="先看一个示例"></a>先看一个示例</h4><pre><code>MyClass *my = [MyClass new];
+BOOL b1 = [my responseToSelector:@selector(responseToSelector:)];
+BOOL b2 = [MyClass responseToSelector:@selector(responseToSelector:)];
+NSLog(@&quot;%d, %d&quot;, b1, b2);
+</code></pre><p>结果：都输出”1”(YES)。</p>
+<h4 id="Class和实例对象"><a href="#Class和实例对象" class="headerlink" title="Class和实例对象"></a>Class和实例对象</h4><p>所有的对象都是由其对应的类实例化而来，殊不知类本身也是一种对象。在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，NSObject类定义格式如下：</p>
+<pre><code>@interface NSObject &lt;NSObject&gt; {
+Class isa;
+}
+</code></pre><p>在objc.h中我们发现这个Class仅仅是一个结构(struct)指针的typedef定义:</p>
+<pre><code>typedef struct objc_class *Class;
+</code></pre><p>在Objective-C2.0中，objc_class的定义如下：</p>
+<pre><code>struct objc_class {
+Class isa;
+}
+</code></pre><p>在Objective-C中任何的类定义都是对象。即在程序启动的时候任何类定义都对应于一块内存。在编译的时候，编译器会给每一个类生成一个且只生成一个”描述其定义的对象”,也就是苹果公司说的类对象(class object),是一个单例。C++等语言中所谓的对象，叫做实例对象(instance object)。Objective-C是门很动态的语言，因此程序里的所有实例对象(instace object)都是在运行时由Objective-C的运行时库生成的，而这个类对象(class object)就是运行时库用来创建实例对象(instance object)的依据。实例对象(instance object)的isa指针指向的类对象(class object)里面还有一个isa。这个类对象(class objec)的isa指向的依然是一个objc-class，它就是“元类对象”(metaclass object)。</p>
+<p>尽管类对象保留了一个类实例的原型，但它并不是实例本身。它没有自己的实例变量，也不能执行那些类的实例的方法（只有实例对象才可以执行实例方法）。然而，类的定义能包含那些特意为类对象准备的方法–类方法（ 而不是的实例方法）。类对象从父类那里继承类方法，就像实例从父类那里继承实例方法一样。</p>
+<p><strong>类对象（class object）</strong></p>
+<p>类对象像其他对象一样，也是id类型。类对象是由编译器创建的，即在编译时所谓的类，就是指类对象。任何直接或间接继承了NSObject的类，它的实例对象(instance objec)中都有一个isa指针，指向它的类对象(class object)。这个类对象(class object)中存储了关于这个实例对象(instace object)所属的类的定义的一切：包括变量，方法，遵守的协议等等。因此，类对象能访问所有关于这个类的信息，利用这些信息可以产生一个新的实例，但是类对象不能访问任何实例对象的内容。当你调用一个 “类方法” 例如 [NSObject alloc],你事实上是发送了一个消息给他的类对象。类对象是一个功能完整的对象，所以也能被动态识别（dynamically typed），接收消息，从其他类继承方法。特殊之处在于它们是由编译器创建的，缺少它们自己的数据结构(实例变量），只是在运行时产生实例的代理。</p>
+<p><strong>元类对象(metaclass object)</strong></p>
+<p>类对象是元类对象的一个实例！元类描述了 一个类对象，就像类对象描述了普通对象一样。不同的是元类的方法列表是类方法的集合，由类对象的选择器来响应。当向一个类发送消息时，objc_msgSend会通过类对象的isa指针定位到元类，并检查元类的方法列表（包括父类）来决定调用哪个方法。元类代替了类对象描述了类方法，就像类对象代替了实例对象描述了实例化方法。元类也是对象，元类是根元类(root class’s metaclass)的实例,而根元类是其自身的实例，即根元类的isa指针指向自身。</p>
+<p>类对象(class object)中包含了类的实例变量，实例方法的定义，而元类对象(metaclass object)中包括了类的类方法(也就是C++中的静态方法)的定义。类对象存的是关于实例对象的信息(变量，实例方法等)，而元类对象(metaclass object)中存储的是关于类的信息(类的版本，名字，类方法等)。类对象(class object)和元类对象(metaclass object)的定义都是objc_class结构，其不同仅仅是在用途上，比如其中的方法列表在类对象(instance object)中保存的是实例方法(instance method)，而在元类对象(metaclass object)中则保存的是类方法(class method)。</p>
+<p>当一个消息发送给任何一个对象， 方法的检查 从对象的 isa 指针开始，然后是父类。实例方法在类中定义， 类方法 在元类和根类中定义。（根类的元类就是根类自己）。在一些计算机语言的原理中，一个类和元类层次结构可以更自由的组成，更深元类链和从单一的元类继承的更多的实例化的类。Objective-C 的类方法 是使用元类的根本原因，在其他方面试图在隐藏元类。例如 [NSObject class] 完全相等于 [NSObject self]，所以，在形式上他还是返回的 NSObject-&gt;isa 指向的元类。 Objective-C语言是一组实用的折中方案。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在objc中不论是实例对象还是Class，都是id类型的对象（Class同样是对象）；实例对象的isa指向它的Class（储存所有减号方法）,Class对象的isa指向元类（储存所有加号方法）；向一个对象（id类型）发送消息时，都是从这个对象的isa指针指向的Class中寻找方法；类的super_class指向其父类，而元类的super_class则指向父类的元类。元类的super class链与类的super class链平行，所以类方法的继承与实例方法的继承也是并行的。而根元类(root class’s metaclass)的super_class指向根类(root class)。object_getClass跟随实例的isa指针，返回此实例所属的类，对于实例对象(instance)返回的是类(class),对于类(class)则返回的是元类(metaclass)；-class方法对于实例对象(instance)会返回类(class),但对于类(class)则不会返回元类(metaclass),而只会返回类本身，即[@”instance” class]返回的是__NSCFConstantString,而[NSString class]返回的是NSString。class_isMetaClass可判断某类是否为元类。 </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e5ea3116af9c38a4.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="isa"></p>
+<p>回到题目，当像MyClass类发送一个实例方法（- responseToSelector）消息时：会从它的isa，也就是MyClass元类对象中寻找，由于元类中的方法都是类方法，所以自然找不到；于是沿继承链去父类NSObject元类中寻找，依然没有；由于objc对这块的设计是，NSObject的元类的父类是NSObject类（也就是我们熟悉的NSObject类），其中有所有的实例方法，因此找到了- responseToSelector。NSObject类中的所有实例方法很可能都对应实现了一个类方法（至少从开源的代码中可以看出来），如+ resonseToSelector，但并非公开的API，如果真的是这样，第2步就可以找到这个方法。 非NSObject的selector这样做无效。</p>
+<p>使用objc_allocateClassPair可在运行时创建新的类与元类对，使用class_addMethod和class_addIvar可向类中增加方法和实例变量，最后使用objc_registerClassPair注册后，就可以使用此类了。动态语言可以在需要时更改已经定义好的类！由于在编译的时候就为每个类分配了内存空间大小，根据他们的属性，而且这些属性直接保存在名objc_ivar_list的struct容器里，一旦编译后就锁定了大小，所以不能在运行时随意增加，也没有空间再分给他们。之所以category可以是因为他的方法是存在名为objc_method_list的指针指向的struct容器里，由此可以看出属性是全部都是丢在类里，而方法只是把装他们的容器的地址丢在类里，所以属性不能扩展，而方法可以无限制，因为他的大小不影响类的空间。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-84cca5ea0efe20f7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+    
+    </summary>
+    
+    
+      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
     
   </entry>
   
@@ -1194,568 +2554,6 @@ NSLog(@&quot;The two CGColor is not equal!&quot;);
     <summary type="html">
     
       &lt;h4 id=&quot;UIImage-CGImage和CGImageRef释疑&quot;&gt;&lt;a href=&quot;#UIImage-CGImage和CGImageRef释疑&quot; class=&quot;headerlink&quot; title=&quot;UIImage,CGImage和CGImageRef释疑&quot;&gt;&lt;/a&gt;UI
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cordova Source Code Analyse</title>
-    <link href="https://dangdangfeng.github.io/2013/08/29/Cordova-Source-Code-Analyse/"/>
-    <id>https://dangdangfeng.github.io/2013/08/29/Cordova-Source-Code-Analyse/</id>
-    <published>2013-08-29T15:27:36.000Z</published>
-    <updated>2016-08-30T15:34:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  <strong><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></strong> (markdown下经常无法链接，地址在这： <a href="http://cordova.apache.org" target="_blank" rel="external">http://cordova.apache.org</a>)</p>
-<h4 id="文件分类"><a href="#文件分类" class="headerlink" title="文件分类"></a>文件分类</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
-<blockquote>
-<p>目录文件说明：</p>
-<p>conig.xml ：cordova的配置文件</p>
-<p>hooks/ ：存放自定义cordova命令的脚本文件。</p>
-<p>platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改</p>
-<p>plugins/ ：插件目录（主要是提供各个平台的原生API）</p>
-<p>www/ ：用H5编写的源代码目录，build时会被放入各个平台的assets\www目录。</p>
-<p>www/index.html ：App入口html文件</p>
-</blockquote>
-<h4 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h4><p>JS端</p>
-<ul>
-<li>cordova_plugins.js 插件配置文件</li>
-<li>exec.js 在cordova.js里复现，主要用于JS与Native的交互处理事件</li>
-<li>platform.js 在cordova.js里复现，</li>
-<li>cordova.js  JS端最重要的文件了。提供交互处理</li>
-<li>index.html 关联 index.js,index.css UI显示</li>
-</ul>
-<p>Native端</p>
-<ul>
-<li>CDVPlugin 插件类，自定义插件继承于此</li>
-<li>CDV 头文件</li>
-<li>CDVAppDelegate 入口，在didFinishLaunchingWithOptions:里初始化CDVViewController</li>
-<li>CDVAvaliability 宏定义</li>
-<li>CDVAvailabilityDeprecated 弃用提示</li>
-<li>CDVCommandDelegate 命令代理类，JS处理</li>
-<li>CDVCommandDelegateImpl 代理类实现，处理JS</li>
-<li>CDVCommandQueue 命令队列，对应于cordova.commandQueue队列</li>
-<li>CDVConfigParser config文件解析（XML格式）</li>
-<li>CDVUIWebViewEngine WebView处理机</li>
-<li>CDVWebViewEngineProtocol WebView处理机代理类</li>
-<li>CDVWhitelist 白名单（允許訪問任何網站）结合config.xml  <access> 元素</access></li>
-<li>CDVScreenOrientaitionDelegate 屏幕方向处理</li>
-<li>CDVLocalStorage 本地存储</li>
-<li>CDVTimer 计时类</li>
-<li>CDVUserAgentUtil 代理工具类</li>
-<li>CDVURLProtocol 继承于NSURLProtocol.在 Objective-C 端使用一个 NSURLProtocol 的子类来检查每个请求</li>
-<li>CDVInvokedUrlCommand js交互命令类（_callbackId;_className; _methodName;_arguments;）</li>
-<li>CDVPluginResult 组件处理完后执行类</li>
-</ul>
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>参见cordova.js 595-610行。</p>
-<p>cordova的初始化包含JS端和Native端，这两端都是基于事件侦听的方式结合起来，JS端主要包含以下几个点：</p>
-<p>onDOMContentLoaded：dom载入完成</p>
-<p>onNativeReady：Native端WebUI载入完成</p>
-<p>onCordovaReady：JS端相关objects都创建完成</p>
-<p>onDeviceReady: Cordova 准备</p>
-<p>onResume: 开始/恢复生命周期事件</p>
-<p>onPause: 暂停生命周期 </p>
-<p><strong>Cordova生命周期事件：</strong></p>
-<p>（1）deviceready ：当Cordova加载完成会触发</p>
-<p>（2）pause：当应用程序进入到后台会触发</p>
-<p>（3）resumes：应用程序从后台进入到前台会触发</p>
-<pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
-        //页面加载后添加各事件监听
-        function onLoad() {
-            document.addEventListener(&quot;deviceready&quot;, onDeviceReady, false);
-            document.addEventListener(&quot;resume&quot;, onResume, false);
-            document.addEventListener(&quot;pause&quot;, onPause, false);
-        }
-
-        //Cordova加载完毕
-        function onDeviceReady() {
-            alert(&quot;Cordova加载完毕！&quot;);
-        }
-
-        //进入后台
-        function onPause() {
-            console.log(&quot;应用进入到后台！&quot;);
-        }
-
-        //恢复到前台
-        function onResume() {
-            alert(&quot;应用回到前台运行！&quot;);
-        }
- &lt;/script&gt;
-</code></pre><p>以上几个重要事件的先后顺序和hander侦听是通过channel组件架构，所谓的channel组件实际上就是cordova自制的保障事件侦听和触发的组件,具体代码参考cordova.js 626-820行。2百多行代码，就打造了一个JS端事件侦听的框架。</p>
-<p>其中 onNativeReady是被native端调的，当native端WebUI初始化好后就会fire JS端onNativeReady事件，native有以下几个关键的初始化节点：</p>
-<pre><code>AppDelegate.didFinishLaunchingWithOptions：App启动，初始化controller和view
-CDVViewController.viewDidLoad：view加载，初始化WebView
-CDVViewController.webviewDidFinishLoad：WebView加载，触发JS端onNativeReady
-</code></pre><p>Native端存在着App-&gt;view-&gt;webview三个层次，以上三个点正好对应着这三个层次的加载。</p>
-<p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/cordova.png" alt=""></p>
-<h4 id="加载流程"><a href="#加载流程" class="headerlink" title="加载流程"></a>加载流程</h4><p>从源码可以看出AppDelegate继承于CDVAppDelegate;MainViewController继承于CDVViewController。MainCommandDelegate继承于CDVCommandDelegateImpl,MainCommandQueue继承于CDVCommandQueue.</p>
-<p>AppDelegate是程序的入口，由此调用MainViewController,由此启动CDVViewController.</p>
-<ol>
-<li>AppDelegate的application:didFinishLaunchingWithOptions:进入</li>
-<li>从self.viewController = [[MainViewController alloc] init]；到MainViewController.</li>
-<li>CDVViewController 进入init方法</li>
-<li>initWithNibName: bundle:方法调用[self __init]</li>
-<li>__init方法监听通知，UIApplicationWillTerminateNotification（程序被杀死），UIApplicationWillResignActiveNotification（从活动状态进入非活动状态），UIApplicationDidBecomeActiveNotification（程序进入前台并处于活动状态），UIApplicationWillEnterForegroundNotification（进入前台，还没有处于活动状态时），UIApplicationDidEnterBackgroundNotification（进入后台）。在应用处于各种状态时就可以通过evalJs：方法与JS端交互。最终是通过CDVUIWebViewEngine下的evaluateJavaScript: completionHandler:的方法。最终还是用的UIWebView的stringByEvaluatingJavaScriptFromString:方法。从此可以看出，Native处理JS原理上还是用的UIWebView的方法。CDVViewController初始化完成。</li>
-<li>此时AppDelegate调用Super,进入CDVAppDelegate的application: didFinishLaunchingWithOptions:方法。对rootViewController，主window进行设置。此时App才加载MainViewController.走MainViewController生命周期。</li>
-<li>在MainViewController里其实是调用CDVViewController的。进入viewDidLoad方法，在loadSettings里加载配置文件并将index.html设为startPage。</li>
-<li>createGapVeiw初始化webView,通过CDVWebViewEngineProtocol使用CDVUIWebViewEngine使用engineWebView（这是个UIWebView）处理JS。</li>
-<li>registerPlugin: withClassName:初始化插件，此处的插件是CDVUIWebViewEngine。</li>
-<li>将handleopenurl,intentandnavigationfilter,gesturehandler插件注入。计时结束。</li>
-<li>CDVUserAgentUtil acquireLock:加锁处理，加载index.html</li>
-<li>当App进入活跃状态，接收到通知进入onAppDidBecomeActive:方法，执行JS的active事件。js为</li>
-</ol>
-<pre><code>&lt;code&gt;try{cordova.require(&apos;cordova/exec&apos;).nativeEvalAndFetch(function(){cordova.fireDocumentEvent(&apos;active&apos;);})}catch(e){console.log(&apos;exception nativeEvalAndFetch : &apos;+e);};&lt;/code&gt;
-</code></pre><p>   如此就和cordova.js发生了联系。</p>
-<ol>
-<li>此后WebView开始加载，并触发了CDVUIWebViewDelegate的webView: shouldStartLoadWithRequest: navigationType:方法。如果_delegate实现了webView:shouldStartLoadWithRequest:navigationType:此时会进入CDVUIWebViewNavigationDelegate。在此判断url的scheme是否为gap(处理加载页里的加载请求)。</li>
-<li>CDVIntentAndNavigationFilter实现了shouldOverrideLoadWithRequest:navigationType:方法，根据navigationType返回是否请求加载。</li>
-<li>允许加载后，走CDVUIWebViewDelegate的webViewDidStartLoad:方法。跳到CDVUIWebViewNavigationDelegate的webViewDidStartLoad:向enginePlugin.webView发送CDVPluginResetNotification通知。但是CDVUIWebViewEngine没有对onReset处理。其他插件根据需要处理。</li>
-<li>然后走CDVUiWebViewDelegate的webViewDidFinishLoad:方法。跳转CDVUIWebViewNavigationDelegate的webViewDidFinishLoad：方法。发送CDVPageDidLoadNotification通知。此版本未处理。</li>
-<li>iframe bridge 在 JS 端创建一个透明的 iframe，设置这个 ifame 的 src 为自定义的协议，而 ifame 的 src 更改时，UIWebView 会先回调其 delegate 的 webView:shouldStartLoadWithRequest:navigationType: 方法。此时又到了CDVUIWebViewDelegate的shouldStartLoadWithRequest：方法。此时的请求是gap://ready。</li>
-<li>CDVViewController的supportedInterfaceOrientations监听App的屏幕显示，是否左转右转等。</li>
-<li>到此，页面加载完毕。</li>
-</ol>
-<h4 id="JS调用Native"><a href="#JS调用Native" class="headerlink" title="JS调用Native"></a>JS调用Native</h4><p>IOS的UIWebViewDelegate提供了shouldStartLoadWithRequest方法，它能截获web端url请求，因此phonegap就是通过在web端构造一个不可见的iframe，并置其src为gap://ready，Native端截获这个请求后就会得知此时JS端有请求。这块代码可见”cordova/exec”模块：</p>
-<pre><code>function pokeNative() {
-// CB-5488 - Don&apos;t attempt to create iframe before document.body is available.
-if (!document.body) {
-    setTimeout(pokeNative);
-    return;
-}
-
-// Check if they&apos;ve removed it from the DOM, and put it back if so.
-if (execIframe &amp;&amp; execIframe.contentWindow) {
-    execIframe.contentWindow.location = &apos;gap://ready&apos;;
-} else {
-    execIframe = document.createElement(&apos;iframe&apos;);
-    execIframe.style.display = &apos;none&apos;;
-    execIframe.src = &apos;gap://ready&apos;;
-    document.body.appendChild(execIframe);
-}
-// Use a timer to protect against iframe being unloaded during the poke (CB-7735).
-// This makes the bridge ~ 7% slower, but works around the poke getting lost
-// when the iframe is removed from the DOM.
-// An onunload listener could be used in the case where the iframe has just been
-// created, but since unload events fire only once, it doesn&apos;t work in the normal
-// case of iframe reuse (where unload will have already fired due to the attempted
-// navigation of the page).
-failSafeTimerId = setTimeout(function() {
-    if (commandQueue.length) {
-        // CB-10106 - flush the queue on bridge change
-        if (!handleBridgeChange()) {
-            pokeNative();
-         }
-    }
-}, 50); // Making this &gt; 0 improves performance (marginally) in the normal case (where it doesn&apos;t fire).
-}
-</code></pre><p>每次在js端调用exec时，cordova会把调用信息放入commandQueue队列中，并通知native端。native端得到通知后，会调用js端的代码拿到commandQueue队列中所有调用信息，并依次调用plugin来执行请求</p>
-<pre><code>function iOSExec() {
-
-var successCallback, failCallback, service, action, actionArgs;
-var callbackId = null;
-if (typeof arguments[0] !== &apos;string&apos;) {
-    // FORMAT ONE
-    successCallback = arguments[0];
-    failCallback = arguments[1];
-    service = arguments[2];
-    action = arguments[3];
-    actionArgs = arguments[4];
-
-    // Since we need to maintain backwards compatibility, we have to pass
-    // an invalid callbackId even if no callback was provided since plugins
-    // will be expecting it. The Cordova.exec() implementation allocates
-    // an invalid callbackId and passes it even if no callbacks were given.
-    callbackId = &apos;INVALID&apos;;
-} else {
-    throw new Error(&apos;The old format of this exec call has been removed (deprecated since 2.1). Change to: &apos; +
-        &apos;cordova.exec(null, null, \&apos;Service\&apos;, \&apos;action\&apos;, [ arg1, arg2 ]);&apos;
-    );
-}
-
-// If actionArgs is not provided, default to an empty array
-actionArgs = actionArgs || [];
-
-// Register the callbacks and add the callbackId to the positional
-// arguments if given.
-if (successCallback || failCallback) {
-    callbackId = service + cordova.callbackId++;
-    cordova.callbacks[callbackId] =
-        {success:successCallback, fail:failCallback};
-}
-
-actionArgs = massageArgsJsToNative(actionArgs);
-
-var command = [callbackId, service, action, actionArgs];
-
-// Stringify and queue the command. We stringify to command now to
-// effectively clone the command arguments in case they are mutated before
-// the command is executed.
-commandQueue.push(JSON.stringify(command));
-
-// If we&apos;re in the context of a stringByEvaluatingJavaScriptFromString call,
-// then the queue will be flushed when it returns; no need for a poke.
-// Also, if there is already a command in the queue, then we&apos;ve already
-// poked the native side, so there is no reason to do so again.
-if (!isInContextOfEvalJs &amp;&amp; commandQueue.length == 1) {
-    pokeNative();
-}
-}
-</code></pre><p>Native端：shouldStartLoadWithRequest</p>
-<pre><code>if ([[url scheme] isEqualToString:@&quot;gap&quot;]) {
-    [vc.commandQueue fetchCommandsFromJs];
-    // The delegate is called asynchronously in this case, so we don&apos;t have to use
-    // flushCommandQueueWithDelayedJs (setTimeout(0)) as we do with hash changes.
-    [vc.commandQueue executePending];
-    return NO;
-}
-</code></pre><hr>
-<pre><code> // 获取 JS 的请求数据
-- (void)fetchCommandsFromJs
-{
-__weak CDVCommandQueue* weakSelf = self;
-NSString* js = @&quot;cordova.require(&apos;cordova/exec&apos;).nativeFetchMessages()&quot;;
-
-[_viewController.webViewEngine evaluateJavaScript:js
-                                completionHandler:^(id obj, NSError* error) {
-    if ((error == nil) &amp;&amp; [obj isKindOfClass:[NSString class]]) {
-        NSString* queuedCommandsJSON = (NSString*)obj;
-        CDV_EXEC_LOG(@&quot;Exec: Flushed JS-&gt;native queue (hadCommands=%d).&quot;, [queuedCommandsJSON length] &gt; 0);
-        [weakSelf enqueueCommandBatch:queuedCommandsJSON];
-        // this has to be called here now, because fetchCommandsFromJs is now async (previously: synchronous)
-        [self executePending];
-    }
-}];
-}
-
-- (void)executePending
-{
-// Make us re-entrant-safe.
-if (_startExecutionTime &gt; 0) {
-    return;
-}
-@try {
-    _startExecutionTime = [NSDate timeIntervalSinceReferenceDate];
-
-    while ([_queue count] &gt; 0) {
-        NSMutableArray* commandBatchHolder = _queue[0];
-        NSMutableArray* commandBatch = nil;
-        @synchronized(commandBatchHolder) {
-            // If the next-up command is still being decoded, wait for it.
-            if ([commandBatchHolder count] == 0) {
-                break;
-            }
-            commandBatch = commandBatchHolder[0];
-        }
-
-        while ([commandBatch count] &gt; 0) {
-            @autoreleasepool {
-                // Execute the commands one-at-a-time.
-                NSArray* jsonEntry = [commandBatch cdv_dequeue];
-                if ([commandBatch count] == 0) {
-                    [_queue removeObjectAtIndex:0];
-                }
-                CDVInvokedUrlCommand* command = [CDVInvokedUrlCommand commandFromJson:jsonEntry];
-                CDV_EXEC_LOG(@&quot;Exec(%@): Calling %@.%@&quot;, command.callbackId, command.className, command.methodName);
-
-                if (![self execute:command]) {
-#ifdef DEBUG
-                        NSString* commandJson = [jsonEntry cdv_JSONString];
-                        static NSUInteger maxLogLength = 1024;
-                        NSString* commandString = ([commandJson length] &gt; maxLogLength) ?
-                            [NSString stringWithFormat : @&quot;%@[...]&quot;, [commandJson substringToIndex:maxLogLength]] :
-                            commandJson;
-
-                        DLog(@&quot;FAILED pluginJSON = %@&quot;, commandString);
-#endif
-                }
-            }
-
-            // Yield if we&apos;re taking too long.
-            if (([_queue count] &gt; 0) &amp;&amp; ([NSDate timeIntervalSinceReferenceDate] - _startExecutionTime &gt; MAX_EXECUTION_TIME)) {
-                [self performSelector:@selector(executePending) withObject:nil afterDelay:0];
-                return;
-            }
-        }
-    }
-} @finally
-{
-    _startExecutionTime = 0;
-}
-}
-</code></pre><p>在CDVCommandQueue里的execute:方法里用objc_msgSend执行JS里需要的方法。</p>
-<h4 id="Native向JS返回结果"><a href="#Native向JS返回结果" class="headerlink" title="Native向JS返回结果"></a>Native向JS返回结果</h4><p>使用webView的 stringByEvaluatingJavaScriptFromString 方法 。native的plugin完成任务后，会在CDVPluginResult里执行initWithStatus:(CDVCommandStatus)statusOrdinal message:(id)theMessage；在CDVCommandDelegateImpl里执行sendPluginResult:(CDVPluginResult<em>)result callbackId:(NSString</em>)callbackId；返回结果给JS端。<br>通过上面，我们知道JS和Native是通过callbackId对应的，由此就建立了连接。</p>
-<pre><code>// Objective-C 返回结果给JS端
-- (void)sendPluginResult:(CDVPluginResult*)result callbackId:(NSString*)callbackId
-{
-CDV_EXEC_LOG(@&quot;Exec(%@): Sending result. Status=%@&quot;, callbackId, result.status);
-// This occurs when there is are no win/fail callbacks for the call.
-if ([@&quot;INVALID&quot; isEqualToString:callbackId]) {
-    return;
-}
-// This occurs when the callback id is malformed.
-if (![self isValidCallbackId:callbackId]) {
-    NSLog(@&quot;Invalid callback id received by sendPluginResult&quot;);
-    return;
-}
-int status = [result.status intValue];
-BOOL keepCallback = [result.keepCallback boolValue];
-NSString* argumentsAsJSON = [result argumentsAsJSON];
-BOOL debug = NO;
-
-#ifdef DEBUG
-debug = YES;
-#endif
- // 将请求的处理结果及 callbackId 通过调用 JS 方法返回给 JS 端
-NSString* js = [NSString stringWithFormat:@&quot;cordova.require(&apos;cordova/exec&apos;).nativeCallback(&apos;%@&apos;,%d,%@,%d, %d)&quot;, callbackId, status, argumentsAsJSON, keepCallback, debug];
-
-[self evalJsHelper:js];
-}
-</code></pre><h4 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h4><p>此处我们默认已经解决了插件的下载和制作。所要做的就是处理插件。</p>
-<p>将CordovaLib引入项目。</p>
-<p>在配置页的 Build Settings -&gt; Other Linker Flags 中添加”-ObjC -all_load”</p>
-<p>在配置页的 Build Phases 标签中添加如下两个库：</p>
-<pre><code>Target Dependencies -&gt; CordovaLib
-
-Link Binary With Libraries -&gt; libCordova.a
-</code></pre><p>  <strong><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">测试</a></strong></p>
-<p>最主要关注的是Hybrid里的跳转逻辑，用scheme跳转解决。在CDVUIWebViewNagigationDelegate 里的shouldStartLoadWithRequest：里实现自己的跳转逻辑即可，因为在cordova里触发跳转，肯定会走这里的。如果实现了CDVWKWebViewEngine,在webView: webView: decidePolicyForNavigationAction: decisionHandler: 里也要实现.</p>
-<p>其他的都是套路。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  &lt;strong&gt;&lt;a href=&quot;http://cordova.apache.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;/strong&gt; (markdown下经常无法链接，地址在这： &lt;a href=&quot;http://cordo
-    
-    </summary>
-    
-    
-      <category term="Source" scheme="https://dangdangfeng.github.io/tags/Source/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人生不可错过的5本书</title>
-    <link href="https://dangdangfeng.github.io/2012/08/31/%E4%BA%BA%E7%94%9F%E4%B8%8D%E5%8F%AF%E9%94%99%E8%BF%87%E7%9A%845%E6%9C%AC%E4%B9%A6/"/>
-    <id>https://dangdangfeng.github.io/2012/08/31/人生不可错过的5本书/</id>
-    <published>2012-08-31T01:39:18.000Z</published>
-    <updated>2016-08-30T16:40:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="哥德尔、艾舍尔、巴赫书：集异璧之大成"><a href="#哥德尔、艾舍尔、巴赫书：集异璧之大成" class="headerlink" title="哥德尔、艾舍尔、巴赫书：集异璧之大成"></a>哥德尔、艾舍尔、巴赫书：集异璧之大成</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-be18fef26ba9f136.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="哥德尔、艾舍尔、巴赫书：集异璧之大成"></p>
-<p>这是一本超过千页的大书，其翻译为中文的过程亦甚为坎坷。此中文版本采用了移译的翻译手法，将许多陌生的名词中国化了，所以初次阅读之体验可谓兴致盎然。巴赫、艾舍尔、哥德尔，三者的成果即为音乐、画作、逻辑（数理逻辑）上的三个怪圈，恰似原书的封面那样，投影不一，但其实内在的实质是一样的。巴赫的音符在重复中，一面唱出主题，一面扮演和声；艾舍尔的阶梯，一面无限上升，另一面无尽下降；哥德尔的不完备定理，一面作为数理逻辑的内容存在，一面作为评价数理逻辑的存在。《哥德尔、艾舍尔、巴赫书：集异璧之大成》是在英语世界中有极高评价的科普著作，曾获得普利策文学奖。它通过对哥德尔的数理逻辑，艾舍尔的版画和巴赫的音乐三者的综合阐述，引人入胜地介绍了数理逻辑学、可计算理论、人工智能学、语言学、遗传学、音乐、绘画的理论等方面，构思精巧、含义深刻、视野广阔、富于哲学韵味。</p>
-<p>关于这本书，确实只有“奇书”两个字可以形容。</p>
-<p>书籍地址：<a href="http://item.jd.com/11495462.html" target="_blank" rel="external">《哥德尔、艾舍尔、巴赫书：集异璧之大成》</a></p>
-<h4 id="禅与摩托车维修艺术"><a href="#禅与摩托车维修艺术" class="headerlink" title="禅与摩托车维修艺术"></a>禅与摩托车维修艺术</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-aedc5cb86ba95320.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="禅与摩托车维修艺术"></p>
-<p> Pirsig说,要把工作变为艺术,选择良质。在所有关乎技艺方面的工作，背后都有一个“道”或类似于“禅”的东西，一通百通。有时，你就得放弃已有的工匠情结，更多地要把自己的理念，思想都揉合在一个物件上，这时技术只是一个副产品罢了。本书探讨了有关摩托车修理艺术，禅，宗教，自然科学，教育，哲学，数学，个人修行。中间透露的对生命直相、生存本质的看法，优美、简洁而动人。不光研究形而上,思考人生意义的人可以读,而且从实用主义的角度看, 对技术人员(不光是软件开发人员)甚至任何有工作的人都有很大的启发作用。本书在美国及世界十余个国家已被当做新时代的经典之作，本书曾被“Time”为70年代十本最有影响力的书之一。</p>
-<p>书籍地址：<a href="http://item.jd.com/10839490.html" target="_blank" rel="external">《禅与摩托车维修艺术》</a></p>
-<h4 id="编程人生"><a href="#编程人生" class="headerlink" title="编程人生"></a>编程人生</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2f2bffc58eaef600.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="编程人生"></p>
-<blockquote>
-<p>Seibel: 不精通技术却擅长团队协调的人，能成为好的管理者吗？<br> Allen: 这不是不可能，不过他得首先承认自己并不精通技术，其次还要能分辨团队中谁擅长技术，谁不擅长技术。</p>
-</blockquote>
-<p>它并不是一本技术人士的八卦图书。书里面讨论的更多的是编程的习惯，对当今程序设计方法或是程序设计语言的讨论，以及这些编程大牛在成为大牛的过程中的各种经历。很多东西都值得程序员或者是有志学习计算机科学的人借鉴。这本书最大的益处就是帮助广大程序员了解大师是怎么成长过来的，学习他们的宝贵经验。大师的成长经历都隐含了一个基本规律：他们都是编程至少十几二十年以上才最终成为大师的，“十年学会编程”并不是什么天方夜谭，而是确确实实的事情！同理，任何人如果想要成为大师（或者至少是杰出的程序员），那么他首先要做的就是打好基本功。但是，算法并不是编程的前提条件，数学也不会阻碍一个人成为优秀的程序员。</p>
-<p>书籍地址：[《编程人生》](<a href="http://item.jd.com/11584262.html" target="_blank" rel="external">http://item.jd.com/11584262.html</a></p>
-<h4 id="别闹了，费曼先生"><a href="#别闹了，费曼先生" class="headerlink" title="别闹了，费曼先生"></a>别闹了，费曼先生</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-88f55c486ab4207e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="别闹了，费曼先生"></p>
-<blockquote>
-<p>一本理科生写给世界的情书。——和菜头</p>
-</blockquote>
-<p>费曼得过诺贝尔奖，是现代最伟大的理论物理学家之一。但他同时也可能是历史上唯一被按摩院请去画裸体画、偷偷打开放着原子弹机密文件的保险箱，在巴西桑巴乐团担任鼓手的科学家。他曾跟爱因斯坦和波尔等大师讨论物理问题，也曾在赌城跟职业赌徒研究输赢机率。这是费曼对世界和人生看法的总结，不是世界创造了费曼，而是费曼如此理解和对待世界，因此而有了这么一个非常独特的人。他满不在乎地活在这个世界上，靠追逐他的兴趣而指引生活的方向。如同他年幼时自己发明了一套三角函数符号一样，他对世界也有自己的一套符号。所以，大家都在意的事物他未必在意，大家不在意的事物他却穷追不舍。他也爱着这个世界，但是是用他的方式。所以他能在物理之外发现生活中诸多的乐趣和美来，所以不是人人都会到巴西讲学时跑去街头学敲鼓，而且获得了佳年华会的冠军乐队。所以不是人人都会去学绘画，然后还愿意让别人买去挂在妓院的墙上。如孩子一样的眼睛，如孩子一样的好奇心，因此世界以奇迹还赠他，于一生中成就别人的无数生，使得他周围人在失去他时如同整个世界都黯然失色。</p>
-<p>书籍地址：<a href="http://item.jd.com/16012346.html" target="_blank" rel="external">《别闹了，费曼先生》</a></p>
-<h4 id="程序员修炼之道"><a href="#程序员修炼之道" class="headerlink" title="程序员修炼之道"></a>程序员修炼之道</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-03d2d3f3a11fb52c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="程序员修炼之道"><br>一般来说，刚刚接触编程的人，更倾向于从具体的程序代码学习编程的理念，而不是从程序设计理论书籍去理解编程的概念。就像学习英语，在刚开始的时候，最重要的是扩大自己的阅读量和词汇量，而不是“钻研”各种奇淫技巧。所以，计算机编程的入门书籍里都包含了大量的示例代码片段，初学者通过模仿这些代码，在心里逐步建立起一个属于自己的程序设计模型。这是程序设计的第一个阶段，也就是入门阶段。在编写了一定量的代码，对编程有了一定的了解之后。逐渐的，我们开始对自己的编写的程序，以及程序设计进行反思：程序为什么要这么设计？以什么方式可以编写出更好的程序？如何在编写程序时少走不必要的弯路？这时我们最需要的，不再局限于某种语言的语法或者是xxAPI的使用方法，而是面对实际问题需要的灵活的处理方案，亦或是去理解被前辈所认可的相对正确的软件设计方法。在这时，我们处于程序员的第二个阶段，也就是自我提升阶段。</p>
-<p>这本书里面涉及到了在软件开发中的方方面面：从正确的理解需求到灵活的设计实现，从估算/提升程序的运行效率到提升软件的开发效率，从程序员的自身修养到与他人交流时的tips。这本书用非常短小的篇幅，覆盖了非常大的范围。</p>
-<p>书籍地址：<a href="http://item.jd.com/10393278.html" target="_blank" rel="external">《程序员修炼之道》</a></p>
-<p><strong>当然了，不是每篇文章都会投到专题里的，也算是关注的福利吧！</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;哥德尔、艾舍尔、巴赫书：集异璧之大成&quot;&gt;&lt;a href=&quot;#哥德尔、艾舍尔、巴赫书：集异璧之大成&quot; class=&quot;headerlink&quot; title=&quot;哥德尔、艾舍尔、巴赫书：集异璧之大成&quot;&gt;&lt;/a&gt;哥德尔、艾舍尔、巴赫书：集异璧之大成&lt;/h4&gt;&lt;p&gt;&lt;img s
-    
-    </summary>
-    
-    
-      <category term="book" scheme="https://dangdangfeng.github.io/tags/book/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何优雅的谈论HTTP／1.0／1.1／2.0</title>
-    <link href="https://dangdangfeng.github.io/2012/08/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BAHTTP%EF%BC%8F1-0%EF%BC%8F1-1%EF%BC%8F2-0/"/>
-    <id>https://dangdangfeng.github.io/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/</id>
-    <published>2012-08-30T15:30:05.000Z</published>
-    <updated>2016-08-30T15:38:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文将涉及以下方面：</p>
-<ul>
-<li>HTTP协议</li>
-<li>HTTP1.0</li>
-<li>HTTP1.1</li>
-<li>HTTP2.0</li>
-<li>1.0和1.1和2.0之间的区别</li>
-<li>HTTPS</li>
-</ul>
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>HTTP（超文本传输协议，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。是用于从WWW服务器传输超文本到本地浏览器的传输协议。默认使用80端口，HTTP客户端发起一个请求，建立一个到服务器指定端口（默认是80端口）的TCP连接。HTTP协议和TCP协议是不冲突的，HTTP定义在七层协议中的应用层，TCP解决的是传输层的逻辑。HTTP使用TCP而不是UDP的原因在于（打开）一个网页必须传送很多数据，而TCP协议提供传输控制，按顺序组织数据，和错误纠正。HTTP协议的瓶颈及其优化技巧都是基于TCP协议本身的特性。如TCP建立连接时三次握手有1.5个RTT（round-trip time）的延迟，为了避免每次请求的都经历握手带来的延迟，应用层会选择不同策略的http长链接方案。又如TCP在建立连接的初期有慢启动（slow start）的特性，所以连接的重用总是比新建连接性能要好。</p>
-<p>HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。HTTP/1.0是第一个在通讯中指定版本号的HTTP 协议版本，至今仍被广泛采用，特别是在代理服务器中。HTTP/1.1是当前版本，持久连接被默认采用，并能很好地配合代理服务器工作，还支持以管道方式同时发送多个请求，以便降低线路负载，提高传输速度。HTTP／2.0在HTTP 1.x的基础上，大幅度的提高了web性能，减少了网络延迟。HTTP1.0和1.1在之后很长的一段时间内会一直并存，这是由于网络基础设施更新缓慢所决定的。</p>
-<h4 id="HTTP1-0"><a href="#HTTP1-0" class="headerlink" title="HTTP1.0"></a>HTTP1.0</h4><p>HTTP 协议老的标准是HTTP/1.0，为了提高系统的效率，HTTP 1.0规定浏览器与服务器只保持短暂的连接，浏览器的每次请求都需要与服务器建立一个TCP连接，服务器完成请求处理后立即断开TCP连接，服务器不跟踪每个客户也不记录过去的请求。但是，这也造成了一些性能上的缺陷，例如，一个包含有许多图像的网页文件中并没有包含真正的图像数据内容，而只是指明了这些图像的URL地址，当WEB浏览器访问这个网页文件时，浏览器首先要发出针对该网页文件的请求，当浏览器解析WEB服务器返回的该网页文档中的HTML内容时，发现其中的图像标签后，浏览器将根据标签中的src属性所指定的URL地址再次向服务器发出下载图像数据的请求。显 然，访问一个包含有许多图像的网页文件的整个过程包含了多次请求和响应，每次请求和响应都需要建立一个单独的连接，每次连接只是传输一个文档和图像，上一次和下一次请求完全分离。即使图像文件都很小，但是客户端和服务器端每次建立和关闭连接却是一个相对比较费时的过程，并且会严重影响客户机和服务器的性能。当一个网页文件中包含JavaScript文件，CSS文件等内容时，也会出现类似上述的情况。</p>
-<p>同时，带宽和延迟也是影响一个网络请求的重要因素。在网络基础建设已经使得带宽得到极大的提升的当下，大部分时候都是延迟在于响应速度。基于此会发现，http1.0被抱怨最多的就是<strong>连接无法复用</strong>，和<strong>head of line blocking</strong>这两个问题。理解这两个问题有一个十分重要的前提：客户端是依据域名来向服务器建立连接，一般PC端浏览器会针对单个域名的server同时建立6～8个连接，手机端的连接数则一般控制在4～6个。显然连接数并不是越多越好，资源开销和整体延迟都会随之增大。连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对文件类大请求影响较大。head of line blocking会导致带宽无法被充分利用，以及后续健康请求被阻塞。</p>
-<p>head of line blocking(holb)会导致健康的请求会被不健康的请求影响，而且这种体验的损耗受网络环境影响，出现随机且难以监控。为了解决holb带来的延迟，协议设计者设计了一种新的pipelining机制。pipelining只能适用于http1.1,而且由于使用苛刻，很多浏览器厂商并不支持。</p>
-<h4 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h4><p>为了克服HTTP 1.0的这个缺陷，HTTP 1.1支持持久连接（HTTP/1.1的默认模式使用带流水线的持久连接），在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。一个包含有许多图像的网页文件的多个请求和应答可以在一个连接中传输，但每个单独的网页文件的请求和应答仍然需要使用各自的连接。HTTP 1.1还允许客户端不用等待上一次请求结果返回，就可以发出下一次请求，但服务器端必须按照接收到客户端请求的先后顺序依次回送响应结果，以保证客户端能够区分出每次请求的响应内容，这样也显著地减少了整个下载过程所需要的时间。</p>
-<p>在http1.1，request和reponse头中都有可能出现一个connection的头，此header的含义是当client和server通信时对于长链接如何进行处理。<br>在http1.1中，client和server都是默认对方支持长链接的， 如果client使用http1.1协议，但又不希望使用长链接，则需要在header中指明connection的值为close；如果server方也不想支持长链接，则在response中也需要明确说明connection的值为close。不论request还是response的header中包含了值为close的connection，都表明当前正在使用的tcp链接在当天请求处理完毕后会被断掉。以后client再进行新的请求时就必须创建新的tcp链接了。</p>
-<p>HTTP 1.1在继承了HTTP 1.0优点的基础上，也克服了HTTP 1.0的性能问题。HTTP 1.1通过增加更多的请求头和响应头来改进和扩充HTTP 1.0的功能。如，HTTP 1.0不支持Host请求头字段，WEB浏览器无法使用主机头名来明确表示要访问服务器上的哪个WEB站点，这样就无法使用WEB服务器在同一个IP地址和端口号上配置多个虚拟WEB站点。在HTTP 1.1中增加Host请求头字段后，WEB浏览器可以使用主机头名来明确表示要访问服务器上的哪个WEB站点，这才实现了在一台WEB服务器上可以在同一个IP地址和端口号上使用不同的主机名来创建多个虚拟WEB站点。HTTP 1.1的持续连接，也需要增加新的请求头来帮助实现，例如，Connection请求头的值为Keep-Alive时，客户端通知服务器返回本次请求结果后保持连接；Connection请求头的值为close时，客户端通知服务器返回本次请求结果后关闭连接。HTTP 1.1还提供了与身份认证、状态管理和Cache缓存等机制相关的请求头和响应头。HTTP/1.0不支持文件断点续传，<code>RANGE:bytes</code>是HTTP/1.1新增内容，HTTP/1.0每次传送文件都是从文件头开始，即0字节处开始。<code>RANGE:bytes=XXXX</code>表示要求服务器从文件XXXX字节处开始传送，这就是我们平时所说的断点续传！</p>
-<p>由上，HTTP/1.1相较于 HTTP/1.0 协议的区别主要体现在：</p>
-<p>1 缓存处理</p>
-<p>2 带宽优化及网络连接的使用</p>
-<p>3 错误通知的管理</p>
-<p>4 消息在网络中的发送</p>
-<p>5 互联网地址的维护</p>
-<p>6 安全性及完整性</p>
-<p><strong>常用的请求方式</strong></p>
-<p>GET     请求获取Request-URI所标识的资源</p>
-<p>POST    在Request-URI所标识的资源后附加新的数据</p>
-<p>HEAD    请求获取由Request-URI所标识的资源的响应消息报头</p>
-<p>PUT     请求服务器存储一个资源，并用Request-URI作为其标识</p>
-<p>DELETE  请求服务器删除Request-URI所标识的资源</p>
-<p>TRACE   请求服务器回送收到的请求信息，主要用于测试或诊断</p>
-<p>CONNECT 保留将来使用</p>
-<p>OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求</p>
-<p>GET方法：在浏览器的地址栏中输入网址的方式访问网页时，浏览器采用GET方法向服务器获取资源，POST方法要求被请求服务器接受附在请求后面的数据，常用于提交表单。<strong>GET是用于获取数据的，POST一般用于将数据发给服务器之用</strong>。</p>
-<p><strong>请求头信息示例</strong></p>
-<pre><code>// 请求
-GET / HTTP/1.1
-
-Host:xxx.xxxx.com
-
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.10) Gecko/2016042316 Firefox/3.0.10
-
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-
-Accept-Language: en-us,en;q=0.5
-
-Accept-Encoding: gzip,deflate
-
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-
-Keep-Alive: 300
-
-Connection: keep-alive
-
-If-Modified-Since: Mon, 25 May 2016 03:19:18 GMT
-
-
-//响应
-HTTP/1.1 200 OK
-
-Cache-Control: private, max-age=30
-
-Content-Type: text/html; charset=utf-8
-
-Content-Encoding: gzip
-
-Expires: Mon, 25 May 2016 03:20:33 GMT
-
-Last-Modified: Mon, 25 May 2016 03:20:03 GMT
-
-Vary: Accept-Encoding
-
-Server: Microsoft-IIS/7.0
-
-X-AspNet-Version: 2.0.50727
-
-X-Powered-By: ASP.NET
-
-Date: Mon, 25 May 2016 03:20:02 GMT
-
-Content-Length: 12173
-
-消息体的内容（略）
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-feec1e83208a122a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
-<p> <strong>HTTP 1.1状态代码及其含义</strong></p>
-<p>状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：</p>
-<p>1xx：指示信息–表示请求已接收，继续处理</p>
-<p>2xx：成功–表示请求已被成功接收、理解、接受</p>
-<p>3xx：重定向–要完成请求必须进行更进一步的操作</p>
-<p>4xx：客户端错误–请求有语法错误或请求无法实现</p>
-<p>5xx：服务器端错误–服务器未能实现合法的请求</p>
-<blockquote>
-<p>状态代码  状态信息  含义<br>100  Continue  初始的请求已经接受，客户应当继续发送请求的其余部分。（HTTP 1.1新）<br>101  Switching Protocols  服务器将遵从客户的请求转换到另外一种协议（HTTP 1.1新）<br>200  OK  一切正常，对GET和POST请求的应答文档跟在后面。<br>201  Created  服务器已经创建了文档，Location头给出了它的URL。<br>202  Accepted  已经接受请求，但处理尚未完成。<br>203  Non-Authoritative Information  文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝（HTTP 1.1新）。<br>204  No Content  没有新文档，浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的。<br>205  Reset Content  没有新的内容，但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容（HTTP 1.1新）。<br>206  Partial Content  客户发送了一个带有Range头的GET请求，服务器完成了它（HTTP 1.1新）。<br>300  Multiple Choices  客户请求的文档可以在多个位置找到，这些位置已经在返回的文档内列出。如果服务器要提出优先选择，则应该在Location应答头指明。<br>301  Moved Permanently  客户请求的文档在其他地方，新的URL在Location头中给出，浏览器应该自动地访问新的URL。<br>302  Found  类似于301，但新的URL应该被视为临时性的替代，而不是永久性的。注意，在HTTP1.0中对应的状态信息是“Moved Temporatily”。<br>出现该状态代码时，浏览器能够自动访问新的URL，因此它是一个很有用的状态代码。<br>注意这个状态代码有时候可以和301替换使用。例如，如果浏览器错误地请求<a href="http://host/~user（缺少了后面的斜杠），有的服务器返回301，有的则返回302。" target="_blank" rel="external">http://host/~user（缺少了后面的斜杠），有的服务器返回301，有的则返回302。</a><br>严格地说，我们只能假定只有当原来的请求是GET时浏览器才会自动重定向。请参见307。 </p>
-<p>303  See Other  类似于301/302，不同之处在于，如果原来的请求是POST，Location头指定的重定向目标文档应该通过GET提取（HTTP 1.1新）。<br>304  Not Modified  客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。<br>305  Use Proxy  客户请求的文档应该通过Location头所指明的代理服务器提取（HTTP 1.1新）。<br>307  Temporary Redirect  和302（Found）相同。许多浏览器会错误地响应302应答进行重定向，即使原来的请求是POST，即使它实际上只能在POST请求的应答是303时 才能重定向。由于这个原因，HTTP 1.1新增了307，以便更加清除地区分几个状态代码：当出现303应答时，浏览器可以跟随重定向的GET和POST请求；如果是307应答，则浏览器只能跟随对GET请求的重定向。（HTTP 1.1新）<br>400  Bad Request  请求出现语法错误。<br>401  Unauthorized  客户试图未经授权访问受密码保护的页面。应答中会包含一个WWW-Authenticate头，浏览器据此显示用户名字/密码对话框，然后在填写合适的Authorization头后再次发出请求。<br>403  Forbidden  资源不可用。服务器理解客户的请求，但拒绝处理它。通常由于服务器上文件或目录的权限设置导致。<br>404  Not Found  无法找到指定位置的资源。这也是一个常用的应答。<br>405  Method Not Allowed  请求方法（GET、POST、HEAD、DELETE、PUT、TRACE等）对指定的资源不适用。（HTTP 1.1新）<br>406  Not Acceptable  指定的资源已经找到，但它的MIME类型和客户在Accpet头中所指定的不兼容（HTTP 1.1新）。<br>407  Proxy Authentication Required  类似于401，表示客户必须先经过代理服务器的授权。（HTTP 1.1新）<br>408  Request Timeout  在服务器许可的等待时间内，客户一直没有发出任何请求。客户可以在以后重复同一请求。（HTTP 1.1新）<br>409  Conflict  通常和PUT请求有关。由于请求和资源的当前状态相冲突，因此请求不能成功。（HTTP 1.1新）<br>410  Gone  所请求的文档已经不再可用，而且服务器不知道应该重定向到哪一个地址。它和404的不同在于，返回407表示文档永久地离开了指定的位置，而404表示由于未知的原因文档不可用。（HTTP 1.1新）<br>411  Length Required  服务器不能处理请求，除非客户发送一个Content-Length头。（HTTP 1.1新）<br>412  Precondition Failed  请求头中指定的一些前提条件失败（HTTP 1.1新）。<br>413  Request Entity Too Large  目标文档的大小超过服务器当前愿意处理的大小。如果服务器认为自己能够稍后再处理该请求，则应该提供一个Retry-After头（HTTP 1.1新）。<br>414  Request URI Too Long  URI太长（HTTP 1.1新）。<br>416  Requested Range Not Satisfiable  服务器不能满足客户在请求中指定的Range头。（HTTP 1.1新）<br>500  Internal Server Error  服务器遇到了意料不到的情况，不能完成客户的请求。<br>501  Not Implemented  服务器不支持实现请求所需要的功能。例如，客户发出了一个服务器不支持的PUT请求。<br>502  Bad Gateway  服务器作为网关或者代理时，为了完成请求访问下一个服务器，但该服务器返回了非法的应答。<br>503  Service Unavailable  服务器由于维护或者负载过重未能应答。例如，Servlet可能在数据库连接池已满的情况下返回503。服务器返回503时可以提供一个Retry-After头。<br>504  Gateway Timeout  由作为代理或网关的服务器使用，表示不能及时地从远程服务器获得应答。（HTTP 1.1新）<br>505  HTTP Version Not Supported  服务器不支持请求中所指明的HTTP版本。（HTTP 1.1新）</p>
-</blockquote>
-<h5 id="移动app上的困难"><a href="#移动app上的困难" class="headerlink" title="移动app上的困难"></a>移动app上的困难</h5><p>一段时间内的连接复用对PC端浏览器的体验帮助很大，因为大部分的请求在集中在一小段时间以内。但对移动app来说，成效不大，app端的请求比较分散且时间跨度相对较大。所以移动端app一般会从应用层寻求其它解决方案，长连接方案或者伪长连接方案：</p>
-<p>方案一：基于tcp的长链接</p>
-<p>现在越来越多的移动端app都会建立一条自己的长链接通道，通道的实现是基于tcp协议。基于tcp的socket编程技术难度相对复杂很多，而且需要自己制定协议，但带来的回报也很大。信息的上报和推送变得更及时，在请求量爆发的时间点还能减轻服务器压力（http短连接模式会频繁的创建和销毁连接）。不止是IM app有这样的通道，像淘宝这类电商类app都有自己的专属长连接通道了。现在业界也有不少成熟的方案可供选择了，google的protobuf就是其中之一。</p>
-<p>方案二：http long-polling（推送）</p>
-<p>客户端在初始状态就会发送一个polling（轮寻）请求到服务器，服务器并不会马上返回业务数据，而是等待有新的业务数据产生的时候再返回。所以连接会一直被保持，一旦结束马上又会发起一个新的polling请求，如此反复，所以一直会有一个连接被保持。服务器有新的内容产生的时候，并不需要等待客户端建立一个新的连接。做法虽然简单，但有些难题需要攻克才能实现稳定可靠的业务框架：<br>和传统的http短链接相比，长连接会在用户增长的时候极大的增加服务器压力，<br>移动端网络环境复杂，像wifi和4g的网络切换，进电梯导致网络临时断掉等，这些场景都需要考虑怎么重建健康的连接通道。这种polling的方式稳定性并不好，需要做好数据可靠性的保证，比如重发和ack机制（ACK是一个对数据包的确认，当正确收到数据包后，接收端会发送一个ACk给发送端，里面会说明对那个数据包进行确认，每个数据包里都会有一个序列号，如果收到的数据包有误，或错序，还会申请重发，NAK是一个否定的回答，ACK是确定回答，这样保证数据的正确传输）。</p>
-<p>polling的response有可能会被中间代理cache住，要处理好业务数据的过期机制。long-polling方式还有一些缺点是无法克服的，比如每次新的请求都会带上重复的header信息，还有数据通道是单向的，主动权掌握在server这边，客户端有新的业务请求的时候无法及时传送。</p>
-<p>方案三：http streaming</p>
-<p>同long-polling不同的是，server并不会结束初始的streaming请求，而是持续的通过这个通道返回最新的业务数据。显然这个数据通道也是单向的。streaming是通过在server response的头部里增加”Transfer Encoding: chunked”来告诉客户端后续还会有新的数据到来。除了和long－polling相同的难点之外，streaming还有几个缺陷：有些代理服务器会等待服务器的response结束之后才会将结果推送到请求客户端。对于streaming这种永远不会结束的方式来说，客户端就会一直处于等待response的过程中。业务数据无法按照请求来做分割，所以客户端每收到一块数据都需要自己做协议解析，也就是说要做自己的协议定制。streaming不会产生重复的header数据。</p>
-<p>方案四：web socket</p>
-<p>WebSocket和传统的tcp socket连接相似，也是基于tcp协议，提供双向的数据通道。WebSocket优势在于提供了message的概念，比基于字节流的tcp socket使用更简单，同时又提供了传统的http所缺少的长连接功能。不过WebSocket相对较新，2010年才起草，并不是所有的浏览器都提供了支持。各大浏览器厂商最新的版本都提供了支持。</p>
-<h4 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h4><p>使用<a href="https://http2.akamai.com/demo" target="_blank" rel="external">HTTP2.o测试</a>(<a href="https://http2.akamai.com/demo)便可看出HTTP2.0比之前的协议在性能上有很大的提升。下面总结了HTTP2.0协议的几个特性。" target="_blank" rel="external">https://http2.akamai.com/demo)便可看出HTTP2.0比之前的协议在性能上有很大的提升。下面总结了HTTP2.0协议的几个特性。</a></p>
-<p><strong>多路复用 (Multiplexing)</strong></p>
-<p>多路复用允许同时通过单一的 HTTP/2 连接发起多重的请求-响应消息。在 HTTP/1.1 协议中浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞。这也是为何一些站点会有多个静态资源 CDN 域名的原因之一，拿 Twitter 为例，<a href="http://twimg.com，目的就是变相的解决浏览器针对同一域名的请求限制阻塞问题。而" target="_blank" rel="external">http://twimg.com，目的就是变相的解决浏览器针对同一域名的请求限制阻塞问题。而</a> HTTP/2 的多路复用(Multiplexing) 则允许同时通过单一的 HTTP/2 连接发起多重的请求-响应消息。因此 HTTP/2 可以很容易的去实现多流并行而不用依赖建立多个 TCP 连接，HTTP/2 把 HTTP 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 TCP 连接上双向交换消息。</p>
-<p><strong>二进制分帧</strong></p>
-<p>HTTP/2在 应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层。在不改动 HTTP/1.x 的语义、方法、状态码、URI 以及首部字段的情况下, 解决了HTTP1.1 的性能限制，改进传输性能，实现低延迟和高吞吐量。在二进制分帧层中， HTTP/2 会将所有传输的信息分割为更小的消息和帧（frame）,并对它们采用二进制格式的编码 ，其中 HTTP1.x 的首部信息会被封装到 HEADER frame，而相应的 Request Body 则封装到 DATA frame 里面。</p>
-<p>HTTP/2 通信都在一个连接上完成，这个连接可以承载任意数量的双向数据流。在过去， HTTP 性能优化的关键并不在于高带宽，而是低延迟。TCP 连接会随着时间进行自我调谐，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动。由于这种原因，让原本就具有突发性和短时性的 HTTP 连接变的十分低效。HTTP/2 通过让所有数据流共用同一个连接，可以更有效地使用 TCP 连接，让高带宽也能真正的服务于 HTTP 的性能提升。</p>
-<p>这种单连接多资源的方式，减少服务端的链接压力,内存占用更少,连接吞吐量更大；而且由于 TCP 连接的减少而使网络拥塞状况得以改善，同时慢启动时间的减少,使拥塞和丢包恢复速度更快。<br>￼</p>
-<p><strong>首部压缩（Header Compression）</strong></p>
-<p>HTTP/1.1并不支持 HTTP 首部压缩，为此 SPDY 和 HTTP/2 应运而生， SPDY 使用的是通用的DEFLATE 算法，而 HTTP/2 则使用了专门为首部压缩而设计的 HPACK 算法。<br>￼</p>
-<p><strong>服务端推送（Server Push）</strong></p>
-<p>服务端推送是一种在客户端请求之前发送数据的机制。在 HTTP/2 中，服务器可以对客户端的一个请求发送多个响应。Server Push 让 HTTP1.x 时代使用内嵌资源的优化手段变得没有意义；如果一个请求是由你的主页发起的，服务器很可能会响应主页内容、logo 以及样式表，因为它知道客户端会用到这些东西。这相当于在一个 HTML 文档内集合了所有的资源，不过与之相比，服务器推送还有一个很大的优势：可以缓存！也让在遵循同源的情况下，不同页面之间可以共享缓存资源成为可能。</p>
-<h4 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h4><p>HTTP协议传输的数据都是未加密的，也就是明文的，因此使用HTTP协议传输隐私信息非常不安全。为了保证这些隐私数据能加密传输，于是网景公司设计了SSL（Secure Sockets Layer）协议用于对HTTP协议传输的数据进行加密，从而就诞生了HTTPS。现在的HTTPS都是用的TLS协议，但是由于SSL出现的时间比较早，并且依旧被现在浏览器所支持，因此SSL依然是HTTPS的代名词。</p>
-<p>HTTPS在传输数据之前需要客户端（浏览器）与服务端（网站）之间进行一次握手，在握手过程中将确立双方加密传输数据的密码信息。TLS/SSL协议不仅仅是一套加密传输的协议，TLS/SSL中使用了非对称加密，对称加密以及HASH算法。握手过程的简单描述如下：</p>
-<p>1.浏览器将自己支持的一套加密规则发送给网站。</p>
-<p>2.网站从中选出一组加密算法与HASH算法，并将自己的身份信息以证书的形式发回给浏览器。证书里面包含了网站地址，加密公钥，以及证书的颁发机构等信息。</p>
-<p>3.获得网站证书之后浏览器要做以下工作：<br>a) 验证证书的合法性（颁发证书的机构是否合法，证书中包含的网站地址是否与正在访问的地址一致等），如果证书受信任，则浏览器栏里面会显示一个小锁头，否则会给出证书不受信的提示。<br>b) 如果证书受信任，或者是用户接受了不受信的证书，浏览器会生成一串随机数的密码，并用证书中提供的公钥加密。<br>c) 使用约定好的HASH计算握手消息，并使用生成的随机数对消息进行加密，最后将之前生成的所有信息发送给网站。</p>
-<p>4.网站接收浏览器发来的数据之后要做以下的操作：<br>a) 使用自己的私钥将信息解密取出密码，使用密码解密浏览器发来的握手消息，并验证HASH是否与浏览器发来的一致。<br>b) 使用密码加密一段握手消息，发送给浏览器。</p>
-<p>5.浏览器解密并计算握手消息的HASH，如果与服务端发来的HASH一致，此时握手过程结束，之后所有的通信数据将由之前浏览器生成的随机密码并利用对称加密算法进行加密。</p>
-<p>这里浏览器与网站互相发送加密的握手消息并验证，目的是为了保证双方都获得了一致的密码，并且可以正常的加密解密数据。其中非对称加密算法用于在握手过程中加密生成的密码，对称加密算法用于对真正传输的数据进行加密，而HASH算法用于验证数据的完整性。由于浏览器生成的密码是整个数据加密的关键，因此在传输的时候使用了非对称加密算法对其加密。非对称加密算法会生成公钥和私钥，公钥只能用于加密数据，因此可以随意传输，而网站的私钥用于对数据进行解密，所以网站都会非常小心的保管自己的私钥，防止泄漏。</p>
-<p>TLS握手过程中如果有任何错误，都会使加密连接断开，从而阻止了隐私信息的传输。正是由于HTTPS非常的安全，攻击者无法从中找到下手的地方，于是更多的是采用了假证书的手法来欺骗客户端，从而获取明文的信息。默认HTTP的端口号为80，HTTPS的端口号为443。</p>
-<p>最后，如果您有兴趣想对这方面有更加深入的了解，可以买本《HTTP权威指南》放在案边，时不时的翻翻，既能镇宅，又能深化。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文将涉及以下方面：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;HTTP协议&lt;/li&gt;
-&lt;li&gt;HTTP1.0&lt;/li&gt;
-&lt;li&gt;HTTP1.1&lt;/li&gt;
-&lt;li&gt;HTTP2.0&lt;/li&gt;
-&lt;li&gt;1.0和1.1和2.0之间的区别&lt;/li&gt;
-&lt;li&gt;HTTPS&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>谈谈C的性能特点</title>
-    <link href="https://dangdangfeng.github.io/2010/08/31/%E8%B0%88%E8%B0%88C%E7%9A%84%E6%80%A7%E8%83%BD%E7%89%B9%E7%82%B9/"/>
-    <id>https://dangdangfeng.github.io/2010/08/31/谈谈C的性能特点/</id>
-    <published>2010-08-30T16:48:11.000Z</published>
-    <updated>2016-08-30T16:49:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional language)，如Haskell,Lisp。函数式语言更像数学，命令式语言更接近人的思维。</p>
-<h4 id="C语言的特性"><a href="#C语言的特性" class="headerlink" title="C语言的特性"></a>C语言的特性</h4><p>C语言的典型特征是编译型语言(compiled language)（相对于解释型语言来说）、命令式的、人工管理内存 。对于编译型语言，程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接运行编译的结果就行了，<strong>因此效率高</strong>。 以此相对，解释型语言程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次，因此<strong>效率比较低</strong>。由此，当涉及到速度，内存，低层次特性(low-level features)如：移动stack pointer等常会使用C语言。</p>
-<p>从内存的角度思考C语言，相对于其他语言，<strong>汇编语言直接操作内存；C、C++访问内存；Java,C#,Scheme/LISP,ML使用的是内存自动管理机制</strong>。 C语言通过堆(heap)和栈（stack）访问的内存，C函数将会分配到棧中，函数在被调用时进棧(pushed on to stack)， 函数在返回时出棧(popefd off the stack)，函数能访问当前棧顶部以下的所有内存；堆是一块儿用于动态内存分配的内存区域，可以把它想像称为一个巨大的数组 ，通过指针(pointer)来访问，如果操作系统允许，整个程序都能访问堆。C语言人工内存管理目的是允许程序能够分配内存用于当前的使用 ；当程序执行完后，能够释放内存，用于重新分配 ，C语言的标准类库中有malloc和free两个函数支持内存管理 。从内存的层面，C语言虽然使用起来更复杂些，但在可操作性上更好一些，毕竟自动内存管理，内存的释放不是立即的。</p>
-<p>C语言比起其他的高级语言来说，更接近计算机，也就是说，它介于高级语言和汇编语言之间，通常来说比其他高级语言执行效率更高一点。当然，C语言的函数化特点（即所有C程序都是由函数构成）和灵活的语法也是吸引程序设计者的地方。</p>
-<h4 id="C语言的优势"><a href="#C语言的优势" class="headerlink" title="C语言的优势"></a>C语言的优势</h4><p>C语言一共只有32个关键字，9种控制语句，程序书写形式自由，区分大小写。把高级语言的基本结构和语句与低级语言的实用性结合起来。C语言允许直接访问物理地址，可以直接对硬件进行操作，因此它既具有高级语言的功能，又具有低级语言的许多功能，C语言可以像汇编语言一样对<strong>位、字节和地址</strong>进行操作，而这三者是计算机最基本的工作单元，可用来写系统软件，又可用来开发应用软件，已成为一种通用程序设计语言。另外C语言具有强大的图形功能，支持多种显示器和驱动器。且计算功能、逻辑判断功能强大。    </p>
-<p>C语言的运算符包含的范围很广泛，共有34种运算符。C语言把括号、赋值、强制类型转换等都作为运算符处理。从而使C语言的运算类型极其丰富，表达式类型多样化。灵活使用各种运算符可以实现在其它高级语言中难以实现的运算。 C语言的数据类型有：整型、实型、字符型、数组类型、指针类型、结构体类型、共用体类型等。能用来实现各种复杂的数据结构的运算。并引入了指针概念，使程序效率更高。    </p>
-<p>C语言生成目标代码质量高，程序执行效率高，C语言描述问题比汇编语言迅速，工作量小、可读性好，易于调试、修改和移植，而代码质量与汇编语言相当。C语言一般只比汇编程序生成的目标代码效率低10%～20%。可移植性好，C语言在不同机器上的C编译程序，86%的代码是公共的，所以C语言的编译程序便于移植。在一个环境上用C语言编写的程序，不改动或稍加改动，就可移植到另一个完全不同的环境中运行。    </p>
-<h4 id="当前新发明的语言Swift的比较"><a href="#当前新发明的语言Swift的比较" class="headerlink" title="当前新发明的语言Swift的比较"></a>当前新发明的语言Swift的比较</h4><p>Swift包含了很多现代语言特性尤其是从一些脚本语言如Javascript/Ruby中汲取了营养，此外苹果发布Swift时，使用特别选用的一些例子来宣称Swift性能对于Ojbective C的大幅提升（40~50%），如复杂对象排序等。但是开发者实际测试出来的情况却相反。实际数据显示，Swift在简单循环、递增、赋值、数组扩展、字符串拼接上性能远不如Objective C。可能的一个解释是Swift使用类classes，总在执行ARC（Auto Referrence Count），而Objective C则更多使用C风格的数据类型。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ef4897116759a68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional lang
     
     </summary>
     

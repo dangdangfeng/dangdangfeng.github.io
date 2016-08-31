@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>10道经典的iOS面试题 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-09-11T15:00:36.000Z" itemprop="datePublished">
+          2015-09-11
+      </time>
+    
+    
+    | 
+    <a href='/tags/Interview/'>Interview</a>
+    
+    
+</span>
+                <h1>10道经典的iOS面试题</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p>由于众所周知的原因，最近的移动端开发有点供大于求，鉴于当前残酷的商业现状，向往年那样的需求量也不大可能，尤其是15年B和A都停止了社招工作，但是现在的大厂都不招人了吗？显然，那也未必，需求总是有的，不过是需求有了限制。</p>
+<p>一般接到面试邀请，公司已经默认您基本达到了他们的要求，要么学历好，要么经历好。互联网公司都是极其有效率的，虽然各公司各部门的流程不一定相同，但大概都是一样的，如果遇到合适的优秀求职者都是先拿下再说，流程慢慢走，因为优秀的程序员都是转瞬即逝（当然只是社招）。一般都会有一面二面三面（T有五面，A四面），J的有些部门就是一二三一遍过，或者至少是一面二面，当然前提是技术面表现不错。</p>
+<p>公司一般考察三点：人是否聪明？基础是否扎实？知识是否有深度和广度？技术面一般会遇到偏理论型的或实战型的，理论型的会着重在基础知识，原理的理解，算法，系统优化等方面深入；实战型的或许有白板编程，大概就是“Talk is easy, show me the code”。因为公司已经默认面试者拥有了相关知识，所以深度和广度是有的，面试下来也不轻松。</p>
+<h4 id="一些偏理论的问题"><a href="#一些偏理论的问题" class="headerlink" title="一些偏理论的问题"></a>一些偏理论的问题</h4><ol>
+<li><p>什么是OC</p>
+</li>
+<li><p>什么是面向对象</p>
+</li>
+<li><p>OC和传统的面向对象语言有什么区别和优势</p>
+</li>
+<li><p>HTTP协议及HTTPS，能否保持长连接等</p>
+</li>
+<li><p>TCP/IP协议</p>
+</li>
+<li><p>设计模式</p>
+</li>
+<li><p>算法及数据结构</p>
+</li>
+<li><p>系统优化及界面优化等</p>
+</li>
+<li><p>block及delegate的深入理解</p>
+</li>
+<li><p>数据库相关</p>
+</li>
+</ol>
+<p>抛出问题不是我们的风格，试着深入浅出的解决这些问题才是我们的目的。当然这些不会是全部，只是限于篇幅，本次先谈这些。更加详细的，我们下篇再谈。</p>
+<h4 id="深入浅出，详细解答"><a href="#深入浅出，详细解答" class="headerlink" title="深入浅出，详细解答"></a>深入浅出，详细解答</h4><p><strong>1. 什么是OC</strong></p>
+<p>OC语言在c语言的基础上，增加了一层最小的面向对象语法，完全兼容C语言，在OC代码中，可以混用c，甚至是c++代码。可以使用OC开发mac osx平台和iOS平台的应用程序。拓展名：c语言.c  OC语言.m  兼容C++.mm。</p>
+<p>为了与c语言的关键字区分开来,基本上所有的关键字都是以@开头。基本类型：5种，增加了布尔类型，BOOL类型与其他类型的用法一致，BOOL类型的本质是char类型的，定义如下：</p>
+<pre><code>Typedef signed char BOOL
+</code></pre><p>宏定义:</p>
+<pre><code>#define YES  (BOOL)1
+#define NO   (BOOL)0
+</code></pre><p>布尔类型的输出一般当做整数来用。</p>
+<p>在OC中Nil相当于是null,也就是0（具体可以参考之前写的<a href="http://www.jianshu.com/p/9c0310845286" target="_blank" rel="external">《您所不知道的nil/Nil/NULL/NSNull的空与空》</a>）。程序编译连接过程为：源文件（.m）—(编译)—-&gt;目标文件（.0）—–（链接）—-&gt;可执行文件（.out）。</p>
+<p>每个对象内部都默认有一个isa指针指向这个对象所使用的类。isa是对象中的隐藏指针，指向创建这个对象的类。OC做为一门面向对象语言，具有面向对象的语言特性，如封装、继承、多态。也具有静态语言的特性(如C++)，又有动态语言的效率(动态绑定、动态加载等)。</p>
+<p>Apple公司领导着Objective-C语言的发展与维护，包括Objective-C运行时，Cocoa/Cocoa-Touch框架以及Objective-C语言的编译器。看上去Objective-C就如同以下一个云状图： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-7e363cd917357952.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="云状图"></p>
+<p>这个问题很大，可谈的东西很多，当面试者问这样的问题时，其实他不单单是想知道这个语言的一些知识点，除此之外是想了解您对OC的理解深度，更深的一层是想与面试者产生共鸣。基本上一个问题下来，面试者的水分就能挤出不少。这是不是一个好的问题，我不知道，但这确实是一个会被问到的问题。</p>
+<p><strong>2. 什么是面向对象</strong></p>
+<p>OC语言是面向对象的，c语言是面向过程的，面向对象和面向过程只是解决问题的两种思考方式，面向过程关注的是解决问题涉及的步骤，面向对象关注的是设计能够实现解决问题所需功能的类。</p>
+<p>面向对象的编程方法具有四个基本特征：抽象，封装，继承和多态。</p>
+<p>抽象是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象包括两个方面，一是过程抽象，二是数据抽象。过程抽象是指任何一个明确定义功能的操作都可被使用者看作单个的实体看待，尽管这个操作实际上可能由一系列更低级的操作来完成。数据抽象定义了数据类型和施加于该类型对象上的操作，并限定了对象的值只能通过使用这些操作修改和观察。</p>
+<p>继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。继承性很好的解决了软件的可重用性问题。</p>
+<p>封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。一旦定义了一个对象的特性，则有必要决定这些特性的可见性，封装保证了模块具有较好的独立性，使得程序维护修改较为容易。对应用程序的修改仅限于类的内部，因而可以将应用程序修改带来的影响减少到最低限度。</p>
+<p>多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。<strong>多态是依赖于接口的</strong>。</p>
+<p>但是，在C++使用OOP的编程方式在一些场合未能提供最高性能。现在内存存取成为计算机性能的重要瓶颈，这个问题在C++设计OOP编程范式的实现方式之初并未能考虑周全。现时的OOP编程有可能不缓存友好（cache friendly），导致有时候并不能发挥硬件最佳性能。大概就是过度封装，多态增加cache miss的可能性，数据存取时导致载入缓存的浪费等。</p>
+<p><strong>3. OC和传统的面向对象语言有什么区别和优势</strong></p>
+<p>OC中方法的实现只能写在@implementation··@end中，对象方法的声明只能写在@interface···@end中间；对象方法都以-号开头，类方法都以+号开头；对象方法只能由对象来调用，类方法只能由类来调用，不能当做函数一样调用。函数属于整个文件，可以写在文件中的任何位置，包括@implementation··@end中，但写在@interface···@end会无法识别，函数的声明可以在main函数内部也可以在main函数外部。对象方法归类\对象所有；函数调用不依赖于对象；函数内部不能直接通过成员变量名访问对象的成员变量。</p>
+<p>Objective-C的运行时是动态的，它能让你在运行时为类添加方法或者去除方法以及使用反射。 OC的动态特性表现为了三个方面：动态类型、动态绑定、动态加载。之所以叫做动态，是因为必须到运行时(run time)才会做一些事情。</p>
+<p>动态类型，说简单点就是id类型。动态类型是跟静态类型相对的。像内置的明确的基本类型都属于静态类型(int、NSString等)。静态类型在编译的时候就能被识别出来。所以，若程序发生了类型不对应，编译器就会发出警告。而动态类型就编译器编译的时候是不能被识别的，要等到运行时(run time)，即程序运行的时候才会根据语境来识别。所以这里面就有两个概念要分清：编译时跟运行时。</p>
+<p>动态绑定(dynamic binding)需要用到@selector/SEL。先来看看“函数”，对于其他一些静态语言，比如c++,一般在编译的时候就已经将要调用的函数的函数签名都告诉编译器了。静态的，不能改变。而在OC中，其实是没有函数的概念的，我们叫“消息机制”，所谓的函数调用就是给对象发送一条消息。这时，动态绑定的特性就来了。OC可以先跳过编译，到运行的时候才动态地添加函数调用，在运行时才决定要调用什么方法，需要传什么参数进去。这就是动态绑定，要实现他就必须用SEL变量绑定一个方法。最终形成的这个SEL变量就代表一个方法的引用。这里要注意一点：<strong>SEL并不是C里面的函数指针</strong>，虽然很像，但真心不是函数指针。SEL变量只是一个整数，他是该方法的ID。以前的函数调用，是根据函数名，也就是字符串去查找函数体。但现在，我们是根据一个ID整数来查找方法，整数的查找字自然要比字符串的查找快得多！所以，动态绑定的特定不仅方便，而且效率更高。</p>
+<p>动态加载就是根据需求动态地加载资源，在运行时加载新类。在运行时创建一个新类,只需要3步:<br>1、为 class pair分配存储空间 ,使用 objc_allocateClassPair函数<br>2、增加需要的方法使用class_addMethod函数,增加实例变量用class_addIvar<br>3 、用objc_registerClassPair函数注册这个类,以便它能被别人使用。</p>
+<blockquote>
+<p>使用这些函数请引#import <objc runtime.h=""></objc></p>
+</blockquote>
+<p><strong>4. HTTP协议及HTTPS，能否保持长连接等</strong></p>
+<p>HTTP协议是客户端最常用到的协议了，HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。HTTPS是以安全为目标的HTTP通道，是HTTP的安全版。 在HTTP下加入SSL层。 HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息。http的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议。</p>
+<p>Request和Response的格式：</p>
+<pre><code>// 请求
+GET / HTTP/1.1
+
+Host:xxx.xxxx.com
+
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.10) Gecko/2016042316 Firefox/3.0.10
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+
+Accept-Language: en-us,en;q=0.5
+
+Accept-Encoding: gzip,deflate
+
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+
+Keep-Alive: 300
+
+Connection: keep-alive
+
+If-Modified-Since: Mon, 25 May 2016 03:19:18 GMT
+
+
+//响应
+HTTP/1.1 200 OK
+
+Cache-Control: private, max-age=30
+
+Content-Type: text/html; charset=utf-8
+
+Content-Encoding: gzip
+
+Expires: Mon, 25 May 2016 03:20:33 GMT
+
+Last-Modified: Mon, 25 May 2016 03:20:03 GMT
+
+Vary: Accept-Encoding
+
+Server: Microsoft-IIS/7.0
+
+X-AspNet-Version: 2.0.50727
+
+X-Powered-By: ASP.NET
+
+Date: Mon, 25 May 2016 03:20:02 GMT
+
+Content-Length: 12173
+
+消息体的内容（略）
+</code></pre><p>HTTP/1.1的默认模式使用带流水线的持久连接。这种情况下，HTTP客户每碰到一个引用就立即发出一个请求，因而HTTP客户可以一个接一个紧挨着发出各个引用对象的请求。服务器收到这些请求后，也可以一个接一个紧挨着发出各个对象。如果所有的请求和响应都是紧挨着发送的，那么所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)。另外，带流水线的持久连接中服务器空等请求的时间比较少。与非持久连接相比，持久连接(不论是否带流水线)除降低了1个RTT的响应延迟外，缓启动延迟也比较小。其原因在于既然各个对象使用同一个TCP连接，服务器发出第一个对象后就不必再以一开始的缓慢速率发送后续对象。相反，服务器可以按照第一个对象发送完毕时的速率开始发送下一个对象。</p>
+<p>参考书目：<a href="http://item.jd.com/11056556.html" target="_blank" rel="external">《HTTP权威指南》</a></p>
+<p><strong>5. TCP/IP协议</strong></p>
+<p>此处参考之前写的文章<a href="http://www.jianshu.com/p/3e4f3de18e3b" target="_blank" rel="external">《关于iOS socket都在这里了》</a> 。里面涵盖了常用到的TCP/IP协议的一些原理型知识。</p>
+<p>参考书目：<a href="http://item.jd.com/11311644.html" target="_blank" rel="external">《TCP/IP详解》</a></p>
+<p><strong>6. 设计模式</strong><br>代理模式：当一个类的某些功能需要由别的类来实现，但是又不确定具体会是哪个类实现，即常用的delegate。优势是解耦合，敏捷原则是开放-封闭原则。</p>
+<p>观察者模式：是一种通知方式，不关心谁去接收，只负责发布信息，即Notification通知中心、KVO。可以解耦合，实现的敏捷原则是接口隔离原则，开放-封闭原则。</p>
+<p>单例模式：确保程序运行期某个类，只有一份实例，用于进行资源共享控制，使用简单，延时求值，易于跨模块。实现的敏捷原则是单一职责原则，例如[UIApplication sharedApplication]。</p>
+<p>策略模式：定义算法族，封装起来，使他们之间可以相互替换，使算法的变化独立于使用算法的用户，如排序算法，NSArray的sortedArrayUsingSelector等，<strong>controller对view的实现也是一种策略模式</strong>。实现了接口隔离原则；多用组合，少用继承；针对接口编程，而非实现。</p>
+<p>工厂模式：工厂方式创建类的实例，多与proxy模式配合，创建可替换代理类。优势是易于替换，面向抽象编程，工厂模式是抽象工厂的一部分，抽象工厂的实现依赖于具体工厂，工厂模式产生特定的品类，而抽象工厂可以产生很多不同的品类。实现了DIP依赖倒置原则。</p>
+<p>参考书目：<a href="http://item.jd.com/10871643.html" target="_blank" rel="external">《Objective-C编程之道：iOS设计模式解析》</a><br><strong>7. 算法及数据结构</strong></p>
+<p>技术运用得多熟练，决定你的当下水准，基础打得多好，决定你的发展上限。</p>
+<p>最经典的就是反转二叉树了：</p>
+<pre><code>+ (BinaryTreeNode *)invertBinaryTree:(BinaryTreeNode *)rootNode {
+if (!rootNode) {  return nil; }
+if (!rootNode.leftNode &amp;&amp; !rootNode.rightNode) {  return rootNode; }
+NSMutableArray *queueArray = [NSMutableArray array]; //数组当成队列
+[queueArray addObject:rootNode]; //压入根节点
+while (queueArray.count &gt; 0) {
+BinaryTreeNode *node = [queueArray firstObject];
+[queueArray removeObjectAtIndex:0]; //弹出最前面的节点，仿照队列先进先出原则
+BinaryTreeNode *pLeft = node.leftNode;
+node.leftNode = node.rightNode;
+node.rightNode = pLeft;
+
+if (node.leftNode) {
+    [queueArray addObject:node.leftNode];
+}
+if (node.rightNode) {
+    [queueArray addObject:node.rightNode];
+}
+
+}
+
+return rootNode;
+}
+</code></pre><p>IOS常用数据结构有NSArray、NSMutableArray、NSDictionary、NSMutableDictionary等，这些基础知识就不细说了。不过，单向链表和双向链表关于插入和查询的效率问题还是要了解一些的。单向链表存储结构的节点中只有一个指向直接后继的指针域，双向链表的节点中有两个指针域，其中一个指向直接后继，另一个指向直接前驱。</p>
+<p>单向链表增加删除节点简单，遍历时候不会死循环（双向也不会死循环，循环链表忘了进行控制的话很容易进入死循环）。缺点是只能从头到尾遍历。只能找到后继，无法找到前驱，也就是只能前进。</p>
+<p>双向链表可以找到前驱和后继，可进可退，缺点是增加删除节点复杂（其实就复杂一点点）</p>
+<p>参考书目：<a href="http://item.jd.com/11098789.html" target="_blank" rel="external">《算法 第4版》</a><br><strong>8. 系统优化及界面优化等</strong></p>
+<p>此处可以参考之前的文章<a href="http://www.jianshu.com/p/f4adce56166f" target="_blank" rel="external">《如何编写稳定流畅的iOS移动端应用》</a>,<a href="http://www.jianshu.com/p/d74398c50fe1" target="_blank" rel="external">《深刻理解移动端优化之离屏渲染》</a>,<a href="http://www.jianshu.com/p/393920b15539" target="_blank" rel="external">《不要过多的或者低效的使用NSNotification》</a>,这几篇文章对某些关键点已经尽力讲清楚了，篇幅有限，这里就不再复述了。</p>
+<p><strong>9. block及delegate的深入理解</strong></p>
+<p>此处可以参考我之前写的<a href="http://www.jianshu.com/p/bbccac805641" target="_blank" rel="external">block和delegate傻傻分不清楚</a>，自认为已经尽力讲清楚了一些原理，希望对您有所帮助。</p>
+<p><strong>10. 数据库相关</strong></p>
+<p>表面上SQLite将数据分为以下几种类型：integer : 整数、real : 实数（浮点数）、text : 文本字符串、blob : 二进制数据，比如文件，图片之类的。实际上SQLite是无类型的。即不管你在创表时指定的字段类型是什么，存储是依然可以存储任意类型的数据。而且在创表时也可以不指定字段类型。SQLite之所以设置类型就是为了良好的编程规范和方便开发人员交流，所以平时在使用时最好设置正确的字段类型！主键必须设置成integer。</p>
+<p>在一般开发过程中，使用的都是第三方开源库 <a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB</a>，封装了基本的c语言方法，使得我们在使用时更加容易理解，提高开发效率。FMDB有三个主要的类：FMDatabase,一个FMDatabase对象就代表一个单独的SQLite数据库，用来执行SQL语句。FMResultSet，使用FMDatabase执行查询后的结果集。FMDatabaseQueue，用于在多线程中执行多个查询或更新，它是线程安全的。具体操作请移步gitHub。</p>
+<hr>
+<p>自认为问的太大的问题不是好问题，然而这些问题在大厂里确实是存在的。最后，您也可以参考我之前写的三篇文章，<a href="http://www.jianshu.com/p/8f16613861fa" target="_blank" rel="external">《那些著名或非著名的iOS面试题－前编》</a>,<a href="http://www.jianshu.com/p/7214f164141b" target="_blank" rel="external">《那些著名或非著名的iOS面试题－中编》</a>,<a href="http://www.jianshu.com/p/5178204a58d6" target="_blank" rel="external">《那些著名或非著名的iOS面试题－后编》</a>。这些从术的方面详细的介绍了一些iOS面试中常见的问题，当然在追求“术“的同时也不能忽略了”道“。</p>
+<p>不论面试什么公司，态度一定要好，我不止一次的听同事说起“某某面试者太XX了”，虽然做技术的有些孤傲可以理解，但毕竟是工作嘛，工作时还是要一团和气。面试着装上自然就好，如果不是高级管理岗，西装革履的也没必要。怀着一颗阳光的心去拥抱一切吧。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-d7ab3168fa9a5a0c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="看起来好累"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2015/09/11/10道经典的iOS面试题/" data-title="10道经典的iOS面试题" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="10道经典的iOS面试题 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2015/09/11/10道经典的iOS面试题/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2015/10/01/React-Native的极简手册/" style="float: left;">
+        ← React Native的极简手册
+    </a>
+    
+    
+    <a class="pull-right" href="/2015/08/21/如何优雅的谈论Hybrid-App/">
+        如何幽雅的谈论Hybrid App →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2015/09/11/10道经典的iOS面试题/" data-title="10道经典的iOS面试题" data-url="https://dangdangfeng.github.io/2015/09/11/10道经典的iOS面试题/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

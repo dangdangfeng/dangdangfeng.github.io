@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>iOS开发的奇技淫巧 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2015-03-25T15:09:53.000Z" itemprop="datePublished">
+          2015-03-25
+      </time>
+    
+    
+    | 
+    <a href='/tags/skill/'>skill</a>
+    
+    
+</span>
+                <h1>iOS开发的奇技淫巧</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<p><img src="http://upload-images.jianshu.io/upload_images/1170656-c0163bdc4c2cce56.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h4 id="JSON返回空值"><a href="#JSON返回空值" class="headerlink" title="JSON返回空值"></a>JSON返回空值</h4><p>开发过程中，我们通过http请求，后台返回json数据，而有时数据里某一字段的值为null，然后我们把此值赋值给NSArray,NSdictionary,或是NSString会判断此值为null，做的处理通常是：</p>
+<pre><code>if(dict == nil)或是if(dict == Nil)或是if(dict == NULL)再或是if(dict isEqual nil)
+</code></pre><p>但事实并不这么简单。<br>当字典，数组为null时，后台打印的输出结果是这样：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fb00347741f564bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这就需要在代码判断时利用[NSNull null]来判断。</p>
+<pre><code>if(![location isEqual:[NSNull null]]){
+ NSLog(@&quot;YES&quot;);
+}
+</code></pre><p>空字符串或数组中一个为空，会打印:<null> 。代表着这是一个空字符串，赋值为空，指针是存在的，只是内容为空。在iOS上，内容为空不能简单的判断str==null（null 在ios上得用[NSNull null]）。</null></p>
+<p>赋值为nil,可以直接用＝＝nil来判断，相当于空指针。打印为：（null）</p>
+<p>控制台打印：</p>
+<pre><code>str=（null） 
+</code></pre><p>代表着 字符串或数组或字典是一个空指针，（而非空字符串）判断的时候，直接用：</p>
+<pre><code>if(str == nil)
+</code></pre><p>就可以了。</p>
+<h4 id="内存泄露压力测试"><a href="#内存泄露压力测试" class="headerlink" title="内存泄露压力测试"></a>内存泄露压力测试</h4><p>用 dispatch 写个小函数，方便测试。</p>
+<pre><code>func dipatch_forever(duration: Double, _ queue : dispatch_queue_t, _ block : dispatch_block_t){ 
+   let time = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC))) 
+       dispatch_after(time, queue) {
+        block() 
+        dipatch_forever(duration, queue, block) 
+      }
+}
+
+func main_dipatch_forever(duration: Double, _ block : dispatch_block_t) { 
+ dipatch_forever(duration, dispatch_get_main_queue(), block)
+ }
+</code></pre><p>每当怀疑某界面或函数有问题。就随手写个回调，不断地 push 界面，pop 界面。或者不断地用随机数调用某些函数。或者创建删除对象。</p>
+<pre><code>main_dipatch_forever(0.0) {
+// Do something
+}
+</code></pre><p>这样界面或函数中稍微有内存泄露，或者程序不稳定。就会很容易看到内存飞快地涨或程序直接崩掉。经得起这种压力测试的，那段程序基本会很稳定（正确性需要额外测）。</p>
+<h4 id="更改iphone的键盘颜色："><a href="#更改iphone的键盘颜色：" class="headerlink" title="更改iphone的键盘颜色："></a>更改iphone的键盘颜色：</h4><p>UIKeyboardTypeNumberPad，UIKeyboardTypePhonePad只有这2种数字键盘才有效果。</p>
+<p><strong>键盘外观</strong></p>
+<pre><code>typedef enum {
+UIKeyboardAppearanceDefault, // 默认外观：浅灰色
+UIKeyboardAppearanceAlert, //深灰/石墨色
+} UIKeyboardAppearance;
+
+ textView.keyboardAppearance ＝ UIKeyboardAppearanceAlert ;
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+
+NSArray *ws = [[UIApplication sharedApplication] windows];
+
+for(UIView *w in ws){
+
+NSArray *vs = [w subviews];
+
+for(UIView *v in vs) {
+if([[NSString stringWithUTF8String:object_getClassName(v)] isEqualToString:@&quot;UIKeyboard&quot;]){
+v.backgroundColor = [UIColor redColor];
+}
+}
+}
+</code></pre><p><strong>自动大写</strong></p>
+<pre><code>typedef enum {
+UITextAutocapitalizationTypeNone, //不自动大写
+UITextAutocapitalizationTypeWords, //单词首字母大写
+UITextAutocapitalizationTypeSentences, //句子首字母大写
+UITextAutocapitalizationTypeAllCharacters, //所有字母大写
+} UITextAutocapitalizationType;
+
+用法用例：textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+</code></pre><p><strong>自动更正</strong></p>
+<pre><code>typedef enum {
+UITextAutocorrectionTypeDefault,//默认
+UITextAutocorrectionTypeNo,//不自动更正
+UITextAutocorrectionTypeYes,//自动更正
+} UITextAutocorrectionType;
+
+用法用例：textField.autocorrectionType = UITextAutocorrectionTypeYes;
+</code></pre><p>####查看一段代码的执行时间</p>
+<pre><code>#define Begin   NSDate *startTime = [NSDate date]
+#define Go   NSLog(@&quot;Time: %f&quot;, -[startTime timeIntervalSinceNow])
+</code></pre><p>查看执行时间的代码的地方进行这么处理</p>
+<pre><code>Begin
+//do your work here
+Go
+</code></pre><h4 id="锯齿化问题"><a href="#锯齿化问题" class="headerlink" title="锯齿化问题"></a>锯齿化问题</h4><p>在使用view的缩放的时候，layer.border.width随着view的放大，会出现锯齿化的问题，解决这个问题需要设置这个属性。</p>
+<pre><code>self.layer.allowsEdgeAntialiasing = YES;
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-f253d04c96ef1226.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>####关于关键字volatile</p>
+<p>一个定义为volatile的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。就像大家更熟悉的const一样，volatile是一个类型修饰符。它是被设计用来修饰被不同线程访问和修改的变量。如果不加入volatile，基本上会导致这样的结果：要么无法编写多线程程序，要么编译器失去大量优化的机会。</p>
+<p>Volatile变量具有 synchronized 的可见性特性，但是不具备原子特性。这就是说线程能够自动发现 volatile变量的最新值。Volatile变量可用于提供线程安全，但是只能应用于非常有限的一组用例：多个变量之间或者某个变量的当前值与修改后值之间没有约束。因此，单独使用 volatile 还不足以实现计数器、互斥锁或任何具有与多个变量相关的不变式（Invariants）的类（例如 “start &lt;=end”）。</p>
+<p>出于简易性或可伸缩性的考虑，您可能倾向于使用 volatile变量而不是锁。当使用 volatile变量而非锁时，某些习惯用法更加易于编码和阅读。此外，volatile变量不会像锁那样造成线程阻塞，因此也很少造成可伸缩性问题。在某些情况下，如果读操作远远大于写操作，volatile变量还可以提供优于锁的性能优势。</p>
+<p><strong>代码示例</strong></p>
+<pre><code>volatile int i=10; 
+int j = i; 
+... 
+int k = i; 
+</code></pre><p>volatile 告诉编译器i是随时可能发生变化的，每次使用它的时候必须从i的地址中读取，因而编译器生成的可执行码会重新从i的地址读取数据放在k中。编译器在产生release版可执行码时会进行编译优化，加volatile关键字的变量有关的运算，将不进行编译优化。而优化做法是，由于编译器发现两次从i读数据的代码之间的代码没有对i进行过操作，它会自动把上次读的数据放在k中。而不是重新从i里面读。这样以来，如果i是一个寄存器变量或者表示一个端口数据就容易出错，所以说volatile可以保证对特殊地址的稳定访问，不会出错。</p>
+<pre><code>int square(volatile int *ptr) { return *ptr * *ptr; } 
+</code></pre><p>这段代码的目的是用来返指针<em>ptr指向值的平方，但是，由于</em>ptr指向一个volatile型参数，编译器将产生类似下面的代码： </p>
+<pre><code>int square(volatile int *ptr) { 
+int a,b; 
+a = *ptr; 
+b = *ptr; 
+return a * b;
+} 
+</code></pre><p>由于*ptr的值可能被意想不到地该变，因此a和b可能是不同的。结果，这段代码可能返不是你所期望的平方值！正确的代码如下：</p>
+<pre><code>long square(volatile int *ptr) { int a; a = *ptr; return a * a; } 
+</code></pre><p><strong>下面是volatile变量的几个使用：</strong><br>• 并行设备的硬件寄存器（如：状态寄存器）<br>• 一个中断服务子程序中会访问到的非自动变量(Non-automatic variables)<br>• 多线程应用中被几个任务共享的变量</p>
+<p><strong>那么问题来了：</strong><br>• 一个参数既可以是const还可以是volatile吗？答案是是的。一个例子是只读的状态寄存器。它是volatile因为它可能被意想不到地改变。它是const因为程序不应该试图去修改它。</p>
+<p>• 一个指针可以是volatile 吗？答案是是的。尽管这并不很常见。一个例子是当一个中服务子程序修该一个指向一个buffer的指针时。</p>
+<p><strong>在编写多线程程序中使用volatile的关键点：</strong><br>1.将所有的共享对象声明为volatile；<br>2.不要将volatile直接作用于基本类型；<br>3.当定义了共享类的时候，用volatile成员函数来保证线程安全；<br>在多线程中，我们可以利用锁的机制来保护好资源临界区。在临界区的外面操作共享变量则需要volatile，在临界区的里面则non-volatile了。</p>
+<h4 id="关键字const的位置"><a href="#关键字const的位置" class="headerlink" title="关键字const的位置"></a>关键字const的位置</h4><p>const意味着”只读”，分析下面的含义：</p>
+<pre><code>const int a;
+int const a;// 前两个的作用是一样，a是一个常整型数。
+const int *a;// 第三个意味着a是一个指向常整型数的指针（整型数是不可修改的，但指针可以）
+int * const a;// 第四个意思a是一个指向整型数的常指针（指针指向的整型数是可以修改的，但指针是不可修改的）
+int const * const a;// a是一个指向常整型数的常指针（指针指向的整型数是不可修改的，同时指针也是不可修改的）。表示a是一个指针常量，初始化的时候必须固定指向一个int常量或者int变量，之后就不能再指向别的地方了，它总是把它所指向的目标当作一个int常量。也可以写成const int* const a;含义相同。
+</code></pre><p>合理地使用关键字const可以使编译器很自然地保护那些不希望被改变的参数，防止其被无意的代码修改。这样可以减少bug的出现。欲阻止一个变量被改变，可以使用 const 关键字。</p>
+<p>在定义 const 变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；对指针来说，可以指定指针本身为 const，也可以指定指针所指的数据为 const，或二者同时指定为 const；在一个函数声明中，const 可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；对于类的成员函数，若指定其为 const 类型，则表明其是一个常函数，不能修改类的成员变量；对于类的成员函数，有时候必须指定其返回值为 const 类型，以使得其返回值不为“左值”。</p>
+<h4 id="滑动的时候隐藏navigation-bar"><a href="#滑动的时候隐藏navigation-bar" class="headerlink" title="滑动的时候隐藏navigation bar"></a>滑动的时候隐藏navigation bar</h4><pre><code>navigationController.hidesBarsOnSwipe = Yes;
+</code></pre><h4 id="消除导航条返回键带的title"><a href="#消除导航条返回键带的title" class="headerlink" title="消除导航条返回键带的title"></a>消除导航条返回键带的title</h4><pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                 forBarMetrics:UIBarMetricsDefault];
+</code></pre><h4 id="将Navigationbar变成透明而不模糊"><a href="#将Navigationbar变成透明而不模糊" class="headerlink" title="将Navigationbar变成透明而不模糊"></a>将Navigationbar变成透明而不模糊</h4><pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                         forBarMetrics:UIBarMetricsDefault];
+self.navigationController.navigationBar .shadowImage = [UIImage new];
+self.navigationController.navigationBar .translucent = YES;
+</code></pre><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>函数体内 static 变量的作用范围为该函数体，不同于 auto 变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；在模块内的 static 全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；在模块内的 static 函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；在类中的 static 成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；在类中的 static 成员函数属于整个类所拥有，这个函数不接收 this 指针，因而只能访问类的static 成员变量。</p>
+<h4 id="用一个pan手势来代替UISwipegesture的各个方向"><a href="#用一个pan手势来代替UISwipegesture的各个方向" class="headerlink" title="用一个pan手势来代替UISwipegesture的各个方向"></a>用一个pan手势来代替UISwipegesture的各个方向</h4><pre><code>- (void)pan:(UIPanGestureRecognizer *)sender
+{
+typedef NS_ENUM(NSUInteger, UIPanGestureRecognizerDirection) {
+UIPanGestureRecognizerDirectionUndefined,
+UIPanGestureRecognizerDirectionUp,
+UIPanGestureRecognizerDirectionDown,
+UIPanGestureRecognizerDirectionLeft,
+UIPanGestureRecognizerDirectionRight
+};
+
+static  UIPanGestureRecognizerDirection direction = UIPanGestureRecognizerDirectionUndefined;
+
+switch (sender.state) {
+case  UIGestureRecognizerStateBegan: {
+if  (direction == UIPanGestureRecognizerDirectionUndefined) {
+CGPoint velocity = [sender velocityInView:recognizer.view];
+BOOL isVerticalGesture = fabs(velocity.y) &gt; fabs(velocity.x);
+if (isVerticalGesture) {
+    if (velocity.y &gt; 0) {
+    direction = UIPanGestureRecognizerDirectionDown;
+    }    
+    else  {
+    direction = UIPanGestureRecognizerDirectionUp;
+    }
+}
+else{ 
+if (velocity.x &gt; 0) {
+direction = UIPanGestureRecognizerDirectionRight;
+}
+else
+{
+direction = UIPanGestureRecognizerDirectionLeft;
+}
+}
+}
+break ;
+}
+
+case UIGestureRecognizerStateChanged: {
+switch (direction) {
+case UIPanGestureRecognizerDirectionUp: {
+[self handleUpwardsGesture:sender];
+break ;
+}
+
+case UIPanGestureRecognizerDirectionDown: {
+[self handleDownwardsGesture:sender];
+break;
+}
+
+case  UIPanGestureRecognizerDirectionLeft: {
+[self handleLeftGesture:sender];
+break;
+}
+
+case UIPanGestureRecognizerDirectionRight: {
+[self handleRightGesture:sender];
+break ;
+}
+default : {
+break;
+}
+}
+break;
+}
+
+case  UIGestureRecognizerStateEnded: {
+direction = UIPanGestureRecognizerDirectionUndefined;  
+break;
+}
+
+default:
+break;
+}
+}
+</code></pre><h4 id="拉伸图片不变形"><a href="#拉伸图片不变形" class="headerlink" title="拉伸图片不变形"></a>拉伸图片不变形</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-9c32b9138380e54c.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<p>等同于：</p>
+<pre><code>[[UIImage imageNamed:@&quot;&quot;] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+[[UIImage imageNamed:@&quot;&quot;] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+</code></pre>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2015/03/25/iOS开发的奇技淫巧/" data-title="iOS开发的奇技淫巧" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="iOS开发的奇技淫巧 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2015/03/25/iOS开发的奇技淫巧/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2015/07/01/谈谈C的性能特点/" style="float: left;">
+        ← 谈谈C的性能特点
+    </a>
+    
+    
+    <a class="pull-right" href="/2014/10/31/Category不会想当然/">
+        Category不会想当然 →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2015/03/25/iOS开发的奇技淫巧/" data-title="iOS开发的奇技淫巧" data-url="https://dangdangfeng.github.io/2015/03/25/iOS开发的奇技淫巧/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>

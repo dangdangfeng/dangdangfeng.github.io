@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>block和delegate相对论 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2014-01-31T15:21:23.000Z" itemprop="datePublished">
+          2014-01-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                <h1>block和delegate相对论</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+      		<h4 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h4><p>委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中的变化做出反应或者影响另一个对象的行为。其基本思想是：两个对象协同解决问题，并且打算在广泛的情形中重用。委托指向另一个对象（即它的委托）的引用，并在关键时刻给委托发消息。消息可能只是通知委托发生了某件事情，给委托提供机会执行额外的处理，或者消息可能要求委托提供一些关键的信息以控制所发生的事情。委托的作用主要有两个，一个是传值，一个是传事件。</p>
+<p>传值常用在B类要把自己的一个数据或者对象传给A类，让A类去展示或者处理（切分紧耦合，和代码分块时常用）。传事件是A类发生了什么事，把这件事告诉关注自己的类，也就是委托的对象，由委托的对象去考虑发生这个事件后应该做出什么反映（例如在异步请求中，界面事件触发数据层改变等）。利用委托赋值，这种方法是为了不暴露自己的属性就可以给自己赋值，这样方便了类的管理，只有在你想要让别人给你赋值的时候才调用，这样的赋值更可控一些。（如tableView中的委托dateSource等）。</p>
+<p>在iOS中委托通过一种@protocol的方式实现,所以又称为协议。协议是多个类共享的一个方法列表,在协议中所列出的方法没有响应的实现，由其它类来实现。delegate是“一对一”的关系，对同一个协议，一个对象只能设置一个代理delegate，所以<strong>单例对象就不能用代理</strong>。代理更注重过程信息的传输：如发起一个网络请求，是否此时请求已经开始、是否收到了数据、数据是否已经接受完成、数据接收失败等。</p>
+<p>从委托类的定义可以看出，委托与协议有一定的相似性。都采用protocol关键字来声明，并且其中的方法都有optional和required，都需要对required方法和调用的optional方法进行实现。而不同的是在委托对象所在的类中需要定义一个delegate对象，并且为id类型。但是delegate与protocol本质上是不同的。Delegate本身应该称为一种设计模式，是把一个类自己需要做的一部分事情，让另一个类（也可以就是自己本身）来完成，而实际做事的类为delegate。而protocol是一种语法，它的主要目标是提供接口给遵守协议的类使用，而这种方式提供了一个很方便的、实现delegate模式的机会。</p>
+<p><strong>委托模式的实现思路：</strong></p>
+<p>1、通常是在对象主体包含一个委托对象的弱引用：</p>
+<pre><code>@property (nonatomic, weak, nullable) id &lt;UITableViewDelegate&gt; delegate;
+</code></pre><p>2、委托对象的实现有两种方式：一种是必须实现，一种是可选实现，即@required和@optional的区别。</p>
+<pre><code>@protocol UITableViewDelegate&lt;NSObject, UIScrollViewDelegate&gt;
+
+@optional
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+</code></pre><p>3、判断触发委托方法。</p>
+<pre><code>//确定委托是否存在Entered方法
+if([delegate respondsToSelector:@selector(method:)])
+{
+    //发送委托方法，方法的参数为用户的输入
+    [delegate method:xxx];
+}
+</code></pre><p>4、连接对象主体和委托，通过setDelegate:(id)obj来实现。</p>
+<pre><code>_test.delegate = self;
+</code></pre><p>5、如果实现委托的类有委托需要的方法就执行方法。大概就是这样。</p>
+<h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block是Apple Inc.为C、C++以及Objective-C添加的特性，使得这些语言可以用类lambda表达式的语法来创建闭包，是iOS4.0以后和Mac OS X 10.6以后引进的对C语言的扩展，用来实现匿名函数的特性。 Block能够读取其它函数内部变量的函数,在一段请求连续代码中可以看到调用参数（如发送请求）和响应结果。采用Block技术能够抽象出很多共用函数，提高了代码的可读性，可维护性，封装性。 </p>
+<p>block写法更简练，不需要写protocol、函数等等；block注重结果的传输：比如对于一个事件，只想知道成功或者失败，并不需要知道进行了多少或者额外的一些信息；block需要注意防止循环引用。</p>
+<p>block的写法大概就是这样：</p>
+<pre><code>void (^blockTest)(void) = ^{
+    NSLog(@&quot;block&quot;);
+};
+
+blockTest();
+</code></pre><p>如果用block进行两个类之间的互动，需要这样：<br>BLOCK首先你在.h文件中声明BLOCK对象，当然返回的参数你可以自己定义： </p>
+<pre><code>typedef void (^blockTest)(); 
+
+@property (nonatomic,copy) blockTest myblock;  
+</code></pre><p>在.m文件中执行时：</p>
+<pre><code>if(_myblock){
+_myblock();
+}
+</code></pre><p>其他类执行block时是这样的：</p>
+<pre><code>_testClass.myblock = ^{
+ NSLog(@&quot;block&quot;);
+}
+</code></pre><p>需要注意的是：<br>1.循环引用问题，如果block里用了self，需要替换为</p>
+<pre><code>__weak typeof(self) weakSelf = self;
+</code></pre><p>2.block所在函数中的，捕获自动变量,但是不能修改它，不然就是编译错误。但是可以改变全局变量、静态变量、全局静态变量。为何不让修改变量：这个是编译器决定的。理论上当然可以修改变量了，只不过block捕获的是自动变量的副本，名字一样。为了不给开发者迷惑，干脆不让赋值。静态变量属于类的，不是某一个变量。所以block内部不用调用self指针,所以block可以调用。解决block不能保存值这一问题的另外一个办法是使用__block修饰符。 </p>
+<h4 id="block和delegate的区别"><a href="#block和delegate的区别" class="headerlink" title="block和delegate的区别"></a>block和delegate的区别</h4><p>block不像代理声明了一个代理函数，在调用的类内部还要实现该函数，若一个页面能发送多个请求，并且用多点触控同时触发发送多个请求，那个这个页面的代理函数很难区分是那个请求的结果,只有你的响应消息中带有消息类型可能会分出来，若服务器做的不够强大，当出现异常时，找不发送请求，对于开发来说是个问题。这样多个消息在一个函数里解析也不利于封装。 Block比代理更清晰, Block可以在创建事件的时候区分开来。这也是为什么现在苹果 API 中越来越多地使用 Block而不是 Delegate。</p>
+<p>block有三个存储区域_NSConcretStackBlock ，_NSConcretGlobalBlock和_NSConcretMallocBlock。正如它们名字说的那样，说明了block的三种存储方式：栈、全局、堆。如果是定义在函数外面的block是global的，另外如果函数内部的block但是没有捕获任何自动变量，那么它也是全局的。</p>
+<pre><code>typedef  int  (^blk_test)( int );
+
+for(...){
+
+blk_test blk = ^(int count) {return count;};
+}
+</code></pre><p>虽然，这个block在循环内，但是blk的地址总是不变的。说明这个block在全局段。在栈上block调用copy那么复制到堆上，在全局block调用copy什么也不做，在堆上调用block引用计数增加。</p>
+<p>测试方法如下：</p>
+<pre><code>typedef  int  (^blkt1)(void) ;
+
+-(void) stackOrHeap{
+
+__block int val =10;
+
+int *valPtr = &amp;val;//使用int的指针，来检测block到底在栈上，还是堆上
+
+blkt1 s= ^{
+
+    NSLog(@&quot;val_block = %d&quot;,++val);
+
+    return val;};
+
+s();
+
+NSLog(@&quot;valPointer = %d&quot;,*valPtr);
+
+}
+</code></pre><p>int val肯定是在栈上的，我保存了val的地址，看看block调用前后是否变化。输出一致说明是栈上，不一致说明是堆上。有兴趣的可以手动试一下ARC和MRC下的结果。</p>
+<p>由此我们可以看到delegate运行成本低，block成本很高。block出栈需要将使用的数据从栈内存拷贝到堆内存，当然对象的话就是加计数，使用完或者block置nil后才消除；delegate只是保存了一个对象指针，直接回调，没有额外消耗。相对C的函数指针，只多做了一个查表动作 。</p>
+<p>一般来说公共接口，方法也较多用delegate进行解耦 ，iOS有很多例子如最常用tableViewDelegate，textViewDelegate等。异步和简单的回调用block更好 ，iOS有很多例子如常用的网络库AFNetwork等。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-dc4d5077aa5ab178.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来自网络"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2014/01/31/block和delegate相对论/" data-title="block和delegate相对论" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="block和delegate相对论 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/01/31/block和delegate相对论/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2014/03/03/优秀的iOS开发站点/" style="float: left;">
+        ← 优秀的iOS开发站点
+    </a>
+    
+    
+    <a class="pull-right" href="/2013/12/13/OC中的Class/">
+        OC中的Class →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2014/01/31/block和delegate相对论/" data-title="block和delegate相对论" data-url="https://dangdangfeng.github.io/2014/01/31/block和delegate相对论/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
