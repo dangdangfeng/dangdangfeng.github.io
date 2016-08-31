@@ -634,9 +634,637 @@ pu
             </div>
         </div>
         
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/07/01/那些著名或非著名的iOS面试题－前编/">那些著名或非著名的iOS面试题－前编</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-07-01T14:55:06.000Z" itemprop="datePublished">
+          2014-07-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/Interview/'>Interview</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        1.如何追踪app崩溃率，如何解决线上闪退当iOS设备上的App应用闪退时，操作系统会生成一个crash日志，保存在设备上。crash日志上有很多有用的信息，比如每个正在执行线程的完整堆栈跟踪信息和内存映像，这样就能够通过解析这些信息进而定位crash发生时的代码逻辑，从而找到App闪退的原因。通常来说，crash产生来源于两种问题：违反iOS系统规则导致的crash和App代码逻辑BUG导致的crash，下面分别对他们进行分析。
+违反
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/07/01/那些著名或非著名的iOS面试题－前编/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/05/31/iOS-socket-all-in-here/">iOS socket all in here</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-05-30T16:49:55.000Z" itemprop="datePublished">
+          2014-05-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        socket（套接字）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。
+多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应用层可以和传输层通过Socket接口
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/05/31/iOS-socket-all-in-here/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/03/31/OC攻与伐/">OC攻与伐</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-03-31T15:18:27.000Z" itemprop="datePublished">
+          2014-03-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+Objective-C是非常“实际”的语言。它使用一个用C写成、很小的运行库，只会令应用程序的大小增加很小，和大部分OO（面向对象）系统使用极大的VM（如JVM等）执行取代了整个系统的运作相反。OC写成的程序通常不会比其原始码大很多。 Objective-C的最初版本并不支持垃圾回收。即是鉴于当时的面向对象语言回收时有漫长的“死亡时间”，令整个系统失去功用。Objective-C为避免此问题才不拥有这个功能。Objective-C的内
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/03/31/OC攻与伐/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/03/30/如何优雅的谈论源码/">如何优雅的谈论源码</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-03-30T15:38:48.000Z" itemprop="datePublished">
+          2014-03-30
+      </time>
+    
+    
+    | 
+    <a href='/tags/source/'>source</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        本文主要涉及一下几点：
+
+SDWebImage 原理
+SDWebImage 使用
+SDWebImage 源码分析
+一些思考
+
+
+SDWebImage 加载图片原理具体源码分析见GIT。
+
+通过标注的类，看懂应该没问题了。
+SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCac
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/03/30/如何优雅的谈论源码/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/03/03/优秀的iOS开发站点/">优秀的iOS开发站点</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-03-02T16:37:08.000Z" itemprop="datePublished">
+          2014-03-03
+      </time>
+    
+    
+    | 
+    <a href='/tags/helper/'>helper</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+
+工欲善其事必先利其器，每一次的惊叹背后都有不为人知的努力。分享和共赢，是开源的精神所在。感谢那些开诚布公，乐于助人的程序员们。从优秀到卓越，我们需要不停地向他人学习。
+
+
+国内优秀的iOS网站
+国外优秀的iOS网站
+
+常用的国内网站社区网站：
+
+简书
+稀土掘金
+SegmentFault
+博客园
+
+
+
+cocoachina
+ITeye
+CSDN
+51CTO
+infoq
+开发者头条
+
+
+
+开源中国
+Code4App
+
+
+
+慕课网
+麦子学
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/03/03/优秀的iOS开发站点/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/01/31/block和delegate相对论/">block和delegate相对论</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-01-31T15:21:23.000Z" itemprop="datePublished">
+          2014-01-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        delegate委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中的变化做出反应或者影响另一个对象的行为。其基本思想是：两个对象协同解决问题，并且打算在广泛的情形中重用。委托指向另一个对象（即它的委托）的引用，并在关键时刻给委托发消息。消息可能只是通知委托发生了某件事情，给委托提供机会执行额外的处理，或者消息可能要求委托提供一些关键的信息以控制所发生的事情。委托的作用主要有两个，一个是传值，一个
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/01/31/block和delegate相对论/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/12/13/OC中的Class/">OC中的Class</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-12-13T15:16:11.000Z" itemprop="datePublished">
+          2013-12-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+先看一个示例MyClass *my = [MyClass new];
+BOOL b1 = [my responseToSelector:@selector(responseToSelector:)];
+BOOL b2 = [MyClass responseToSelector:@selector(responseToSelector:)];
+NSLog(@&quot;%d, %d&quot;, b1, b2);
+结果：都输出”1”(Y
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/12/13/OC中的Class/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/12/01/如何编写稳定流畅的iOS移动端应用/">如何编写稳定流畅的iOS移动端应用</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-11-30T16:53:32.000Z" itemprop="datePublished">
+          2013-12-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        不忘初心在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开发应用的时候，人们也开始考虑“移动优先”的做法。我们正在面对全新一代的移动设备，诸如可穿戴设备或众多移动配件——正是它们构成了“万物互联”的世界。我们将面对全新的用户界面，通过它们数据展示及指令接收处理。同时，我们还将看到，越来越多的公司将真正地践行“移动优先”的思路。而在未来数年中，这一切都将影响我们设计
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/12/01/如何编写稳定流畅的iOS移动端应用/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/10/01/从0开始看一个项目/">从0开始看一个项目</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-10-01T02:40:37.000Z" itemprop="datePublished">
+          2013-10-01
+      </time>
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        在着手一个项目前先读文档（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就看他的测试用例，也是有一样的功效的。因为测试都是从文档出发编写的，而不是从代码出发编写的。找不到文档和测试用例？那就直接Gank吧。
+读代码要层次化、带着问题去阅读。首先整体了解这个软件是干什么？解决
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/10/01/从0开始看一个项目/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/08/31/iOS图像处理之UI-CG和CI/">iOS图像处理之UI,CG和CI</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-08-30T16:35:38.000Z" itemprop="datePublished">
+          2013-08-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        UIImage,CGImage和CGImageRef释疑UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/08/31/iOS图像处理之UI-CG和CI/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/08/29/Cordova-Source-Code-Analyse/">Cordova Source Code Analyse</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-08-29T15:27:36.000Z" itemprop="datePublished">
+          2013-08-29
+      </time>
+    
+    
+    | 
+    <a href='/tags/Source/'>Source</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                          官网 (markdown下经常无法链接，地址在这： http://cordova.apache.org)
+文件分类
+
+目录文件说明：
+conig.xml ：cordova的配置文件
+hooks/ ：存放自定义cordova命令的脚本文件。
+platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改
+plugins/ ：插件目录（主要是提供各个平台的原生API）
+www/ ：用H5编写的源代码目录，build时会被放入
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/08/29/Cordova-Source-Code-Analyse/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/">如何优雅的谈论HTTP／1.0／1.1／2.0</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2012-08-30T15:30:05.000Z" itemprop="datePublished">
+          2012-08-30
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        本文将涉及以下方面：
+
+HTTP协议
+HTTP1.0
+HTTP1.1
+HTTP2.0
+1.0和1.1和2.0之间的区别
+HTTPS
+
+HTTP协议HTTP（超文本传输协议，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。是用于从WWW服务器传输超文本到本地浏览器的传输协议。默认使用80端口，
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2012/07/01/手机App的购物车必须登陆/">手机App的购物车必须登陆</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2012-07-01T15:03:58.000Z" itemprop="datePublished">
+          2012-07-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/think/'>think</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        从Web到移动互联网，电商几乎改变了人们的生活，细思恐极，虽然离沃尔玛只有三站地的距离，但自从使用了天猫超市，竟然有4个月没去过卖场。科技改变生活，让潜质上有宅男倾向的人成功变成了宅男。互联网，看似身在网外，其实全在网中。
+那么有意思的事来了，在网上购物时会有一个不太被注意的细节，网站购物，加入购物车时并不需要登陆，只有结算时才需登陆。但是，移动端呢，情况全然不同，只要有购物车的应用，点到购物车选项，一定会要求登陆，一个本质上相同的网上
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2012/07/01/手机App的购物车必须登陆/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2012/03/11/优秀的团队该不该使用敏捷开发/">优秀的团队该不该使用敏捷开发</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2012-03-10T16:51:30.000Z" itemprop="datePublished">
+          2012-03-11
+      </time>
+    
+    
+    | 
+    <a href='/tags/skill/'>skill</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。
+敏捷开发的起源我们大部分人都学过瀑布开发模型，它是以文档为驱动的。因为在瀑布的整个开发过程中，开发人员根据需求文档进行开发，一切以文档为依据。敏捷开发(Agile Development)是一
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2012/03/11/优秀的团队该不该使用敏捷开发/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2011/07/01/野蛮生长－－SEO/">野蛮生长－－SEO</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2011-07-01T15:02:22.000Z" itemprop="datePublished">
+          2011-07-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/technology/'>technology</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        什么是SEOSEO是由英文Search Engine Optimization缩写而来， 中文意译为“搜索引擎优化”。SEO是指通过对网站内部调整优化及站外优化，使网站满足搜索引擎收录排名需求，在搜索引擎中关键词排名提高，从而把精准用户带到网站，获得免费流量，产生直接销售或品牌推广。目前SEO渐渐注重UEO了。
+UEO是英文user experience Optimization的缩写，把它翻译成中文的意思是用户体验优化，也就是把你的网
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2011/07/01/野蛮生长－－SEO/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2010/08/31/人生不可错过的5本书/">人生不可错过的5本书</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2010-08-31T01:39:18.000Z" itemprop="datePublished">
+          2010-08-31
+      </time>
+    
+    
+    | 
+    <a href='/tags/book/'>book</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        哥德尔、艾舍尔、巴赫书：集异璧之大成
+这是一本超过千页的大书，其翻译为中文的过程亦甚为坎坷。此中文版本采用了移译的翻译手法，将许多陌生的名词中国化了，所以初次阅读之体验可谓兴致盎然。巴赫、艾舍尔、哥德尔，三者的成果即为音乐、画作、逻辑（数理逻辑）上的三个怪圈，恰似原书的封面那样，投影不一，但其实内在的实质是一样的。巴赫的音符在重复中，一面唱出主题，一面扮演和声；艾舍尔的阶梯，一面无限上升，另一面无尽下降；哥德尔的不完备定理，一面作为数理
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2010/08/31/人生不可错过的5本书/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
         <nav class="pagination" role="pagination">
           
-          <a class="pull-right" href="/page/2/">Older Posts →</a>
+          
         </nav>
     </div>
 </section>
