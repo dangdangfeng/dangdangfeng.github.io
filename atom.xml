@@ -466,6 +466,79 @@ registry = http://registry.cnpmjs.org
   </entry>
   
   <entry>
+    <title>iOS9之后我们需要关注的事情</title>
+    <link href="https://dangdangfeng.github.io/2015/05/13/iOS9%E4%B9%8B%E5%90%8E%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E7%9A%84%E4%BA%8B%E6%83%85/"/>
+    <id>https://dangdangfeng.github.io/2015/05/13/iOS9之后我们需要关注的事情/</id>
+    <published>2015-05-13T13:58:50.000Z</published>
+    <updated>2016-09-01T13:59:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-cab02fd7bf9ee004.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS9"></p>
+<h4 id="应用隐私控制-外部调用"><a href="#应用隐私控制-外部调用" class="headerlink" title="应用隐私控制-外部调用"></a>应用隐私控制-外部调用</h4><p>iOS9增加了隐私控制，自己的应用如果需要调用其它应用，需要在工程的info.plist中添加一个key为LSApplicationQueriesSchemes的数组值，里面包含需要添加白名单的string类型的scheme。即使用URL scheme将其加入白名单。如项目中使用了qq，微信等分享登录功能，需要添加的值为：</p>
+<pre><code>mqqopensdkapiV2
+
+mqqOpensdkSSoLogin
+
+mqq
+
+mqzoneopensdkapiV2
+
+mqzoneopensdkapi19
+
+mqzoneopensdkapi
+
+mqzoneopensdk
+
+mqzone
+
+weixin
+
+wechat ...
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-ebd8251189201050.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例"></p>
+<p>如果不添加该项，使用canOpenURL:判断应用是否安装时会报错。</p>
+<pre><code>canOpenURL: failed for URL: &quot;mqqopensdkapiV2://qqapp&quot; - error: &quot;This app is not allowed to query for scheme mqqopensdkapiV2”
+</code></pre><h4 id="bitcode"><a href="#bitcode" class="headerlink" title="bitcode"></a>bitcode</h4><p>bitcode是被编译程序的一种中间形式的代码。包含bitcode配置的程序将会在App store上被编译和链接。bitcode允许苹果在后期重新优化我们程序的二进制文件，而不需要我们重新提交一个新的版本到App store上。</p>
+<p>Xcode7 默认开启了bitcode，如果App使用的第三方类库不支持bitcode会提示错误，只需要在”Build Settings”-&gt;”Enable Bitcode”选项中关闭bitcode即可。</p>
+<p>开启Bitcode编译后，编译产生的文件体积会变大 (因为是中间代码，不是用户下载的包)，且dSYM文件不能用来崩溃日志的符号化 (用户下载的包是Apple服务重新编译产生的，有产生新的符号文件)。通过Archive方式上传AppStore的包，可以在 Xcode的Organizer工具中下载对应安装包的新的符号文件。</p>
+<h4 id="改用更安全的HTTPS"><a href="#改用更安全的HTTPS" class="headerlink" title="改用更安全的HTTPS"></a>改用更安全的HTTPS</h4><p>如果在Xcode 7之前使用的时http请求，那么在XCode 7上编译的App是不能联网的。iOS9把所有的http请求都改为https了：iOS9系统发送的网络请求将统一使用TLS 1.2 SSL。采用TLS 1.2 协议，目的是 强制增强数据访问安全，而且 系统 Foundation 框架下的相关网络请求，将不再默认使用 Http 等不安全的网络协议，而默认采用 TLS 1.2。</p>
+<p>修改方法是要么使服务器支持https访问，要么关闭https的使用。第一种方法对于个人开发者来说代价还是比较大的，第二种方法:在工程的Info.plist文件里添加NSAppTransportSecurity字典类型的，添加一个元素：key为NSAllowsArbitraryLoads，值为YES。</p>
+<p><strong>什么是SSL/TLS</strong></p>
+<p>HTTP+SSL/TLS+TCP = HTTPS<br>TLS 是 SSL 新的别称。SSL 3.0版本之后的迭代版本被重新命名为TLS 1.0。</p>
+<p><strong>SSL/TLS协议解决的问题</strong></p>
+<p>1.所有信息都是加密传播，第三方无法窃听。<br>2.具有校验机制，一旦被篡改，通信双方会立刻发现。<br>3.配备身份证书，防止身份被冒充。</p>
+<p>iOS9中新增App Transport Security（简称ATS）特性, 主要使原来请求的时候用到的HTTP，都转向TLS1.2协议进行传输。这也意味着所有的HTTP协议都强制使用了HTTPS协议进行传输。</p>
+<p>在Info.plist新增一段用于控制ATS的配置：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fb1fd555239f1dc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="控制ATS的配置"></p>
+<p>这段配置中的NSAppTransportSecurity是ATS配置的根节点，配置了节点表示告诉系统要走自定义的ATS设置。而NSAllowsAritraryLoads节点则是控制是否禁用ATS特性，设置YES就是禁用ATS功能。</p>
+<p>其实ATS并不单单针对HTTP进行了限制，而是对HTTPS也有一定的要求，如果你希望自己所有的域名，除了一些已知并不会使用ATS之外的，所有通信都使用ATS。这种情况下你可以指定一些不使用ATS的特殊情况，而其余的情况使用ATS。对于这种场景，可以使用<em>NSExceptionDomains</em>来标识使用ATS默认设置的域。<br>以QQdemo为例：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-22799f250b4ed42e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQdemo"></p>
+<p>其中NSIncludesSubdomains设置为YES表示子级域名都使用相同设置。NSExceptionRequiresForwardSecrecy为NO由于不支持ForwardSecrecy，因此屏蔽掉改功能。最后NSExceptionAllowInsecureHTTPLoads设置为YES，则表示允许访问没有证书或者是自签名、过期、主机名不匹配的证书引发的错误的域名（这里检查过QQ的证书貌似没有什么问题，但是还是需要设置此项才允许访问）。这是比较严谨的做法，指定了能访问哪些特定的HTTP。</p>
+<h4 id="forward-secrecy"><a href="#forward-secrecy" class="headerlink" title="forward secrecy"></a>forward secrecy</h4><p>中文可叫做前向保密。perfect forward secrecy,叫做完全前向保密,要求一个密钥只能访问由它所保护的数据；用来产生密钥的元素一次一换，不能再产生其他的密钥；一个密钥被破解，并不影响其他密钥的安全性。</p>
+<p><strong>支持Forward Secrecy的加密方式</strong></p>
+<pre><code>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-cab02fd7bf9ee004.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+    
+    </summary>
+    
+    
+      <category term="杂谈" scheme="https://dangdangfeng.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS开发的奇技淫巧</title>
     <link href="https://dangdangfeng.github.io/2015/03/25/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
     <id>https://dangdangfeng.github.io/2015/03/25/iOS开发的奇技淫巧/</id>
@@ -687,6 +760,117 @@ break;
   </entry>
   
   <entry>
+    <title>从UIWindow谈起</title>
+    <link href="https://dangdangfeng.github.io/2014/12/30/%E4%BB%8EUIWindow%E8%B0%88%E8%B5%B7/"/>
+    <id>https://dangdangfeng.github.io/2014/12/30/从UIWindow谈起/</id>
+    <published>2014-12-30T13:55:55.000Z</published>
+    <updated>2016-09-01T13:57:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前写了一篇名为<a href="http://www.jianshu.com/p/0c637f496ec9" target="_blank" rel="external">iOS视图成像解构</a>的文章,<a href="http://www.jianshu.com/p/0c637f496ec9" target="_blank" rel="external">iOS视图成像解构</a>主要是结合各种工具来分析程序中视图在不同布局下产生的一些问题，今天主要讲一些原理上的东西，结合今天的内容，对您以后开发中视图显示出现的问题可能会有些帮助。</p>
+<h4 id="UIWindow"><a href="#UIWindow" class="headerlink" title="UIWindow"></a>UIWindow</h4><p>下面先看看Apple的官方文档</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fc6677d242b61837.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Apple官方文档"></p>
+<p>UIWindow继承自UIView，UIWindow是一种特殊的UIView，通常在一个程序中只会有一个UIWindow，但可以手动创建多个UIWindow，同时加到程序里面。即使有多个UIWindow对象，也只有一个UIWindow可以接受到用户的触屏事件（即主窗口）。</p>
+<p>iOS程序启动完毕后，先创建Application，再创建它的代理，之后创建UIWindow（创建的第一个对象是UIApplication），接着创建控制器的view，最后将控制器的view添加到UIWindow上，于是控制器的view就显示在屏幕上了。</p>
+<p>一个iOS程序之所以能显示到屏幕上，完全是因为它有UIWindow。也就说，没有UIWindow，就看不见任何UI界面。</p>
+<h4 id="主窗口和次窗口"><a href="#主窗口和次窗口" class="headerlink" title="主窗口和次窗口"></a>主窗口和次窗口</h4><pre><code>【self.window makekeyandvisible】让窗口成为主窗口，并且显示出来。有这个方法，才能把信息显示到屏幕上。
+</code></pre><p>   因为Window有makekeyandvisible这个方法，可以让这个Window凭空的显示出来，而其他的view没有这个方法，所以它只能依赖于Window，Window显示出来后，view才依附在Window上显示出来。</p>
+<pre><code>【self.window make keywindow】//让uiwindow成为主窗口，但不显示。
+</code></pre><p>次窗口，需要定义一个Window属性来保存变量。 window的属性定义为strong，就是为了让其不销毁， 一个应用程序只能有一个主窗口。只有主窗口才能响应键盘的输入事件，如果不能输入内容，可以查看是否是显示在主窗口上，不在主窗口上的不能响应。</p>
+<h4 id="WindowLevel"><a href="#WindowLevel" class="headerlink" title="WindowLevel"></a>WindowLevel</h4><p>UIWindow有三个层级，分别是Normal，StatusBar，Alert。Normal级别是最低的，StatusBar处于中等水平，Alert级别最高。而通常我们的程序的界面都是处于Normal这个级别上的，系统顶部的状态栏应该是处于StatusBar级别，UIActionSheet和UIAlertView这些通常都是用来中断正常流程，提醒用户等操作，因此位于Alert级别。</p>
+<p>根据window显示级别优先的原则，级别高的会显示在上面，级别低的在下面，我们程序正常显示的view位于最底层。</p>
+<p>当Level层级相同的时候，只有第一个设置为KeyWindow的显示出来，后面同级的再设置KeyWindow也不会显示。UIWindow在显示的时候是不管KeyWindow是谁，都是Level优先的，即Level最高的始终显示在最前面。</p>
+<h4 id="UIWindow是显示的起点"><a href="#UIWindow是显示的起点" class="headerlink" title="UIWindow是显示的起点"></a>UIWindow是显示的起点</h4><p>1.UIWindow对象是所有UIView的根，管理和协调应用程序的显示。<br>2.UIViewController对象负责管理所有UIView的层次结构，并响应设备的方向变化。<br>3.UIView对象定义了一个屏幕上的一个矩形区域，同时处理该区域的绘制和触屏事件。可以在这个区域内绘制图形和文字，还可以接收用户的操作。一个UIView的实例可以包含和管理若干个子UIView。</p>
+<h4 id="UIWindow在程序中的作用"><a href="#UIWindow在程序中的作用" class="headerlink" title="UIWindow在程序中的作用"></a>UIWindow在程序中的作用</h4><p>1.作为容器，包含app所要显示的所有视图<br>2.传递触摸消息到程序中view和其他对象<br>3.与UIViewController协同工作，方便完成设备方向旋转的支持</p>
+<h4 id="storyboard项目中的创建过程"><a href="#storyboard项目中的创建过程" class="headerlink" title="storyboard项目中的创建过程"></a>storyboard项目中的创建过程</h4><p>当用户点击应用程序图标的时候，先执行Main函数，执行UIApplicationMain(),根据其第三个和第四个参数创建Application，创建代理，并且把代理设置给application（看项目配置文件info.plist里面的storyboard的name，根据这个name找到对应的storyboard），开启一个事件循环，当程序加载完毕，他会调用代理的didFinishLaunchingWithOptions:方法。在调用didFinishLaunchingWithOptions:方法之前，会加载storyboard，在加载的时候创建一个window，接下来会创建箭头所指向的控制器，把该控制器设置为UIWindow的根控制器，接下来再将window显示出来，即看到了运行后显示的界面。</p>
+<h4 id="rootViewController和addSubview的不同"><a href="#rootViewController和addSubview的不同" class="headerlink" title="rootViewController和addSubview的不同"></a>rootViewController和addSubview的不同</h4><p>创建一个控制器，把view添加到uiwindow上面有两种方式<br><strong>1.rootViewController</strong><br>　rootViewController是UIWindow的一个遍历方法，通过设置该属性为要添加view对应的ViewController，UIWindow将会自动将其view添加到当前window中，同时负责ViewController和view的生命周期的维护，防止其过早释放</p>
+<p><strong>2.addSubview</strong><br>　直接将view通过addSubview方式添加到window中，程序负责维护view的生命周期以及刷新，但是并不会为去理会view对应的ViewController，因此采用这种方法将view添加到window以后，我们还要保持view对应的ViewController的有效性，不能过早释放。</p>
+<p>提示：不通过控制器的view也可以做开发，但是在实际开发中，不要这么做，不要直接把view添加到UIWindow上面去。因为，难以管理。以后的开发中，建议使用rootViewController。</p>
+<h4 id="UIView有关图层布局的方法"><a href="#UIView有关图层布局的方法" class="headerlink" title="UIView有关图层布局的方法"></a>UIView有关图层布局的方法</h4><p>一个 UIView 里面可以包含许多的 Subview（其他的 UIView），而这些 Subview 彼此之间是有层级关系的。<br><strong>1.新增Subview</strong> </p>
+<pre><code>[UIView addSubview:Subview];     //替UIView增加一个Subview 
+</code></pre><p><strong> 2.移动图层</strong><br>在UIView中将Subview往前或是往后移动一个图层，往前移动会覆盖住较后层的 Subview，而往后移动则会被较上层的Subview所覆盖。</p>
+<pre><code>[UIView bringSubviewToFront:Subview];       //将Subview往前移动一个图层（与它的前一个图层对调位置）
+[UIView sendSubviewToBack:Subview];      //将Subview往后移动一个图层（与它的后一个图层对调位置） 
+</code></pre><p><strong>3.交换两个Subview彼此的图层层级</strong></p>
+<pre><code>[UIView exchangeSubviewAtIndex:indexA withSubviewAtIndex:indexB];    //交换两个图层
+</code></pre><p><strong>4.取得子视图在UIView中的索引值（Index ）</strong></p>
+<pre><code>NSInteger index = [[UIView subviews] indexOfObject:Subview名称];       //取得Index
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-c6fc927c9d65a964.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="怀念乔布斯"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前写了一篇名为&lt;a href=&quot;http://www.jianshu.com/p/0c637f496ec9&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;iOS视图成像解构&lt;/a&gt;的文章,&lt;a href=&quot;http://www.jianshu.com/p
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://dangdangfeng.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OC的内存管理</title>
+    <link href="https://dangdangfeng.github.io/2014/11/01/OC%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>https://dangdangfeng.github.io/2014/11/01/OC的内存管理/</id>
+    <published>2014-11-01T13:47:24.000Z</published>
+    <updated>2016-09-01T13:49:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>内存管理四句箴言：</p>
+<p>自己生成的自己持有<br>非自己生成的对象自己也可持有<br>不再需要自己持有时释放<br>非自己持有的对象无法释放</p>
+</blockquote>
+<p>Objective-C中的内存管理机制跟C语言中指针的内容是同样重要的，要开发一个程序并不难，但是优秀的程序则更测重于内存管理，它们往往占用内存更少，运行更加流畅。在Xcode4.2及之后的版本中由于引入了ARC（Automatic Reference Counting）机制,程序编译时Xcode可以自动给你的代码添加内存释放代码。内存管理是开发中不可忽略的一块，虽然ARC帮我们节省了很多精力，不过作为一名合格的开发人员，最基本的知识还是要理解的。</p>
+<h4 id="自持与不自持"><a href="#自持与不自持" class="headerlink" title="自持与不自持"></a>自持与不自持</h4><p>在开发中，如果使用了alloc,new,copy,mutableCopy或以其开头的方法名，意味着自己生成的对象只有自己持有，如：allocMyJob,newItName,copyAfter,mutableCopyYourName。但是以allocate,newer,copying,mutableCopyed开头的是不自己持有的，很明显它们是假冒的。</p>
+<p>以下为例：</p>
+<pre><code>id obj = [NSMutableArray array]; // 取得非自己生成并持有的对象
+</code></pre><p>取得的对象存在，但自己并不持有对象。NSMutableArray类对象被赋给变量obj,但变量obj自己并不持有该对象。持有时需要用retain方法，如：</p>
+<pre><code>id obj = [NSMutableArray array]; 
+[obj retain];
+</code></pre><p>通过retain,非自己用alloc等生成的对象也可以自己持有了。</p>
+<p>不需要时，使用release释放，对象一经释放就不可访问了。用alloc/new/copy/mutableCopy持有和retain持有的对象，不需要时一定要用release释放。</p>
+<p>同理使用如allocObject也可以取得自己持有对象。</p>
+<pre><code>id obj1 = [obj0 allocObject];
+</code></pre><p>当使用autorelease时，即是取得了对象存在，但是自己不持有对象。如：</p>
+<pre><code>- (id)object
+{
+id obj = [[NSObject alloc] init]; //自己持有对象
+[obj autorelease];
+return obj;// 取得的对象存在，但自己不持有
+}
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1170656-b57663af5fa31350.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="autorelease"></p>
+<h4 id="autorelease"><a href="#autorelease" class="headerlink" title="autorelease"></a>autorelease</h4><p>[NSMutableArray array]就是因为用了autorelease使得谁都不持有的。当然再次使用retain就持有了。程序里的所有autorelease pool是以桟（stack）的形式组织的。新创建的pool位于桟的最顶端。当发送autorelease消息给一个对象时，这个对象被加到栈顶的那个pool中。发送drain给一个pool时，这个pool里所有对象都会受到release消息，而且如果这个pool不是位于栈顶，那么位于这个pool“上端”的所有pool也会受到drain消息。</p>
+<p>[pool drain] 和 [pool release] 的区别：<br>release，在引用计数环境下，由于NSAutoReleasePool是一个不可以被retain的类型，所以release会直接dealloc pool对象。当pool被dealloc的时候，pool向所有在pool中的对象发出一个release的消息，如果一个对象在这个pool中autorelease了多次，pool对这个对象的每一次autorelease都会release。在GC(garbage-collected environment)环境下release是一个no-op操作（代表没有操作，是一个占据进行很少的空间但是指出没有操作的计算机指令）。</p>
+<p>drain，在引用计数环境下，它的行为和release是一样的。在GC的环境下，这个方法调用objc_collect_if_needed 触发GC。重点是：在GC环境下，release是一个no-op，所以除非你不希望在GC环境下触发GC，你都应该使用drain而不是使用release来释放pool。原文如下：</p>
+<blockquote>
+<p>drain</p>
+<p>In a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.     - (void)drain</p>
+<p>Discussion<br><strong>In a reference-counted environment, this method behaves the same as release. </strong>Since an autorelease pool cannot be retained (see retain<br>), this therefore causes the receiver to be deallocated. When an autorelease pool is deallocated, it sends a release message to all its autoreleased objects. If an object is added several times to the same pool, when the pool is deallocated it receives a release message for each time it was added.In a garbage-collected environment, this method ultimately calls objc_collect_if_needed.</p>
+<p>Special Considerations<br>In a garbage-collected environment, release is a no-op, so unless you do not want to give the collector a hint it is important to use drain in any code that may be compiled for a garbage-collected environment.</p>
+</blockquote>
+<p>对于iOS来说drain和release的作用其实是一样的。</p>
+<p>一个对象被加到一个pool很多次，只要多次发送autorelease消息给这个对象就可以；同时，当这个pool被回收时，这个对象也会收到同样多次release消息。简单地可以认为接收autorelease消息等同于：接收一个retain消息，同时加入到一个pool里；这个pool用来存放这些暂缓回收的对象；一旦这个pool被回收（drain），那么pool里面的对象会收到同样次数的release消息。－UIKit框架已经帮你自动创建一个autorelease pool。大部分时候，你可以直接使用这个pool，不必自己创建；所以你给一个对象发送autorelease消息，那么这个对象会加到这个UIKit自动创建的pool里。</p>
+<p>某些时候，可能需要创建一个pool：<br>1.没有使用UIKit框架或者其它内含autorelease pool的框架，那么要使用pool，就要自己创建。</p>
+<p>2.如果一个循环体要创建大量的临时变量，那么创建自己的pool可以减少程序占用的内存峰值。（如果使用UIKit的pool，那么这些临时变量可能一直在这个pool里，只要这个pool受到drain消息；完全不使用autorelease pool应该也是可以的，可能只是要发一些release消息给这些临时变量，所以使用autorelease pool还是方便一些）</p>
+<p>3.创建线程时必须创建这个线程自己的autorelease pool。－使用alloc和init消息来创建pool，发送drain消息则表示这个pool不再使用。pool的创建和drain要在同一上下文中，比如循环体内。</p>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>ObjC中没有垃圾回收机制，在ObjC中内存的管理是依赖对象引用计数器来进行的：在ObjC中每个对象内部都有一个与之对应的整数（retainCount），叫“引用计数器”，当一个对象在创建之后它的引用计数器为1，当调用这个对象的alloc、retain、new、copy方法之后引用计数器自动在原来的基础上加1（OC中调用一个对象的方法就是给这个对象发送一个消息），当调用这个对象的release方法之后它的引用计数器减1，如果一个对象的引用计数器为0，则系统会自动调用这个对象的dealloc方法来销毁这个对象。手动管理内存有时候并不容易，因为对象的引用有时候是错综复杂的，对象之间可能互相交叉引用，此时需要遵循一个法则：<strong>谁创建，谁释放</strong>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;内存管理四句箴言：&lt;/p&gt;
+&lt;p&gt;自己生成的自己持有&lt;br&gt;非自己生成的对象自己也可持有&lt;br&gt;不再需要自己持有时释放&lt;br&gt;非自己持有的对象无法释放&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Objective-C中的内存管理机制跟C语言中指针的
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://dangdangfeng.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Category不会想当然</title>
     <link href="https://dangdangfeng.github.io/2014/10/31/Category%E4%B8%8D%E4%BC%9A%E6%83%B3%E5%BD%93%E7%84%B6/"/>
     <id>https://dangdangfeng.github.io/2014/10/31/Category不会想当然/</id>
@@ -760,6 +944,67 @@ _free_internal(mlists);
     
     
       <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动端优化之离屏渲染</title>
+    <link href="https://dangdangfeng.github.io/2014/09/27/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BC%98%E5%8C%96%E4%B9%8B%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/"/>
+    <id>https://dangdangfeng.github.io/2014/09/27/移动端优化之离屏渲染/</id>
+    <published>2014-09-27T14:00:19.000Z</published>
+    <updated>2016-09-01T14:01:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-56254b398efc6894.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="渲染.jpg"></p>
+<p>相比于当前屏幕渲染，离屏渲染的代价是很高的，这也是iOS移动端优化的必要部分。</p>
+<p>OpenGL中，GPU屏幕渲染有以下两种方式：</p>
+<p>1.On-Screen Rendering<br>意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。</p>
+<p>2.Off-Screen Rendering<br>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</p>
+<p>一般情况下，OpenGL会将应用提交到Render Server的动画直接渲染显示（基本的Tile-Based渲染流程），但对于一些复杂的图像动画的渲染并不能直接渲染叠加显示，而是需要根据Command Buffer分通道进行渲染之后再组合，这一组合过程中，就有些渲染通道是不会直接显示的；Masking渲染需要更多渲染通道和合并的步骤；而这些没有直接显示在屏幕的上的通道就是Offscreen Rendering Pass。</p>
+<p>Offscreen Render为什么卡顿，Offscreen Render需要更多的渲染通道，而且不同的渲染通道间切换需要耗费一定的时间，这个时间内GPU会闲置，当通道达到一定数量，对性能也会有较大的影响。</p>
+<h4 id="离屏渲染的触发"><a href="#离屏渲染的触发" class="headerlink" title="离屏渲染的触发"></a>离屏渲染的触发</h4><p>离屏渲染可以被 Core Animation 自动触发，或者被应用程序强制触发。屏幕外的渲染会合并渲染图层树的一部分到一个新的缓冲区，然后该缓冲区被渲染到屏幕上。</p>
+<p>离屏渲染合成计算是非常昂贵的, 但有时你也许希望强制这种操作。一种好的方法就是缓存合成的纹理/图层。如果你的渲染树非常复杂(所有的纹理，以及如何组合在一起)，你可以强制离屏渲染缓存那些图层，然后可以用缓存作为合成的结果放到屏幕上。</p>
+<p>如果你的程序混合了很多图层，并且想要他们一起做动画，GPU 通常会为每一帧(1/60s)重复合成所有的图层。当使用离屏渲染时，GPU 第一次会混合所有图层到一个基于新的纹理的位图缓存上，然后使用这个纹理来绘制到屏幕上。现在，当这些图层一起移动的时候，GPU 便可以复用这个位图缓存，并且只需要做很少的工作。需要注意的是，只有当那些图层不改变时，这才可以用。如果那些图层改变了，GPU 需要重新创建位图缓存。你可以通过设置 shouldRasterize 为 YES 来触发这个行为。</p>
+<p>然而，这是一个权衡。第一，这可能会使事情变得更慢。创建额外的屏幕外缓冲区是 GPU 需要多做的一步操作，特殊情况下这个位图可能再也不需要被复用，这便是一个无用功了。然而，可以被复用的位图，GPU 也有可能将它卸载了。所以你需要计算 GPU 的利用率和帧的速率来判断这个位图是否有用。</p>
+<p>离屏渲染也可能产生副作用。如果你正在直接或者间接的将mask应用到一个图层上，Core Animation 为了应用这个 mask，会强制进行屏幕外渲染。这会对 GPU 产生重负。通常情况下 mask 只能被直接渲染到帧的缓冲区中(在屏幕内)。</p>
+<p>Instrument 的 Core Animation 工具有一个叫做<em>Color Offscreen-Rendered Yellow</em>的选项，它会将已经被渲染到屏幕外缓冲区的区域标注为黄色(这个选项在模拟器中也可以用)。同时记得检查<em>Color Hits Green and Misses Red</em>选项。绿色代表无论何时一个屏幕外缓冲区被复用，而红色代表当缓冲区被重新创建。</p>
+<p>一般情况下，你需要避免离屏渲染，因为这是很大的消耗。直接将图层合成到帧的缓冲区中(在屏幕上)比先创建屏幕外缓冲区，然后渲染到纹理中，最后将结果渲染到帧的缓冲区中要廉价很多。因为这其中涉及两次昂贵的环境转换(转换环境到屏幕外缓冲区，然后转换环境到帧缓冲区)。</p>
+<p>所以当你打开<em>Color Offscreen-Rendered Yellow</em>后看到黄色，这便是一个警告，但这不一定是不好的。如果 Core Animation 能够复用屏幕外渲染的结果，这便能够提升性能。</p>
+<p>同时还要注意，rasterized layer 的空间是有限的。苹果暗示大概有屏幕大小两倍的空间来存储 rasterized layer/屏幕外缓冲区。</p>
+<p>如果你使用 layer 的方式会通过屏幕外渲染，你最好摆脱这种方式。为 layer 使用蒙板或者设置圆角半径会造成屏幕外渲染，产生阴影也会如此。</p>
+<p>至于 mask，圆角半径(特殊的mask)和 clipsToBounds/masksToBounds，你可以简单的为一个已经拥有 mask 的 layer 创建内容，比如，已经应用了 mask 的 layer 使用一张图片。如果你想根据 layer 的内容为其应用一个长方形 mask，你可以使用 contentsRect 来代替蒙板。</p>
+<p>如果你最后设置了 shouldRasterize 为 YES，那也要记住设置 rasterizationScale 为 contentsScale。</p>
+<h4 id="离屏渲染的体现"><a href="#离屏渲染的体现" class="headerlink" title="离屏渲染的体现"></a>离屏渲染的体现</h4><p>相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：</p>
+<p>1.创建新缓冲区<br>要想进行离屏渲染，首先要创建一个新的缓冲区。</p>
+<p>2.上下文切换<br>离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。</p>
+<p>那哪些情况会Offscreen Render呢？</p>
+<pre><code>1) drawRect
+2) layer.shouldRasterize = true;
+3) 有mask或者是阴影(layer.masksToBounds, layer.shadow*)；
+ 3.1) shouldRasterize（光栅化）
+ 3.2) masks（遮罩）
+ 3.3) shadows（阴影）
+ 3.4) edge antialiasing（抗锯齿）
+ 3.5) group opacity（不透明）
+4) Text（UILabel, CATextLayer, Core Text, etc）...
+</code></pre><p> 注：layer.cornerRadius，layer.borderWidth，layer.borderColor并不会Offscreen Render，因为这些不需要加入Mask。</p>
+<p>需要注意的是，如果shouldRasterize被设置成YES，在触发离屏绘制的同时，会将光栅化后的内容缓存起来，如果对应的layer及其sublayers没有发生改变，在下一帧的时候可以直接复用。这将在很大程度上提升渲染性能。</p>
+<p>而其它属性如果是开启的，就不会有缓存，离屏绘制会在每一帧都发生。</p>
+<h4 id="另一种特殊的“离屏渲染”方式：CPU渲染"><a href="#另一种特殊的“离屏渲染”方式：CPU渲染" class="headerlink" title="另一种特殊的“离屏渲染”方式：CPU渲染"></a>另一种特殊的“离屏渲染”方式：CPU渲染</h4><p>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内同步地<br>完成，渲染得到的bitmap最后再交由GPU用于显示。</p>
+<h4 id="当前屏幕渲染、离屏渲染、CPU渲染的选择"><a href="#当前屏幕渲染、离屏渲染、CPU渲染的选择" class="headerlink" title="当前屏幕渲染、离屏渲染、CPU渲染的选择"></a>当前屏幕渲染、离屏渲染、CPU渲染的选择</h4><p>1.尽量使用当前屏幕渲染<br>鉴于离屏渲染、CPU渲染可能带来的性能问题，一般情况下，我们要尽量使用当前屏幕渲染。</p>
+<p>2.离屏渲染 VS CPU渲染<br>由于GPU的浮点运算能力比CPU强，CPU渲染的效率可能不如离屏渲染；但如果仅仅是实现一个简单的效果，直接使用CPU渲染的效率又可能比离屏渲染好，毕竟离屏渲染要涉及到缓冲区创建和上下文切换等耗时操作。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>一方面来说，一部分（通过drawRect并且使用任何CoreGraphics来实现的绘制，或使用CoreText[其实就是使用CoreGraphics]绘制）的确涉及到了“离屏绘制”，但是这和我们通常说的那种离屏绘制是有区别的。当你实现drawRect方法或者通过CoeGraphics绘制的时候，其实你是在使用CPU绘制。并且这个绘制的过程会在你的App内同步地进行。基本上你只是调用了一些向位图缓存内写入一些二进制信息的方法而已。</p>
+<p>而另外一种形式离屏绘制是发生在绘制服务（是独立的处理过程）并且同时通过GPU执行（这里就不是像前面提到的用CPU了）。当OpengGL的绘制程序在绘制每个layer的时候，有可能因为包含多子层级关系而必须停下来把他们合成到一个单独的缓存里。你可能认为GPU应该总是比CPU牛逼一点，但是在这里我们还是需要慎重的考虑一下。因为对GPU来说，从当前屏幕（on-screen）到离屏（off-screen）上下文环境的来回切换（这个过程必须flush管线和光栅），代价是非常大的。因此对一些简单的绘制过程来说，这个过程有可能用CoreGraphics，全部用CPU来完成反而会比GPU做得更好。所以如果你正在尝试处理一些复杂的层级，并且在犹豫到底用-[CALayer setShouldRasterize:]还是通过CoreGraphics来绘制层级上的所有内容，唯一的方法就是测试并且进行权衡。</p>
+<p>有机会，我们下次再谈。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-56254b398efc6894.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://dangdangfeng.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
@@ -1791,6 +2036,108 @@ NSLog(@&quot;%s %@&quot;,__func__,receiverStr);
   </entry>
   
   <entry>
+    <title>iOS的锁屏和解锁的时间机制</title>
+    <link href="https://dangdangfeng.github.io/2014/05/06/iOS%E7%9A%84%E9%94%81%E5%B1%8F%E5%92%8C%E8%A7%A3%E9%94%81%E7%9A%84%E6%97%B6%E9%97%B4%E6%9C%BA%E5%88%B6/"/>
+    <id>https://dangdangfeng.github.io/2014/05/06/iOS的锁屏和解锁的时间机制/</id>
+    <published>2014-05-06T13:54:20.000Z</published>
+    <updated>2016-09-01T13:55:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="idleTimer"><a href="#idleTimer" class="headerlink" title="idleTimer"></a>idleTimer</h4><p>idleTimer 是iOS内置的时间监测机制，当在一段时间内未操作即进入锁屏状态。但有些应用程序是不需要锁住屏幕的，比如游戏，视频这类应用。 可以通过设置UIApplication的idleTimerDisabled属性来指定iOS是否锁屏。 </p>
+<pre><code>// 禁用休闲时钟 
+[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+</code></pre><p>也可以使用这种语法 </p>
+<pre><code>[UIApplication sharedApplication].idleTimerDisabled = YES;
+</code></pre><p>但是，这个命令只能禁用自动锁屏，如果点击了锁屏按钮，仍然会进入锁屏的。有一点例外的是，AVPlayer不用设置idleTimerDisabled=YES，也能屏幕常亮，播放完成后过一分钟就自动关闭屏幕。有兴趣的可以自己尝试一下。</p>
+<h4 id="锁屏和解锁通知"><a href="#锁屏和解锁通知" class="headerlink" title="锁屏和解锁通知"></a>锁屏和解锁通知</h4><p>iPhone的锁屏监测分为两种方式监听：一种是程序在前台，另一种程序在后台。 程序在前台，这种比较简单。直接使用Darwin层的通知就可以了：</p>
+<blockquote>
+<p>Darwin是由苹果电脑于2000年所释出的一个开放原始码操作系统。Darwin 是MacOSX 操作环境的操作系统成份。苹果电脑于2000年把Darwin 释出给开放原始码社群。现在的Darwin皆可以在苹果电脑的PowerPC 架构和X86 架构下执行，而后者的架构只有有限的驱动程序支援。</p>
+</blockquote>
+<pre><code>#import &lt;notify.h&gt;
+#define NotificationLock CFSTR(&quot;com.apple.springboard.lockcomplete&quot;)
+#define NotificationChange CFSTR(&quot;com.apple.springboard.lockstate&quot;)
+#define NotificationPwdUI CFSTR(&quot;com.apple.springboard.hasBlankedScreen&quot;)
+
+static void screenLockStateChanged(CFNotificationCenterRef center,void* observer,CFStringRef name,const void* object,CFDictionaryRef userInfo)
+{
+NSString* lockstate = (__bridge NSString*)name;
+if ([lockstate isEqualToString:(__bridge  NSString*)NotificationLock]) {
+    NSLog(@&quot;locked.&quot;);
+} else {
+    NSLog(@&quot;lock state changed.&quot;);
+}
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, NotificationLock, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, NotificationChange, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+return YES;
+}
+</code></pre><p><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/notify_register_check.3.html" target="_blank" rel="external">notify.h</a>的具体内容可以移步开发文档。这种方法，程序在前台是可以拿到的，在后台情况下就无能为力了。</p>
+<p>第二种是程序退后台后，这时再锁屏就收不到上面的那个通知了，需要另外一种方式, 以循环的方式一直来检测是否是锁屏状态，会消耗性能并可能被苹果挂起，需要合理设置循环时间。</p>
+<pre><code>static void setScreenStateCb()
+{
+uint64_t locked;
+
+__block int token = 0;
+notify_register_dispatch(&quot;com.apple.springboard.lockstate&quot;,&amp;token,dispatch_get_main_queue(),^(int t){
+});
+notify_get_state(token, &amp;locked);
+NSLog(@&quot;%d&quot;,(int)locked);
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+while (YES) {
+    setScreenStateCb();
+    sleep(5); // 循环5s
+}
+}
+</code></pre><h4 id="UIApplication"><a href="#UIApplication" class="headerlink" title="UIApplication"></a>UIApplication</h4><p>上面我们使用了UIApplication的IdleTimerDisabled方法，下面就大概了解下UIApplication吧。</p>
+<p>UIApplication，每个程序只能有一个，系统使用的是单例模式，用[UIApplication sharedApplication]来得到一个实例。这个单例实例是在系统启动时由main函数里面的UIApplicationMain方法生成，实现的是UIApplicationDelegate的Protocol，也就是AppDelegate的一个实例。每次通过[UIApplication sharedApplication]调用的就是它。UIApplication保存一个UIWindow对象序列，用来快速恢复views。</p>
+<p>UIApplication在程序里的作用很多，大致如下所示：</p>
+<pre><code>一、远程提醒，就是push notification注册；
+二、可以连接到UIUndoManager；在Cocoa中使用NSUndoManager可以很方便的完成撤销操作。NSUndoManager会记录下修改、撤销操作的消息。这个机制使用两个NSInvocation对象栈。当进行操作时，控制器会添加一个该操作的逆操作的invocation到Undo栈中。当进行Undo操作时，Undo操作的逆操作会倍添加到Redo栈中，就这样利用Undo和Redo两个堆栈巧妙的实现撤销操作。需要注意的是，堆栈中存放的都是NSInvocation实例。
+三、检查能否打开某个URL，并且打开URL；这个功能可以配合应用的自定义URL功能，来检测是否安装了某个应用。使用的是[[UIApplication sharedApplication] canOpenURL:url]方法。如果返回YES，可执行[[UIApplication sharedApplication] openURL:url]; 
+四、注册Local Notification；
+五、在后台运行以及从后台转为前台时的操作；
+六、防止屏幕睡眠：即上面的[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+七、手动调整status bar的位置和状态，如设置为竖屏、横屏等；
+八、设置badge number，就是图标右上角的数字；
+九、每当应用联网时，在状态栏上会显示联网小菊花。UIApplication可以设置是否出现。
+UIApplication *app = [UIApplication sharedApplication]; 
+app.networkActivityIndicatorVisible =!app.networkActivityIndicatorVisible;//转动 
+app.networkActivityIndicatorVisible = app.networkActivityIndicatorVisible;//不转动
+</code></pre><p><strong>UIUndoManager示例</strong></p>
+<pre><code>- (void) one
+{
+position = position + 10;
+[[undoManager prepareWithInvocationTarget:self] two];
+[self showTheChangesToThePostion];
+}
+
+- (void) two
+{
+position = position - 10;
+[[undoManager prepareWithInvocationTarget:self] one];
+[self showTheChangesToThePostion];
+}
+</code></pre><p>prepareWithInvocationTarget:方法记录了target并返回UndoManager，然后UndoManager重载了forwardInvocation方法，也就将two方法的Invocation添加到undo栈中了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e230b6aa68d11fa4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解锁"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;idleTimer&quot;&gt;&lt;a href=&quot;#idleTimer&quot; class=&quot;headerlink&quot; title=&quot;idleTimer&quot;&gt;&lt;/a&gt;idleTimer&lt;/h4&gt;&lt;p&gt;idleTimer 是iOS内置的时间监测机制，当在一段时间内未操作即进入锁屏状态。
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://dangdangfeng.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>OC攻与伐</title>
     <link href="https://dangdangfeng.github.io/2014/03/31/OC%E6%94%BB%E4%B8%8E%E4%BC%90/"/>
     <id>https://dangdangfeng.github.io/2014/03/31/OC攻与伐/</id>
@@ -2154,411 +2501,6 @@ dispatch_barrier_sync(self.barrierQueue, ^{
     
     
       <category term="helper" scheme="https://dangdangfeng.github.io/tags/helper/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>block和delegate相对论</title>
-    <link href="https://dangdangfeng.github.io/2014/01/31/block%E5%92%8Cdelegate%E7%9B%B8%E5%AF%B9%E8%AE%BA/"/>
-    <id>https://dangdangfeng.github.io/2014/01/31/block和delegate相对论/</id>
-    <published>2014-01-31T15:21:23.000Z</published>
-    <updated>2016-08-31T15:22:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h4><p>委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中的变化做出反应或者影响另一个对象的行为。其基本思想是：两个对象协同解决问题，并且打算在广泛的情形中重用。委托指向另一个对象（即它的委托）的引用，并在关键时刻给委托发消息。消息可能只是通知委托发生了某件事情，给委托提供机会执行额外的处理，或者消息可能要求委托提供一些关键的信息以控制所发生的事情。委托的作用主要有两个，一个是传值，一个是传事件。</p>
-<p>传值常用在B类要把自己的一个数据或者对象传给A类，让A类去展示或者处理（切分紧耦合，和代码分块时常用）。传事件是A类发生了什么事，把这件事告诉关注自己的类，也就是委托的对象，由委托的对象去考虑发生这个事件后应该做出什么反映（例如在异步请求中，界面事件触发数据层改变等）。利用委托赋值，这种方法是为了不暴露自己的属性就可以给自己赋值，这样方便了类的管理，只有在你想要让别人给你赋值的时候才调用，这样的赋值更可控一些。（如tableView中的委托dateSource等）。</p>
-<p>在iOS中委托通过一种@protocol的方式实现,所以又称为协议。协议是多个类共享的一个方法列表,在协议中所列出的方法没有响应的实现，由其它类来实现。delegate是“一对一”的关系，对同一个协议，一个对象只能设置一个代理delegate，所以<strong>单例对象就不能用代理</strong>。代理更注重过程信息的传输：如发起一个网络请求，是否此时请求已经开始、是否收到了数据、数据是否已经接受完成、数据接收失败等。</p>
-<p>从委托类的定义可以看出，委托与协议有一定的相似性。都采用protocol关键字来声明，并且其中的方法都有optional和required，都需要对required方法和调用的optional方法进行实现。而不同的是在委托对象所在的类中需要定义一个delegate对象，并且为id类型。但是delegate与protocol本质上是不同的。Delegate本身应该称为一种设计模式，是把一个类自己需要做的一部分事情，让另一个类（也可以就是自己本身）来完成，而实际做事的类为delegate。而protocol是一种语法，它的主要目标是提供接口给遵守协议的类使用，而这种方式提供了一个很方便的、实现delegate模式的机会。</p>
-<p><strong>委托模式的实现思路：</strong></p>
-<p>1、通常是在对象主体包含一个委托对象的弱引用：</p>
-<pre><code>@property (nonatomic, weak, nullable) id &lt;UITableViewDelegate&gt; delegate;
-</code></pre><p>2、委托对象的实现有两种方式：一种是必须实现，一种是可选实现，即@required和@optional的区别。</p>
-<pre><code>@protocol UITableViewDelegate&lt;NSObject, UIScrollViewDelegate&gt;
-
-@optional
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
-</code></pre><p>3、判断触发委托方法。</p>
-<pre><code>//确定委托是否存在Entered方法
-if([delegate respondsToSelector:@selector(method:)])
-{
-    //发送委托方法，方法的参数为用户的输入
-    [delegate method:xxx];
-}
-</code></pre><p>4、连接对象主体和委托，通过setDelegate:(id)obj来实现。</p>
-<pre><code>_test.delegate = self;
-</code></pre><p>5、如果实现委托的类有委托需要的方法就执行方法。大概就是这样。</p>
-<h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block是Apple Inc.为C、C++以及Objective-C添加的特性，使得这些语言可以用类lambda表达式的语法来创建闭包，是iOS4.0以后和Mac OS X 10.6以后引进的对C语言的扩展，用来实现匿名函数的特性。 Block能够读取其它函数内部变量的函数,在一段请求连续代码中可以看到调用参数（如发送请求）和响应结果。采用Block技术能够抽象出很多共用函数，提高了代码的可读性，可维护性，封装性。 </p>
-<p>block写法更简练，不需要写protocol、函数等等；block注重结果的传输：比如对于一个事件，只想知道成功或者失败，并不需要知道进行了多少或者额外的一些信息；block需要注意防止循环引用。</p>
-<p>block的写法大概就是这样：</p>
-<pre><code>void (^blockTest)(void) = ^{
-    NSLog(@&quot;block&quot;);
-};
-
-blockTest();
-</code></pre><p>如果用block进行两个类之间的互动，需要这样：<br>BLOCK首先你在.h文件中声明BLOCK对象，当然返回的参数你可以自己定义： </p>
-<pre><code>typedef void (^blockTest)(); 
-
-@property (nonatomic,copy) blockTest myblock;  
-</code></pre><p>在.m文件中执行时：</p>
-<pre><code>if(_myblock){
-_myblock();
-}
-</code></pre><p>其他类执行block时是这样的：</p>
-<pre><code>_testClass.myblock = ^{
- NSLog(@&quot;block&quot;);
-}
-</code></pre><p>需要注意的是：<br>1.循环引用问题，如果block里用了self，需要替换为</p>
-<pre><code>__weak typeof(self) weakSelf = self;
-</code></pre><p>2.block所在函数中的，捕获自动变量,但是不能修改它，不然就是编译错误。但是可以改变全局变量、静态变量、全局静态变量。为何不让修改变量：这个是编译器决定的。理论上当然可以修改变量了，只不过block捕获的是自动变量的副本，名字一样。为了不给开发者迷惑，干脆不让赋值。静态变量属于类的，不是某一个变量。所以block内部不用调用self指针,所以block可以调用。解决block不能保存值这一问题的另外一个办法是使用__block修饰符。 </p>
-<h4 id="block和delegate的区别"><a href="#block和delegate的区别" class="headerlink" title="block和delegate的区别"></a>block和delegate的区别</h4><p>block不像代理声明了一个代理函数，在调用的类内部还要实现该函数，若一个页面能发送多个请求，并且用多点触控同时触发发送多个请求，那个这个页面的代理函数很难区分是那个请求的结果,只有你的响应消息中带有消息类型可能会分出来，若服务器做的不够强大，当出现异常时，找不发送请求，对于开发来说是个问题。这样多个消息在一个函数里解析也不利于封装。 Block比代理更清晰, Block可以在创建事件的时候区分开来。这也是为什么现在苹果 API 中越来越多地使用 Block而不是 Delegate。</p>
-<p>block有三个存储区域_NSConcretStackBlock ，_NSConcretGlobalBlock和_NSConcretMallocBlock。正如它们名字说的那样，说明了block的三种存储方式：栈、全局、堆。如果是定义在函数外面的block是global的，另外如果函数内部的block但是没有捕获任何自动变量，那么它也是全局的。</p>
-<pre><code>typedef  int  (^blk_test)( int );
-
-for(...){
-
-blk_test blk = ^(int count) {return count;};
-}
-</code></pre><p>虽然，这个block在循环内，但是blk的地址总是不变的。说明这个block在全局段。在栈上block调用copy那么复制到堆上，在全局block调用copy什么也不做，在堆上调用block引用计数增加。</p>
-<p>测试方法如下：</p>
-<pre><code>typedef  int  (^blkt1)(void) ;
-
--(void) stackOrHeap{
-
-__block int val =10;
-
-int *valPtr = &amp;val;//使用int的指针，来检测block到底在栈上，还是堆上
-
-blkt1 s= ^{
-
-    NSLog(@&quot;val_block = %d&quot;,++val);
-
-    return val;};
-
-s();
-
-NSLog(@&quot;valPointer = %d&quot;,*valPtr);
-
-}
-</code></pre><p>int val肯定是在栈上的，我保存了val的地址，看看block调用前后是否变化。输出一致说明是栈上，不一致说明是堆上。有兴趣的可以手动试一下ARC和MRC下的结果。</p>
-<p>由此我们可以看到delegate运行成本低，block成本很高。block出栈需要将使用的数据从栈内存拷贝到堆内存，当然对象的话就是加计数，使用完或者block置nil后才消除；delegate只是保存了一个对象指针，直接回调，没有额外消耗。相对C的函数指针，只多做了一个查表动作 。</p>
-<p>一般来说公共接口，方法也较多用delegate进行解耦 ，iOS有很多例子如最常用tableViewDelegate，textViewDelegate等。异步和简单的回调用block更好 ，iOS有很多例子如常用的网络库AFNetwork等。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-dc4d5077aa5ab178.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片来自网络"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;delegate&quot;&gt;&lt;a href=&quot;#delegate&quot; class=&quot;headerlink&quot; title=&quot;delegate&quot;&gt;&lt;/a&gt;delegate&lt;/h4&gt;&lt;p&gt;委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OC中的Class</title>
-    <link href="https://dangdangfeng.github.io/2013/12/13/OC%E4%B8%AD%E7%9A%84Class/"/>
-    <id>https://dangdangfeng.github.io/2013/12/13/OC中的Class/</id>
-    <published>2013-12-13T15:16:11.000Z</published>
-    <updated>2016-08-31T15:17:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-84cca5ea0efe20f7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h4 id="先看一个示例"><a href="#先看一个示例" class="headerlink" title="先看一个示例"></a>先看一个示例</h4><pre><code>MyClass *my = [MyClass new];
-BOOL b1 = [my responseToSelector:@selector(responseToSelector:)];
-BOOL b2 = [MyClass responseToSelector:@selector(responseToSelector:)];
-NSLog(@&quot;%d, %d&quot;, b1, b2);
-</code></pre><p>结果：都输出”1”(YES)。</p>
-<h4 id="Class和实例对象"><a href="#Class和实例对象" class="headerlink" title="Class和实例对象"></a>Class和实例对象</h4><p>所有的对象都是由其对应的类实例化而来，殊不知类本身也是一种对象。在Objective-C中，我们用到的几乎所有类都是NSObject类的子类，NSObject类定义格式如下：</p>
-<pre><code>@interface NSObject &lt;NSObject&gt; {
-Class isa;
-}
-</code></pre><p>在objc.h中我们发现这个Class仅仅是一个结构(struct)指针的typedef定义:</p>
-<pre><code>typedef struct objc_class *Class;
-</code></pre><p>在Objective-C2.0中，objc_class的定义如下：</p>
-<pre><code>struct objc_class {
-Class isa;
-}
-</code></pre><p>在Objective-C中任何的类定义都是对象。即在程序启动的时候任何类定义都对应于一块内存。在编译的时候，编译器会给每一个类生成一个且只生成一个”描述其定义的对象”,也就是苹果公司说的类对象(class object),是一个单例。C++等语言中所谓的对象，叫做实例对象(instance object)。Objective-C是门很动态的语言，因此程序里的所有实例对象(instace object)都是在运行时由Objective-C的运行时库生成的，而这个类对象(class object)就是运行时库用来创建实例对象(instance object)的依据。实例对象(instance object)的isa指针指向的类对象(class object)里面还有一个isa。这个类对象(class objec)的isa指向的依然是一个objc-class，它就是“元类对象”(metaclass object)。</p>
-<p>尽管类对象保留了一个类实例的原型，但它并不是实例本身。它没有自己的实例变量，也不能执行那些类的实例的方法（只有实例对象才可以执行实例方法）。然而，类的定义能包含那些特意为类对象准备的方法–类方法（ 而不是的实例方法）。类对象从父类那里继承类方法，就像实例从父类那里继承实例方法一样。</p>
-<p><strong>类对象（class object）</strong></p>
-<p>类对象像其他对象一样，也是id类型。类对象是由编译器创建的，即在编译时所谓的类，就是指类对象。任何直接或间接继承了NSObject的类，它的实例对象(instance objec)中都有一个isa指针，指向它的类对象(class object)。这个类对象(class object)中存储了关于这个实例对象(instace object)所属的类的定义的一切：包括变量，方法，遵守的协议等等。因此，类对象能访问所有关于这个类的信息，利用这些信息可以产生一个新的实例，但是类对象不能访问任何实例对象的内容。当你调用一个 “类方法” 例如 [NSObject alloc],你事实上是发送了一个消息给他的类对象。类对象是一个功能完整的对象，所以也能被动态识别（dynamically typed），接收消息，从其他类继承方法。特殊之处在于它们是由编译器创建的，缺少它们自己的数据结构(实例变量），只是在运行时产生实例的代理。</p>
-<p><strong>元类对象(metaclass object)</strong></p>
-<p>类对象是元类对象的一个实例！元类描述了 一个类对象，就像类对象描述了普通对象一样。不同的是元类的方法列表是类方法的集合，由类对象的选择器来响应。当向一个类发送消息时，objc_msgSend会通过类对象的isa指针定位到元类，并检查元类的方法列表（包括父类）来决定调用哪个方法。元类代替了类对象描述了类方法，就像类对象代替了实例对象描述了实例化方法。元类也是对象，元类是根元类(root class’s metaclass)的实例,而根元类是其自身的实例，即根元类的isa指针指向自身。</p>
-<p>类对象(class object)中包含了类的实例变量，实例方法的定义，而元类对象(metaclass object)中包括了类的类方法(也就是C++中的静态方法)的定义。类对象存的是关于实例对象的信息(变量，实例方法等)，而元类对象(metaclass object)中存储的是关于类的信息(类的版本，名字，类方法等)。类对象(class object)和元类对象(metaclass object)的定义都是objc_class结构，其不同仅仅是在用途上，比如其中的方法列表在类对象(instance object)中保存的是实例方法(instance method)，而在元类对象(metaclass object)中则保存的是类方法(class method)。</p>
-<p>当一个消息发送给任何一个对象， 方法的检查 从对象的 isa 指针开始，然后是父类。实例方法在类中定义， 类方法 在元类和根类中定义。（根类的元类就是根类自己）。在一些计算机语言的原理中，一个类和元类层次结构可以更自由的组成，更深元类链和从单一的元类继承的更多的实例化的类。Objective-C 的类方法 是使用元类的根本原因，在其他方面试图在隐藏元类。例如 [NSObject class] 完全相等于 [NSObject self]，所以，在形式上他还是返回的 NSObject-&gt;isa 指向的元类。 Objective-C语言是一组实用的折中方案。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在objc中不论是实例对象还是Class，都是id类型的对象（Class同样是对象）；实例对象的isa指向它的Class（储存所有减号方法）,Class对象的isa指向元类（储存所有加号方法）；向一个对象（id类型）发送消息时，都是从这个对象的isa指针指向的Class中寻找方法；类的super_class指向其父类，而元类的super_class则指向父类的元类。元类的super class链与类的super class链平行，所以类方法的继承与实例方法的继承也是并行的。而根元类(root class’s metaclass)的super_class指向根类(root class)。object_getClass跟随实例的isa指针，返回此实例所属的类，对于实例对象(instance)返回的是类(class),对于类(class)则返回的是元类(metaclass)；-class方法对于实例对象(instance)会返回类(class),但对于类(class)则不会返回元类(metaclass),而只会返回类本身，即[@”instance” class]返回的是__NSCFConstantString,而[NSString class]返回的是NSString。class_isMetaClass可判断某类是否为元类。 </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e5ea3116af9c38a4.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="isa"></p>
-<p>回到题目，当像MyClass类发送一个实例方法（- responseToSelector）消息时：会从它的isa，也就是MyClass元类对象中寻找，由于元类中的方法都是类方法，所以自然找不到；于是沿继承链去父类NSObject元类中寻找，依然没有；由于objc对这块的设计是，NSObject的元类的父类是NSObject类（也就是我们熟悉的NSObject类），其中有所有的实例方法，因此找到了- responseToSelector。NSObject类中的所有实例方法很可能都对应实现了一个类方法（至少从开源的代码中可以看出来），如+ resonseToSelector，但并非公开的API，如果真的是这样，第2步就可以找到这个方法。 非NSObject的selector这样做无效。</p>
-<p>使用objc_allocateClassPair可在运行时创建新的类与元类对，使用class_addMethod和class_addIvar可向类中增加方法和实例变量，最后使用objc_registerClassPair注册后，就可以使用此类了。动态语言可以在需要时更改已经定义好的类！由于在编译的时候就为每个类分配了内存空间大小，根据他们的属性，而且这些属性直接保存在名objc_ivar_list的struct容器里，一旦编译后就锁定了大小，所以不能在运行时随意增加，也没有空间再分给他们。之所以category可以是因为他的方法是存在名为objc_method_list的指针指向的struct容器里，由此可以看出属性是全部都是丢在类里，而方法只是把装他们的容器的地址丢在类里，所以属性不能扩展，而方法可以无限制，因为他的大小不影响类的空间。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-84cca5ea0efe20f7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何编写稳定流畅的iOS移动端应用</title>
-    <link href="https://dangdangfeng.github.io/2013/12/01/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85%E7%9A%84iOS%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BA%94%E7%94%A8/"/>
-    <id>https://dangdangfeng.github.io/2013/12/01/如何编写稳定流畅的iOS移动端应用/</id>
-    <published>2013-11-30T16:53:32.000Z</published>
-    <updated>2016-08-30T16:54:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="不忘初心"><a href="#不忘初心" class="headerlink" title="不忘初心"></a>不忘初心</h4><p>在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开发应用的时候，人们也开始考虑“移动优先”的做法。我们正在面对全新一代的移动设备，诸如可穿戴设备或众多移动配件——正是它们构成了“万物互联”的世界。我们将面对全新的用户界面，通过它们数据展示及指令接收处理。同时，我们还将看到，越来越多的公司将真正地践行“移动优先”的思路。而在未来数年中，这一切都将影响我们设计、开发和测试软件的方式。</p>
-<p>把一个客户端做得稳定、无奔溃、流畅，是写客户端朋友的梦想，但是，我们面临的结果往往是不如人意的。天下武功，唯快不破。很多公司都信奉这个教条。恨不得把app开发周期压缩到最低,这就导致了开发中隐藏了很多问题。有点经验的工程师草率的优化一下,更糟的情况是那些没有经验的工程师甚至不会对app进行任何优化，这将会使情况变的更糟。</p>
-<p>十年前,移动设备的硬件资源是非常有限的.甚至连浮点数都是被禁止的.因为浮点数能导致计算的速度变慢。科技发展如此迅速的今天,硬件很大程度上可以弥补软件的短板。但是硬件的进步终究无法掩饰软件的不足，这也是写这篇文章的初心。</p>
-<h4 id="移动端关注要点"><a href="#移动端关注要点" class="headerlink" title="移动端关注要点"></a>移动端关注要点</h4><p>在程序开发中，测试是必不可少的。移动端测试按大的类型划分可以分为白盒测试和黑盒测试。</p>
-<p>白盒测试一般是由开发人员使用编码的方式进行。测试者需要接触程序的内部代码；而黑盒测试可以在不知道程序内部结构和代码的情况下进行。</p>
-<p>下面是主要的测试流程了：<br>冒烟测试：在软件测试中，冒烟测试是指快速验证APP的主要功能（例如：微信的登陆、退出、发消息等功能） 。如果没有发现问题，再进行更加深入的测试工作；如果发现有问题，就说明APP有重大缺陷。</p>
-<p>功能测试：功能测试也叫行为测试，需要根据测试用例来验证应用预期的功能有没有实现。</p>
-<p>自由探索式测试：尝试边界条件、输入特殊符号、异常网络环境、突然中断程序等操作 。功能测试的目的是验证正常的功能有没有实现，而自由探索测试的目的就是为了试试应用在极端的操作下会不会出现问题。探索式测试就是要找到能让应用出错的操作。</p>
-<p>回归测试：对之前使用我们的服务测试过的应用，将案例复测一遍。</p>
-<p><strong>移动端关注的一些指标</strong><br>运行多少小时不崩溃；<br>多次打开页面，控制崩溃率；<br>界面优化，如何才能让用户不急躁、不烦躁；<br>服务器没有返回数据，是否会导致奔溃；<br>网络不好，数据来的太慢，界面是否不流畅；<br>从数据库读的数据太慢如何解决等。</p>
-<p>移动端界面应该有自己的逻辑，需要网络数据的地方，应该有默认值，这样在网络数据没有返回的情况下，让用户有数据可以看到。收到的网络数据应该是通过某种方式刷新到界面，而不是等到数据返回才刷新页面。当没有网络数据的时候，界面应该可以自成一体，走的通流程，不强依赖网络数据。</p>
-<p>在弱网模式下调试是我们必备的功力，因为我们要考虑用户的实施环境通常都不会很好。把经常使用的数据，存到缓存，提高APP的运行效率、界面流程度。同时，我们需要具备收集奔溃日志的功能，这样才能更好的减少崩溃，提高用户体验。</p>
-<h4 id="界面卡顿产生的原因和解决方案"><a href="#界面卡顿产生的原因和解决方案" class="headerlink" title="界面卡顿产生的原因和解决方案"></a>界面卡顿产生的原因和解决方案</h4><p>iOS界面处理是在主线程下进行的，系统图形服务通过 CADisplayLink 等机制通知 App，App 主线程开始在 CPU 中计算显示内容，比如视图的创建、布局计算、图片解码、文本绘制等。随后 CPU 会将计算好的内容提交到 GPU 去，由 GPU 进行变换、合成、渲染。随后 GPU 会把渲染结果提交到帧缓冲区去，等待下一次刷新信号到来时显示到屏幕上。显示器通常以固定频率进行刷新，如果在一个刷新时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就是界面卡顿的原因。CPU 和 GPU 不论哪个阻碍了显示流程，都会造成掉帧现象。</p>
-<p>CPU 造成的资源消耗有以下几种：</p>
-<ul>
-<li>对象创建</li>
-<li>对象调整</li>
-<li>对象销毁</li>
-<li>布局计算</li>
-<li>Autolayout</li>
-<li>文本计算</li>
-<li>文本渲染</li>
-<li>图片的绘制和解码</li>
-</ul>
-<p>GPU 资源消耗有下面几种情况：</p>
-<ul>
-<li>纹理的渲染</li>
-<li>视图的混合 (Composing)</li>
-<li>图形的生成等</li>
-</ul>
-<p>具体可以参考<a href="http://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="external">这篇文章</a></p>
-<h4 id="用-Instruments-来检验你的app"><a href="#用-Instruments-来检验你的app" class="headerlink" title="用 Instruments 来检验你的app"></a>用 Instruments 来检验你的app</h4><p><strong>时间事件查看器-Time Profiler</strong><br>在xcode的菜单中选择 product-&gt;Profile<br>我们会看到下面的界面：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-11be1e08fd9ed911.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Instruments"><br>点击Time Profiler进入。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-40bdb36ac65cdc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Time Profiler"><br>下面我们来深究如下的控制面板：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-d6755d42a68acf4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="控制面板"></p>
-<p>以下介绍下配置选项：</p>
-<ol>
-<li>Separate by Thread: 每个线程应该分开考虑。只有这样你才能揪出那些大量占用CPU的”重”线程。</li>
-<li>Invert Call Tree: 从上倒下跟踪堆栈,这意味着你看到的表中的方法,将已从第0帧开始取样,这通常你是想要的,只有这样你才能看到CPU中话费时间最深的方法.也就是说FuncA{FunB{FunC}} 勾选此项后堆栈以C-&gt;B-A 把调用层级最深的C显示在最外面。</li>
-<li>Hide System Libraries: 勾选此项你会显示你app的代码,这是非常有用的. 因为通常你只关心cpu花在自己代码上的时间不是系统上的。</li>
-<li>Flatten Recursion: 递归函数, 每个堆栈跟踪一个条目。</li>
-<li>Top Functions: 一个函数花费的时间直接在该函数中的总和，以及在函数调用该函数所花费的时间的总时间。因此，如果函数A调用B，那么A的时间报告在A花费的时间加上B.花费的时间,这非常真有用，因为它可以让你每次下到调用堆栈时挑最大的时间数字，归零在你最耗时的方法。</li>
-</ol>
-<p>找到Detail面板里最耗时的进程，点击进去可以看到代码，观察是否有异，如此便可逐步优化应用的运行效果了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-709a8715b9a6c191.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="修改"></p>
-<p>修改好后,在仪器重新运行该应用程序Product—Profile（或⌘I-记住，这些快捷键真的会为您节省一些时间）。<br><strong>分配工具</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-c1f214001adad7e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分配工具"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e1619715fecd3f4b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击进入"></p>
-<p>这个时候你会发现两个曲目。一个叫(分配)Allocations，以及一个被称为VM Tracker(虚拟机跟踪)。</p>
-<p>内存泄漏有两种泄漏。第一个是真正的内存泄漏，一个对象尚未被释放，但是不再被引用的了。因此，存储器不能被重新使用。第二类泄漏是比较麻烦一些。这就是所谓的“无界内存增长”。这发生在内存继续分配，并永远不会有机会被释放。如果永远这样下去你的程序占用的内存会无限大,当超过一定内存的话 会被系统的看门狗给kill掉。</p>
-<p>内存警告是ios处理app最好的方式，尤其是在内存越来越吃紧的时候,你需要清除一些内存。内存一直增长其实也不一定是你的代码出了问题,也有可能是UIKit 系统框架本身导致的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a22007e5806c3b75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="尝试"><br>自己动手观察下，一切自然明了。</p>
-<p><strong>内存泄露</strong><br>这一类泄漏是前面提到的 - 当一个对象不再被引用时出现的那种,检测泄漏可以理解为一个很复杂的事情，但泄漏的工具记得已分配的所有对象，通过定期扫描每个对象以确定是否有任何不能从任何其他对象访问的。</p>
-<p>关闭仪器，回到Xcode和选择Product-&gt;Profile</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-46943f0933d55df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存泄露"></p>
-<p>点击进入，运行：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f69162d70c7f254a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行"></p>
-<p>自己动手尝试下，找到右边面板里，如果有黑色标识的方法，进入看看。学习就是多尝试。</p>
-<p>篇幅有限，更多的内容我们下次再聊。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;不忘初心&quot;&gt;&lt;a href=&quot;#不忘初心&quot; class=&quot;headerlink&quot; title=&quot;不忘初心&quot;&gt;&lt;/a&gt;不忘初心&lt;/h4&gt;&lt;p&gt;在过去几年间，移动应用以雷霆之势席卷全球。我们在工作和休闲时间中使用互联网的方式，已经随着移动应用的前进脚步发生了变革。在开
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>从0开始看一个项目</title>
-    <link href="https://dangdangfeng.github.io/2013/10/01/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9C%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE/"/>
-    <id>https://dangdangfeng.github.io/2013/10/01/从0开始看一个项目/</id>
-    <published>2013-10-01T02:40:37.000Z</published>
-    <updated>2016-08-30T16:41:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在着手一个项目前<strong>先读文档</strong>（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就看他的<strong>测试用例</strong>，也是有一样的功效的。因为测试都是从文档出发编写的，而不是从代码出发编写的。找不到文档和测试用例？那就直接Gank吧。</p>
-<p><strong>读代码要层次化、带着问题去阅读</strong>。首先整体了解这个软件是干什么？解决什么问题？包含哪些大的模块，各个模块的作用是什么，各个模块的调用关系怎么样？然后对于每一个模块，这个模块是干什么的？为什么要有这个模块？这个模块怎么实现的？最后细化到每一个包，每一个类，每一个函数方法。从上到下，一一击破每一个问题，认真去<strong>思考</strong>他这样设计、写代码的好处，因为好的软件都会满足这种从抽象-&gt;具体的原则的。</p>
-<p>在开始读具体代码前<strong>定位好所有要读的文件</strong>，知道他们的位置和名字，设计良好的工程光看工程的目录结构和文件名就能知道个大概功能了。事实上阅读代码的难易程度70%取决于代码书写的规范程度，写乱掉的代码，大师也读不懂。之后根据你对目录结构的理解确定文件阅读的顺序（我反正都是从main函数开始读的）。你最好对<strong>设计模式</strong>有一定了解，否则你读面向对象的code时会经常无法理解code为啥要弄得这么层层嵌套。阅读代码一个最重要的提升水平的地方就是理解好的代码如何合理使用设计模式。基本的阅读起点都会选择main函数或者类的构造函数。然后把自己想象成cpu执行程序那样去阅读你的代码。遇到需要跳转函数时，不要急于跳转，以了解函数功能和输入输出为目标，读代码最忌讳的是不抓结构抓细节，只见树木不见森林，<strong>比起某个函数具体功能来说对结构的全局把握更重要</strong>。功能了解清楚后继续跳回来（这里就可以区分代码写的优不优秀，优秀的代码光看函数名字就知道功能，连跳转都不用）。结构弄清楚了，知道程序怎么跑了，source code的精华你已经读了60%了，之后根据需要再对具体函数深入分析，到这里整个代码已经被你扒光了，没什么神秘了。</p>
-<p>阅读代码有两种模式：<strong>top-down</strong> 和 <strong>bottom-up</strong>。Top-down 模式，就是先设定一个 use case，比如说打开一个文件。然后静态跟着代码看，或者用 debugger 跟着看。每次出现函数调用的时候，把函数的执行层次纪录下来。大致如下：</p>
-<pre><code>func1( )
-   func2(  )
-       func(  )
-   func3(  )
-</code></pre><p>这种图表很随意，你可以根据自己的需要增加信息，可以把重要的「实际参数」一直标下来，画函数调用图，然后标注每个函数在干什么。不过这个图无法清楚地表明一个变量的轨迹，需要另外的图来标示变量的变化轨迹。要是想提高阅读代码的速度，归根结底要多读多写。熟悉程序的基本构成单元（例如循环、分支）的常见写法，各种lib, api的调用方式。这样阅读深层次代码不用再回头查形式参数到底指什么。这个图的基本作用是防止在阅读深层次代码时忘记总体执行层次。Top-down 模式进行到一定层次，往往会发现虽然图画了出来，但还是无法了解程序在干什么。这时需要转入 bottom-up 模式，一直深入到最底层，给能了解作用的底层函数一个一个的写文档。当然这时的文档是完全底层的观点。bottom-up的阅读方法，有时候会一头扎进去，出不来了。这种方式适合读一些比较优秀的开源项目的代码，也会很好地提高内功。然后就是不断在两个模式之间转换，不断的细化两种模式的理解。</p>
-<p>最后，对于OC工程可以去GitHub找<a href="https://github.com/RuiAAPeres/UIViewController-Swizzled" target="_blank" rel="external">UIViewController-Swizzled</a>这个库，拉下来放到项目里，他有什么用呢？他可以把每个页面的类名打出来。而且有层次结构，也就是说你只需要打开项目点点点，就知道这个App运行的顺序了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-299eea93eaaceba3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="项目"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在着手一个项目前&lt;strong&gt;先读文档&lt;/strong&gt;（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS图像处理之UI,CG和CI</title>
-    <link href="https://dangdangfeng.github.io/2013/08/31/iOS%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B9%8BUI-CG%E5%92%8CCI/"/>
-    <id>https://dangdangfeng.github.io/2013/08/31/iOS图像处理之UI-CG和CI/</id>
-    <published>2013-08-30T16:35:38.000Z</published>
-    <updated>2016-08-30T16:36:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="UIImage-CGImage和CGImageRef释疑"><a href="#UIImage-CGImage和CGImageRef释疑" class="headerlink" title="UIImage,CGImage和CGImageRef释疑"></a>UIImage,CGImage和CGImageRef释疑</h4><p>UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对CGImageRef的定义为：</p>
-<pre><code>typedef struct CGImage *CGImageRef;
-</code></pre><p>CGImage和CGImageRef是用来重绘图形的类，它们在应用时是按照图像的像素矩阵来绘制图片的，它们可以用来处理bitmap。</p>
-<pre><code>//CGImageRef转换成UIImage
-CGContextRef context = UIGraphicsGetCurrentContext();
-CGImageRef ic = CGBitmapContextCreateImage(context);
-UIImage* image = [UIImage imageWithCGImage: ic];
-
-//UIImage转换成CGImageRef
-UIImage *loadImage=[UIImage imageNamed:@&quot;c.png&quot;];
-CGImageRef cgimage=loadImage.CGImage;
-</code></pre><p>系统会维护一个CGContextRef的栈，而UIGraphicsGetCurrentContext()会取栈顶的CGContextRef，正确的做法是只在drawRect里调用UIGraphicsGetCurrentContext()，因为在drawRect之前，系统会往栈里面压入一个valid的CGContextRef，除非自己去维护一个CGContextRef，否则不应该在其他地方取CGContextRef。</p>
-<h4 id="UIColor，CGColor，CIColor区别和联系"><a href="#UIColor，CGColor，CIColor区别和联系" class="headerlink" title="UIColor，CGColor，CIColor区别和联系"></a>UIColor，CGColor，CIColor区别和联系</h4><p>UIColor是UIKit中存储颜色信息的一个重要的类，一个UIColor对象包含了颜色和透明度的值，它的颜色空间已经针对iOS进行了优化。UIColor包含了一些类方法用于创建一些最常见的颜色，如白色，黑色，红色，透明色等，这些颜色的色彩空间也不尽相同（白色和黑色是kCGColorSpaceDeviceGray，红色的色彩空间是kCGColorSpaceDeviceRGB）。UIColor有两个重要的属性：一个是CGColor，一个是CIColor(5.0之后添加)。</p>
-<p>CGColor主要用于CoreGaphics框架之中，CGColor其实是个结构体，而我们通常在使用的CGColor的时候使用的是它的引用类型CGColorRef。CGColor主要由CGColorSapce和Color Components两个部分组成，同样的颜色组成，如果颜色空间不同的话，解析出来的结果可能会有所不同。这就像我们在处理图片数据的时候，如果把RGBA格式当成BGRA格式处理的结果可想而知。在Quartz 2D中CGColor常用来设置context的填充颜色，设置透明度等。</p>
-<p>CIColor主要用于和Core Image框架中其他类交互，比如CIFilter，CIContext以及CIImage。CIColor中颜色值的范围是0.0-1.0之间，0.0代表该颜色分量为最小值，1.0代表改颜色分量为最大值。其中alpha值的范围也是0.0到1.0之间，0.0代表全透明，1.0代表完全不透明，CIColor的颜色分量通常都是没有乘以alpha值。可以使用initWithCGColor:函数，通过CGColor创建一个CIColor。其中传入的CGColorRef对象可以使任何任何颜色空间，但是Core Image框架会在传入filter kernel之前把所有的颜色空间转换到Core Image工作颜色空间。Core Image工作颜色空间使用三个颜色分量加上一个alpha分量组成(其实就是kCGColorSpaceDeviceRGB)。</p>
-<p>UIColor的CGColor总是有效的，不管它是通过CGColor，CIColor，还是其他方法创建的，CGColor属性都总是有效的；但是CIColor属性就不总是有效的，只有当UIColor是通过CIColor创建的时候，它才是有效的，否则访问该属性将会抛出异常。</p>
-<pre><code>// test init uicolor with CGColor
-UIColor *color = [UIColor colorWithCGColor:[UIColor whiteColor].CGColor];
-
-// CGColor property is always valid
-NSLog(@&quot;CGColor from UIColor %@&quot;, color.CGColor);
-
-// don&apos;t use CIColor property 
-// This property throws an exception if the color object was not initialized with a Core Image color. 
-NSLog(@&quot;CIColor from UIColor %@&quot;, color.CIColor);   // crush
-</code></pre><p>当UIColor使用CGColor初始化的时候，所有CGColorRef包含的信息，都会被原封不动的保留，其中就包括Color space，而且通过下面的小例子我们还可以看到如果使用CGColor初始化UIColor的时候，UIColor其实是直接保留了一份这个CGColorRef对象。</p>
-<pre><code>// test kCGColorSpaceDeviceCMYK
-CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
-CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
-CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
-CGColorSpaceRelease(cmykSpace);
-NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
-
-// color with CGColor, uicolor will just retain it
-UIColor *color = [UIColor colorWithCGColor:colorCMYK];
-NSLog(@&quot;CGColor from UIColor: %@&quot;, color.CGColor);
-</code></pre><p>当使用CIColor来初始化一个UIColor的时候，再去访问UIColor的CGColor属性的时候，我们会发现<strong>CGColor的color Space和设置CIColor的color space的是不完全一样的</strong>，在这个过程中CIColor会为我们做一个转换。使用kCGColorSpaceDeviceGray，kCGColorSpaceDeviceRGB，kCGColorSpaceDeviceCMYK三种颜色空间来初始化一个CIColor的时候，再去使用该CIColor去初始化一个UIColor，然后在去访问其CIColor属，CGColor属性，查看颜色空间并打印颜色信息。</p>
-<p>1) 使用kCGColorSpaceDeviceGray初始化CIColor</p>
-<pre><code>// test kCGColorSpaceDeviceGray
-NSLog(@&quot;CGColor white color:%@&quot;, [UIColor whiteColor].CGColor);
-
-CIColor *ciColor = [CIColor colorWithCGColor:[UIColor whiteColor].CGColor];
-NSLog(@&quot;cicolor: %@&quot;, ciColor);
-NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
-
-color = [UIColor colorWithCIColor:ciColor];
-NSLog(@&quot;color %@&quot;, color);
-
-// Core Image converts all color spaces to the Core Image working color 
-// space before it passes the color space to the filter kernel.
-// kCGColorSpaceDeviceGray ---&gt; kCGColorSpaceDeviceRGB
-NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
-NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
-NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
-</code></pre><p>通过运行程序，我们看出来，如果使用一个kCGColorSpaceDeviceGray的颜色空间的CGColor来初始化CIColor的时候，我们可以看到CIColor的色彩空间一直是kCGColorSpaceDeviceGray，通过访问UIColor的CIColor属性，我们可以看到其颜色空间仍然是kCGColorSpaceDeviceGray，但是当访问UIColor的CGColor属性的时候，通过打印可以发现其色彩空间已经转变成了kCGColorSpaceDeviceRGB空间了，而颜色值也正确的从原来的颜色空间转换到了新的颜色空间。</p>
-<p>2) 使用kCGColorSpaceDeviceRGB初始化CIColor</p>
-<pre><code>//test kCGColorSpaceDeviceRGB
-NSLog(@&quot;CGColor red color:%@&quot;, [UIColor redColor].CGColor);
-
-CIColor *ciColor = [CIColor colorWithCGColor:[UIColor redColor].CGColor];
-NSLog(@&quot;cicolor: %@&quot;, ciColor);
-NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
-
-UIColor *color = [UIColor colorWithCIColor:ciColor];
-NSLog(@&quot;color %@&quot;, color);
-
-NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
-NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
-NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
-</code></pre><p>整个过程中CIColor，以及通过UIColor的CGColor和CIColor属性访问到的值，打印出来我们可以发现它们都是kCGColorSpaceDeviceRGB空间的。</p>
-<p>3) 使用kCGColorSpaceDeviceCMYK初始化CIColor</p>
-<pre><code>// test kCGColorSpaceDeviceCMYK
-CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
-NSLog(@&quot;Components number: %zu&quot;, CGColorSpaceGetNumberOfComponents(cmykSpace));
-CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
-CGColorRef colorCMYK = CGColorCreate(cmykSpace, cmykValue);
-CGColorSpaceRelease(cmykSpace);
-NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
-
-ciColor = [CIColor colorWithCGColor:colorCMYK];
-NSLog(@&quot;cicolor: %@&quot;, ciColor);     // in fact，the color value of CIColor has converted to RGB Colorspace
-NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
-
-color = [UIColor colorWithCIColor:ciColor];
-NSLog(@&quot;UIColor with CIColor: %@&quot;, color);
-
-NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
-NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
-
-// when UIColor init with CIColor, UIColor&apos;s CGColor will convert other colorspace to kCGColorSpaceDeviceRGB
-NSLog(@&quot;cgcolor from UIColor: %@&quot;, color.CGColor);
-</code></pre><p>当我们用一个CMYK颜色空间的CGColor来初始化CIColor的时候，CIColor的颜色空间依然是CMYK，但是颜色值已经转换成RGB的颜色值。当使用该CIColor创建一个UIColor的时候，我们再通过CIColor和CGColor属性打印信息的时候，我们会发现CIColor的色彩空间依然是CMYK，但是CGColor打印所得到的信息说明它已经被转换成RGB空间了。</p>
-<p><strong>关于创建一个CGColor</strong><br>最常用的函数是CGColorCreate，该函数有两个参数：</p>
-<p>1) colorspace，指定CGColor对应的颜色空间，Quartz就会retain该对象，因此调用完之后你就可以安全的释放该对象。<br>2) components，一个CGFloat的数组，该数组的元素个数是指定色彩空间包含的颜色分量数n，加上对应的alpha值。　</p>
-<p>该函数该返回一个新创建的CGColorRef，当我们不再使用该对象的时候使用CGColorRelease函数释放该对象。</p>
-<p><strong>获取CGColor的数据</strong><br>在我们创建的时候传入两个重要的参数进去，当我们获取到了CGColorRef以后当然就可以拿到对应的ColorSpace以及Components。</p>
-<p>1) 获取ColorSpace<br>通过CGColorGetColorSpace函数我们可以获取到当前CGColorRef对应的ColorSpace，该函数只接受一个参数就是你要获取ColorSpace的CGColorRef。</p>
-<pre><code>CGColorRef cgColor = [UIColor redColor].CGColor;
-CGColorSpaceRef colorSpace = CGColorGetColorSpace(cgColor);
-NSLog(@&quot;color space: %@&quot;, colorSpace);
-</code></pre><p>2) 获取Color Components<br>要获取到CGColorRef对应的颜色值，我们需要用到CGColorGetNumberOfComponents和CGColorGetComponents两个函数。我们先来看看两个函数的函数原型：</p>
-<pre><code>size_t CGColorGetNumberOfComponents (
-CGColorRef color
-);
-
-const CGFloat * CGColorGetComponents (
-CGColorRef color
-);
-</code></pre><p>第一个函数是获得CGColorRef的中包含的颜色组成部分的个数，第二个函数就是获取实际的颜色组成部分的数组。</p>
-<pre><code>NSUInteger num = CGColorGetNumberOfComponents(cgColor);
-const CGFloat *colorComponents = CGColorGetComponents(cgColor);
-for (int i = 0; i &lt; num; ++i) {
-NSLog(@&quot;color components %d: %f&quot;, i, colorComponents[i]);
-}
-</code></pre><p><strong>判断两个颜色是否相等</strong><br>不管UIColor使用CIColor，CGColor还是其他方式初始化的，其CGColor属性都是可用的。CoreGraphics中提供一个方法可以判断两个CGColor是否相等，因此我们可以通过判断两个UIColor是否相等。</p>
-<pre><code>// judge two CGColor is equal
-if (CGColorEqualToColor([UIColor whiteColor].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
-NSLog(@&quot;The two CGColor is equal!&quot;);
-}
-else {
-NSLog(@&quot;The two CGColor is not equal!&quot;);
-}
-
-if (CGColorEqualToColor([UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
-NSLog(@&quot;The two CGColor is equal!&quot;);
-}
-else {
-NSLog(@&quot;The two CGColor is not equal!&quot;);
-}
-</code></pre><p>例子中第一部分是判断两个白色的UIColor是否相等，虽然都是白色，但是颜色空间是不一样的。例子的第二部分简单的创建了两个RGB空间的UIColor，运行程序可以看出，这两种颜色是相同的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-f66427dbc02dea3c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;UIImage-CGImage和CGImageRef释疑&quot;&gt;&lt;a href=&quot;#UIImage-CGImage和CGImageRef释疑&quot; class=&quot;headerlink&quot; title=&quot;UIImage,CGImage和CGImageRef释疑&quot;&gt;&lt;/a&gt;UI
-    
-    </summary>
-    
-    
-      <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
     
   </entry>
   

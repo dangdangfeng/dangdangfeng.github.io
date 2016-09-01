@@ -392,6 +392,49 @@ C语言的特性C语言的典型特征是编译型语言(compiled language)
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2015/05/13/iOS9之后我们需要关注的事情/">iOS9之后我们需要关注的事情</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2015-05-13T13:58:50.000Z" itemprop="datePublished">
+          2015-05-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/杂谈/'>杂谈</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+应用隐私控制-外部调用iOS9增加了隐私控制，自己的应用如果需要调用其它应用，需要在工程的info.plist中添加一个key为LSApplicationQueriesSchemes的数组值，里面包含需要添加白名单的string类型的scheme。即使用URL scheme将其加入白名单。如项目中使用了qq，微信等分享登录功能，需要添加的值为：
+mqqopensdkapiV2
+
+mqqOpensdkSSoLogin
+
+mqq
+
+mqz
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2015/05/13/iOS9之后我们需要关注的事情/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2015/03/25/iOS开发的奇技淫巧/">iOS开发的奇技淫巧</a></h3>
                     <span>
                         <span class="post-meta">
@@ -430,6 +473,83 @@ if(dict == nil)或是if(dict == Nil)或是if(dict == NULL)再或是if(dict isEqu
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2014/12/30/从UIWindow谈起/">从UIWindow谈起</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-12-30T13:55:55.000Z" itemprop="datePublished">
+          2014-12-30
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        之前写了一篇名为iOS视图成像解构的文章,iOS视图成像解构主要是结合各种工具来分析程序中视图在不同布局下产生的一些问题，今天主要讲一些原理上的东西，结合今天的内容，对您以后开发中视图显示出现的问题可能会有些帮助。
+UIWindow下面先看看Apple的官方文档
+
+UIWindow继承自UIView，UIWindow是一种特殊的UIView，通常在一个程序中只会有一个UIWindow，但可以手动创建多个UIWindow，同时加到程序里面
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/12/30/从UIWindow谈起/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/11/01/OC的内存管理/">OC的内存管理</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-11-01T13:47:24.000Z" itemprop="datePublished">
+          2014-11-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+内存管理四句箴言：
+自己生成的自己持有非自己生成的对象自己也可持有不再需要自己持有时释放非自己持有的对象无法释放
+
+Objective-C中的内存管理机制跟C语言中指针的内容是同样重要的，要开发一个程序并不难，但是优秀的程序则更测重于内存管理，它们往往占用内存更少，运行更加流畅。在Xcode4.2及之后的版本中由于引入了ARC（Automatic Reference Counting）机制,程序编译时Xcode可以自动给你的代码添加内
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/11/01/OC的内存管理/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2014/10/31/Category不会想当然/">Category不会想当然</a></h3>
                     <span>
                         <span class="post-meta">
@@ -455,6 +575,46 @@ Category用于向已经存在的类添加方法从而达到扩展已有类的目
                     
                     <p class="pull-right readMore">
                         <a href="/2014/10/31/Category不会想当然/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/09/27/移动端优化之离屏渲染/">移动端优化之离屏渲染</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-09-27T14:00:19.000Z" itemprop="datePublished">
+          2014-09-27
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+相比于当前屏幕渲染，离屏渲染的代价是很高的，这也是iOS移动端优化的必要部分。
+OpenGL中，GPU屏幕渲染有以下两种方式：
+1.On-Screen Rendering意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。
+2.Off-Screen Rendering意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。
+一般情况下，OpenGL会将应用提交到Render Server的动
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/09/27/移动端优化之离屏渲染/">Read More...</a>
                     </p>
                     
                 </div>
@@ -698,6 +858,45 @@ pu
                     
                     <p class="pull-right readMore">
                         <a href="/2014/05/31/iOS-socket-all-in-here/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2014/05/06/iOS的锁屏和解锁的时间机制/">iOS的锁屏和解锁的时间机制</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-05-06T13:54:20.000Z" itemprop="datePublished">
+          2014-05-06
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        idleTimeridleTimer 是iOS内置的时间监测机制，当在一段时间内未操作即进入锁屏状态。但有些应用程序是不需要锁住屏幕的，比如游戏，视频这类应用。 可以通过设置UIApplication的idleTimerDisabled属性来指定iOS是否锁屏。 
+// 禁用休闲时钟 
+[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+也可以使用这种语法 
+[
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/05/06/iOS的锁屏和解锁的时间机制/">Read More...</a>
                     </p>
                     
                 </div>
@@ -999,6 +1198,43 @@ NSLog(@&quot;%d, %d&quot;, b1, b2);
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2013/09/01/动画中的运动曲线/">动画中的运动曲线</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-09-01T13:50:14.000Z" itemprop="datePublished">
+          2013-09-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/iOS/'>iOS</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        无意间看到了介绍运动曲线的一个很有趣的网站cubic-bezier,在cubic-bezier.com网站中简单绘制需要形状的曲线，然后选择线性曲线作为参考，就可以查看方块的运动变化情况。借着这个机会，我们就来聊一聊一些动画中的运动曲线吧！
+
+运动图例我们都知道时间是一秒一秒过去的，也就是线性的，匀速前进的。如果属性值从起始值到结束值是匀速变化的话，那么整个动画看起来就是慢慢地均匀地变化着。但是，如果我们想让动画变得很快或者变得很慢怎么
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/09/01/动画中的运动曲线/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2013/08/31/iOS图像处理之UI-CG和CI/">iOS图像处理之UI,CG和CI</a></h3>
                     <span>
                         <span class="post-meta">
@@ -1077,6 +1313,47 @@ www/ ：用H5编写的源代码目录，build时会被放入
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2012/12/01/程序员进阶的五个瞬间/">程序员进阶的五个瞬间</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2012-12-01T13:52:03.000Z" itemprop="datePublished">
+          2012-12-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/杂谈/'>杂谈</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        
+“当你不创造东西时，你只会根据自己的感觉而不是能力去看待问题。” 
+
+之前有个讨论：实现同样功能，简洁代码一定比复杂代码效率高吗？有的说，还得看算法，如果算法相同，简洁代码效率应该会高一些。有的说，即使算法相同，简洁代码也不见得比复杂代码效率高，而应尽可能减少循环的使用，特别是少用多重循环，或者尽可能在一个循环中做更多的事。如此，便想起了很久以前的一个段子，讲的是程序员如何一步步在循环中重新回到起点的，仅供大家一笑。
+第一年
+
+第二年
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2012/12/01/程序员进阶的五个瞬间/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/">如何优雅的谈论HTTP／1.0／1.1／2.0</a></h3>
                     <span>
                         <span class="post-meta">
@@ -1121,42 +1398,6 @@ HTTP协议HTTP（超文本传输协议，HyperText Transfer Protocol)是互联�
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
-                    <h3><a href="/2012/07/01/手机App的购物车必须登陆/">手机App的购物车必须登陆</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2012-07-01T15:03:58.000Z" itemprop="datePublished">
-          2012-07-01
-      </time>
-    
-    
-    | 
-    <a href='/tags/think/'>think</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        从Web到移动互联网，电商几乎改变了人们的生活，细思恐极，虽然离沃尔玛只有三站地的距离，但自从使用了天猫超市，竟然有4个月没去过卖场。科技改变生活，让潜质上有宅男倾向的人成功变成了宅男。互联网，看似身在网外，其实全在网中。
-那么有意思的事来了，在网上购物时会有一个不太被注意的细节，网站购物，加入购物车时并不需要登陆，只有结算时才需登陆。但是，移动端呢，情况全然不同，只要有购物车的应用，点到购物车选项，一定会要求登陆，一个本质上相同的网上
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2012/07/01/手机App的购物车必须登陆/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
                     <h3><a href="/2012/03/11/优秀的团队该不该使用敏捷开发/">优秀的团队该不该使用敏捷开发</a></h3>
                     <span>
                         <span class="post-meta">
@@ -1190,81 +1431,9 @@ HTTP协议HTTP（超文本传输协议，HyperText Transfer Protocol)是互联�
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2011/07/01/野蛮生长－－SEO/">野蛮生长－－SEO</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2011-07-01T15:02:22.000Z" itemprop="datePublished">
-          2011-07-01
-      </time>
-    
-    
-    | 
-    <a href='/tags/technology/'>technology</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        什么是SEOSEO是由英文Search Engine Optimization缩写而来， 中文意译为“搜索引擎优化”。SEO是指通过对网站内部调整优化及站外优化，使网站满足搜索引擎收录排名需求，在搜索引擎中关键词排名提高，从而把精准用户带到网站，获得免费流量，产生直接销售或品牌推广。目前SEO渐渐注重UEO了。
-UEO是英文user experience Optimization的缩写，把它翻译成中文的意思是用户体验优化，也就是把你的网
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2011/07/01/野蛮生长－－SEO/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2010/08/31/人生不可错过的5本书/">人生不可错过的5本书</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2010-08-31T01:39:18.000Z" itemprop="datePublished">
-          2010-08-31
-      </time>
-    
-    
-    | 
-    <a href='/tags/book/'>book</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        哥德尔、艾舍尔、巴赫书：集异璧之大成
-这是一本超过千页的大书，其翻译为中文的过程亦甚为坎坷。此中文版本采用了移译的翻译手法，将许多陌生的名词中国化了，所以初次阅读之体验可谓兴致盎然。巴赫、艾舍尔、哥德尔，三者的成果即为音乐、画作、逻辑（数理逻辑）上的三个怪圈，恰似原书的封面那样，投影不一，但其实内在的实质是一样的。巴赫的音符在重复中，一面唱出主题，一面扮演和声；艾舍尔的阶梯，一面无限上升，另一面无尽下降；哥德尔的不完备定理，一面作为数理
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2010/08/31/人生不可错过的5本书/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
         <nav class="pagination" role="pagination">
           
-          
+          <a class="pull-right" href="/page/2/">Older Posts →</a>
         </nav>
     </div>
 </section>

@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>手机App的购物车必须登陆 | 流城</title>
+  <title>移动端优化之离屏渲染 | 流城</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -199,38 +199,61 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2012-07-01T15:03:58.000Z" itemprop="datePublished">
-          2012-07-01
+      <time datetime="2014-09-27T14:00:19.000Z" itemprop="datePublished">
+          2014-09-27
       </time>
     
     
     | 
-    <a href='/tags/think/'>think</a>
+    <a href='/tags/技术/'>技术</a>
     
     
 </span>
-                <h1>手机App的购物车必须登陆</h1>
+                <h1>移动端优化之离屏渲染</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>从Web到移动互联网，电商几乎改变了人们的生活，细思恐极，虽然离沃尔玛只有三站地的距离，但自从使用了天猫超市，竟然有4个月没去过卖场。科技改变生活，让潜质上有宅男倾向的人成功变成了宅男。互联网，看似身在网外，其实全在网中。</p>
-<p>那么有意思的事来了，在网上购物时会有一个不太被注意的细节，网站购物，加入购物车时并不需要登陆，只有结算时才需登陆。但是，移动端呢，情况全然不同，只要有购物车的应用，点到购物车选项，一定会要求登陆，一个本质上相同的网上购物行为为什么在不同的终端会出现截然不同的行为呢。</p>
-<p>以京东为例，在我们没有登陆时，点击一款产品加入购物车，如图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-4fb54bd6e6dae00f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>当我们清除Cookie后,刷新：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a3c8dc5e72176068.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>购物车里的商品没了，由此我们知道，此时购物车里的商品是放在cookie里的。如果不清除cookie，换个浏览器也是看不到购物车里的商品的，因为每个浏览器的cookie是不通用的。</p>
-<p>在登陆状态下呢，网购过的人们都清楚，在A地加入购物车里的商品在B地打开浏览器照样可以看到，其实这时，购物车里的商品是记录在服务器的。</p>
-<p>那么，对于如IOS这样的移动端呢，IOS也有自己的本地存储啊，为什么不这么做呢。其实这是一个标识用户的概念了，不论是浏览器还是移动端，加入购物车并不构成购买，只有结算支付后购买才算完成，购物车不过是用户一时的喜好罢了，钱还没赚兜里，一切都还太早。</p>
-<p>浏览器，对于大众来说几乎是一个公共产品，即使是私人电脑，被朋友用来购物也很正常，这里就会存在两种行为，一种是浏览器浏览某电商网站无主状态，一种是特定用户登陆状态。在网站未登陆状态，加入购物车的商品是共用的，在不清空cookie的情况下，任何人都可以看到，但这不构成购买行为，登陆 -&gt;结算，完成商业闭环。在登陆状态下，加入购物车或是直接购买结算。购物车行为是会影响到广告运营商的针对性投放的，如果某天在购物车里加入了某类商品，在其他不相干的网站很有可能会看到相关推荐，那是因为你的行为已经入云了，不要害怕，一直在裸泳，只是没有意识到罢了。</p>
-<p>那移动端呢，在手机覆盖面健全的当下，手机几乎成了人类肢体的一个不可或缺的延伸，传统互联网还没有这么严重，手机却成了人们的私属，里面或多或少会有些隐私，所以有些人见不得别人使用自己的手机。移动端因为屏幕的限制，呈现的界面有限，如WEB般投放广告就不那么方便，客户使用移动终端本身就已经被商家定义为了客户，用户定位在用户下载App的那一刻就已经完成，所以对于移动端的购物车，想加入购物车，那就先登录吧。而且，在移动终端登录后如果不是手动退出，就一直在登陆状态，这种行为有意的减少了用户购买所需要的步骤，本质上是对商业行为的一种优化。</p>
-<p>那么我们在移动端的购物车界面，加入购物车的商品在计算商品价格时，需不需要联网呢。答案是需要的，</p>
-<p>在没网的情况下打开购物车</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-31192d7e99c01819.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>界面是可以看到的，结算金额也OK。</p>
-<p>当我们点击商品的加号后，情况就全然不同了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-49dafaa215a67b1a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>是了，您还是需要联网的，你会说我还没有结算啊，只是把商品的个数改变了下，情况不是您想的那样。如果您在网速不是很好的情况下改变商品的个数，有没有发现界面其实是有加载动作的，每件商品在购物车里的行为其实已经和服务器通过多线程交互了，开发购物车的小伙伴是不是深有感触。</p>
-<p>那么问题来了，移动端有没有记录用户的购买行为呢，哈哈，别太天真，商业公司不是天使，用户的行为就是金钱，在不知不觉中我们早已是大数据中的一员，在互联网的当下，我们早已被扒的体无完肤。</p>
+      		<p><img src="http://upload-images.jianshu.io/upload_images/1170656-56254b398efc6894.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="渲染.jpg"></p>
+<p>相比于当前屏幕渲染，离屏渲染的代价是很高的，这也是iOS移动端优化的必要部分。</p>
+<p>OpenGL中，GPU屏幕渲染有以下两种方式：</p>
+<p>1.On-Screen Rendering<br>意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。</p>
+<p>2.Off-Screen Rendering<br>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</p>
+<p>一般情况下，OpenGL会将应用提交到Render Server的动画直接渲染显示（基本的Tile-Based渲染流程），但对于一些复杂的图像动画的渲染并不能直接渲染叠加显示，而是需要根据Command Buffer分通道进行渲染之后再组合，这一组合过程中，就有些渲染通道是不会直接显示的；Masking渲染需要更多渲染通道和合并的步骤；而这些没有直接显示在屏幕的上的通道就是Offscreen Rendering Pass。</p>
+<p>Offscreen Render为什么卡顿，Offscreen Render需要更多的渲染通道，而且不同的渲染通道间切换需要耗费一定的时间，这个时间内GPU会闲置，当通道达到一定数量，对性能也会有较大的影响。</p>
+<h4 id="离屏渲染的触发"><a href="#离屏渲染的触发" class="headerlink" title="离屏渲染的触发"></a>离屏渲染的触发</h4><p>离屏渲染可以被 Core Animation 自动触发，或者被应用程序强制触发。屏幕外的渲染会合并渲染图层树的一部分到一个新的缓冲区，然后该缓冲区被渲染到屏幕上。</p>
+<p>离屏渲染合成计算是非常昂贵的, 但有时你也许希望强制这种操作。一种好的方法就是缓存合成的纹理/图层。如果你的渲染树非常复杂(所有的纹理，以及如何组合在一起)，你可以强制离屏渲染缓存那些图层，然后可以用缓存作为合成的结果放到屏幕上。</p>
+<p>如果你的程序混合了很多图层，并且想要他们一起做动画，GPU 通常会为每一帧(1/60s)重复合成所有的图层。当使用离屏渲染时，GPU 第一次会混合所有图层到一个基于新的纹理的位图缓存上，然后使用这个纹理来绘制到屏幕上。现在，当这些图层一起移动的时候，GPU 便可以复用这个位图缓存，并且只需要做很少的工作。需要注意的是，只有当那些图层不改变时，这才可以用。如果那些图层改变了，GPU 需要重新创建位图缓存。你可以通过设置 shouldRasterize 为 YES 来触发这个行为。</p>
+<p>然而，这是一个权衡。第一，这可能会使事情变得更慢。创建额外的屏幕外缓冲区是 GPU 需要多做的一步操作，特殊情况下这个位图可能再也不需要被复用，这便是一个无用功了。然而，可以被复用的位图，GPU 也有可能将它卸载了。所以你需要计算 GPU 的利用率和帧的速率来判断这个位图是否有用。</p>
+<p>离屏渲染也可能产生副作用。如果你正在直接或者间接的将mask应用到一个图层上，Core Animation 为了应用这个 mask，会强制进行屏幕外渲染。这会对 GPU 产生重负。通常情况下 mask 只能被直接渲染到帧的缓冲区中(在屏幕内)。</p>
+<p>Instrument 的 Core Animation 工具有一个叫做<em>Color Offscreen-Rendered Yellow</em>的选项，它会将已经被渲染到屏幕外缓冲区的区域标注为黄色(这个选项在模拟器中也可以用)。同时记得检查<em>Color Hits Green and Misses Red</em>选项。绿色代表无论何时一个屏幕外缓冲区被复用，而红色代表当缓冲区被重新创建。</p>
+<p>一般情况下，你需要避免离屏渲染，因为这是很大的消耗。直接将图层合成到帧的缓冲区中(在屏幕上)比先创建屏幕外缓冲区，然后渲染到纹理中，最后将结果渲染到帧的缓冲区中要廉价很多。因为这其中涉及两次昂贵的环境转换(转换环境到屏幕外缓冲区，然后转换环境到帧缓冲区)。</p>
+<p>所以当你打开<em>Color Offscreen-Rendered Yellow</em>后看到黄色，这便是一个警告，但这不一定是不好的。如果 Core Animation 能够复用屏幕外渲染的结果，这便能够提升性能。</p>
+<p>同时还要注意，rasterized layer 的空间是有限的。苹果暗示大概有屏幕大小两倍的空间来存储 rasterized layer/屏幕外缓冲区。</p>
+<p>如果你使用 layer 的方式会通过屏幕外渲染，你最好摆脱这种方式。为 layer 使用蒙板或者设置圆角半径会造成屏幕外渲染，产生阴影也会如此。</p>
+<p>至于 mask，圆角半径(特殊的mask)和 clipsToBounds/masksToBounds，你可以简单的为一个已经拥有 mask 的 layer 创建内容，比如，已经应用了 mask 的 layer 使用一张图片。如果你想根据 layer 的内容为其应用一个长方形 mask，你可以使用 contentsRect 来代替蒙板。</p>
+<p>如果你最后设置了 shouldRasterize 为 YES，那也要记住设置 rasterizationScale 为 contentsScale。</p>
+<h4 id="离屏渲染的体现"><a href="#离屏渲染的体现" class="headerlink" title="离屏渲染的体现"></a>离屏渲染的体现</h4><p>相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：</p>
+<p>1.创建新缓冲区<br>要想进行离屏渲染，首先要创建一个新的缓冲区。</p>
+<p>2.上下文切换<br>离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。</p>
+<p>那哪些情况会Offscreen Render呢？</p>
+<pre><code>1) drawRect
+2) layer.shouldRasterize = true;
+3) 有mask或者是阴影(layer.masksToBounds, layer.shadow*)；
+ 3.1) shouldRasterize（光栅化）
+ 3.2) masks（遮罩）
+ 3.3) shadows（阴影）
+ 3.4) edge antialiasing（抗锯齿）
+ 3.5) group opacity（不透明）
+4) Text（UILabel, CATextLayer, Core Text, etc）...
+</code></pre><p> 注：layer.cornerRadius，layer.borderWidth，layer.borderColor并不会Offscreen Render，因为这些不需要加入Mask。</p>
+<p>需要注意的是，如果shouldRasterize被设置成YES，在触发离屏绘制的同时，会将光栅化后的内容缓存起来，如果对应的layer及其sublayers没有发生改变，在下一帧的时候可以直接复用。这将在很大程度上提升渲染性能。</p>
+<p>而其它属性如果是开启的，就不会有缓存，离屏绘制会在每一帧都发生。</p>
+<h4 id="另一种特殊的“离屏渲染”方式：CPU渲染"><a href="#另一种特殊的“离屏渲染”方式：CPU渲染" class="headerlink" title="另一种特殊的“离屏渲染”方式：CPU渲染"></a>另一种特殊的“离屏渲染”方式：CPU渲染</h4><p>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内同步地<br>完成，渲染得到的bitmap最后再交由GPU用于显示。</p>
+<h4 id="当前屏幕渲染、离屏渲染、CPU渲染的选择"><a href="#当前屏幕渲染、离屏渲染、CPU渲染的选择" class="headerlink" title="当前屏幕渲染、离屏渲染、CPU渲染的选择"></a>当前屏幕渲染、离屏渲染、CPU渲染的选择</h4><p>1.尽量使用当前屏幕渲染<br>鉴于离屏渲染、CPU渲染可能带来的性能问题，一般情况下，我们要尽量使用当前屏幕渲染。</p>
+<p>2.离屏渲染 VS CPU渲染<br>由于GPU的浮点运算能力比CPU强，CPU渲染的效率可能不如离屏渲染；但如果仅仅是实现一个简单的效果，直接使用CPU渲染的效率又可能比离屏渲染好，毕竟离屏渲染要涉及到缓冲区创建和上下文切换等耗时操作。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>一方面来说，一部分（通过drawRect并且使用任何CoreGraphics来实现的绘制，或使用CoreText[其实就是使用CoreGraphics]绘制）的确涉及到了“离屏绘制”，但是这和我们通常说的那种离屏绘制是有区别的。当你实现drawRect方法或者通过CoeGraphics绘制的时候，其实你是在使用CPU绘制。并且这个绘制的过程会在你的App内同步地进行。基本上你只是调用了一些向位图缓存内写入一些二进制信息的方法而已。</p>
+<p>而另外一种形式离屏绘制是发生在绘制服务（是独立的处理过程）并且同时通过GPU执行（这里就不是像前面提到的用CPU了）。当OpengGL的绘制程序在绘制每个layer的时候，有可能因为包含多子层级关系而必须停下来把他们合成到一个单独的缓存里。你可能认为GPU应该总是比CPU牛逼一点，但是在这里我们还是需要慎重的考虑一下。因为对GPU来说，从当前屏幕（on-screen）到离屏（off-screen）上下文环境的来回切换（这个过程必须flush管线和光栅），代价是非常大的。因此对一些简单的绘制过程来说，这个过程有可能用CoreGraphics，全部用CPU来完成反而会比GPU做得更好。所以如果你正在尝试处理一些复杂的层级，并且在犹豫到底用-[CALayer setShouldRasterize:]还是通过CoreGraphics来绘制层级上的所有内容，唯一的方法就是测试并且进行权衡。</p>
+<p>有机会，我们下次再谈。</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
@@ -240,7 +263,7 @@
         <nav class="pagination" role="pagination">
 
 
-<div class="ds-share flat" data-thread-key="2012/07/01/手机App的购物车必须登陆/" data-title="手机App的购物车必须登陆" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="手机App的购物车必须登陆 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2012/07/01/手机App的购物车必须登陆/">
+<div class="ds-share flat" data-thread-key="2014/09/27/移动端优化之离屏渲染/" data-title="移动端优化之离屏渲染" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="移动端优化之离屏渲染 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/09/27/移动端优化之离屏渲染/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         
@@ -259,13 +282,13 @@
  <br/>
 
     
-    <a class="pull-left" href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/" style="float: left;">
-        ← 如何优雅的谈论HTTP／1.0／1.1／2.0
+    <a class="pull-left" href="/2014/10/31/Category不会想当然/" style="float: left;">
+        ← Category不会想当然
     </a>
     
     
-    <a class="pull-right" href="/2012/03/11/优秀的团队该不该使用敏捷开发/">
-        优秀的团队该不该使用敏捷开发 →
+    <a class="pull-right" href="/2014/08/31/从代码看一个程序员的笔力/">
+        从代码看一个程序员的笔力 →
     </a>
     
 
@@ -278,7 +301,7 @@
         <div class="duoshuo">
 
 
-<div class="ds-thread" data-thread-key="2012/07/01/手机App的购物车必须登陆/" data-title="手机App的购物车必须登陆" data-url="https://dangdangfeng.github.io/2012/07/01/手机App的购物车必须登陆/"></div>
+<div class="ds-thread" data-thread-key="2014/09/27/移动端优化之离屏渲染/" data-title="移动端优化之离屏渲染" data-url="https://dangdangfeng.github.io/2014/09/27/移动端优化之离屏渲染/"></div>
 
 
 
