@@ -117,7 +117,7 @@ html[xmlns] .slides {display: block;}
 	-webkit-pointer-events: none;
 	pointer-events: none;
 	-webkit-user-select: none;
-	-moz-user-select: none;
+	/*-moz-user-select: none;*/
 	user-select: none;
 }
 .pace-inactive {
