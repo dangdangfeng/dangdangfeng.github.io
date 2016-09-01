@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2016-08-31T15:08:34.000Z</updated>
+  <updated>2016-09-01T15:30:58.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -14,6 +14,164 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://dangdangfeng.github.io/2016/09/01/%E4%BB%8EReact%E5%88%B0Flux%E6%9E%B6%E6%9E%84/"/>
+    <id>https://dangdangfeng.github.io/2016/09/01/从React到Flux架构/</id>
+    <published>2016-09-01T15:09:36.000Z</published>
+    <updated>2016-09-01T15:30:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>React 本身只涉及UI层，如果搭建大型应用，必须搭配一个前端框架。即：React + 前端框架。<a href="https://facebook.github.io/flux/docs/overview.html" target="_blank" rel="external">Flux</a>是Facebook用户建立客户端Web应用的前端架构， 它通过利用一个单向的数据流补充了React的组合视图组件，<br>相对于框架而言它更像是一种模式思想，在无需许多新代码的情况下就可以构建出合适的Web应用。</p>
+<h4 id="应用的几个部分"><a href="#应用的几个部分" class="headerlink" title="应用的几个部分"></a>应用的几个部分</h4><p>应用通常分为Dispatcher调度 、存储Store和视图View(React 组件)。分析如下：</p>
+<p>1) View: 应用的界面。这里创建响应用户操作的action。</p>
+<p>2) Dispatcher: 中心枢纽，传递所有的action，负责把它们运达每个Store，整个数据流程的管理者。</p>
+<p>3) Store: 维护一个特定application domain的状态。它们根据当前状态响应action，执行业务逻辑，同时在完成的时候发出一个change事件。这个事件用于view更新其界面。</p>
+<p>4) Controller Views：React组件，从Store获取状态，并将其逐级向下传递给子组件。</p>
+<p>这几个部分都是通过Action来通信的。控制器controller-view(控制器-视图)模式，视图通常在一个结构顶部，这种结构是用来从存储stroe获得数据，然后将数据传递到自己的子结构。可以简单的将控制器视图理解为React组件，这些组件会监听change事件，如果事件发生了， 就从Stores中获取应用程序新的状态数据。随后，可以将数据通过props逐级向子组件传递。控制器被存储反转控制：存储接受更新，适当地调节这些更新，而不是一致地依赖外部更新其数据，存储之外根本不知道它是如何管理领域数据的，这有助于实现一种清晰的分离关注。存储并没有直接的类似setAsRead()之类的方法，而是只有一个单一方式获取数据到其自成一体的世界中，这个方式就是回调，注册在dispatcher中的callback。</p>
+<p>行为创建器（Action Creators）是一组会在视图中被调用的方法（也可以在其他地方使用）， 它们用于向Dispatcher发送actions。也就是说，我们使用Dispatcher分发的payloads，实际上就是actions。<br>Action Creators是相对独立的，它作为语法上的辅助函数以action的形式使得dispatcher传递数据更为便利。</p>
+<p>应用的每一个部分可以对应于一个Store，Store可以用来管理数据，定义数据检索方法，此外，Store中还包括了注册给Dispatcher的回调函数。控制器视图（Controller View）会监听我们的Store， 并利用这一点通过发出事件方式通知控制器视图应用程序的状态发生了改变， 从而进行视图层的重新渲染。</p>
+<p>每一个 store　的角色是提供状态信息，它与相关的 UI 和成为关联点为了状态的更新。这并不意味着整个业务逻辑需要被实现在 store 本身。每当一个状态更新（的事件）发生， 自动更新 UI 的机制就被触发, 这是 Flux 的一个核心理念。它保证了 UI 始终显示最新的状态，并且可以摆脱一直需要（手动地）维护这些代码的工作。这一步类似于在 MVVM 架构中，将一个视图绑定到 ViewModel。如果要自己实现部分 UI 更新的代码可以借用ReactiveCocoa,它提供了很多操作 (skipUntil，take，map，其他。)，很容易就能创建这些关系。但此处不做过多的讨论。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-7ff05b4bb695a031.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>示例代码可以参考<a href="https://github.com/ruanyf/extremely-simple-flux-demo" target="_blank" rel="external">阮一峰写的demo</a>.</p>
+<h4 id="数据的”单向流动”"><a href="#数据的”单向流动”" class="headerlink" title="数据的”单向流动”"></a>数据的”单向流动”</h4><p>数据总是”单向流动”，任何相邻的部分都不会发生数据的”双向流动”。</p>
+<p><strong>数据的流程可以分为以下步骤：</strong></p>
+<ol>
+<li>用户访问 View</li>
+<li>View 发出用户的 Action</li>
+<li>Dispatcher 收到 Action，要求 Store 进行相应的更新</li>
+<li>Store 更新后，发出一个”change”事件</li>
+<li>View 收到”change”事件后，更新页面</li>
+</ol>
+<p>通过应用的数据流是一个方向，没有两边绑定(two-way bingding：Angular.js有此方式)，应用状态在存储中维护，允许应用不同部分保持解耦，在存储之间发生依赖的地方，它们能够保持严格的层次关系（设计原则：尽量松耦合，无法回避的就变成树形层次结构），同步管理由dispatcher负责。而two-way绑定会导致级联更新，当一个对象改变导致另外对象改变，接着会触发更多的更新，当应用规模增长时，这些级联更新会使得预期响应用户交互的结果变得困难，当更新只会在一个轮回中发生改变数据时，整个系统就变得可预期。</p>
+<p>不过，很多场景下不仅仅包括应用程序内部的状态数据，还可能包括来自外部的数据，即常见的RESTful服务，在Action中引入外部数据流是个不错的方式，然后把数据送到Store中。<a href="https://github.com/facebook/flux/tree/master/examples/flux-todomvc" target="_blank" rel="external">官方的示例代码</a>很好的为我们解决了疑惑。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-5cde667b0db85470.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数据流"></p>
+<p>Dispatcher接收actions作为payloads，并且将payloads分发给所注册的回调函数。并且包括了允许你以指定次序调用这些回掉函数的执行逻辑，例如在处理前等待数据更新。在Flux架构中只有一个Dispatcher，它是你整个应用的中央Hub。在下面的handleTestAction方法中调用了dispatch方法（该方法来自Dispatcher实现），它会将payloads广播给所有注册到它的回调函数 （注意，这里所说的回调是在store中注册给Dispatcher的）。然后，action会触发Store中相应事件，并最终体现在state的更新上。示例如下：</p>
+<pre><code>//创建一个简单的Dispatcher
+var Dispatcher = require(&apos;flux&apos;).Dispatcher;
+var AppDispatcher = new Dispatcher();
+
+AppDispatcher.handleTestAction = function(action) {
+  this.dispatch({
+    source: &apos;Test_ACTION&apos;,
+    action: action
+  });
+}
+
+module.exports = AppDispatcher;
+</code></pre><p>Dispatcher模块能够定义依赖，并在Store中向Dispatcher注册回调函数。如果你的应用的某个部分依赖于其他部分的数据更新，为了能够进行合适的渲染，Dispatcher中的waitFor方法将会非常有用。在Store中存储注册给Dispatcher的回调函数的返回值.如果一个相关的action发生了，那么就触发一个change事件，并且监听 此事件的视图会根据新的状态（state）进行重新渲染。</p>
+<pre><code>TestStore.dispatcherIndex = AppDispatcher.register(function(payload) {});//dispatcherIndex 存储注册给Dispatcher的回调函数的返回值
+</code></pre><p>在Store中处理每一个被分发的action时，我们可以使用Dispatcher的waitFor方法来确保我们的ShoeStore已经被更新了，示例代码如下：</p>
+<pre><code>case &apos;Do_Something&apos;:
+  AppDispatcher.waitFor([
+    TestStore.dispatcherIndex
+  ], function() {
+    CheckoutStore.purchaseShoes(TestStore.getSelectedShoes());
+  });
+  break;
+</code></pre><p>在Facebook提供的例子中，action的类型常数被用于定义这些action所被应用的场景，并且是伴随着action一起被传递的。现在，在所注册的回调函数内部，这些actions可以根据他们的action类型来处理。</p>
+<p>总结来说，Flux 模式首先会定义状态类型的形状。之后会定义 actions。然后实现业务逻辑和针对每个 action 状态的转变 - 这个实现在 store 中。最后实现 UI 绑定方法，将状态映射到视图展示层。Flux 主要的好处在于它把有关的内容严格的区分开。这让测试业务逻辑和大块的 UI 代码变得非常容易。测试时需要关注两个逻辑：在 store 中的业务逻辑和视图模型的提供者 （就是那些我们实现的类似 React 的方法，他们基于输入的状态描述了 UI）。但是，国内对这方面并不是很关注，关于测试，此处不做太多的讨论。有需要的可以看下这篇<a href="https://www.objc.io/issues/15-testing/snapshot-testing/" target="_blank" rel="external">文章</a>（可能需要翻墙！）</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过上面的分析，我们会发现Flux的React应用开发类似于jQuery的DOM遍历操作。没有Flux可以照常进行React应用开发，但是你在代码组织和数据流程上会缺乏优雅的解决方案。Flux可以把接受数据和发送数据分离。因此当出错的时候可以很容易地沿着数据流看看到底是哪里出错了。</p>
+<p>如果你想使用FLux架构，但你并不想使用React，那么你可以参考 <a href="https://github.com/f/delorean" target="_blank" rel="external">Delorean</a>，它是一个Flux框架，并且可以让你使用Ractive.js或者Flight。另一个值得参考的库是 <a href="http://fluxxor.com" target="_blank" rel="external">Fluxxor</a>，它实现了在紧耦合的Flux组件中包含一个中央Flux实例。</p>
+<p>Flux让事情变得可预见。</p>
+<p>注：本文受到了<a href="http://blog.andrewray.me/flux-for-stupid-people/" target="_blank" rel="external">《Flux For Stupid People》</a>和<a href="https://skillsmatter.com/skillscasts/8179-turning-uikit-inside-out" target="_blank" rel="external">《Turning UIKit inside out》</a>的启发。在此对其表示感谢！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;React 本身只涉及UI层，如果搭建大型应用，必须搭配一个前端框架。即：React + 前端框架。&lt;a href=&quot;https://facebook.github.io/flux/docs/overview.html&quot; target=&quot;_blank&quot; rel=&quot;exter
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://dangdangfeng.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mac上自定义脚本命令</title>
+    <link href="https://dangdangfeng.github.io/2016/01/11/mac%E4%B8%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
+    <id>https://dangdangfeng.github.io/2016/01/11/mac上自定义脚本命令/</id>
+    <published>2016-01-11T15:34:53.000Z</published>
+    <updated>2016-09-01T15:36:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。AppleScript 的一个优点是你不必是一个天才程序员才能使用它，事实上你甚至不需要有任何编程的经验！</p>
+<h4 id="OS-X-中使用appleScript快速调出终端"><a href="#OS-X-中使用appleScript快速调出终端" class="headerlink" title="OS X 中使用appleScript快速调出终端"></a>OS X 中使用appleScript快速调出终端</h4><p>os x 上很多功能都可以通过Apple自家的Automator.app创建，且使用此方法可以为任何的程序创建快捷键。</p>
+<p>1.第一步 打开 Automator.app，可以在spotlight中搜索Automator,然后打开。<br><img src="http://upload-images.jianshu.io/upload_images/1170656-af4786d785df7361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Automator"><br>2.选择 新建，然后选择服务</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-4030f0834d9b3b97.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="选择服务"></p>
+<p>3.服务收到 选择为 没有输入</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-ed184d3d7315f368.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="选择"></p>
+<p>然后在左边侧栏中双击 Run AppleScript</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-cc945ec8fc9bab78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20151226_6.png"></p>
+<p>4.在编辑区输入</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-4ccdde257b2c4e82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="输入"></p>
+<p>这样 AppleScript 就写好了，ctrl + s 将其保存为 Open Terminal只需将脚本中的 tell application “Terminal” 中的 “Terminal” 改为其他的程序名，就可以为其它的程序建立快捷键</p>
+<p>5.设置快捷键<br>打开系统偏好设置-&gt;键盘-&gt;快捷键</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-cd256ae46b9f5912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="设置快捷键"></p>
+<p>在键盘快捷键设置的左侧栏中选中 服务 ，可以看到Open Terminal ，然后完成快捷键的设置。我的快捷键设置alt ＋ contrl ＋1。</p>
+<h4 id="AppleScript-字典"><a href="#AppleScript-字典" class="headerlink" title="AppleScript 字典"></a>AppleScript 字典</h4><p>要打开字典，在 AppleScript Editor 选择菜单 File-&gt;Open Dictionary (或快捷键Shift-Command-O)。例如在打开的字典里向下浏览，找到程序 Mail 然后按 “Choose”，你应该会看到以下的窗口：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df4b5bbe92c2127f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AppleScript 字典"></p>
+<p>在左边的列中包含了指令和物件的 “套件”。当你选择了一个套件，你会在下面的显示窗中看到此套件所包含的所有东西。你可以通过点击第二列及第三列里的命令来缩小预览的范围。套件包含了 “指令” （圆形的C图标）和 “类” （方形的C图标），而 “类” 包含了 “属性”（P图标）和 “元素”（E图标）。</p>
+<h4 id="使用-Mail-字典来创建邮件变量"><a href="#使用-Mail-字典来创建邮件变量" class="headerlink" title="使用 Mail 字典来创建邮件变量"></a>使用 Mail 字典来创建邮件变量</h4><p>由于我们完全不知道怎么告诉 Mail 去创建一个新的邮件信息，所以我们必须借助于 AppleScript 字典。如果你点击一下 “Standard Suite” 你会看到一些 AppleScript 自带的公共标准命令。由于我们是要 “创建” 一个新的邮件信息，我们通过向下浏览来找到相关的命令，你会发现里面没有 “create” 这个命令，但在向下滑到差不多中间的部分你会找到 “make” 这个命令。听起来貌似不错，所以创建一个新的邮件系统，其实是要告诉 AppleScript 我们要 “make” 一些东西。</p>
+<p>接下来点击最左列的 “Mail” 套件。我们刚才已经找到动作是 “make”，所以在这里我们跳过所有“指令”（动词）不看，直接翻到下面的 “类”（名词）中。我们第一个看到的类是 “outgoing message”，太好了这就是我们要的，因为我们就是要发出一个新的邮件信息。接着点击 “outgoing message” 类然后看下面显示的属性说明。</p>
+<p>我们需要把第一步创建的几个简单变量插入到新邮件变量中。但在下面的 “outgoing message” 属性列表中，我们只找到邮件标题和内容的属性，而没看到收件人相关的属性。现在我们知道引用这些属性的正确语法了。注意，字典告诉你的是属性的定义格式。比如 subject 这个属性，我们定义的方法是 “subject:你想打的标题字样”。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-842803b21c2e09a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="outgoing message"></p>
+<p>同样你会在套件中找到一个叫 “send”的指令，我们会使用这个指令来发送邮件。现在我们还需要知道正确表达收件人名字和收件人邮箱地址的语法。由于不在这个套件中，我们点击 “Message” 套件。向下浏览到差不多一半的时候我们找到 “receipient” 这个类，点击这个类会看到他的属性列表，同样我们可以通过简单的英文来引用这个类的属性，它的属性包括 “name” 和 “address”。</p>
+<p>你可以使用字典窗右上角的搜索栏快速的搜索你需要的类或属性等。</p>
+<p>创建我们的邮件信息</p>
+<pre><code>--Variables
+set recipientName to &quot;John Doe&quot;
+set recipientAddress to &quot;nobody@nowhere.com&quot;
+set theSubject to &quot;AppleScript Automated Email&quot;
+set theContent to &quot;This email was created and sent using   AppleScript!&quot;
+
+--Mail Tell Block
+tell application &quot;Mail&quot;
+
+--Create the message
+set theMessage to make new outgoing message with   properties {subject:theSubject, content:theContent, visible:true}
+
+end tell
+</code></pre><p>创建了一个 tell 命令块来包住所有发送给 Mail 应用程序的命令。然后我创建了一个变量（theMessage）并让他去 “make” 一个新的 “outgoing message”而且指定上面说到的它的属性。需要注意的是属性组需要用{}来包住，每个属性间用逗号分隔。</p>
+<p>设置收件人和发送邮件</p>
+<pre><code>--Variables
+set recipientName to &quot;John Doe&quot;
+set recipientAddress to &quot;nobody@nowhere.com&quot;
+set theSubject to &quot;AppleScript Automated Email&quot;
+set theContent to &quot;This email was created and sent using AppleScript!&quot;
+
+--Mail Tell Block
+tell application &quot;Mail&quot;
+
+--Create the message
+set theMessage to make new outgoing message with properties {subject:theSubject, content:theContent, visible:true}
+
+--Set a recipient
+tell theMessage
+    make new to recipient with properties {name:recipientName, address:recipientAddress}
+
+    --Send the Message
+    send
+
+end tell
+end tell
+</code></pre><p>theMessage 指向的是一个 outgoing message 类的实例，我们在前面查 outgoing message 类的时候，看到除了属性列表外，前面还有一个叫 Elements 的说明，这里说明的是这个类具有这些元素，其中就包括一个叫 to recipient 的元素。那么这里就比较好理解了，“tell theMessage make new to recipient” 这句就可以理解为告诉 theMessage 这个实例创建（或者叫设置）它自己的 to recipient 元素，当然用的就是后面跟的 properties 了。</p>
+<p>最后我们执行 “send” 指令来发送我们的邮件。注意最下面我们用了两次 end tell，因为有两个 tell 命令块需要关闭。当你修改完一些输入的错误并编译完成后点击 “Run”，Mail 程序应该会自动创建一封邮件并且发出。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-ef40b28f57d531e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="发送"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-cf9591e5d04babb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="收件箱"></p>
+<p>具体命令，我们后续再聊！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。AppleScript 的一个优点是你不必是一个天才程序员才能使用它，事实上你甚至不需要有任何编程的经验！&lt;/p&gt;
+&lt;h4
+    
+    </summary>
+    
+    
+      <category term="杂谈" scheme="https://dangdangfeng.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>React Native的极简手册</title>
@@ -2179,328 +2337,6 @@ return self;
     
     
       <category term="technology" scheme="https://dangdangfeng.github.io/tags/technology/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何优雅的谈论源码</title>
-    <link href="https://dangdangfeng.github.io/2014/03/30/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E8%B0%88%E8%AE%BA%E6%BA%90%E7%A0%81/"/>
-    <id>https://dangdangfeng.github.io/2014/03/30/如何优雅的谈论源码/</id>
-    <published>2014-03-30T15:38:48.000Z</published>
-    <updated>2016-08-31T14:50:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文主要涉及一下几点：</p>
-<ul>
-<li>SDWebImage 原理</li>
-<li>SDWebImage 使用</li>
-<li>SDWebImage 源码分析</li>
-<li>一些思考</li>
-</ul>
-<hr>
-<h4 id="SDWebImage-加载图片原理"><a href="#SDWebImage-加载图片原理" class="headerlink" title="SDWebImage 加载图片原理"></a>SDWebImage 加载图片原理</h4><p><a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">具体源码分析</a>见GIT。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6971e44291c18bb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="目前标注的类"></p>
-<p>通过标注的类，看懂应该没问题了。</p>
-<p>SDWebImage是一个图片缓存的框架。相较于AFNetworking集成的UIImageView+AFNetworking.h，对于图片的缓存实际应用的是NSURLCache自带的cache机制。而NSURLCache每次都要把缓存的raw  data 再转化为UIImage，就带来了数据处理和内存方面的更多操作。SDWebImage的缓存由SDImageCache类来实现，这是一个单例类，该类负责处理内存缓存及一个可选的磁盘缓存，其中磁盘缓存的写操作是异步的，这样就不会对UI操作造成影响。此外还提供了若干属性和接口来配置和操作缓存对象。包含以下功能：</p>
-<p>1.提供UIImageView的一个分类，以支持网络图片的加载与缓存管理</p>
-<p>2.一个异步的图片加载器</p>
-<p>3.一个异步的内存+磁盘图片缓存</p>
-<p>4.支持GIF图片</p>
-<p>5.支持WebP图片</p>
-<p>6.后台图片解压缩处理</p>
-<p>7.确保同一个URL的图片不被下载多次</p>
-<p>8.确保虚假的URL不会被反复加载</p>
-<p>9.确保下载及缓存时，主线程不被阻塞</p>
-<p><strong>SDWebImage底层实现原理：</strong></p>
-<p>SDWebImage有沙盒缓存机制，主要由三块组成</p>
-<p>1.内存图片缓存</p>
-<p>2.内存操作缓存</p>
-<p>3.磁盘沙盒缓存</p>
-<p>SDWebImage的大部分工作是由缓存对象SDImageCache和异步下载器管理对象SDWebImageManager来完成的。SDWebImage的图片下载是由SDWebImageDownloader这个类来实现的，它是一个异步下载管理器，下载过程中增加了对图片加载做了优化的处理。而真正实现图片下载的是自定义的一个Operation操作，将该操作加入到下载管理器的操作队列downloadQueue中，Operation操作依赖系统提供的NSURLConnection类实现图片的下载。</p>
-<p>SDWebImage提供了对图片缓存的支持，而该功能是由SDImageCache类来完成的。该类负责处理内存缓存及一个可选的磁盘缓存。内存缓存的处理是使用NSCache对象来实现的。NSCache是一个类似于集合的容器。它存储key-value对，这一点类似于NSDictionary类，用搜索文件系统的方式做管理，文件替换方式是以时间为单位。我们通常用使用缓存来临时存储短时间使用但创建昂贵的对象。重用这些对象可以优化性能，因为它们的值不需要重新计算。另外一方面，这些对象对于程序来说不是紧要的，在内存紧张时会被丢弃。</p>
-<p>磁盘缓存的处理则是使用NSFileManager对象来实现的。图片存储的位置是位于Cache文件夹。另外，SDImageCache还定义了一个串行队列，来异步存储图片。</p>
-<p>当SDWebImageManager向SDImageCache要资源时，先搜索内存层面的数据，如果有直接返回，没有的话去访问磁盘，将图片从磁盘读取出来，然后做Decoder，将图片对象放到内存层面做备份，再返回调用层。使用Decoder 是因为UIImage的imageWithData函数是每次画图的时候才将Data解压成ARGB的图像，<br>所以在每次画图的时候，会有一个解压操作，这样效率很低，但是只有瞬时的内存需求。<br>为了提高效率通过SDWebImageDecoder将包装在Data下的资源解压，然后画在另外一张图片上，这样这张新图片就不再需要重复解压了。是典型的空间换时间的做法。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8c5e61bb0b11d4e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>SDWebImage的原理</strong></p>
-<p>1.使用 </p>
-<pre><code>- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(SDWebImageOptions)options; 
-</code></pre><p>会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片。</p>
-<p>2.进入  SDWebImageManager</p>
-<pre><code>-downloadWithURL:options:progress:completed:
-</code></pre><p>交给 SDImageCache 从缓存查找图片是否已经下载。</p>
-<p>3.先从内存图片缓存查找是否有图片，如果内存中已经有图片缓存，取缓存，没有从<code>- (UIImage <em>)diskImageForKey:(NSString </em>)key</code>去磁盘缓存中去查找，根据 URLKey 在硬盘缓存目录下尝试读取图片文件。在磁盘缓存中找到后，同时更新置内存缓存中（如果空闲内存过小，会先清空内存缓存），有回调则调用doneBlock回调。</p>
-<p>4.找到了就从SDWebImageQueryCompletedBlock到 UIImageView+WebCache 等前端展示图片。</p>
-<p>5.如果从硬盘缓存目录读取不到图片，说明不存在该图片，需要下载图片，共享或重新生成一个下载器 SDWebImageDownloader 开始下载图片。 图片下载由 NSURLSession 来做，实现相关 delegate 来判断图片下载中、下载完成和下载失败。</p>
-<p>6.<code>URLSession:didReceiveData:</code> 中利用 ImageIO 做了按图片下载进度加载效果。数据下载完成后交给 SDWebImageDecoder 做图片解码处理。</p>
-<p>7.图片解码处理在一个 NSOperationQueue 完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。</p>
-<p>8.在主线程 SDWebImageDownloaderCompletedBlock里处理解码完成后的操作。回调给需要的地方展示图片。</p>
-<p>9.从SDWebImageDownloaderProgressBlock 回调给 SDWebImageManager 告知图片下载信息。</p>
-<p>10.将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存。写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程。</p>
-<p>11.SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。</p>
-<p>12.SDWebImage 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache方便使用。 SDWebImagePrefetcher 可以预先下载图片，方便后续使用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-bf7c86e7bd12b9c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h4 id="SDWebImage-使用"><a href="#SDWebImage-使用" class="headerlink" title="SDWebImage 使用"></a>SDWebImage 使用</h4><p><strong>常用到的对象：</strong></p>
-<p>1、UIImageView (WebCache)类别，入口封装，实现读取图片完成后的回调。</p>
-<p>2、SDWebImageManager，对图片进行管理的中转站，记录那些图片正在读取。<br>向下层读取Cache（调用SDImageCache），或者向网络读取对象（调用SDWebImageDownloader） 。<br>实现SDImageCache和SDWebImageDownloader的回调。</p>
-<p>3、SDImageCache，根据URL的MD5摘要对图片进行存储和读取（实现存在内存中或者存在硬盘上两种实现）<br>实现图片和内存清理工作。</p>
-<p>4、SDWebImageDownloader，根据URL向网络读取数据（实现部分读取和全部读取后再通知回调两种方式）</p>
-<p>5、SDWebImageDecoder，异步对图像进行了一次解压</p>
-<p>使用：</p>
-<pre><code>[self.imageView sd_setImageWithURL:self.imageURL
-                      placeholderImage:nil
-                               options:SDWebImageProgressiveDownload
-                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                  ...
-                              }
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 ...
-                             }];
-</code></pre><p>调用setImageWithURL:方法的时候，SDWebImage自动做很多事，当你需要在某一具体时刻做事情的时候，你可以覆盖这些方法。比如在下载某个图片的过程中要响应一个事件，就覆盖这个方法：</p>
-<pre><code>//这个方法是下载imagePath2的时候响应
-SDWebImageManager *manager = [SDWebImageManager sharedManager];
-
-[manager downloadImageWithURL:imagePath2 options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-
-    NSLog(@&quot;显示当前进度&quot;);
-
-} completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-
-    NSLog(@&quot;下载完成&quot;);
-}];
-</code></pre><p><strong>基本代码：</strong></p>
-<p>使用SDWebImageManager类：可以进行一些异步加载的工作。</p>
-<pre><code>SDWebImageManager *manager = [SDWebImageManager sharedManager];
-UIImage *cachedImage = [manager imageWithURL:url]; // 将需要缓存的图片加载进来
-if (cachedImage) {
-  // 如果Cache命中，则直接利用缓存的图片进行有关操作
-  // Use the cached image immediatly
-} else {
-  // 如果Cache没有命中，则去下载指定网络位置的图片，并且给出一个委托方法
-  // Start an async download
- [manager downloadWithURL:url delegate:self];
-}
-</code></pre><p>当然你的类要实现SDWebImageManagerDelegate协议，并且要实现协议的webImageManager:didFinishWithImage:方法。</p>
-<pre><code>// 当下载完成后，调用回调方法，使下载的图片显示
-- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
-// Do something with the downloaded image
-}
-</code></pre><p><strong>独立的异步图像下载</strong></p>
-<p>可能会单独用到异步图片下载，则一定要用downloaderWithURL:delegate:来建立一个SDWebImageDownloader实例。</p>
-<pre><code>downloader = [SDWebImageDownloader downloaderWithURL:url delegate:self];
-</code></pre><p>这样SDWebImageDownloaderDelegate协议的方法imageDownloader:didFinishWithImage:被调用时下载会立即开始并完成。</p>
-<p><strong>独立的异步图像缓存</strong></p>
-<p>SDImageCache类提供一个创建空缓存的实例，并用方法imageForKey:来寻找当前缓存。</p>
-<pre><code>UIImage *myCachedImage = [[SDImageCache sharedImageCache] imageFromKey:myCacheKey];
-</code></pre><p>存储一个图像到缓存是使用方法storeImage: forKey:</p>
-<pre><code>[[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
-</code></pre><p>默认情况下，图像将被存储在内存缓存和磁盘缓存中。如果仅仅是想内存缓存中，要使用storeImage:forKey:toDisk:方法的第三个参数带一负值<br>来替代。</p>
-<h4 id="SDWebImage-源码分析示例"><a href="#SDWebImage-源码分析示例" class="headerlink" title="SDWebImage 源码分析示例"></a>SDWebImage 源码分析示例</h4><p>SDWebImageDownloader类</p>
-<p>SDWebImageDownloaderOptions定义：</p>
-<pre><code>typedef NS_OPTIONS(NSUInteger, SDWebImageDownloaderOptions) {
-SDWebImageDownloaderLowPriority = 1 &lt;&lt; 0,
-SDWebImageDownloaderProgressiveDownload = 1 &lt;&lt; 1,
-
-// 默认情况下请求不使用NSURLCache，如果设置该选项，则以默认的缓存策略来使用NSURLCache
-SDWebImageDownloaderUseNSURLCache = 1 &lt;&lt; 2,
-
-// 如果从NSURLCache缓存中读取图片，则使用nil作为参数来调用完成block
-SDWebImageDownloaderIgnoreCachedResponse = 1 &lt;&lt; 3,
-
-// 在iOS 4+系统上，允许程序进入后台后继续下载图片。该操作通过向系统申请额外的时间来完成后台下载。如果后台任务终止，则操作会被取消
-SDWebImageDownloaderContinueInBackground = 1 &lt;&lt; 4,
-
-// 通过设置NSMutableURLRequest.HTTPShouldHandleCookies = YES来处理存储在NSHTTPCookieStore中的cookie
-SDWebImageDownloaderHandleCookies = 1 &lt;&lt; 5,
-
-// 允许不受信任的SSL证书。主要用于测试目的。
-SDWebImageDownloaderAllowInvalidSSLCertificates = 1 &lt;&lt; 6,
-
-// 将图片下载放到高优先级队列中
-SDWebImageDownloaderHighPriority = 1 &lt;&lt; 7,
-};
-</code></pre><p>下载顺序：</p>
-<pre><code>typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) {
-// 以队列的方式，按照先进先出的顺序下载。这是默认的下载顺序
-SDWebImageDownloaderFIFOExecutionOrder,
-// 以栈的方式，按照后进先出的顺序下载。
-SDWebImageDownloaderLIFOExecutionOrder
-};
-</code></pre><p>每个下载操作都定义了回调操作，如下载进度回调，下载完成回调，头部过滤等，这些回调操作是以block形式来呈现；每个下载操作的下载进度回调和下载完成回调，这两个回调稍后将保存在下载管理器的URLCallbacks字典中，key为URL，value为一个数组，数组里面又存放一个保存了下载进度回调和完成回调代码块的字典。这个字典数组同时也保证了同一张图片只会被下载一次。</p>
-<pre><code>// 下载进度
-typedef void(^SDWebImageDownloaderProgressBlock)(NSInteger receivedSize, NSInteger expectedSize);
-// 下载完成
-typedef void(^SDWebImageDownloaderCompletedBlock)(UIImage *image, NSData *data, NSError *error, BOOL finished);
-// Header过滤
-typedef NSDictionary *(^SDWebImageDownloaderHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
-</code></pre><p>为了保证URLCallbacks操作(添加、删除)的线程安全性，SDWebImageDownloader将这些操作作为一个个任务放到barrierQueue队列中，并设置屏障来确保同一时间只有一个线程操作URLCallbacks属性。</p>
-<pre><code>- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock andCompletedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock forURL:(NSURL *)url createCallback:(SDWebImageNoParamsBlock)createCallback {
-...
-// 1. 以dispatch_barrier_sync操作来保证同一时间只有一个线程能对URLCallbacks进行操作
-dispatch_barrier_sync(self.barrierQueue, ^{
-...
-// 2. 处理同一URL的同步下载请求的单个下载
-});
-}
-</code></pre><p>下载请求的管理都是放在downloadImageWithURL:options:progress:completed:方法里面来处理的，该方法调用了上面所提到的addProgressCallback:andCompletedBlock:forURL:createCallback:方法来将请求的信息存入管理器中，同时在创建回调的block中创建新的操作，配置之后将其放入downloadQueue操作队列中，最后方法返回新创建的操作。</p>
-<pre><code>- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url options:(SDWebImageDownloaderOptions)options progress:(SDWebImageDownloaderProgressBlock)progressBlock completed:(SDWebImageDownloaderCompletedBlock)completedBlock {
-...
-[self addProgressCallback:progressBlock andCompletedBlock:completedBlock forURL:url createCallback:^{
-...
-}
-</code></pre><p>下载操作的超时时间可以通过downloadTimeout属性来设置，默认值为15秒。</p>
-<p>SDWebImage定义了一个协议，即 SDWebImageOperation 作为图片下载操作的基础协议。它只声明了一个cancel方法，用于取消操作。每个图片的下载都是一个Operation操作。SDWebImage自定义了一个Operation类，即 SDWebImageDownloaderOperation ，它继承自NSOperation，并采用了SDWebImageOperation协议。除了继承而来的方法，该类只向外暴露了一个方法，initWithRequest:options:progress:completed:cancelled:。对于图片的下载，SDWebImageDownloaderOperation完全依赖于URL加载系统中的NSURLSession。具体看代码<a href="https://github.com/dangdangfeng/SDWebImage-Source-Analyse" target="_blank" rel="external">源码分析</a>.</p>
-<pre><code>- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-</code></pre><p>方法的主要任务是接收数据。每次接收到数据时，都会用现有的数据创建一个CGImageSourceRef对象以做处理。在首次获取到数据时(width+height==0)会从这些包含图像信息的数据中取出图像的长、宽、方向等信息以备使用。而后在图片下载完成之前，会使用CGImageSourceRef对象创建一个图片对象，经过缩放、解压缩操作后生成一个UIImage对象供完成回调使用。当然，在这个方法中还需要处理的就是进度信息。如果我们有设置进度回调的话，就调用这个进度回调以处理当前图片的下载进度。</p>
-<p>缩放操作可以查看SDWebImageCompat文件中的SDScaledImageForKey函数；解压缩操作可以查看SDWebImageDecoder文件+decodedImageWithImage方法。在下载完成或下载失败后，需要停止当前线程的run loop，清除连接，并抛出下载停止的通知。如果下载成功，则会处理完整的图片数据，对其进行适当的缩放与解压缩操作，以提供给完成回调使用。</p>
-<p>最重要是自己分析，看过的会忘，消化了才是自己的。学而不思则罔,思而不学则殆。每个人要了解自己的优缺点。有思考才有所得！</p>
-<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4><p>我们应该把精力和时间投入在更值得学习的东西上。如果纯看代码而没有碰到这个场景就算看懂了也没法理解，学习的目的是为了实践，而不要为了原理而分析原理，这样就本末倒置了。对于广大程序员而言，做码农，通过低水平重复的劳动来创造价值的道路是永远不可能一劳永逸的，恰恰相反，是永劳一逸的！生产只能够惠及当下！事物的发展在于思考，可能每个人走的路径不一样，寻找到最适合自己的，坚持走下去。只要能肯定每天都是进步的，快慢又有什么关系呢。这是一个浮躁的社会，这个社会催生了无数可能，也许不是每个人都能做一辈子的程序员，但不要辜负你的时光。你之所以成为你，是因为你的时间，你的经历在哪里，你就在哪里。共勉！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文主要涉及一下几点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SDWebImage 原理&lt;/li&gt;
-&lt;li&gt;SDWebImage 使用&lt;/li&gt;
-&lt;li&gt;SDWebImage 源码分析&lt;/li&gt;
-&lt;li&gt;一些思考&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h4 id=&quot;SDWebImage-加
-    
-    </summary>
-    
-    
-      <category term="source" scheme="https://dangdangfeng.github.io/tags/source/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优秀的iOS开发站点</title>
-    <link href="https://dangdangfeng.github.io/2014/03/03/%E4%BC%98%E7%A7%80%E7%9A%84iOS%E5%BC%80%E5%8F%91%E7%AB%99%E7%82%B9/"/>
-    <id>https://dangdangfeng.github.io/2014/03/03/优秀的iOS开发站点/</id>
-    <published>2014-03-02T16:37:08.000Z</published>
-    <updated>2016-08-31T14:49:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<blockquote>
-<p>工欲善其事必先利其器，每一次的惊叹背后都有不为人知的努力。分享和共赢，是开源的精神所在。感谢那些开诚布公，乐于助人的程序员们。从优秀到卓越，我们需要不停地向他人学习。</p>
-</blockquote>
-<ul>
-<li>国内优秀的iOS网站</li>
-<li>国外优秀的iOS网站</li>
-</ul>
-<h4 id="常用的国内网站"><a href="#常用的国内网站" class="headerlink" title="常用的国内网站"></a>常用的国内网站</h4><p><img src="http://upload-images.jianshu.io/upload_images/1170656-2364ba42664a3d23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><strong>社区网站：</strong></p>
-<ul>
-<li><a href="http://www.jianshu.com" target="_blank" rel="external">简书</a></li>
-<li><a href="http://gold.xitu.io/welcome/ios" target="_blank" rel="external">稀土掘金</a></li>
-<li><a href="https://segmentfault.com" target="_blank" rel="external">SegmentFault</a></li>
-<li><a href="http://www.cnblogs.com/cate/ios/" target="_blank" rel="external">博客园</a></li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://www.cocoachina.com" target="_blank" rel="external">cocoachina</a></li>
-<li><a href="http://www.iteye.com" target="_blank" rel="external">ITeye</a></li>
-<li><a href="http://www.csdn.net" target="_blank" rel="external">CSDN</a></li>
-<li><a href="http://www.51cto.com" target="_blank" rel="external">51CTO</a></li>
-<li><a href="https://www.infoq.com" target="_blank" rel="external">infoq</a></li>
-<li><a href="http://toutiao.io/subjects/12199" target="_blank" rel="external">开发者头条</a></li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://www.oschina.net" target="_blank" rel="external">开源中国</a></li>
-<li><a href="http://code4app.qiniudn.com" target="_blank" rel="external">Code4App</a></li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://www.imooc.com" target="_blank" rel="external">慕课网</a></li>
-<li><a href="http://www.maiziedu.com" target="_blank" rel="external">麦子学院</a></li>
-<li><a href="http://www.jikexueyuan.com" target="_blank" rel="external">极客学院</a></li>
-</ul>
-<p><strong>UI设计：</strong></p>
-<p><a href="http://www.ui4app.com" target="_blank" rel="external">UI4App</a></p>
-<blockquote>
-<p>当然还有很多有用的网站，如果您知道并愿意分享，可以在评论里提供。</p>
-</blockquote>
-<h4 id="常用的国外网站"><a href="#常用的国外网站" class="headerlink" title="常用的国外网站"></a>常用的国外网站</h4><ul>
-<li><a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html" target="_blank" rel="external"> Apple Learning Objective C </a>：Apple官方文档</li>
-<li><a href="https://github.com" target="_blank" rel="external">github</a>：每天必看的吧</li>
-<li><a href="http://stackoverflow.com" target="_blank" rel="external">stackoverflow</a>：估计是最大的技术问答网站了</li>
-<li><a href="https://www.developerfeed.com/category/ios/ios-tutorials/" target="_blank" rel="external">developerfeed</a>：开发者论坛</li>
-<li><a href="https://www.objc.io" target="_blank" rel="external">objc.io</a>：经典网站，不用解释</li>
-<li><a href="http://www.cocoacontrols.com" target="_blank" rel="external">cocoacontrols</a>：优秀开源组件</li>
-<li><a href="http://cocoa.tumblr.com" target="_blank" rel="external">cocoa</a>：iOS开发源码和深度观察</li>
-<li><a href="http://maniacdev.com/open-source-iphone-app-store-apps" target="_blank" rel="external">maniacdev.com</a>：开源ios应用及其源代码</li>
-<li><a href="https://sourceforge.net" target="_blank" rel="external">sourceforge</a>：源码</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://iphonedevsdk.com/forum" target="_blank" rel="external">iphonedevsdk</a>：苹果开发论坛之一</li>
-<li><a href="https://devforums.apple.com" target="_blank" rel="external">devforums.apple.com</a>：苹果官方开发者</li>
-<li><a href="https://developer.apple.com/library/ios/navigation/index.html?section=Resource+Types&amp;topic=Sample+Code" target="_blank" rel="external">Sample+Code</a>：苹果官方的小示例项目论坛</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://subjc.com" target="_blank" rel="external">Subjective-C</a>：以解析和重构创新模式和著名应用的UI而闻名</li>
-<li><a href="http://mobile.tutsplus.com/category/tutorials/iphone/" target="_blank" rel="external">tutsplus</a>：一些不错的实例教程</li>
-<li><a href="http://nshipster.com" target="_blank" rel="external">NSHipster</a>：探讨了编程风格，以及最前沿的类的使用和实现</li>
-<li><a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>：每个iOS都应该看看</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://oleb.net" target="_blank" rel="external">oleb</a>：个人博客，在持续更新</li>
-<li><a href="http://petersteinberger.com" target="_blank" rel="external">petersteinberger</a>：个人网站</li>
-<li><a href="http://floriankugler.com/archive/" target="_blank" rel="external">floriankugler</a>：更到15年</li>
-<li><a href="https://www.mikeash.com/pyblog/" target="_blank" rel="external">NSBlog</a>：包含了关于Objective-C和其他主题的深度问题</li>
-</ul>
-<hr>
-<ul>
-<li><a href="http://iosdevweekly.com" target="_blank" rel="external">iOS Dev Weekly</a>：每天更新的iOS推送资源</li>
-<li><a href="http://ios-goodies.com" target="_blank" rel="external">iOS Goodies</a>：iOS资讯站</li>
-<li><a href="http://www.appcoda.com" target="_blank" rel="external">AppCoda</a>：产于香港，重点在用于执行的最新的API和结构上</li>
-<li><a href="http://merowing.info" target="_blank" rel="external">Krzysztof Zab?ocki</a>：提供关于代码结构、工具和Xcode的技巧</li>
-<li><a href="http://iosdevtips.co" target="_blank" rel="external">iOS Development tips</a>：一些关于使用Xcode和API的细致的提示</li>
-</ul>
-<hr>
-<ul>
-<li><a href="https://teamtreehouse.com/techdegree" target="_blank" rel="external">Team Tree House </a>：人人都可以编程的学习网站</li>
-<li><a href="http://www.technobuffalo.com" target="_blank" rel="external">technobuffalo</a>：手机媒体网站</li>
-<li><a href="https://designthencode.com" target="_blank" rel="external">Design then Code </a>：最好的iOS界面设计和应用指导和教程</li>
-<li><a href="http://www.daleisphere.com" target="_blank" rel="external"> iPhone App Development Where to Start </a>：博客</li>
-</ul>
-<p><strong>UI设计：</strong></p>
-<ul>
-<li><a href="http://www.iosinspires.me/" target="_blank" rel="external">iosinspires</a>：优秀的iOS平台上应用的设计，icon及相关资源</li>
-<li><a href="http://www.patternsofdesign.co.uk/" target="_blank" rel="external">patternsofdesign</a>：专注于分享iOS应用UI界面的细节，按照设计元素进行分类，按照iOS常用功能对各类UI进行分类展示。</li>
-<li><a href="http://pttrns.com/" target="_blank" rel="external">iOS UI Patterns</a>：整理/罗列了许多精彩的iOS 应用界面截图，并且按照分类将这些截图分类，比如Activity，Login，About，Calendar，Seeting，Share等各种类型的不同应用的实现效果</li>
-<li><a href="http://www.appsites.com/" target="_blank" rel="external">appsites</a>：优秀移动应用网站设计</li>
-<li><a href="http://dribbble.com/" target="_blank" rel="external">dribbble</a>：设计师交流和分享自己设计作品的社区。上面有很多非常棒的移动产品设计作品。</li>
-<li><a href="http://www.tappgala.com/" target="_blank" rel="external">tappgala</a>：分享最棒的手机产品界面设计</li>
-</ul>
-<p><strong>iOS游戏</strong></p>
-<ul>
-<li><a href="http://maniacdev.com/open-source-ios-game-list-source-code-to-games-in-the-app-store" target="_blank" rel="external">open-source-ios-game</a>：iOS游戏及其源代码</li>
-<li><a href="http://mobile.tutsplus.com/tutorials/iphone/learn-ios-game-development-by-example-10-projects-to-get-you-started/" target="_blank" rel="external">iOS游戏开发可以参考的10个实例</a>：（源代码都在github上）</li>
-<li><a href="http://www.learn-cocos2d.com/blog/" target="_blank" rel="external">Kobold2d引擎</a>：cocos2d引擎的变种，主要和ios,cocos2d,kobold2d开发有关</li>
-<li><a href="https://developers.facebook.com/docs/tutorials/ios-sdk-games/" target="_blank" rel="external">facebook的游戏教程</a></li>
-<li><a href="http://www.idevgames.com/articles" target="_blank" rel="external">idevgames</a>：游戏相关的教程</li>
-</ul>
-<p>暂时统计了这么多，还有好多优秀的网站等待我们挖掘，当然有好的网站也希望可以多互相分享，此处持续添加中······。</p>
-<p>总体感觉，国外的网站并不一定比国内的好用，比如objc.io已经有了国内版。外国网站对于英语也是一种挑战，不过技术就是如此，想更上一层，总要比他人更努力一些。</p>
-<p>PS：读文章固然可以增长我们的见识，但别人的总归是别人的，只有内化成自己的，才不至于白费光阴。写博客，开源组件，都是很好的锻炼。要对得起您耗费的时间。时间不会辜负尊重它的人的，与君共勉！</p>
-<h4 id="无法访问国外网站怎么办？"><a href="#无法访问国外网站怎么办？" class="headerlink" title="无法访问国外网站怎么办？"></a>无法访问国外网站怎么办？</h4><ul>
-<li><a href="https://github.com/racaljk/hosts" target="_blank" rel="external">hosts</a>：最新可用的google hosts文件</li>
-</ul>
-<h5 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h5><p>请出门左拐，购买付费！世界变得无比简单。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/1170656-8ecc5b178b74528a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; 
-    
-    </summary>
-    
-    
-      <category term="helper" scheme="https://dangdangfeng.github.io/tags/helper/"/>
     
   </entry>
   

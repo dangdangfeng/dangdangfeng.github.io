@@ -231,6 +231,80 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2016/09/01/从React到Flux架构/">test</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-09-01T15:09:36.000Z" itemprop="datePublished">
+          2016-09-01
+      </time>
+    
+    
+    | 
+    <a href='/tags/前端/'>前端</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        React 本身只涉及UI层，如果搭建大型应用，必须搭配一个前端框架。即：React + 前端框架。Flux是Facebook用户建立客户端Web应用的前端架构， 它通过利用一个单向的数据流补充了React的组合视图组件，相对于框架而言它更像是一种模式思想，在无需许多新代码的情况下就可以构建出合适的Web应用。
+应用的几个部分应用通常分为Dispatcher调度 、存储Store和视图View(React 组件)。分析如下：
+1) Vi
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2016/09/01/从React到Flux架构/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2016/01/11/mac上自定义脚本命令/">mac上自定义脚本命令</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2016-01-11T15:34:53.000Z" itemprop="datePublished">
+          2016-01-11
+      </time>
+    
+    
+    | 
+    <a href='/tags/杂谈/'>杂谈</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        AppleScript 是 Mac OS X内置的一种功能强大的脚本语言，使用 AppleScript 的目的是把一些重复繁琐并且耗费时间的任务自动化。AppleScript 的一个优点是你不必是一个天才程序员才能使用它，事实上你甚至不需要有任何编程的经验！
+OS X 中使用appleScript快速调出终端os x 上很多功能都可以通过Apple自家的Automator.app创建，且使用此方法可以为任何的程序创建快捷键。
+1.第一步
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2016/01/11/mac上自定义脚本命令/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2015/10/01/React-Native的极简手册/">React Native的极简手册</a></h3>
                     <span>
                         <span class="post-meta">
@@ -1092,6 +1166,88 @@ Code4App
         <div class="row">
             <div class="col-md-8 col-md-offset-2 opening-statement">
                 <div class="col-md-4">
+                    <h3><a href="/2014/01/11/Daily-Build/">Daily Build</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2014-01-11T15:42:42.000Z" itemprop="datePublished">
+          2014-01-11
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        XCODEBUILD下面Daily Build iOS项目。Xcode有一个command tool的工具xcodebuild。用这个工具可以用来使用命令行编译Xcode项目。
+然后先看看这个xcodebuild都能做些什么。输入man xcodebuild命令：
+
+打包app1.切换到你项目所在的目录
+cd /Users/username/Desktop/MyiOSApp/
+2.执行下面
+xcodebuild -configurati
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2014/01/11/Daily-Build/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
+                    <h3><a href="/2013/12/21/weak简析/">__weak简析</a></h3>
+                    <span>
+                        <span class="post-meta">
+      <time datetime="2013-12-21T15:38:41.000Z" itemprop="datePublished">
+          2013-12-21
+      </time>
+    
+    
+    | 
+    <a href='/tags/技术/'>技术</a>
+    
+    
+</span>
+                    </span>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                      
+                        当一个 __weak 类型的指针指向的对象被释放时，该指针会自动被置成nil，因此__weak关键字修饰的指针又被称为智能指针。那么这个功能是如何实现的呢？
+id __weak obj1 = obj; 
+会转化为
+id obj1;  
+objc_initWeak(&amp;obj1, obj);  
+objc_destoryWeak(&amp;obj1);  
+即编译器会通过objc_initWeak函数初始化__weak修饰的变量，当
+                      
+                    </p>
+                    
+                    <p class="pull-right readMore">
+                        <a href="/2013/12/21/weak简析/">Read More...</a>
+                    </p>
+                    
+                </div>
+                <div class="clearfix"></div>
+                <hr class="nogutter">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 opening-statement">
+                <div class="col-md-4">
                     <h3><a href="/2013/12/13/OC中的Class/">OC中的Class</a></h3>
                     <span>
                         <span class="post-meta">
@@ -1259,170 +1415,6 @@ NSLog(@&quot;%d, %d&quot;, b1, b2);
                     
                     <p class="pull-right readMore">
                         <a href="/2013/08/31/iOS图像处理之UI-CG和CI/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2013/08/29/Cordova-Source-Code-Analyse/">Cordova Source Code Analyse</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2013-08-29T15:27:36.000Z" itemprop="datePublished">
-          2013-08-29
-      </time>
-    
-    
-    | 
-    <a href='/tags/Source/'>Source</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                          官网 (markdown下经常无法链接，地址在这： http://cordova.apache.org)
-文件分类
-
-目录文件说明：
-conig.xml ：cordova的配置文件
-hooks/ ：存放自定义cordova命令的脚本文件。
-platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改
-plugins/ ：插件目录（主要是提供各个平台的原生API）
-www/ ：用H5编写的源代码目录，build时会被放入
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2013/08/29/Cordova-Source-Code-Analyse/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2012/12/01/程序员进阶的五个瞬间/">程序员进阶的五个瞬间</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2012-12-01T13:52:03.000Z" itemprop="datePublished">
-          2012-12-01
-      </time>
-    
-    
-    | 
-    <a href='/tags/杂谈/'>杂谈</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        
-“当你不创造东西时，你只会根据自己的感觉而不是能力去看待问题。” 
-
-之前有个讨论：实现同样功能，简洁代码一定比复杂代码效率高吗？有的说，还得看算法，如果算法相同，简洁代码效率应该会高一些。有的说，即使算法相同，简洁代码也不见得比复杂代码效率高，而应尽可能减少循环的使用，特别是少用多重循环，或者尽可能在一个循环中做更多的事。如此，便想起了很久以前的一个段子，讲的是程序员如何一步步在循环中重新回到起点的，仅供大家一笑。
-第一年
-
-第二年
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2012/12/01/程序员进阶的五个瞬间/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/">如何优雅的谈论HTTP／1.0／1.1／2.0</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2012-08-30T15:30:05.000Z" itemprop="datePublished">
-          2012-08-30
-      </time>
-    
-    
-    | 
-    <a href='/tags/technology/'>technology</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        本文将涉及以下方面：
-
-HTTP协议
-HTTP1.0
-HTTP1.1
-HTTP2.0
-1.0和1.1和2.0之间的区别
-HTTPS
-
-HTTP协议HTTP（超文本传输协议，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。是用于从WWW服务器传输超文本到本地浏览器的传输协议。默认使用80端口，
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2012/08/30/如何优雅的谈论HTTP／1-0／1-1／2-0/">Read More...</a>
-                    </p>
-                    
-                </div>
-                <div class="clearfix"></div>
-                <hr class="nogutter">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 opening-statement">
-                <div class="col-md-4">
-                    <h3><a href="/2012/03/11/优秀的团队该不该使用敏捷开发/">优秀的团队该不该使用敏捷开发</a></h3>
-                    <span>
-                        <span class="post-meta">
-      <time datetime="2012-03-10T16:51:30.000Z" itemprop="datePublished">
-          2012-03-11
-      </time>
-    
-    
-    | 
-    <a href='/tags/skill/'>skill</a>
-    
-    
-</span>
-                    </span>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                      
-                        在CMM（能力成熟度模型Capability Maturity Model的缩写，是一种侧重于软件开发过程的管理及工程能力的提高与评估的开发模型）神话崩溃以后，敏捷开发逐渐引起了人们的关注，并被寄予厚望。下面我们就来谈一谈敏捷开发相关的一些知识。
-敏捷开发的起源我们大部分人都学过瀑布开发模型，它是以文档为驱动的。因为在瀑布的整个开发过程中，开发人员根据需求文档进行开发，一切以文档为依据。敏捷开发(Agile Development)是一
-                      
-                    </p>
-                    
-                    <p class="pull-right readMore">
-                        <a href="/2012/03/11/优秀的团队该不该使用敏捷开发/">Read More...</a>
                     </p>
                     
                 </div>
