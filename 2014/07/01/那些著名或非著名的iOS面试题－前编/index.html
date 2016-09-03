@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>那些著名或非著名的iOS面试题－前编</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<h4 id="1-如何追踪app崩溃率，如何解决线上闪退"><a href="#1-如何追踪app崩溃率，如何解决线上闪退" class="headerlink" title="1.如何追踪app崩溃率，如何解决线上闪退"></a>1.如何追踪app崩溃率，如何解决线上闪退</h4><p>当iOS设备上的App应用闪退时，操作系统会生成一个crash日志，保存在设备上。crash日志上有很多有用的信息，比如每个正在执行线程的完整堆栈跟踪信息和内存映像，这样就能够通过解析这些信息进而定位crash发生时的代码逻辑，从而找到App闪退的原因。通常来说，crash产生来源于两种问题：违反iOS系统规则导致的crash和App代码逻辑BUG导致的crash，下面分别对他们进行分析。</p>
 <p><strong>违反iOS系统规则产生crash的三种类型</strong></p>
 <p>(1) 内存报警闪退<br>当iOS检测到内存过低时，它的VM系统会发出低内存警告通知，尝试回收一些内存；如果情况没有得到足够的改善，iOS会终止后台应用以回收更多内存；最后，如果内存还是不足，那么正在运行的应用可能会被终止掉。在Debug模式下，可以主动将客户端执行的动作逻辑写入一个log文件中，这样程序童鞋可以将内存预警的逻辑写入该log文件，当发生如下截图中的内存报警时，就是提醒当前客户端性能内存吃紧，可以通过Instruments工具中的Allocations 和 Leaks模块库来发现内存分配问题和内存泄漏问题。</p>

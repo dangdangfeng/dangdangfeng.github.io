@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -207,7 +207,8 @@
                 <h1>从0开始看一个项目</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<p>在着手一个项目前<strong>先读文档</strong>（如果有文档的话）。尽管读了文档你不一定知道每一个代码的细节，但是如果你了解那个问题的话，你一定知道怎么写可以写出一个满足文档的内容。这个时候大脑里面就可以有个框架，先猜一猜，然后看代码，事半功倍。找不到好的文档，就看他的<strong>测试用例</strong>，也是有一样的功效的。因为测试都是从文档出发编写的，而不是从代码出发编写的。找不到文档和测试用例？那就直接Gank吧。</p>
 <p><strong>读代码要层次化、带着问题去阅读</strong>。首先整体了解这个软件是干什么？解决什么问题？包含哪些大的模块，各个模块的作用是什么，各个模块的调用关系怎么样？然后对于每一个模块，这个模块是干什么的？为什么要有这个模块？这个模块怎么实现的？最后细化到每一个包，每一个类，每一个函数方法。从上到下，一一击破每一个问题，认真去<strong>思考</strong>他这样设计、写代码的好处，因为好的软件都会满足这种从抽象-&gt;具体的原则的。</p>
 <p>在开始读具体代码前<strong>定位好所有要读的文件</strong>，知道他们的位置和名字，设计良好的工程光看工程的目录结构和文件名就能知道个大概功能了。事实上阅读代码的难易程度70%取决于代码书写的规范程度，写乱掉的代码，大师也读不懂。之后根据你对目录结构的理解确定文件阅读的顺序（我反正都是从main函数开始读的）。你最好对<strong>设计模式</strong>有一定了解，否则你读面向对象的code时会经常无法理解code为啥要弄得这么层层嵌套。阅读代码一个最重要的提升水平的地方就是理解好的代码如何合理使用设计模式。基本的阅读起点都会选择main函数或者类的构造函数。然后把自己想象成cpu执行程序那样去阅读你的代码。遇到需要跳转函数时，不要急于跳转，以了解函数功能和输入输出为目标，读代码最忌讳的是不抓结构抓细节，只见树木不见森林，<strong>比起某个函数具体功能来说对结构的全局把握更重要</strong>。功能了解清楚后继续跳回来（这里就可以区分代码写的优不优秀，优秀的代码光看函数名字就知道功能，连跳转都不用）。结构弄清楚了，知道程序怎么跑了，source code的精华你已经读了60%了，之后根据需要再对具体函数深入分析，到这里整个代码已经被你扒光了，没什么神秘了。</p>

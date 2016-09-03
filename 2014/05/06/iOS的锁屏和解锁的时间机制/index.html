@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>iOS的锁屏和解锁的时间机制</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<h4 id="idleTimer"><a href="#idleTimer" class="headerlink" title="idleTimer"></a>idleTimer</h4><p>idleTimer 是iOS内置的时间监测机制，当在一段时间内未操作即进入锁屏状态。但有些应用程序是不需要锁住屏幕的，比如游戏，视频这类应用。 可以通过设置UIApplication的idleTimerDisabled属性来指定iOS是否锁屏。 </p>
 <pre><code>// 禁用休闲时钟 
 [[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 

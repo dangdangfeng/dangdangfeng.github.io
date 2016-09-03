@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>block和delegate相对论</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<h4 id="delegate"><a href="#delegate" class="headerlink" title="delegate"></a>delegate</h4><p>委托是协议的一种，顾名思义，就是委托他人帮自己去做事。委托是给一个对象提供机会对另一个对象中的变化做出反应或者影响另一个对象的行为。其基本思想是：两个对象协同解决问题，并且打算在广泛的情形中重用。委托指向另一个对象（即它的委托）的引用，并在关键时刻给委托发消息。消息可能只是通知委托发生了某件事情，给委托提供机会执行额外的处理，或者消息可能要求委托提供一些关键的信息以控制所发生的事情。委托的作用主要有两个，一个是传值，一个是传事件。</p>
 <p>传值常用在B类要把自己的一个数据或者对象传给A类，让A类去展示或者处理（切分紧耦合，和代码分块时常用）。传事件是A类发生了什么事，把这件事告诉关注自己的类，也就是委托的对象，由委托的对象去考虑发生这个事件后应该做出什么反映（例如在异步请求中，界面事件触发数据层改变等）。利用委托赋值，这种方法是为了不暴露自己的属性就可以给自己赋值，这样方便了类的管理，只有在你想要让别人给你赋值的时候才调用，这样的赋值更可控一些。（如tableView中的委托dateSource等）。</p>
 <p>在iOS中委托通过一种@protocol的方式实现,所以又称为协议。协议是多个类共享的一个方法列表,在协议中所列出的方法没有响应的实现，由其它类来实现。delegate是“一对一”的关系，对同一个协议，一个对象只能设置一个代理delegate，所以<strong>单例对象就不能用代理</strong>。代理更注重过程信息的传输：如发起一个网络请求，是否此时请求已经开始、是否收到了数据、数据是否已经接受完成、数据接收失败等。</p>

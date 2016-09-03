@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>动画中的运动曲线</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<p>无意间看到了介绍运动曲线的一个很有趣的网站<a href="http://cubic-bezier.com" target="_blank" rel="external">cubic-bezier</a>,在<a href="http://cubic-bezier.com" target="_blank" rel="external">cubic-bezier.com</a>网站中简单绘制需要形状的曲线，然后选择线性曲线作为参考，就可以查看方块的运动变化情况。借着这个机会，我们就来聊一聊一些动画中的运动曲线吧！</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1170656-cadeec9d626ea44f.gif?imageMogr2/auto-orient/strip" alt="运动曲线"></p>
 <h4 id="运动图例"><a href="#运动图例" class="headerlink" title="运动图例"></a>运动图例</h4><p>我们都知道时间是一秒一秒过去的，也就是线性的，匀速前进的。如果属性值从起始值到结束值是匀速变化的话，那么整个动画看起来就是慢慢地均匀地变化着。但是，如果我们想让动画变得很快或者变得很慢怎么办？答案是我们可以通过“篡改时间”来完成这个任务！实际上就是一条函数曲线。</p>

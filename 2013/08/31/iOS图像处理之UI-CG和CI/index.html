@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>iOS图像处理之UI,CG和CI</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<h4 id="UIImage-CGImage和CGImageRef释疑"><a href="#UIImage-CGImage和CGImageRef释疑" class="headerlink" title="UIImage,CGImage和CGImageRef释疑"></a>UIImage,CGImage和CGImageRef释疑</h4><p>UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对CGImageRef的定义为：</p>
 <pre><code>typedef struct CGImage *CGImageRef;
 </code></pre><p>CGImage和CGImageRef是用来重绘图形的类，它们在应用时是按照图像的像素矩阵来绘制图片的，它们可以用来处理bitmap。</p>

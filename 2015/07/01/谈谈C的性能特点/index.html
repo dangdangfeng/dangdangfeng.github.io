@@ -44,15 +44,15 @@
     <![endif]-->
 
     <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
-    <link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
 
     <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
     <!--[if IE]>
-    <link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
     <![endif]-->
 
     <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
@@ -212,7 +212,8 @@
                 <h1>谈谈C的性能特点</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
       		<p>C语言是一种命令式语言（又称强制式语言，通过指明一系列可执行的运算及运算的次序来描述计算过程的语言），生于1972年的贝尔实验室。平时我们用的大多数语言（比如，C,C++,Java,C#,Python等）都是命令式语言，与它相对的是函数式语言(functional language)，如Haskell,Lisp。函数式语言更像数学，命令式语言更接近人的思维。</p>
 <h4 id="C语言的特性"><a href="#C语言的特性" class="headerlink" title="C语言的特性"></a>C语言的特性</h4><p>C语言的典型特征是编译型语言(compiled language)（相对于解释型语言来说）、命令式的、人工管理内存 。对于编译型语言，程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时不需要重新翻译，直接运行编译的结果就行了，<strong>因此效率高</strong>。 以此相对，解释型语言程序不需要编译，程序在运行时才翻译成机器语言，每执行一次都要翻译一次，因此<strong>效率比较低</strong>。由此，当涉及到速度，内存，低层次特性(low-level features)如：移动stack pointer等常会使用C语言。</p>
 <p>从内存的角度思考C语言，相对于其他语言，<strong>汇编语言直接操作内存；C、C++访问内存；Java,C#,Scheme/LISP,ML使用的是内存自动管理机制</strong>。 C语言通过堆(heap)和栈（stack）访问的内存，C函数将会分配到棧中，函数在被调用时进棧(pushed on to stack)， 函数在返回时出棧(popefd off the stack)，函数能访问当前棧顶部以下的所有内存；堆是一块儿用于动态内存分配的内存区域，可以把它想像称为一个巨大的数组 ，通过指针(pointer)来访问，如果操作系统允许，整个程序都能访问堆。C语言人工内存管理目的是允许程序能够分配内存用于当前的使用 ；当程序执行完后，能够释放内存，用于重新分配 ，C语言的标准类库中有malloc和free两个函数支持内存管理 。从内存的层面，C语言虽然使用起来更复杂些，但在可操作性上更好一些，毕竟自动内存管理，内存的释放不是立即的。</p>
