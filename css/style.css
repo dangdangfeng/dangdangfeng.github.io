@@ -141,7 +141,7 @@ a:active,
 a:focus,
 a:visited,
 a:link {
-	color: #151515;
+	color: #5bafb1;
 	text-decoration: none;
 }
 [class*="col-"] {
