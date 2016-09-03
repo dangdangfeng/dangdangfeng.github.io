@@ -252,7 +252,7 @@ a:active,
 a:focus,
 a:visited,
 a:link {
-	color: #5bafb1;
+	color: #080808;
 	text-decoration: none;
 }
 [class*="col-"] {
