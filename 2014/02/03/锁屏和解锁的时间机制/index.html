@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--[if lte IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--
+***************  *      *     *
+      8          *    *       *
+      8          *  *         *
+      8          **           *
+      8          *  *         *
+      8          *    *       *
+      8          *      *     *
+      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+
+<head>
+  <title>锁屏和解锁的时间机制 | 流城</title>
+  <!-- Meta data -->
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="流城">
+    <meta name="author" content="吴白">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicon, (keep icon in root folder) -->
+    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
+
+    <link rel="alternate" href="/atom.xml" title="流城" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+	
+    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
+    
+    
+
+    <!-- Custom stylesheet, (add custom styles here, always load last) -->
+    <!-- Load our stylesheet for IE8 -->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
+    <![endif]-->
+
+    <!-- Google Webfonts (Monserrat 400/700, Open Sans 400/600) -->
+    <!--<link href='//fonts.useso.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <!--<link href='//fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>-->
+
+    <!-- Load our fonts individually if IE8+, to avoid faux bold & italic rendering -->
+    <!--[if IE]>
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:400' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'> -->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.useso.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>-->
+    <![endif]-->
+
+    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+    <!-- Load these in the <head> for quicker IE8+ load times -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
+
+  
+  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+</head>
+
+<!--
+<body class="post-template">
+-->
+<body id="index" class="lightnav animsition">
+
+      <!-- ============================ Off-canvas navigation =========================== -->
+
+    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
+        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
+            <img src="/img/close.png" alt="Close"/>
+        </div>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu">
+            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
+            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
+            <!-- Dropdown Menu -->
+			 
+            <li>
+                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                        <li><a href="http://www.gome.com.cn" target="_BLANK" class="animsition-link">Gome</a></li>
+                    
+                        <li><a href="http://www.yintai.com" target="_BLANK" class="animsition-link">YinTai</a></li>
+                    
+                </ul>
+            </li>
+            
+            
+            
+            <li>
+                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
+                <ul class="sb-submenu">
+                    
+                    <li><a href="http://www.jianshu.com/users/211925b3ca7c/latest_articles" class="animsition-link">吴白</a></li>
+                    
+                    <li><a href="http://www.jianshu.com/users/19f4bf67c705/latest_articles" class="animsition-link">吴禅</a></li>
+                    
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- Lists in Slidebars -->
+        <ul class="sb-menu secondary">
+            <li><a href="/about" class="animsition-link" title="about">About</a></li>
+            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
+        </ul>
+    </div>
+    
+    <!-- ============================ END Off-canvas navigation =========================== -->
+
+    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+
+    <div id="sb-site">
+        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+        <div id="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- Nav logo -->
+                    <div class="logo">
+                        <a href="/" title="Logo" class="animsition-link">
+                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
+                        </a>
+                    </div>
+                    <!-- // Nav logo -->
+                    <!-- Info-bar -->
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="/" class="animsition-link">流城</a></li>
+                            <li class="nolink"><span>Always </span>Creative.</li>
+                            
+                            <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a></li>
+                            
+                            
+                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
+                            
+                            
+                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
+                            
+                            
+                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
+                            
+                            
+                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
+                            
+                            <li class="nolink"><span>Welcome!</span></li>
+                        </ul>
+                    </nav>
+                    <!--// Info-bar -->
+                </div>
+                <!-- // .container -->
+                <div class="learnmore sb-toggle-right">More</div>
+                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar before"></span>
+                <span class="icon-bar main"></span>
+                <span class="icon-bar after"></span>
+                </button>
+            </div>
+            <!-- // .navbar-inner -->
+        </div>
+
+        <!-- ============================ Header & Logo bar =========================== -->
+
+
+      
+<section id="intro">
+    <div class="container">
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2014-02-03T04:35:18.000Z" itemprop="datePublished">
+          2014-02-03
+      </time>
+    
+    
+    | 
+    <a href='/tags/iOS/'>iOS</a>
+    
+    
+</span>
+                <h1>锁屏和解锁的时间机制</h1>
+            </div>
+        </div>
+        <!--<div class="col-md-8 col-md-offset-2">-->
+        <div class="col-md-offset-2">
+      		<h4 id="idleTimer"><a href="#idleTimer" class="headerlink" title="idleTimer"></a>idleTimer</h4><p>idleTimer &#x662F;iOS&#x5185;&#x7F6E;&#x7684;&#x65F6;&#x95F4;&#x76D1;&#x6D4B;&#x673A;&#x5236;&#xFF0C;&#x5F53;&#x5728;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x672A;&#x64CD;&#x4F5C;&#x5373;&#x8FDB;&#x5165;&#x9501;&#x5C4F;&#x72B6;&#x6001;&#x3002;&#x4F46;&#x6709;&#x4E9B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x9501;&#x4F4F;&#x5C4F;&#x5E55;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x6E38;&#x620F;&#xFF0C;&#x89C6;&#x9891;&#x8FD9;&#x7C7B;&#x5E94;&#x7528;&#x3002; &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;UIApplication&#x7684;idleTimerDisabled&#x5C5E;&#x6027;&#x6765;&#x6307;&#x5B9A;iOS&#x662F;&#x5426;&#x9501;&#x5C4F;&#x3002; </p>
+<pre><code>// &#x7981;&#x7528;&#x4F11;&#x95F2;&#x65F6;&#x949F; 
+[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+</code></pre><p>&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5; </p>
+<pre><code>[UIApplication sharedApplication].idleTimerDisabled = YES;
+</code></pre><p>&#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x53EA;&#x80FD;&#x7981;&#x7528;&#x81EA;&#x52A8;&#x9501;&#x5C4F;&#xFF0C;&#x5982;&#x679C;&#x70B9;&#x51FB;&#x4E86;&#x9501;&#x5C4F;&#x6309;&#x94AE;&#xFF0C;&#x4ECD;&#x7136;&#x4F1A;&#x8FDB;&#x5165;&#x9501;&#x5C4F;&#x7684;&#x3002;&#x6709;&#x4E00;&#x70B9;&#x4F8B;&#x5916;&#x7684;&#x662F;&#xFF0C;AVPlayer&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;idleTimerDisabled=YES&#xFF0C;&#x4E5F;&#x80FD;&#x5C4F;&#x5E55;&#x5E38;&#x4EAE;&#xFF0C;&#x64AD;&#x653E;&#x5B8C;&#x6210;&#x540E;&#x8FC7;&#x4E00;&#x5206;&#x949F;&#x5C31;&#x81EA;&#x52A8;&#x5173;&#x95ED;&#x5C4F;&#x5E55;&#x3002;&#x6709;&#x5174;&#x8DA3;&#x7684;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;</p>
+<h4 id="&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;"><a href="#&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;" class="headerlink" title="&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;"></a>&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;</h4><p>iPhone&#x7684;&#x9501;&#x5C4F;&#x76D1;&#x6D4B;&#x5206;&#x4E3A;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x76D1;&#x542C;&#xFF1A;&#x4E00;&#x79CD;&#x662F;&#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x7A0B;&#x5E8F;&#x5728;&#x540E;&#x53F0;&#x3002; &#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#xFF0C;&#x8FD9;&#x79CD;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x3002;&#x76F4;&#x63A5;&#x4F7F;&#x7528;Darwin&#x5C42;&#x7684;&#x901A;&#x77E5;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF1A;</p>
+<blockquote>
+<p>Darwin&#x662F;&#x7531;&#x82F9;&#x679C;&#x7535;&#x8111;&#x4E8E;2000&#x5E74;&#x6240;&#x91CA;&#x51FA;&#x7684;&#x4E00;&#x4E2A;&#x5F00;&#x653E;&#x539F;&#x59CB;&#x7801;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;Darwin &#x662F;MacOSX &#x64CD;&#x4F5C;&#x73AF;&#x5883;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6210;&#x4EFD;&#x3002;&#x82F9;&#x679C;&#x7535;&#x8111;&#x4E8E;2000&#x5E74;&#x628A;Darwin &#x91CA;&#x51FA;&#x7ED9;&#x5F00;&#x653E;&#x539F;&#x59CB;&#x7801;&#x793E;&#x7FA4;&#x3002;&#x73B0;&#x5728;&#x7684;Darwin&#x7686;&#x53EF;&#x4EE5;&#x5728;&#x82F9;&#x679C;&#x7535;&#x8111;&#x7684;PowerPC &#x67B6;&#x6784;&#x548C;X86 &#x67B6;&#x6784;&#x4E0B;&#x6267;&#x884C;&#xFF0C;&#x800C;&#x540E;&#x8005;&#x7684;&#x67B6;&#x6784;&#x53EA;&#x6709;&#x6709;&#x9650;&#x7684;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x652F;&#x63F4;&#x3002;</p>
+</blockquote>
+<pre><code>#import &lt;notify.h&gt;
+#define NotificationLock CFSTR(&quot;com.apple.springboard.lockcomplete&quot;)
+#define NotificationChange CFSTR(&quot;com.apple.springboard.lockstate&quot;)
+#define NotificationPwdUI CFSTR(&quot;com.apple.springboard.hasBlankedScreen&quot;)
+
+static void screenLockStateChanged(CFNotificationCenterRef center,void* observer,CFStringRef name,const void* object,CFDictionaryRef userInfo)
+{
+NSString* lockstate = (__bridge NSString*)name;
+if ([lockstate isEqualToString:(__bridge  NSString*)NotificationLock]) {
+    NSLog(@&quot;locked.&quot;);
+} else {
+    NSLog(@&quot;lock state changed.&quot;);
+}
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, NotificationLock, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, NotificationChange, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+return YES;
+}
+</code></pre><p><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/notify_register_check.3.html" target="_blank" rel="external">notify.h</a>&#x7684;&#x5177;&#x4F53;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x79FB;&#x6B65;&#x5F00;&#x53D1;&#x6587;&#x6863;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#x662F;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x7684;&#xFF0C;&#x5728;&#x540E;&#x53F0;&#x60C5;&#x51B5;&#x4E0B;&#x5C31;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x4E86;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x662F;&#x7A0B;&#x5E8F;&#x9000;&#x540E;&#x53F0;&#x540E;&#xFF0C;&#x8FD9;&#x65F6;&#x518D;&#x9501;&#x5C4F;&#x5C31;&#x6536;&#x4E0D;&#x5230;&#x4E0A;&#x9762;&#x7684;&#x90A3;&#x4E2A;&#x901A;&#x77E5;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;, &#x4EE5;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x4E00;&#x76F4;&#x6765;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x662F;&#x9501;&#x5C4F;&#x72B6;&#x6001;&#xFF0C;&#x4F1A;&#x6D88;&#x8017;&#x6027;&#x80FD;&#x5E76;&#x53EF;&#x80FD;&#x88AB;&#x82F9;&#x679C;&#x6302;&#x8D77;&#xFF0C;&#x9700;&#x8981;&#x5408;&#x7406;&#x8BBE;&#x7F6E;&#x5FAA;&#x73AF;&#x65F6;&#x95F4;&#x3002;</p>
+<pre><code>static void setScreenStateCb()
+{
+uint64_t locked;
+
+__block int token = 0;
+notify_register_dispatch(&quot;com.apple.springboard.lockstate&quot;,&amp;token,dispatch_get_main_queue(),^(int t){
+});
+notify_get_state(token, &amp;locked);
+NSLog(@&quot;%d&quot;,(int)locked);
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+while (YES) {
+    setScreenStateCb();
+    sleep(5); // &#x5FAA;&#x73AF;5s
+}
+}
+</code></pre><h4 id="UIApplication"><a href="#UIApplication" class="headerlink" title="UIApplication"></a>UIApplication</h4><p>&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;UIApplication&#x7684;IdleTimerDisabled&#x65B9;&#x6CD5;&#xFF0C;&#x4E0B;&#x9762;&#x5C31;&#x5927;&#x6982;&#x4E86;&#x89E3;&#x4E0B;UIApplication&#x5427;&#x3002;</p>
+<p>UIApplication&#xFF0C;&#x6BCF;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#xFF0C;&#x7528;[UIApplication sharedApplication]&#x6765;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x8FD9;&#x4E2A;&#x5355;&#x4F8B;&#x5B9E;&#x4F8B;&#x662F;&#x5728;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x65F6;&#x7531;main&#x51FD;&#x6570;&#x91CC;&#x9762;&#x7684;UIApplicationMain&#x65B9;&#x6CD5;&#x751F;&#x6210;&#xFF0C;&#x5B9E;&#x73B0;&#x7684;&#x662F;UIApplicationDelegate&#x7684;Protocol&#xFF0C;&#x4E5F;&#x5C31;&#x662F;AppDelegate&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x6BCF;&#x6B21;&#x901A;&#x8FC7;[UIApplication sharedApplication]&#x8C03;&#x7528;&#x7684;&#x5C31;&#x662F;&#x5B83;&#x3002;UIApplication&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;UIWindow&#x5BF9;&#x8C61;&#x5E8F;&#x5217;&#xFF0C;&#x7528;&#x6765;&#x5FEB;&#x901F;&#x6062;&#x590D;views&#x3002;</p>
+<p>UIApplication&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x7684;&#x4F5C;&#x7528;&#x5F88;&#x591A;&#xFF0C;&#x5927;&#x81F4;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code>&#x4E00;&#x3001;&#x8FDC;&#x7A0B;&#x63D0;&#x9192;&#xFF0C;&#x5C31;&#x662F;push notification&#x6CE8;&#x518C;&#xFF1B;
+&#x4E8C;&#x3001;&#x53EF;&#x4EE5;&#x8FDE;&#x63A5;&#x5230;UIUndoManager&#xFF1B;&#x5728;Cocoa&#x4E2D;&#x4F7F;&#x7528;NSUndoManager&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x5B8C;&#x6210;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x3002;NSUndoManager&#x4F1A;&#x8BB0;&#x5F55;&#x4E0B;&#x4FEE;&#x6539;&#x3001;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x7684;&#x6D88;&#x606F;&#x3002;&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#x4F7F;&#x7528;&#x4E24;&#x4E2A;NSInvocation&#x5BF9;&#x8C61;&#x6808;&#x3002;&#x5F53;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x63A7;&#x5236;&#x5668;&#x4F1A;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x8BE5;&#x64CD;&#x4F5C;&#x7684;&#x9006;&#x64CD;&#x4F5C;&#x7684;invocation&#x5230;Undo&#x6808;&#x4E2D;&#x3002;&#x5F53;&#x8FDB;&#x884C;Undo&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;Undo&#x64CD;&#x4F5C;&#x7684;&#x9006;&#x64CD;&#x4F5C;&#x4F1A;&#x500D;&#x6DFB;&#x52A0;&#x5230;Redo&#x6808;&#x4E2D;&#xFF0C;&#x5C31;&#x8FD9;&#x6837;&#x5229;&#x7528;Undo&#x548C;Redo&#x4E24;&#x4E2A;&#x5806;&#x6808;&#x5DE7;&#x5999;&#x7684;&#x5B9E;&#x73B0;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5806;&#x6808;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x90FD;&#x662F;NSInvocation&#x5B9E;&#x4F8B;&#x3002;
+&#x4E09;&#x3001;&#x68C0;&#x67E5;&#x80FD;&#x5426;&#x6253;&#x5F00;&#x67D0;&#x4E2A;URL&#xFF0C;&#x5E76;&#x4E14;&#x6253;&#x5F00;URL&#xFF1B;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x5E94;&#x7528;&#x7684;&#x81EA;&#x5B9A;&#x4E49;URL&#x529F;&#x80FD;&#xFF0C;&#x6765;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x4E86;&#x67D0;&#x4E2A;&#x5E94;&#x7528;&#x3002;&#x4F7F;&#x7528;&#x7684;&#x662F;[[UIApplication sharedApplication] canOpenURL:url]&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x8FD4;&#x56DE;YES&#xFF0C;&#x53EF;&#x6267;&#x884C;[[UIApplication sharedApplication] openURL:url]; 
+&#x56DB;&#x3001;&#x6CE8;&#x518C;Local Notification&#xFF1B;
+&#x4E94;&#x3001;&#x5728;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#x4EE5;&#x53CA;&#x4ECE;&#x540E;&#x53F0;&#x8F6C;&#x4E3A;&#x524D;&#x53F0;&#x65F6;&#x7684;&#x64CD;&#x4F5C;&#xFF1B;
+&#x516D;&#x3001;&#x9632;&#x6B62;&#x5C4F;&#x5E55;&#x7761;&#x7720;&#xFF1A;&#x5373;&#x4E0A;&#x9762;&#x7684;[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+&#x4E03;&#x3001;&#x624B;&#x52A8;&#x8C03;&#x6574;status bar&#x7684;&#x4F4D;&#x7F6E;&#x548C;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x8BBE;&#x7F6E;&#x4E3A;&#x7AD6;&#x5C4F;&#x3001;&#x6A2A;&#x5C4F;&#x7B49;&#xFF1B;
+&#x516B;&#x3001;&#x8BBE;&#x7F6E;badge number&#xFF0C;&#x5C31;&#x662F;&#x56FE;&#x6807;&#x53F3;&#x4E0A;&#x89D2;&#x7684;&#x6570;&#x5B57;&#xFF1B;
+&#x4E5D;&#x3001;&#x6BCF;&#x5F53;&#x5E94;&#x7528;&#x8054;&#x7F51;&#x65F6;&#xFF0C;&#x5728;&#x72B6;&#x6001;&#x680F;&#x4E0A;&#x4F1A;&#x663E;&#x793A;&#x8054;&#x7F51;&#x5C0F;&#x83CA;&#x82B1;&#x3002;UIApplication&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x662F;&#x5426;&#x51FA;&#x73B0;&#x3002;
+UIApplication *app = [UIApplication sharedApplication]; 
+app.networkActivityIndicatorVisible =!app.networkActivityIndicatorVisible;//&#x8F6C;&#x52A8; 
+app.networkActivityIndicatorVisible = app.networkActivityIndicatorVisible;//&#x4E0D;&#x8F6C;&#x52A8;
+</code></pre><p><strong>UIUndoManager&#x793A;&#x4F8B;</strong></p>
+<pre><code>- (void) one
+{
+position = position + 10;
+[[undoManager prepareWithInvocationTarget:self] two];
+[self showTheChangesToThePostion];
+}
+
+- (void) two
+{
+position = position - 10;
+[[undoManager prepareWithInvocationTarget:self] one];
+[self showTheChangesToThePostion];
+}
+</code></pre><p>prepareWithInvocationTarget:&#x65B9;&#x6CD5;&#x8BB0;&#x5F55;&#x4E86;target&#x5E76;&#x8FD4;&#x56DE;UndoManager&#xFF0C;&#x7136;&#x540E;UndoManager&#x91CD;&#x8F7D;&#x4E86;forwardInvocation&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x5C31;&#x5C06;two&#x65B9;&#x6CD5;&#x7684;Invocation&#x6DFB;&#x52A0;&#x5230;undo&#x6808;&#x4E2D;&#x4E86;&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e230b6aa68d11fa4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x89E3;&#x9501;"></p>
+
+            <div class="clearfix"></div>
+            <hr class="nogutter">
+        </div>
+
+
+        <nav class="pagination" role="pagination">
+
+
+<div class="ds-share flat" data-thread-key="2014/02/03/锁屏和解锁的时间机制/" data-title="锁屏和解锁的时间机制" data-images="https://avatars0.githubusercontent.com/u/10378248?v=3&s=460" data-content="锁屏和解锁的时间机制 是最近写的文章，希望能帮到您！" data-url="https://dangdangfeng.github.io/2014/02/03/锁屏和解锁的时间机制/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+ <br/>
+
+    
+    <a class="pull-left" href="/2014/03/03/优秀的iOS开发站点/" style="float: left;">
+        ← 优秀的iOS开发站点
+    </a>
+    
+    
+    <a class="pull-right" href="/2014/01/31/block和delegate相对论/">
+        block和delegate相对论 →
+    </a>
+    
+
+    
+</nav>
+
+
+
+        
+        <div class="duoshuo">
+
+
+<div class="ds-thread" data-thread-key="2014/02/03/锁屏和解锁的时间机制/" data-title="锁屏和解锁的时间机制" data-url="https://dangdangfeng.github.io/2014/02/03/锁屏和解锁的时间机制/"></div>
+
+
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"deter"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
+    </div>
+</section>
+
+
+      
+<!-- ============================ Footer =========================== -->
+
+<footer>
+    <div class="container">
+            <div class="copy">
+                <p>
+                    &copy; 2010<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By 吴白. All Rights Reserved.
+                </p>
+                <p>Theme By <a href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
+            </div>
+            <div class="social">
+                <ul>
+                    
+                    <li><a href="https://github.com/" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
+                    
+                    
+                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
+                    
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+</footer>
+
+<!-- ============================ END Footer =========================== -->
+      <!-- Load our scripts -->
+        
+<!-- Resizable 'on-demand' full-height hero -->
+<script type="text/javascript">
+    
+    var resizeHero = function () {
+        var hero = $(".cover,.heightblock"),
+            window1 = $(window);
+        hero.css({
+            "height": window1.height()
+        });
+    };
+    
+    resizeHero();
+    
+    $(window).resize(function () {
+        resizeHero();
+    });
+</script>
+<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
+<script src="/js/jquery.flexslider-min.js"></script><!-- Flexslider plugin -->
+<script src="/js/scripts.js"></script><!-- Theme scripts -->
+
+<!-- Initiate flexslider plugin -->
+<script type="text/javascript">
+    $(document).ready(function($) {
+      $('.flexslider').flexslider({
+        animation: "fade",
+        prevText: "",
+        nextText: "",
+        directionNav: true
+      });
+    });
+</script>
+
+</body>
+</html>
