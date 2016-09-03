@@ -214,22 +214,22 @@
         </div>
         <!--<div class="col-md-8 col-md-offset-2">-->
         <div class="col-md-offset-2">
-      		<p>当一个 __weak 类型的指针指向的对象被释放时，该指针会自动被置成nil，因此__weak关键字修饰的指针又被称为智能指针。那么这个功能是如何实现的呢？</p>
+      		<p>&#x5F53;&#x4E00;&#x4E2A; __weak &#x7C7B;&#x578B;&#x7684;&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x88AB;&#x91CA;&#x653E;&#x65F6;&#xFF0C;&#x8BE5;&#x6307;&#x9488;&#x4F1A;&#x81EA;&#x52A8;&#x88AB;&#x7F6E;&#x6210;nil&#xFF0C;&#x56E0;&#x6B64;__weak&#x5173;&#x952E;&#x5B57;&#x4FEE;&#x9970;&#x7684;&#x6307;&#x9488;&#x53C8;&#x88AB;&#x79F0;&#x4E3A;&#x667A;&#x80FD;&#x6307;&#x9488;&#x3002;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7684;&#x5462;&#xFF1F;</p>
 <pre><code>id __weak obj1 = obj; 
-</code></pre><p>会转化为</p>
+</code></pre><p>&#x4F1A;&#x8F6C;&#x5316;&#x4E3A;</p>
 <pre><code>id obj1;  
 objc_initWeak(&amp;obj1, obj);  
 objc_destoryWeak(&amp;obj1);  
-</code></pre><p>即编译器会通过objc_initWeak函数初始化__weak修饰的变量，当变量的作用域结束后会通过objc_destoryWeak函数释放该变量。objc_initWeak函数实际干的活是：</p>
+</code></pre><p>&#x5373;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x901A;&#x8FC7;objc_initWeak&#x51FD;&#x6570;&#x521D;&#x59CB;&#x5316;__weak&#x4FEE;&#x9970;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5F53;&#x53D8;&#x91CF;&#x7684;&#x4F5C;&#x7528;&#x57DF;&#x7ED3;&#x675F;&#x540E;&#x4F1A;&#x901A;&#x8FC7;objc_destoryWeak&#x51FD;&#x6570;&#x91CA;&#x653E;&#x8BE5;&#x53D8;&#x91CF;&#x3002;objc_initWeak&#x51FD;&#x6570;&#x5B9E;&#x9645;&#x5E72;&#x7684;&#x6D3B;&#x662F;&#xFF1A;</p>
 <pre><code>objc1 = 0;  
 objc_storeWeak(&amp;obj1, obj);  
-</code></pre><p>这里是先将指针objc1置成0，再调用objc_storeWeak函数使得obj1指向obj对象。<br>接下来的objc_destoryWeak函数的实际操作如下：</p>
+</code></pre><p>&#x8FD9;&#x91CC;&#x662F;&#x5148;&#x5C06;&#x6307;&#x9488;objc1&#x7F6E;&#x6210;0&#xFF0C;&#x518D;&#x8C03;&#x7528;objc_storeWeak&#x51FD;&#x6570;&#x4F7F;&#x5F97;obj1&#x6307;&#x5411;obj&#x5BF9;&#x8C61;&#x3002;<br>&#x63A5;&#x4E0B;&#x6765;&#x7684;objc_destoryWeak&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x9645;&#x64CD;&#x4F5C;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code>objc_storeWeak(&amp;obj1, 0); 
-</code></pre><p>也就是说，让obj1指针指向的内容变成空。</p>
-<h4 id="weak实现原理"><a href="#weak实现原理" class="headerlink" title="__weak实现原理"></a>__weak实现原理</h4><p>实际上，objc<em>storeWeak函数会把第二个参数的对象的地址作为key，并将第一个参数（\</em>_weak关键字修饰的指针的地址）作为值，注册到weak表中。如果第二个参数为0（说明对应的对象被释放了），则将weak表中将整个key-value键值对删除，这就是__weak关键字的核心思想！</p>
-<p>weak表和引用计数表类似，都是通过hash表实现的。如果使用weak表，将被释放的对象地址作为key去检索，就能很高效的获取对应的指向该对象的类型为__weak的指针变量的地址。同时很容易理解，一个对象可能有多个__weak指针指向，因此一个对象地址key可能对应多个值。</p>
-<p>在调用对象的release方法时，会在其中一步调用objc_clear_deallocating函数，该函数会执行以下操作：以当前对象的地址作为key，从weak表中获取对应的值—-指向该对象的__weak类型的指针变量；将取到的所有指针变量的值赋值为nil；从weak表中删除该key对应的整条记录。</p>
-<p>如果大量使用附有__weak修饰符的变量会消耗响应的CPU资源，因此，应该尽量少使用__weak修饰符。</p>
+</code></pre><p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x8BA9;obj1&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x5185;&#x5BB9;&#x53D8;&#x6210;&#x7A7A;&#x3002;</p>
+<h4 id="weak&#x5B9E;&#x73B0;&#x539F;&#x7406;"><a href="#weak&#x5B9E;&#x73B0;&#x539F;&#x7406;" class="headerlink" title="__weak&#x5B9E;&#x73B0;&#x539F;&#x7406;"></a>__weak&#x5B9E;&#x73B0;&#x539F;&#x7406;</h4><p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;objc<em>storeWeak&#x51FD;&#x6570;&#x4F1A;&#x628A;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x5730;&#x5740;&#x4F5C;&#x4E3A;key&#xFF0C;&#x5E76;&#x5C06;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF08;\</em>_weak&#x5173;&#x952E;&#x5B57;&#x4FEE;&#x9970;&#x7684;&#x6307;&#x9488;&#x7684;&#x5730;&#x5740;&#xFF09;&#x4F5C;&#x4E3A;&#x503C;&#xFF0C;&#x6CE8;&#x518C;&#x5230;weak&#x8868;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;0&#xFF08;&#x8BF4;&#x660E;&#x5BF9;&#x5E94;&#x7684;&#x5BF9;&#x8C61;&#x88AB;&#x91CA;&#x653E;&#x4E86;&#xFF09;&#xFF0C;&#x5219;&#x5C06;weak&#x8868;&#x4E2D;&#x5C06;&#x6574;&#x4E2A;key-value&#x952E;&#x503C;&#x5BF9;&#x5220;&#x9664;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;__weak&#x5173;&#x952E;&#x5B57;&#x7684;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#xFF01;</p>
+<p>weak&#x8868;&#x548C;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x8868;&#x7C7B;&#x4F3C;&#xFF0C;&#x90FD;&#x662F;&#x901A;&#x8FC7;hash&#x8868;&#x5B9E;&#x73B0;&#x7684;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;weak&#x8868;&#xFF0C;&#x5C06;&#x88AB;&#x91CA;&#x653E;&#x7684;&#x5BF9;&#x8C61;&#x5730;&#x5740;&#x4F5C;&#x4E3A;key&#x53BB;&#x68C0;&#x7D22;&#xFF0C;&#x5C31;&#x80FD;&#x5F88;&#x9AD8;&#x6548;&#x7684;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;&#x6307;&#x5411;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x578B;&#x4E3A;__weak&#x7684;&#x6307;&#x9488;&#x53D8;&#x91CF;&#x7684;&#x5730;&#x5740;&#x3002;&#x540C;&#x65F6;&#x5F88;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#xFF0C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x4E2A;__weak&#x6307;&#x9488;&#x6307;&#x5411;&#xFF0C;&#x56E0;&#x6B64;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5730;&#x5740;key&#x53EF;&#x80FD;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x503C;&#x3002;</p>
+<p>&#x5728;&#x8C03;&#x7528;&#x5BF9;&#x8C61;&#x7684;release&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x4F1A;&#x5728;&#x5176;&#x4E2D;&#x4E00;&#x6B65;&#x8C03;&#x7528;objc_clear_deallocating&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x4F1A;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x64CD;&#x4F5C;&#xFF1A;&#x4EE5;&#x5F53;&#x524D;&#x5BF9;&#x8C61;&#x7684;&#x5730;&#x5740;&#x4F5C;&#x4E3A;key&#xFF0C;&#x4ECE;weak&#x8868;&#x4E2D;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;&#x503C;&#x2014;-&#x6307;&#x5411;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;__weak&#x7C7B;&#x578B;&#x7684;&#x6307;&#x9488;&#x53D8;&#x91CF;&#xFF1B;&#x5C06;&#x53D6;&#x5230;&#x7684;&#x6240;&#x6709;&#x6307;&#x9488;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x8D4B;&#x503C;&#x4E3A;nil&#xFF1B;&#x4ECE;weak&#x8868;&#x4E2D;&#x5220;&#x9664;&#x8BE5;key&#x5BF9;&#x5E94;&#x7684;&#x6574;&#x6761;&#x8BB0;&#x5F55;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5927;&#x91CF;&#x4F7F;&#x7528;&#x9644;&#x6709;__weak&#x4FEE;&#x9970;&#x7B26;&#x7684;&#x53D8;&#x91CF;&#x4F1A;&#x6D88;&#x8017;&#x54CD;&#x5E94;&#x7684;CPU&#x8D44;&#x6E90;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5E94;&#x8BE5;&#x5C3D;&#x91CF;&#x5C11;&#x4F7F;&#x7528;__weak&#x4FEE;&#x9970;&#x7B26;&#x3002;</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

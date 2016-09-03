@@ -214,22 +214,22 @@
         </div>
         <!--<div class="col-md-8 col-md-offset-2">-->
         <div class="col-md-offset-2">
-      		<h4 id="UIImage-CGImage和CGImageRef释疑"><a href="#UIImage-CGImage和CGImageRef释疑" class="headerlink" title="UIImage,CGImage和CGImageRef释疑"></a>UIImage,CGImage和CGImageRef释疑</h4><p>UIImage虽然可以加载、显示各种格式的位图，甚至可以同时加载图片，接下来依次播放多张图片形成动画。但UIImage不能对图片进行缩放、旋转，不能”挖取”源图片的指定区域等，这些功能可借助Quartz 2D的CGImageRef来实现。UIImage与CGImageRef之间可以相互转换，CGImageRef并不是面向对象的API，也不是类，只是一个指针类型，Quartz 2D对CGImageRef的定义为：</p>
+      		<h4 id="UIImage-CGImage&#x548C;CGImageRef&#x91CA;&#x7591;"><a href="#UIImage-CGImage&#x548C;CGImageRef&#x91CA;&#x7591;" class="headerlink" title="UIImage,CGImage&#x548C;CGImageRef&#x91CA;&#x7591;"></a>UIImage,CGImage&#x548C;CGImageRef&#x91CA;&#x7591;</h4><p>UIImage&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x52A0;&#x8F7D;&#x3001;&#x663E;&#x793A;&#x5404;&#x79CD;&#x683C;&#x5F0F;&#x7684;&#x4F4D;&#x56FE;&#xFF0C;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x52A0;&#x8F7D;&#x56FE;&#x7247;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x4F9D;&#x6B21;&#x64AD;&#x653E;&#x591A;&#x5F20;&#x56FE;&#x7247;&#x5F62;&#x6210;&#x52A8;&#x753B;&#x3002;&#x4F46;UIImage&#x4E0D;&#x80FD;&#x5BF9;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x7F29;&#x653E;&#x3001;&#x65CB;&#x8F6C;&#xFF0C;&#x4E0D;&#x80FD;&#x201D;&#x6316;&#x53D6;&#x201D;&#x6E90;&#x56FE;&#x7247;&#x7684;&#x6307;&#x5B9A;&#x533A;&#x57DF;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#x53EF;&#x501F;&#x52A9;Quartz 2D&#x7684;CGImageRef&#x6765;&#x5B9E;&#x73B0;&#x3002;UIImage&#x4E0E;CGImageRef&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x76F8;&#x4E92;&#x8F6C;&#x6362;&#xFF0C;CGImageRef&#x5E76;&#x4E0D;&#x662F;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;API&#xFF0C;&#x4E5F;&#x4E0D;&#x662F;&#x7C7B;&#xFF0C;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x7C7B;&#x578B;&#xFF0C;Quartz 2D&#x5BF9;CGImageRef&#x7684;&#x5B9A;&#x4E49;&#x4E3A;&#xFF1A;</p>
 <pre><code>typedef struct CGImage *CGImageRef;
-</code></pre><p>CGImage和CGImageRef是用来重绘图形的类，它们在应用时是按照图像的像素矩阵来绘制图片的，它们可以用来处理bitmap。</p>
-<pre><code>//CGImageRef转换成UIImage
+</code></pre><p>CGImage&#x548C;CGImageRef&#x662F;&#x7528;&#x6765;&#x91CD;&#x7ED8;&#x56FE;&#x5F62;&#x7684;&#x7C7B;&#xFF0C;&#x5B83;&#x4EEC;&#x5728;&#x5E94;&#x7528;&#x65F6;&#x662F;&#x6309;&#x7167;&#x56FE;&#x50CF;&#x7684;&#x50CF;&#x7D20;&#x77E9;&#x9635;&#x6765;&#x7ED8;&#x5236;&#x56FE;&#x7247;&#x7684;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5904;&#x7406;bitmap&#x3002;</p>
+<pre><code>//CGImageRef&#x8F6C;&#x6362;&#x6210;UIImage
 CGContextRef context = UIGraphicsGetCurrentContext();
 CGImageRef ic = CGBitmapContextCreateImage(context);
 UIImage* image = [UIImage imageWithCGImage: ic];
 
-//UIImage转换成CGImageRef
+//UIImage&#x8F6C;&#x6362;&#x6210;CGImageRef
 UIImage *loadImage=[UIImage imageNamed:@&quot;c.png&quot;];
 CGImageRef cgimage=loadImage.CGImage;
-</code></pre><p>系统会维护一个CGContextRef的栈，而UIGraphicsGetCurrentContext()会取栈顶的CGContextRef，正确的做法是只在drawRect里调用UIGraphicsGetCurrentContext()，因为在drawRect之前，系统会往栈里面压入一个valid的CGContextRef，除非自己去维护一个CGContextRef，否则不应该在其他地方取CGContextRef。</p>
-<h4 id="UIColor，CGColor，CIColor区别和联系"><a href="#UIColor，CGColor，CIColor区别和联系" class="headerlink" title="UIColor，CGColor，CIColor区别和联系"></a>UIColor，CGColor，CIColor区别和联系</h4><p>UIColor是UIKit中存储颜色信息的一个重要的类，一个UIColor对象包含了颜色和透明度的值，它的颜色空间已经针对iOS进行了优化。UIColor包含了一些类方法用于创建一些最常见的颜色，如白色，黑色，红色，透明色等，这些颜色的色彩空间也不尽相同（白色和黑色是kCGColorSpaceDeviceGray，红色的色彩空间是kCGColorSpaceDeviceRGB）。UIColor有两个重要的属性：一个是CGColor，一个是CIColor(5.0之后添加)。</p>
-<p>CGColor主要用于CoreGaphics框架之中，CGColor其实是个结构体，而我们通常在使用的CGColor的时候使用的是它的引用类型CGColorRef。CGColor主要由CGColorSapce和Color Components两个部分组成，同样的颜色组成，如果颜色空间不同的话，解析出来的结果可能会有所不同。这就像我们在处理图片数据的时候，如果把RGBA格式当成BGRA格式处理的结果可想而知。在Quartz 2D中CGColor常用来设置context的填充颜色，设置透明度等。</p>
-<p>CIColor主要用于和Core Image框架中其他类交互，比如CIFilter，CIContext以及CIImage。CIColor中颜色值的范围是0.0-1.0之间，0.0代表该颜色分量为最小值，1.0代表改颜色分量为最大值。其中alpha值的范围也是0.0到1.0之间，0.0代表全透明，1.0代表完全不透明，CIColor的颜色分量通常都是没有乘以alpha值。可以使用initWithCGColor:函数，通过CGColor创建一个CIColor。其中传入的CGColorRef对象可以使任何任何颜色空间，但是Core Image框架会在传入filter kernel之前把所有的颜色空间转换到Core Image工作颜色空间。Core Image工作颜色空间使用三个颜色分量加上一个alpha分量组成(其实就是kCGColorSpaceDeviceRGB)。</p>
-<p>UIColor的CGColor总是有效的，不管它是通过CGColor，CIColor，还是其他方法创建的，CGColor属性都总是有效的；但是CIColor属性就不总是有效的，只有当UIColor是通过CIColor创建的时候，它才是有效的，否则访问该属性将会抛出异常。</p>
+</code></pre><p>&#x7CFB;&#x7EDF;&#x4F1A;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;CGContextRef&#x7684;&#x6808;&#xFF0C;&#x800C;UIGraphicsGetCurrentContext()&#x4F1A;&#x53D6;&#x6808;&#x9876;&#x7684;CGContextRef&#xFF0C;&#x6B63;&#x786E;&#x7684;&#x505A;&#x6CD5;&#x662F;&#x53EA;&#x5728;drawRect&#x91CC;&#x8C03;&#x7528;UIGraphicsGetCurrentContext()&#xFF0C;&#x56E0;&#x4E3A;&#x5728;drawRect&#x4E4B;&#x524D;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x5F80;&#x6808;&#x91CC;&#x9762;&#x538B;&#x5165;&#x4E00;&#x4E2A;valid&#x7684;CGContextRef&#xFF0C;&#x9664;&#x975E;&#x81EA;&#x5DF1;&#x53BB;&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;CGContextRef&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x5E94;&#x8BE5;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x53D6;CGContextRef&#x3002;</p>
+<h4 id="UIColor&#xFF0C;CGColor&#xFF0C;CIColor&#x533A;&#x522B;&#x548C;&#x8054;&#x7CFB;"><a href="#UIColor&#xFF0C;CGColor&#xFF0C;CIColor&#x533A;&#x522B;&#x548C;&#x8054;&#x7CFB;" class="headerlink" title="UIColor&#xFF0C;CGColor&#xFF0C;CIColor&#x533A;&#x522B;&#x548C;&#x8054;&#x7CFB;"></a>UIColor&#xFF0C;CGColor&#xFF0C;CIColor&#x533A;&#x522B;&#x548C;&#x8054;&#x7CFB;</h4><p>UIColor&#x662F;UIKit&#x4E2D;&#x5B58;&#x50A8;&#x989C;&#x8272;&#x4FE1;&#x606F;&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x7C7B;&#xFF0C;&#x4E00;&#x4E2A;UIColor&#x5BF9;&#x8C61;&#x5305;&#x542B;&#x4E86;&#x989C;&#x8272;&#x548C;&#x900F;&#x660E;&#x5EA6;&#x7684;&#x503C;&#xFF0C;&#x5B83;&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x5DF2;&#x7ECF;&#x9488;&#x5BF9;iOS&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#x3002;UIColor&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E9B;&#x7C7B;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x4E00;&#x4E9B;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x989C;&#x8272;&#xFF0C;&#x5982;&#x767D;&#x8272;&#xFF0C;&#x9ED1;&#x8272;&#xFF0C;&#x7EA2;&#x8272;&#xFF0C;&#x900F;&#x660E;&#x8272;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x989C;&#x8272;&#x7684;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x4E5F;&#x4E0D;&#x5C3D;&#x76F8;&#x540C;&#xFF08;&#x767D;&#x8272;&#x548C;&#x9ED1;&#x8272;&#x662F;kCGColorSpaceDeviceGray&#xFF0C;&#x7EA2;&#x8272;&#x7684;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x662F;kCGColorSpaceDeviceRGB&#xFF09;&#x3002;UIColor&#x6709;&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x5C5E;&#x6027;&#xFF1A;&#x4E00;&#x4E2A;&#x662F;CGColor&#xFF0C;&#x4E00;&#x4E2A;&#x662F;CIColor(5.0&#x4E4B;&#x540E;&#x6DFB;&#x52A0;)&#x3002;</p>
+<p>CGColor&#x4E3B;&#x8981;&#x7528;&#x4E8E;CoreGaphics&#x6846;&#x67B6;&#x4E4B;&#x4E2D;&#xFF0C;CGColor&#x5176;&#x5B9E;&#x662F;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x800C;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x5728;&#x4F7F;&#x7528;&#x7684;CGColor&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5B83;&#x7684;&#x5F15;&#x7528;&#x7C7B;&#x578B;CGColorRef&#x3002;CGColor&#x4E3B;&#x8981;&#x7531;CGColorSapce&#x548C;Color Components&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#x7EC4;&#x6210;&#xFF0C;&#x540C;&#x6837;&#x7684;&#x989C;&#x8272;&#x7EC4;&#x6210;&#xFF0C;&#x5982;&#x679C;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x4E0D;&#x540C;&#x7684;&#x8BDD;&#xFF0C;&#x89E3;&#x6790;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x6240;&#x4E0D;&#x540C;&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x5728;&#x5904;&#x7406;&#x56FE;&#x7247;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5982;&#x679C;&#x628A;RGBA&#x683C;&#x5F0F;&#x5F53;&#x6210;BGRA&#x683C;&#x5F0F;&#x5904;&#x7406;&#x7684;&#x7ED3;&#x679C;&#x53EF;&#x60F3;&#x800C;&#x77E5;&#x3002;&#x5728;Quartz 2D&#x4E2D;CGColor&#x5E38;&#x7528;&#x6765;&#x8BBE;&#x7F6E;context&#x7684;&#x586B;&#x5145;&#x989C;&#x8272;&#xFF0C;&#x8BBE;&#x7F6E;&#x900F;&#x660E;&#x5EA6;&#x7B49;&#x3002;</p>
+<p>CIColor&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x548C;Core Image&#x6846;&#x67B6;&#x4E2D;&#x5176;&#x4ED6;&#x7C7B;&#x4EA4;&#x4E92;&#xFF0C;&#x6BD4;&#x5982;CIFilter&#xFF0C;CIContext&#x4EE5;&#x53CA;CIImage&#x3002;CIColor&#x4E2D;&#x989C;&#x8272;&#x503C;&#x7684;&#x8303;&#x56F4;&#x662F;0.0-1.0&#x4E4B;&#x95F4;&#xFF0C;0.0&#x4EE3;&#x8868;&#x8BE5;&#x989C;&#x8272;&#x5206;&#x91CF;&#x4E3A;&#x6700;&#x5C0F;&#x503C;&#xFF0C;1.0&#x4EE3;&#x8868;&#x6539;&#x989C;&#x8272;&#x5206;&#x91CF;&#x4E3A;&#x6700;&#x5927;&#x503C;&#x3002;&#x5176;&#x4E2D;alpha&#x503C;&#x7684;&#x8303;&#x56F4;&#x4E5F;&#x662F;0.0&#x5230;1.0&#x4E4B;&#x95F4;&#xFF0C;0.0&#x4EE3;&#x8868;&#x5168;&#x900F;&#x660E;&#xFF0C;1.0&#x4EE3;&#x8868;&#x5B8C;&#x5168;&#x4E0D;&#x900F;&#x660E;&#xFF0C;CIColor&#x7684;&#x989C;&#x8272;&#x5206;&#x91CF;&#x901A;&#x5E38;&#x90FD;&#x662F;&#x6CA1;&#x6709;&#x4E58;&#x4EE5;alpha&#x503C;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;initWithCGColor:&#x51FD;&#x6570;&#xFF0C;&#x901A;&#x8FC7;CGColor&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CIColor&#x3002;&#x5176;&#x4E2D;&#x4F20;&#x5165;&#x7684;CGColorRef&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x4F7F;&#x4EFB;&#x4F55;&#x4EFB;&#x4F55;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#xFF0C;&#x4F46;&#x662F;Core Image&#x6846;&#x67B6;&#x4F1A;&#x5728;&#x4F20;&#x5165;filter kernel&#x4E4B;&#x524D;&#x628A;&#x6240;&#x6709;&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#x5230;Core Image&#x5DE5;&#x4F5C;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x3002;Core Image&#x5DE5;&#x4F5C;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x4F7F;&#x7528;&#x4E09;&#x4E2A;&#x989C;&#x8272;&#x5206;&#x91CF;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;alpha&#x5206;&#x91CF;&#x7EC4;&#x6210;(&#x5176;&#x5B9E;&#x5C31;&#x662F;kCGColorSpaceDeviceRGB)&#x3002;</p>
+<p>UIColor&#x7684;CGColor&#x603B;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x4E0D;&#x7BA1;&#x5B83;&#x662F;&#x901A;&#x8FC7;CGColor&#xFF0C;CIColor&#xFF0C;&#x8FD8;&#x662F;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x7684;&#xFF0C;CGColor&#x5C5E;&#x6027;&#x90FD;&#x603B;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF1B;&#x4F46;&#x662F;CIColor&#x5C5E;&#x6027;&#x5C31;&#x4E0D;&#x603B;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x53EA;&#x6709;&#x5F53;UIColor&#x662F;&#x901A;&#x8FC7;CIColor&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x624D;&#x662F;&#x6709;&#x6548;&#x7684;&#xFF0C;&#x5426;&#x5219;&#x8BBF;&#x95EE;&#x8BE5;&#x5C5E;&#x6027;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
 <pre><code>// test init uicolor with CGColor
 UIColor *color = [UIColor colorWithCGColor:[UIColor whiteColor].CGColor];
 
@@ -239,7 +239,7 @@ NSLog(@&quot;CGColor from UIColor %@&quot;, color.CGColor);
 // don&apos;t use CIColor property 
 // This property throws an exception if the color object was not initialized with a Core Image color. 
 NSLog(@&quot;CIColor from UIColor %@&quot;, color.CIColor);   // crush
-</code></pre><p>当UIColor使用CGColor初始化的时候，所有CGColorRef包含的信息，都会被原封不动的保留，其中就包括Color space，而且通过下面的小例子我们还可以看到如果使用CGColor初始化UIColor的时候，UIColor其实是直接保留了一份这个CGColorRef对象。</p>
+</code></pre><p>&#x5F53;UIColor&#x4F7F;&#x7528;CGColor&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6240;&#x6709;CGColorRef&#x5305;&#x542B;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x90FD;&#x4F1A;&#x88AB;&#x539F;&#x5C01;&#x4E0D;&#x52A8;&#x7684;&#x4FDD;&#x7559;&#xFF0C;&#x5176;&#x4E2D;&#x5C31;&#x5305;&#x62EC;Color space&#xFF0C;&#x800C;&#x4E14;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x5C0F;&#x4F8B;&#x5B50;&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5982;&#x679C;&#x4F7F;&#x7528;CGColor&#x521D;&#x59CB;&#x5316;UIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;UIColor&#x5176;&#x5B9E;&#x662F;&#x76F4;&#x63A5;&#x4FDD;&#x7559;&#x4E86;&#x4E00;&#x4EFD;&#x8FD9;&#x4E2A;CGColorRef&#x5BF9;&#x8C61;&#x3002;</p>
 <pre><code>// test kCGColorSpaceDeviceCMYK
 CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
 CGFloat cmykValue[] = {1, 1, 0, 0, 1};      // blue
@@ -250,8 +250,8 @@ NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
 // color with CGColor, uicolor will just retain it
 UIColor *color = [UIColor colorWithCGColor:colorCMYK];
 NSLog(@&quot;CGColor from UIColor: %@&quot;, color.CGColor);
-</code></pre><p>当使用CIColor来初始化一个UIColor的时候，再去访问UIColor的CGColor属性的时候，我们会发现<strong>CGColor的color Space和设置CIColor的color space的是不完全一样的</strong>，在这个过程中CIColor会为我们做一个转换。使用kCGColorSpaceDeviceGray，kCGColorSpaceDeviceRGB，kCGColorSpaceDeviceCMYK三种颜色空间来初始化一个CIColor的时候，再去使用该CIColor去初始化一个UIColor，然后在去访问其CIColor属，CGColor属性，查看颜色空间并打印颜色信息。</p>
-<p>1) 使用kCGColorSpaceDeviceGray初始化CIColor</p>
+</code></pre><p>&#x5F53;&#x4F7F;&#x7528;CIColor&#x6765;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;UIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x518D;&#x53BB;&#x8BBF;&#x95EE;UIColor&#x7684;CGColor&#x5C5E;&#x6027;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x53D1;&#x73B0;<strong>CGColor&#x7684;color Space&#x548C;&#x8BBE;&#x7F6E;CIColor&#x7684;color space&#x7684;&#x662F;&#x4E0D;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x7684;</strong>&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;CIColor&#x4F1A;&#x4E3A;&#x6211;&#x4EEC;&#x505A;&#x4E00;&#x4E2A;&#x8F6C;&#x6362;&#x3002;&#x4F7F;&#x7528;kCGColorSpaceDeviceGray&#xFF0C;kCGColorSpaceDeviceRGB&#xFF0C;kCGColorSpaceDeviceCMYK&#x4E09;&#x79CD;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x6765;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;CIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x518D;&#x53BB;&#x4F7F;&#x7528;&#x8BE5;CIColor&#x53BB;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;UIColor&#xFF0C;&#x7136;&#x540E;&#x5728;&#x53BB;&#x8BBF;&#x95EE;&#x5176;CIColor&#x5C5E;&#xFF0C;CGColor&#x5C5E;&#x6027;&#xFF0C;&#x67E5;&#x770B;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x5E76;&#x6253;&#x5370;&#x989C;&#x8272;&#x4FE1;&#x606F;&#x3002;</p>
+<p>1) &#x4F7F;&#x7528;kCGColorSpaceDeviceGray&#x521D;&#x59CB;&#x5316;CIColor</p>
 <pre><code>// test kCGColorSpaceDeviceGray
 NSLog(@&quot;CGColor white color:%@&quot;, [UIColor whiteColor].CGColor);
 
@@ -268,8 +268,8 @@ NSLog(@&quot;color %@&quot;, color);
 NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
 NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
 NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
-</code></pre><p>通过运行程序，我们看出来，如果使用一个kCGColorSpaceDeviceGray的颜色空间的CGColor来初始化CIColor的时候，我们可以看到CIColor的色彩空间一直是kCGColorSpaceDeviceGray，通过访问UIColor的CIColor属性，我们可以看到其颜色空间仍然是kCGColorSpaceDeviceGray，但是当访问UIColor的CGColor属性的时候，通过打印可以发现其色彩空间已经转变成了kCGColorSpaceDeviceRGB空间了，而颜色值也正确的从原来的颜色空间转换到了新的颜色空间。</p>
-<p>2) 使用kCGColorSpaceDeviceRGB初始化CIColor</p>
+</code></pre><p>&#x901A;&#x8FC7;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x51FA;&#x6765;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;kCGColorSpaceDeviceGray&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x7684;CGColor&#x6765;&#x521D;&#x59CB;&#x5316;CIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;CIColor&#x7684;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x4E00;&#x76F4;&#x662F;kCGColorSpaceDeviceGray&#xFF0C;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;UIColor&#x7684;CIColor&#x5C5E;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5176;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x4ECD;&#x7136;&#x662F;kCGColorSpaceDeviceGray&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x8BBF;&#x95EE;UIColor&#x7684;CGColor&#x5C5E;&#x6027;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x901A;&#x8FC7;&#x6253;&#x5370;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x5176;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x5DF2;&#x7ECF;&#x8F6C;&#x53D8;&#x6210;&#x4E86;kCGColorSpaceDeviceRGB&#x7A7A;&#x95F4;&#x4E86;&#xFF0C;&#x800C;&#x989C;&#x8272;&#x503C;&#x4E5F;&#x6B63;&#x786E;&#x7684;&#x4ECE;&#x539F;&#x6765;&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x8F6C;&#x6362;&#x5230;&#x4E86;&#x65B0;&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>2) &#x4F7F;&#x7528;kCGColorSpaceDeviceRGB&#x521D;&#x59CB;&#x5316;CIColor</p>
 <pre><code>//test kCGColorSpaceDeviceRGB
 NSLog(@&quot;CGColor red color:%@&quot;, [UIColor redColor].CGColor);
 
@@ -283,8 +283,8 @@ NSLog(@&quot;color %@&quot;, color);
 NSLog(@&quot;cicolor from UIColor: %@&quot;, color.CIColor);
 NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
 NSLog(@&quot;color&apos;s CGColor: %@&quot;, color.CGColor);
-</code></pre><p>整个过程中CIColor，以及通过UIColor的CGColor和CIColor属性访问到的值，打印出来我们可以发现它们都是kCGColorSpaceDeviceRGB空间的。</p>
-<p>3) 使用kCGColorSpaceDeviceCMYK初始化CIColor</p>
+</code></pre><p>&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;CIColor&#xFF0C;&#x4EE5;&#x53CA;&#x901A;&#x8FC7;UIColor&#x7684;CGColor&#x548C;CIColor&#x5C5E;&#x6027;&#x8BBF;&#x95EE;&#x5230;&#x7684;&#x503C;&#xFF0C;&#x6253;&#x5370;&#x51FA;&#x6765;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x5B83;&#x4EEC;&#x90FD;&#x662F;kCGColorSpaceDeviceRGB&#x7A7A;&#x95F4;&#x7684;&#x3002;</p>
+<p>3) &#x4F7F;&#x7528;kCGColorSpaceDeviceCMYK&#x521D;&#x59CB;&#x5316;CIColor</p>
 <pre><code>// test kCGColorSpaceDeviceCMYK
 CGColorSpaceRef cmykSpace = CGColorSpaceCreateDeviceCMYK();
 NSLog(@&quot;Components number: %zu&quot;, CGColorSpaceGetNumberOfComponents(cmykSpace));
@@ -294,7 +294,7 @@ CGColorSpaceRelease(cmykSpace);
 NSLog(@&quot;colorCMYK: %@&quot;, colorCMYK);
 
 ciColor = [CIColor colorWithCGColor:colorCMYK];
-NSLog(@&quot;cicolor: %@&quot;, ciColor);     // in fact，the color value of CIColor has converted to RGB Colorspace
+NSLog(@&quot;cicolor: %@&quot;, ciColor);     // in fact&#xFF0C;the color value of CIColor has converted to RGB Colorspace
 NSLog(@&quot;cicolor colorspace: %@&quot;, ciColor.colorSpace);
 
 color = [UIColor colorWithCIColor:ciColor];
@@ -305,16 +305,16 @@ NSLog(@&quot;cicolor&apos;s colorspace: %@&quot;, color.CIColor.colorSpace);
 
 // when UIColor init with CIColor, UIColor&apos;s CGColor will convert other colorspace to kCGColorSpaceDeviceRGB
 NSLog(@&quot;cgcolor from UIColor: %@&quot;, color.CGColor);
-</code></pre><p>当我们用一个CMYK颜色空间的CGColor来初始化CIColor的时候，CIColor的颜色空间依然是CMYK，但是颜色值已经转换成RGB的颜色值。当使用该CIColor创建一个UIColor的时候，我们再通过CIColor和CGColor属性打印信息的时候，我们会发现CIColor的色彩空间依然是CMYK，但是CGColor打印所得到的信息说明它已经被转换成RGB空间了。</p>
-<p><strong>关于创建一个CGColor</strong><br>最常用的函数是CGColorCreate，该函数有两个参数：</p>
-<p>1) colorspace，指定CGColor对应的颜色空间，Quartz就会retain该对象，因此调用完之后你就可以安全的释放该对象。<br>2) components，一个CGFloat的数组，该数组的元素个数是指定色彩空间包含的颜色分量数n，加上对应的alpha值。　</p>
-<p>该函数该返回一个新创建的CGColorRef，当我们不再使用该对象的时候使用CGColorRelease函数释放该对象。</p>
-<p><strong>获取CGColor的数据</strong><br>在我们创建的时候传入两个重要的参数进去，当我们获取到了CGColorRef以后当然就可以拿到对应的ColorSpace以及Components。</p>
-<p>1) 获取ColorSpace<br>通过CGColorGetColorSpace函数我们可以获取到当前CGColorRef对应的ColorSpace，该函数只接受一个参数就是你要获取ColorSpace的CGColorRef。</p>
+</code></pre><p>&#x5F53;&#x6211;&#x4EEC;&#x7528;&#x4E00;&#x4E2A;CMYK&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x7684;CGColor&#x6765;&#x521D;&#x59CB;&#x5316;CIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;CIColor&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x4F9D;&#x7136;&#x662F;CMYK&#xFF0C;&#x4F46;&#x662F;&#x989C;&#x8272;&#x503C;&#x5DF2;&#x7ECF;&#x8F6C;&#x6362;&#x6210;RGB&#x7684;&#x989C;&#x8272;&#x503C;&#x3002;&#x5F53;&#x4F7F;&#x7528;&#x8BE5;CIColor&#x521B;&#x5EFA;&#x4E00;&#x4E2A;UIColor&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x901A;&#x8FC7;CIColor&#x548C;CGColor&#x5C5E;&#x6027;&#x6253;&#x5370;&#x4FE1;&#x606F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x53D1;&#x73B0;CIColor&#x7684;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x4F9D;&#x7136;&#x662F;CMYK&#xFF0C;&#x4F46;&#x662F;CGColor&#x6253;&#x5370;&#x6240;&#x5F97;&#x5230;&#x7684;&#x4FE1;&#x606F;&#x8BF4;&#x660E;&#x5B83;&#x5DF2;&#x7ECF;&#x88AB;&#x8F6C;&#x6362;&#x6210;RGB&#x7A7A;&#x95F4;&#x4E86;&#x3002;</p>
+<p><strong>&#x5173;&#x4E8E;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CGColor</strong><br>&#x6700;&#x5E38;&#x7528;&#x7684;&#x51FD;&#x6570;&#x662F;CGColorCreate&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x6709;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;</p>
+<p>1) colorspace&#xFF0C;&#x6307;&#x5B9A;CGColor&#x5BF9;&#x5E94;&#x7684;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#xFF0C;Quartz&#x5C31;&#x4F1A;retain&#x8BE5;&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x6B64;&#x8C03;&#x7528;&#x5B8C;&#x4E4B;&#x540E;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x5B89;&#x5168;&#x7684;&#x91CA;&#x653E;&#x8BE5;&#x5BF9;&#x8C61;&#x3002;<br>2) components&#xFF0C;&#x4E00;&#x4E2A;CGFloat&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x8BE5;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x4E2A;&#x6570;&#x662F;&#x6307;&#x5B9A;&#x8272;&#x5F69;&#x7A7A;&#x95F4;&#x5305;&#x542B;&#x7684;&#x989C;&#x8272;&#x5206;&#x91CF;&#x6570;n&#xFF0C;&#x52A0;&#x4E0A;&#x5BF9;&#x5E94;&#x7684;alpha&#x503C;&#x3002;&#x3000;</p>
+<p>&#x8BE5;&#x51FD;&#x6570;&#x8BE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x521B;&#x5EFA;&#x7684;CGColorRef&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x4E0D;&#x518D;&#x4F7F;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;CGColorRelease&#x51FD;&#x6570;&#x91CA;&#x653E;&#x8BE5;&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>&#x83B7;&#x53D6;CGColor&#x7684;&#x6570;&#x636E;</strong><br>&#x5728;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#x4F20;&#x5165;&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x53C2;&#x6570;&#x8FDB;&#x53BB;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x83B7;&#x53D6;&#x5230;&#x4E86;CGColorRef&#x4EE5;&#x540E;&#x5F53;&#x7136;&#x5C31;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x5BF9;&#x5E94;&#x7684;ColorSpace&#x4EE5;&#x53CA;Components&#x3002;</p>
+<p>1) &#x83B7;&#x53D6;ColorSpace<br>&#x901A;&#x8FC7;CGColorGetColorSpace&#x51FD;&#x6570;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5230;&#x5F53;&#x524D;CGColorRef&#x5BF9;&#x5E94;&#x7684;ColorSpace&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x53EA;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5C31;&#x662F;&#x4F60;&#x8981;&#x83B7;&#x53D6;ColorSpace&#x7684;CGColorRef&#x3002;</p>
 <pre><code>CGColorRef cgColor = [UIColor redColor].CGColor;
 CGColorSpaceRef colorSpace = CGColorGetColorSpace(cgColor);
 NSLog(@&quot;color space: %@&quot;, colorSpace);
-</code></pre><p>2) 获取Color Components<br>要获取到CGColorRef对应的颜色值，我们需要用到CGColorGetNumberOfComponents和CGColorGetComponents两个函数。我们先来看看两个函数的函数原型：</p>
+</code></pre><p>2) &#x83B7;&#x53D6;Color Components<br>&#x8981;&#x83B7;&#x53D6;&#x5230;CGColorRef&#x5BF9;&#x5E94;&#x7684;&#x989C;&#x8272;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x5230;CGColorGetNumberOfComponents&#x548C;CGColorGetComponents&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x770B;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x51FD;&#x6570;&#x539F;&#x578B;&#xFF1A;</p>
 <pre><code>size_t CGColorGetNumberOfComponents (
 CGColorRef color
 );
@@ -322,13 +322,13 @@ CGColorRef color
 const CGFloat * CGColorGetComponents (
 CGColorRef color
 );
-</code></pre><p>第一个函数是获得CGColorRef的中包含的颜色组成部分的个数，第二个函数就是获取实际的颜色组成部分的数组。</p>
+</code></pre><p>&#x7B2C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x83B7;&#x5F97;CGColorRef&#x7684;&#x4E2D;&#x5305;&#x542B;&#x7684;&#x989C;&#x8272;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x7684;&#x4E2A;&#x6570;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x83B7;&#x53D6;&#x5B9E;&#x9645;&#x7684;&#x989C;&#x8272;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x7684;&#x6570;&#x7EC4;&#x3002;</p>
 <pre><code>NSUInteger num = CGColorGetNumberOfComponents(cgColor);
 const CGFloat *colorComponents = CGColorGetComponents(cgColor);
 for (int i = 0; i &lt; num; ++i) {
 NSLog(@&quot;color components %d: %f&quot;, i, colorComponents[i]);
 }
-</code></pre><p><strong>判断两个颜色是否相等</strong><br>不管UIColor使用CIColor，CGColor还是其他方式初始化的，其CGColor属性都是可用的。CoreGraphics中提供一个方法可以判断两个CGColor是否相等，因此我们可以通过判断两个UIColor是否相等。</p>
+</code></pre><p><strong>&#x5224;&#x65AD;&#x4E24;&#x4E2A;&#x989C;&#x8272;&#x662F;&#x5426;&#x76F8;&#x7B49;</strong><br>&#x4E0D;&#x7BA1;UIColor&#x4F7F;&#x7528;CIColor&#xFF0C;CGColor&#x8FD8;&#x662F;&#x5176;&#x4ED6;&#x65B9;&#x5F0F;&#x521D;&#x59CB;&#x5316;&#x7684;&#xFF0C;&#x5176;CGColor&#x5C5E;&#x6027;&#x90FD;&#x662F;&#x53EF;&#x7528;&#x7684;&#x3002;CoreGraphics&#x4E2D;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5224;&#x65AD;&#x4E24;&#x4E2A;CGColor&#x662F;&#x5426;&#x76F8;&#x7B49;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5224;&#x65AD;&#x4E24;&#x4E2A;UIColor&#x662F;&#x5426;&#x76F8;&#x7B49;&#x3002;</p>
 <pre><code>// judge two CGColor is equal
 if (CGColorEqualToColor([UIColor whiteColor].CGColor, [UIColor colorWithRed:1 green:1 blue:1 alpha:1].CGColor)) {
 NSLog(@&quot;The two CGColor is equal!&quot;);
@@ -343,7 +343,7 @@ NSLog(@&quot;The two CGColor is equal!&quot;);
 else {
 NSLog(@&quot;The two CGColor is not equal!&quot;);
 }
-</code></pre><p>例子中第一部分是判断两个白色的UIColor是否相等，虽然都是白色，但是颜色空间是不一样的。例子的第二部分简单的创建了两个RGB空间的UIColor，运行程序可以看出，这两种颜色是相同的。</p>
+</code></pre><p>&#x4F8B;&#x5B50;&#x4E2D;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x662F;&#x5224;&#x65AD;&#x4E24;&#x4E2A;&#x767D;&#x8272;&#x7684;UIColor&#x662F;&#x5426;&#x76F8;&#x7B49;&#xFF0C;&#x867D;&#x7136;&#x90FD;&#x662F;&#x767D;&#x8272;&#xFF0C;&#x4F46;&#x662F;&#x989C;&#x8272;&#x7A7A;&#x95F4;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x3002;&#x4F8B;&#x5B50;&#x7684;&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x7B80;&#x5355;&#x7684;&#x521B;&#x5EFA;&#x4E86;&#x4E24;&#x4E2A;RGB&#x7A7A;&#x95F4;&#x7684;UIColor&#xFF0C;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x8FD9;&#x4E24;&#x79CD;&#x989C;&#x8272;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1170656-f66427dbc02dea3c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
             <div class="clearfix"></div>

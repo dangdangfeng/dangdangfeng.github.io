@@ -214,15 +214,15 @@
         </div>
         <!--<div class="col-md-8 col-md-offset-2">-->
         <div class="col-md-offset-2">
-      		<h4 id="idleTimer"><a href="#idleTimer" class="headerlink" title="idleTimer"></a>idleTimer</h4><p>idleTimer 是iOS内置的时间监测机制，当在一段时间内未操作即进入锁屏状态。但有些应用程序是不需要锁住屏幕的，比如游戏，视频这类应用。 可以通过设置UIApplication的idleTimerDisabled属性来指定iOS是否锁屏。 </p>
-<pre><code>// 禁用休闲时钟 
+      		<h4 id="idleTimer"><a href="#idleTimer" class="headerlink" title="idleTimer"></a>idleTimer</h4><p>idleTimer &#x662F;iOS&#x5185;&#x7F6E;&#x7684;&#x65F6;&#x95F4;&#x76D1;&#x6D4B;&#x673A;&#x5236;&#xFF0C;&#x5F53;&#x5728;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x672A;&#x64CD;&#x4F5C;&#x5373;&#x8FDB;&#x5165;&#x9501;&#x5C4F;&#x72B6;&#x6001;&#x3002;&#x4F46;&#x6709;&#x4E9B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x9501;&#x4F4F;&#x5C4F;&#x5E55;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x6E38;&#x620F;&#xFF0C;&#x89C6;&#x9891;&#x8FD9;&#x7C7B;&#x5E94;&#x7528;&#x3002; &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;UIApplication&#x7684;idleTimerDisabled&#x5C5E;&#x6027;&#x6765;&#x6307;&#x5B9A;iOS&#x662F;&#x5426;&#x9501;&#x5C4F;&#x3002; </p>
+<pre><code>// &#x7981;&#x7528;&#x4F11;&#x95F2;&#x65F6;&#x949F; 
 [[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
-</code></pre><p>也可以使用这种语法 </p>
+</code></pre><p>&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5; </p>
 <pre><code>[UIApplication sharedApplication].idleTimerDisabled = YES;
-</code></pre><p>但是，这个命令只能禁用自动锁屏，如果点击了锁屏按钮，仍然会进入锁屏的。有一点例外的是，AVPlayer不用设置idleTimerDisabled=YES，也能屏幕常亮，播放完成后过一分钟就自动关闭屏幕。有兴趣的可以自己尝试一下。</p>
-<h4 id="锁屏和解锁通知"><a href="#锁屏和解锁通知" class="headerlink" title="锁屏和解锁通知"></a>锁屏和解锁通知</h4><p>iPhone的锁屏监测分为两种方式监听：一种是程序在前台，另一种程序在后台。 程序在前台，这种比较简单。直接使用Darwin层的通知就可以了：</p>
+</code></pre><p>&#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x53EA;&#x80FD;&#x7981;&#x7528;&#x81EA;&#x52A8;&#x9501;&#x5C4F;&#xFF0C;&#x5982;&#x679C;&#x70B9;&#x51FB;&#x4E86;&#x9501;&#x5C4F;&#x6309;&#x94AE;&#xFF0C;&#x4ECD;&#x7136;&#x4F1A;&#x8FDB;&#x5165;&#x9501;&#x5C4F;&#x7684;&#x3002;&#x6709;&#x4E00;&#x70B9;&#x4F8B;&#x5916;&#x7684;&#x662F;&#xFF0C;AVPlayer&#x4E0D;&#x7528;&#x8BBE;&#x7F6E;idleTimerDisabled=YES&#xFF0C;&#x4E5F;&#x80FD;&#x5C4F;&#x5E55;&#x5E38;&#x4EAE;&#xFF0C;&#x64AD;&#x653E;&#x5B8C;&#x6210;&#x540E;&#x8FC7;&#x4E00;&#x5206;&#x949F;&#x5C31;&#x81EA;&#x52A8;&#x5173;&#x95ED;&#x5C4F;&#x5E55;&#x3002;&#x6709;&#x5174;&#x8DA3;&#x7684;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x3002;</p>
+<h4 id="&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;"><a href="#&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;" class="headerlink" title="&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;"></a>&#x9501;&#x5C4F;&#x548C;&#x89E3;&#x9501;&#x901A;&#x77E5;</h4><p>iPhone&#x7684;&#x9501;&#x5C4F;&#x76D1;&#x6D4B;&#x5206;&#x4E3A;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x76D1;&#x542C;&#xFF1A;&#x4E00;&#x79CD;&#x662F;&#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x7A0B;&#x5E8F;&#x5728;&#x540E;&#x53F0;&#x3002; &#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#xFF0C;&#x8FD9;&#x79CD;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x3002;&#x76F4;&#x63A5;&#x4F7F;&#x7528;Darwin&#x5C42;&#x7684;&#x901A;&#x77E5;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF1A;</p>
 <blockquote>
-<p>Darwin是由苹果电脑于2000年所释出的一个开放原始码操作系统。Darwin 是MacOSX 操作环境的操作系统成份。苹果电脑于2000年把Darwin 释出给开放原始码社群。现在的Darwin皆可以在苹果电脑的PowerPC 架构和X86 架构下执行，而后者的架构只有有限的驱动程序支援。</p>
+<p>Darwin&#x662F;&#x7531;&#x82F9;&#x679C;&#x7535;&#x8111;&#x4E8E;2000&#x5E74;&#x6240;&#x91CA;&#x51FA;&#x7684;&#x4E00;&#x4E2A;&#x5F00;&#x653E;&#x539F;&#x59CB;&#x7801;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;Darwin &#x662F;MacOSX &#x64CD;&#x4F5C;&#x73AF;&#x5883;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6210;&#x4EFD;&#x3002;&#x82F9;&#x679C;&#x7535;&#x8111;&#x4E8E;2000&#x5E74;&#x628A;Darwin &#x91CA;&#x51FA;&#x7ED9;&#x5F00;&#x653E;&#x539F;&#x59CB;&#x7801;&#x793E;&#x7FA4;&#x3002;&#x73B0;&#x5728;&#x7684;Darwin&#x7686;&#x53EF;&#x4EE5;&#x5728;&#x82F9;&#x679C;&#x7535;&#x8111;&#x7684;PowerPC &#x67B6;&#x6784;&#x548C;X86 &#x67B6;&#x6784;&#x4E0B;&#x6267;&#x884C;&#xFF0C;&#x800C;&#x540E;&#x8005;&#x7684;&#x67B6;&#x6784;&#x53EA;&#x6709;&#x6709;&#x9650;&#x7684;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x652F;&#x63F4;&#x3002;</p>
 </blockquote>
 <pre><code>#import &lt;notify.h&gt;
 #define NotificationLock CFSTR(&quot;com.apple.springboard.lockcomplete&quot;)
@@ -245,8 +245,8 @@ CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NUL
 CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, screenLockStateChanged, NotificationChange, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 return YES;
 }
-</code></pre><p><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/notify_register_check.3.html" target="_blank" rel="external">notify.h</a>的具体内容可以移步开发文档。这种方法，程序在前台是可以拿到的，在后台情况下就无能为力了。</p>
-<p>第二种是程序退后台后，这时再锁屏就收不到上面的那个通知了，需要另外一种方式, 以循环的方式一直来检测是否是锁屏状态，会消耗性能并可能被苹果挂起，需要合理设置循环时间。</p>
+</code></pre><p><a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/notify_register_check.3.html" target="_blank" rel="external">notify.h</a>&#x7684;&#x5177;&#x4F53;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x79FB;&#x6B65;&#x5F00;&#x53D1;&#x6587;&#x6863;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x7A0B;&#x5E8F;&#x5728;&#x524D;&#x53F0;&#x662F;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x7684;&#xFF0C;&#x5728;&#x540E;&#x53F0;&#x60C5;&#x51B5;&#x4E0B;&#x5C31;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x4E86;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x662F;&#x7A0B;&#x5E8F;&#x9000;&#x540E;&#x53F0;&#x540E;&#xFF0C;&#x8FD9;&#x65F6;&#x518D;&#x9501;&#x5C4F;&#x5C31;&#x6536;&#x4E0D;&#x5230;&#x4E0A;&#x9762;&#x7684;&#x90A3;&#x4E2A;&#x901A;&#x77E5;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;, &#x4EE5;&#x5FAA;&#x73AF;&#x7684;&#x65B9;&#x5F0F;&#x4E00;&#x76F4;&#x6765;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x662F;&#x9501;&#x5C4F;&#x72B6;&#x6001;&#xFF0C;&#x4F1A;&#x6D88;&#x8017;&#x6027;&#x80FD;&#x5E76;&#x53EF;&#x80FD;&#x88AB;&#x82F9;&#x679C;&#x6302;&#x8D77;&#xFF0C;&#x9700;&#x8981;&#x5408;&#x7406;&#x8BBE;&#x7F6E;&#x5FAA;&#x73AF;&#x65F6;&#x95F4;&#x3002;</p>
 <pre><code>static void setScreenStateCb()
 {
 uint64_t locked;
@@ -262,25 +262,25 @@ NSLog(@&quot;%d&quot;,(int)locked);
 {
 while (YES) {
     setScreenStateCb();
-    sleep(5); // 循环5s
+    sleep(5); // &#x5FAA;&#x73AF;5s
 }
 }
-</code></pre><h4 id="UIApplication"><a href="#UIApplication" class="headerlink" title="UIApplication"></a>UIApplication</h4><p>上面我们使用了UIApplication的IdleTimerDisabled方法，下面就大概了解下UIApplication吧。</p>
-<p>UIApplication，每个程序只能有一个，系统使用的是单例模式，用[UIApplication sharedApplication]来得到一个实例。这个单例实例是在系统启动时由main函数里面的UIApplicationMain方法生成，实现的是UIApplicationDelegate的Protocol，也就是AppDelegate的一个实例。每次通过[UIApplication sharedApplication]调用的就是它。UIApplication保存一个UIWindow对象序列，用来快速恢复views。</p>
-<p>UIApplication在程序里的作用很多，大致如下所示：</p>
-<pre><code>一、远程提醒，就是push notification注册；
-二、可以连接到UIUndoManager；在Cocoa中使用NSUndoManager可以很方便的完成撤销操作。NSUndoManager会记录下修改、撤销操作的消息。这个机制使用两个NSInvocation对象栈。当进行操作时，控制器会添加一个该操作的逆操作的invocation到Undo栈中。当进行Undo操作时，Undo操作的逆操作会倍添加到Redo栈中，就这样利用Undo和Redo两个堆栈巧妙的实现撤销操作。需要注意的是，堆栈中存放的都是NSInvocation实例。
-三、检查能否打开某个URL，并且打开URL；这个功能可以配合应用的自定义URL功能，来检测是否安装了某个应用。使用的是[[UIApplication sharedApplication] canOpenURL:url]方法。如果返回YES，可执行[[UIApplication sharedApplication] openURL:url]; 
-四、注册Local Notification；
-五、在后台运行以及从后台转为前台时的操作；
-六、防止屏幕睡眠：即上面的[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
-七、手动调整status bar的位置和状态，如设置为竖屏、横屏等；
-八、设置badge number，就是图标右上角的数字；
-九、每当应用联网时，在状态栏上会显示联网小菊花。UIApplication可以设置是否出现。
+</code></pre><h4 id="UIApplication"><a href="#UIApplication" class="headerlink" title="UIApplication"></a>UIApplication</h4><p>&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;UIApplication&#x7684;IdleTimerDisabled&#x65B9;&#x6CD5;&#xFF0C;&#x4E0B;&#x9762;&#x5C31;&#x5927;&#x6982;&#x4E86;&#x89E3;&#x4E0B;UIApplication&#x5427;&#x3002;</p>
+<p>UIApplication&#xFF0C;&#x6BCF;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#xFF0C;&#x7528;[UIApplication sharedApplication]&#x6765;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x8FD9;&#x4E2A;&#x5355;&#x4F8B;&#x5B9E;&#x4F8B;&#x662F;&#x5728;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x65F6;&#x7531;main&#x51FD;&#x6570;&#x91CC;&#x9762;&#x7684;UIApplicationMain&#x65B9;&#x6CD5;&#x751F;&#x6210;&#xFF0C;&#x5B9E;&#x73B0;&#x7684;&#x662F;UIApplicationDelegate&#x7684;Protocol&#xFF0C;&#x4E5F;&#x5C31;&#x662F;AppDelegate&#x7684;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;&#x6BCF;&#x6B21;&#x901A;&#x8FC7;[UIApplication sharedApplication]&#x8C03;&#x7528;&#x7684;&#x5C31;&#x662F;&#x5B83;&#x3002;UIApplication&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;UIWindow&#x5BF9;&#x8C61;&#x5E8F;&#x5217;&#xFF0C;&#x7528;&#x6765;&#x5FEB;&#x901F;&#x6062;&#x590D;views&#x3002;</p>
+<p>UIApplication&#x5728;&#x7A0B;&#x5E8F;&#x91CC;&#x7684;&#x4F5C;&#x7528;&#x5F88;&#x591A;&#xFF0C;&#x5927;&#x81F4;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<pre><code>&#x4E00;&#x3001;&#x8FDC;&#x7A0B;&#x63D0;&#x9192;&#xFF0C;&#x5C31;&#x662F;push notification&#x6CE8;&#x518C;&#xFF1B;
+&#x4E8C;&#x3001;&#x53EF;&#x4EE5;&#x8FDE;&#x63A5;&#x5230;UIUndoManager&#xFF1B;&#x5728;Cocoa&#x4E2D;&#x4F7F;&#x7528;NSUndoManager&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x5B8C;&#x6210;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x3002;NSUndoManager&#x4F1A;&#x8BB0;&#x5F55;&#x4E0B;&#x4FEE;&#x6539;&#x3001;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x7684;&#x6D88;&#x606F;&#x3002;&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#x4F7F;&#x7528;&#x4E24;&#x4E2A;NSInvocation&#x5BF9;&#x8C61;&#x6808;&#x3002;&#x5F53;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x63A7;&#x5236;&#x5668;&#x4F1A;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x8BE5;&#x64CD;&#x4F5C;&#x7684;&#x9006;&#x64CD;&#x4F5C;&#x7684;invocation&#x5230;Undo&#x6808;&#x4E2D;&#x3002;&#x5F53;&#x8FDB;&#x884C;Undo&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;Undo&#x64CD;&#x4F5C;&#x7684;&#x9006;&#x64CD;&#x4F5C;&#x4F1A;&#x500D;&#x6DFB;&#x52A0;&#x5230;Redo&#x6808;&#x4E2D;&#xFF0C;&#x5C31;&#x8FD9;&#x6837;&#x5229;&#x7528;Undo&#x548C;Redo&#x4E24;&#x4E2A;&#x5806;&#x6808;&#x5DE7;&#x5999;&#x7684;&#x5B9E;&#x73B0;&#x64A4;&#x9500;&#x64CD;&#x4F5C;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5806;&#x6808;&#x4E2D;&#x5B58;&#x653E;&#x7684;&#x90FD;&#x662F;NSInvocation&#x5B9E;&#x4F8B;&#x3002;
+&#x4E09;&#x3001;&#x68C0;&#x67E5;&#x80FD;&#x5426;&#x6253;&#x5F00;&#x67D0;&#x4E2A;URL&#xFF0C;&#x5E76;&#x4E14;&#x6253;&#x5F00;URL&#xFF1B;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x5E94;&#x7528;&#x7684;&#x81EA;&#x5B9A;&#x4E49;URL&#x529F;&#x80FD;&#xFF0C;&#x6765;&#x68C0;&#x6D4B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x4E86;&#x67D0;&#x4E2A;&#x5E94;&#x7528;&#x3002;&#x4F7F;&#x7528;&#x7684;&#x662F;[[UIApplication sharedApplication] canOpenURL:url]&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x8FD4;&#x56DE;YES&#xFF0C;&#x53EF;&#x6267;&#x884C;[[UIApplication sharedApplication] openURL:url]; 
+&#x56DB;&#x3001;&#x6CE8;&#x518C;Local Notification&#xFF1B;
+&#x4E94;&#x3001;&#x5728;&#x540E;&#x53F0;&#x8FD0;&#x884C;&#x4EE5;&#x53CA;&#x4ECE;&#x540E;&#x53F0;&#x8F6C;&#x4E3A;&#x524D;&#x53F0;&#x65F6;&#x7684;&#x64CD;&#x4F5C;&#xFF1B;
+&#x516D;&#x3001;&#x9632;&#x6B62;&#x5C4F;&#x5E55;&#x7761;&#x7720;&#xFF1A;&#x5373;&#x4E0A;&#x9762;&#x7684;[[UIApplication sharedApplication] setIdleTimerDisabled: YES]; 
+&#x4E03;&#x3001;&#x624B;&#x52A8;&#x8C03;&#x6574;status bar&#x7684;&#x4F4D;&#x7F6E;&#x548C;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x8BBE;&#x7F6E;&#x4E3A;&#x7AD6;&#x5C4F;&#x3001;&#x6A2A;&#x5C4F;&#x7B49;&#xFF1B;
+&#x516B;&#x3001;&#x8BBE;&#x7F6E;badge number&#xFF0C;&#x5C31;&#x662F;&#x56FE;&#x6807;&#x53F3;&#x4E0A;&#x89D2;&#x7684;&#x6570;&#x5B57;&#xFF1B;
+&#x4E5D;&#x3001;&#x6BCF;&#x5F53;&#x5E94;&#x7528;&#x8054;&#x7F51;&#x65F6;&#xFF0C;&#x5728;&#x72B6;&#x6001;&#x680F;&#x4E0A;&#x4F1A;&#x663E;&#x793A;&#x8054;&#x7F51;&#x5C0F;&#x83CA;&#x82B1;&#x3002;UIApplication&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x662F;&#x5426;&#x51FA;&#x73B0;&#x3002;
 UIApplication *app = [UIApplication sharedApplication]; 
-app.networkActivityIndicatorVisible =!app.networkActivityIndicatorVisible;//转动 
-app.networkActivityIndicatorVisible = app.networkActivityIndicatorVisible;//不转动
-</code></pre><p><strong>UIUndoManager示例</strong></p>
+app.networkActivityIndicatorVisible =!app.networkActivityIndicatorVisible;//&#x8F6C;&#x52A8; 
+app.networkActivityIndicatorVisible = app.networkActivityIndicatorVisible;//&#x4E0D;&#x8F6C;&#x52A8;
+</code></pre><p><strong>UIUndoManager&#x793A;&#x4F8B;</strong></p>
 <pre><code>- (void) one
 {
 position = position + 10;
@@ -294,8 +294,8 @@ position = position - 10;
 [[undoManager prepareWithInvocationTarget:self] one];
 [self showTheChangesToThePostion];
 }
-</code></pre><p>prepareWithInvocationTarget:方法记录了target并返回UndoManager，然后UndoManager重载了forwardInvocation方法，也就将two方法的Invocation添加到undo栈中了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e230b6aa68d11fa4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="解锁"></p>
+</code></pre><p>prepareWithInvocationTarget:&#x65B9;&#x6CD5;&#x8BB0;&#x5F55;&#x4E86;target&#x5E76;&#x8FD4;&#x56DE;UndoManager&#xFF0C;&#x7136;&#x540E;UndoManager&#x91CD;&#x8F7D;&#x4E86;forwardInvocation&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x5C31;&#x5C06;two&#x65B9;&#x6CD5;&#x7684;Invocation&#x6DFB;&#x52A0;&#x5230;undo&#x6808;&#x4E2D;&#x4E86;&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-e230b6aa68d11fa4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x89E3;&#x9501;"></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

@@ -214,82 +214,82 @@
         </div>
         <!--<div class="col-md-8 col-md-offset-2">-->
         <div class="col-md-offset-2">
-      		<p>socket（套接字）是通信的基石，是支持TCP/IP协议的网络通信的基本操作单元，包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。</p>
-<p>多个TCP连接或多个应用程序进程可能需要通过同一个TCP协议端口传输数据。为了区别不同的应用程序进程和连接，计算机操作系统为应用程序与TCP／IP协议交互提供了套接字(Socket)接口。应用层可以和传输层通过Socket接口，区分来自不同应用程序进程或网络连接的通信，实现数据传输的并发服务。</p>
-<p>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket，另一个运行于服务器端，称为ServerSocket。套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</p>
-<p>Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接,UDP连接同理。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6b9392fad31b711d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket使用"></p>
-<h4 id="socket使用的库函数"><a href="#socket使用的库函数" class="headerlink" title="socket使用的库函数"></a>socket使用的库函数</h4><p>1.创建套接字</p>
-<pre><code>Socket(af,type,protocol)//建立地址和套接字的联系
+      		<p>socket&#xFF08;&#x5957;&#x63A5;&#x5B57;&#xFF09;&#x662F;&#x901A;&#x4FE1;&#x7684;&#x57FA;&#x77F3;&#xFF0C;&#x662F;&#x652F;&#x6301;TCP/IP&#x534F;&#x8BAE;&#x7684;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x7684;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x5355;&#x5143;&#xFF0C;&#x5305;&#x542B;&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x5FC5;&#x987B;&#x7684;&#x4E94;&#x79CD;&#x4FE1;&#x606F;&#xFF1A;&#x8FDE;&#x63A5;&#x4F7F;&#x7528;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x672C;&#x5730;&#x4E3B;&#x673A;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x672C;&#x5730;&#x8FDB;&#x7A0B;&#x7684;&#x534F;&#x8BAE;&#x7AEF;&#x53E3;&#xFF0C;&#x8FDC;&#x5730;&#x4E3B;&#x673A;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x8FDC;&#x5730;&#x8FDB;&#x7A0B;&#x7684;&#x534F;&#x8BAE;&#x7AEF;&#x53E3;&#x3002;</p>
+<p>&#x591A;&#x4E2A;TCP&#x8FDE;&#x63A5;&#x6216;&#x591A;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x7A0B;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x540C;&#x4E00;&#x4E2A;TCP&#x534F;&#x8BAE;&#x7AEF;&#x53E3;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x3002;&#x4E3A;&#x4E86;&#x533A;&#x522B;&#x4E0D;&#x540C;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x7A0B;&#x548C;&#x8FDE;&#x63A5;&#xFF0C;&#x8BA1;&#x7B97;&#x673A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E3A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E0E;TCP&#xFF0F;IP&#x534F;&#x8BAE;&#x4EA4;&#x4E92;&#x63D0;&#x4F9B;&#x4E86;&#x5957;&#x63A5;&#x5B57;(Socket)&#x63A5;&#x53E3;&#x3002;&#x5E94;&#x7528;&#x5C42;&#x53EF;&#x4EE5;&#x548C;&#x4F20;&#x8F93;&#x5C42;&#x901A;&#x8FC7;Socket&#x63A5;&#x53E3;&#xFF0C;&#x533A;&#x5206;&#x6765;&#x81EA;&#x4E0D;&#x540C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x7A0B;&#x6216;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x7684;&#x901A;&#x4FE1;&#xFF0C;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x7684;&#x5E76;&#x53D1;&#x670D;&#x52A1;&#x3002;</p>
+<p>&#x5EFA;&#x7ACB;Socket&#x8FDE;&#x63A5;&#x81F3;&#x5C11;&#x9700;&#x8981;&#x4E00;&#x5BF9;&#x5957;&#x63A5;&#x5B57;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x4E8E;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x79F0;&#x4E3A;ClientSocket&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x4E8E;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#xFF0C;&#x79F0;&#x4E3A;ServerSocket&#x3002;&#x5957;&#x63A5;&#x5B57;&#x4E4B;&#x95F4;&#x7684;&#x8FDE;&#x63A5;&#x8FC7;&#x7A0B;&#x5206;&#x4E3A;&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;&#x670D;&#x52A1;&#x5668;&#x76D1;&#x542C;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#xFF0C;&#x8FDE;&#x63A5;&#x786E;&#x8BA4;&#x3002;</p>
+<p>Socket&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x4E0D;&#x540C;&#x7684;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;&#xFF08;TCP&#x6216;UDP&#xFF09;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;TCP&#x534F;&#x8BAE;&#x8FDB;&#x884C;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x8BE5;Socket&#x8FDE;&#x63A5;&#x5C31;&#x662F;&#x4E00;&#x4E2A;TCP&#x8FDE;&#x63A5;,UDP&#x8FDE;&#x63A5;&#x540C;&#x7406;&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-6b9392fad31b711d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket&#x4F7F;&#x7528;"></p>
+<h4 id="socket&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x51FD;&#x6570;"><a href="#socket&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x51FD;&#x6570;" class="headerlink" title="socket&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x51FD;&#x6570;"></a>socket&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x51FD;&#x6570;</h4><p>1.&#x521B;&#x5EFA;&#x5957;&#x63A5;&#x5B57;</p>
+<pre><code>Socket(af,type,protocol)//&#x5EFA;&#x7ACB;&#x5730;&#x5740;&#x548C;&#x5957;&#x63A5;&#x5B57;&#x7684;&#x8054;&#x7CFB;
 
-bind(sockid, local addr, addrlen)//服务器端侦听客户端的请求
+bind(sockid, local addr, addrlen)//&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x4FA6;&#x542C;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;
 
-listen( Sockid ,quenlen)//建立服务器/客户端的连接 (面向连接TCP）
-</code></pre><p>2.客户端请求连接</p>
-<pre><code>Connect(sockid, destaddr, addrlen)//服务器端等待从编号为Sockid的Socket上接收客户连接请求
+listen( Sockid ,quenlen)//&#x5EFA;&#x7ACB;&#x670D;&#x52A1;&#x5668;/&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8FDE;&#x63A5; (&#x9762;&#x5411;&#x8FDE;&#x63A5;TCP&#xFF09;
+</code></pre><p>2.&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;</p>
+<pre><code>Connect(sockid, destaddr, addrlen)//&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7B49;&#x5F85;&#x4ECE;&#x7F16;&#x53F7;&#x4E3A;Sockid&#x7684;Socket&#x4E0A;&#x63A5;&#x6536;&#x5BA2;&#x6237;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;
 
-newsockid=accept(Sockid，Clientaddr, paddrlen)//发送/接收数据
-</code></pre><p>3.面向连接：</p>
+newsockid=accept(Sockid&#xFF0C;Clientaddr, paddrlen)//&#x53D1;&#x9001;/&#x63A5;&#x6536;&#x6570;&#x636E;
+</code></pre><p>3.&#x9762;&#x5411;&#x8FDE;&#x63A5;&#xFF1A;</p>
 <pre><code>send(sockid, buff, bufflen) 
 recv( )
-</code></pre><p>4.面向无连接：</p>
-<pre><code>sendto(sockid,buff,…,addrlen) 
+</code></pre><p>4.&#x9762;&#x5411;&#x65E0;&#x8FDE;&#x63A5;&#xFF1A;</p>
+<pre><code>sendto(sockid,buff,&#x2026;,addrlen) 
 recvfrom( )
-</code></pre><p>5.释放套接字</p>
+</code></pre><p>5.&#x91CA;&#x653E;&#x5957;&#x63A5;&#x5B57;</p>
 <pre><code>close(socked)
-</code></pre><p>在iOS中以NSStream(流)来发送和接收数据,可以设置流的代理，对流状态的变化做出相应的动作(连接建立，接收到数据，连接关闭）。</p>
-<p>NSStream：数据流的父类，用于定义抽象特性，例如：打开、关闭代理，NSStream继承自CFStream(CoreFoundation)<br>NSInputStream：NSStream的子类，用于读取输入<br>NSOutputStream：NSSTream的子类，用于写输出。</p>
-<p>服务端先不提，客户端代码大概如下：</p>
-<pre><code>//需要导入&lt;arpa/inet.h&gt;，&lt;netdb.h&gt;
+</code></pre><p>&#x5728;iOS&#x4E2D;&#x4EE5;NSStream(&#x6D41;)&#x6765;&#x53D1;&#x9001;&#x548C;&#x63A5;&#x6536;&#x6570;&#x636E;,&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6D41;&#x7684;&#x4EE3;&#x7406;&#xFF0C;&#x5BF9;&#x6D41;&#x72B6;&#x6001;&#x7684;&#x53D8;&#x5316;&#x505A;&#x51FA;&#x76F8;&#x5E94;&#x7684;&#x52A8;&#x4F5C;(&#x8FDE;&#x63A5;&#x5EFA;&#x7ACB;&#xFF0C;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#xFF0C;&#x8FDE;&#x63A5;&#x5173;&#x95ED;&#xFF09;&#x3002;</p>
+<p>NSStream&#xFF1A;&#x6570;&#x636E;&#x6D41;&#x7684;&#x7236;&#x7C7B;&#xFF0C;&#x7528;&#x4E8E;&#x5B9A;&#x4E49;&#x62BD;&#x8C61;&#x7279;&#x6027;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x6253;&#x5F00;&#x3001;&#x5173;&#x95ED;&#x4EE3;&#x7406;&#xFF0C;NSStream&#x7EE7;&#x627F;&#x81EA;CFStream(CoreFoundation)<br>NSInputStream&#xFF1A;NSStream&#x7684;&#x5B50;&#x7C7B;&#xFF0C;&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x8F93;&#x5165;<br>NSOutputStream&#xFF1A;NSSTream&#x7684;&#x5B50;&#x7C7B;&#xFF0C;&#x7528;&#x4E8E;&#x5199;&#x8F93;&#x51FA;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x7AEF;&#x5148;&#x4E0D;&#x63D0;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x5927;&#x6982;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>//&#x9700;&#x8981;&#x5BFC;&#x5165;&lt;arpa/inet.h&gt;&#xFF0C;&lt;netdb.h&gt;
 - (void)test
 {
 NSString * host =@&quot;123.33.33.1&quot;;
 NSNumber * port = @1233;
 
-// 创建 socket
+// &#x521B;&#x5EFA; socket
 int socketFileDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 if (-1 == socketFileDescriptor) {
-    NSLog(@&quot;创建失败&quot;);
+    NSLog(@&quot;&#x521B;&#x5EFA;&#x5931;&#x8D25;&quot;);
     return;
 }
 
-// 获取 IP 地址 
+// &#x83B7;&#x53D6; IP &#x5730;&#x5740; 
 struct hostent * remoteHostEnt = gethostbyname([host UTF8String]);
 if (NULL == remoteHostEnt) {
     close(socketFileDescriptor);
-     NSLog(@&quot;%@&quot;,@&quot;无法解析服务器的主机名&quot;);
+     NSLog(@&quot;%@&quot;,@&quot;&#x65E0;&#x6CD5;&#x89E3;&#x6790;&#x670D;&#x52A1;&#x5668;&#x7684;&#x4E3B;&#x673A;&#x540D;&quot;);
     return;
 }
 
 struct in_addr * remoteInAddr = (struct in_addr *)remoteHostEnt-&gt;h_addr_list[0];
 
-// 设置 socket 参数
+// &#x8BBE;&#x7F6E; socket &#x53C2;&#x6570;
 struct sockaddr_in socketParameters;
 socketParameters.sin_family = AF_INET;
 socketParameters.sin_addr = *remoteInAddr;
 socketParameters.sin_port = htons([port intValue]);
 
-// 连接 socket
+// &#x8FDE;&#x63A5; socket
 int ret = connect(socketFileDescriptor, (struct sockaddr *) &amp;socketParameters, sizeof(socketParameters));
 if (-1 == ret) {
     close(socketFileDescriptor);
-    NSLog(@&quot;连接失败&quot;);
+    NSLog(@&quot;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&quot;);
     return;
 }
 
-NSLog(@&quot;连接成功&quot;);
+NSLog(@&quot;&#x8FDE;&#x63A5;&#x6210;&#x529F;&quot;);
 }
-</code></pre><p>大概就是这样，因为是C语言的，所以看起来不是很方便，一般开发中都会使用比较简单的方法，如下。</p>
-<h4 id="CocoaAsyncSocket"><a href="#CocoaAsyncSocket" class="headerlink" title="CocoaAsyncSocket"></a>CocoaAsyncSocket</h4><p>iOS的socket实现是特别简单的，可以使用用github的开源类库<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="external">cocoaasyncsocket</a>简化开发，cocoaasyncsocket是支持tcp和ump的。代码大概如下：</p>
+</code></pre><p>&#x5927;&#x6982;&#x5C31;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;C&#x8BED;&#x8A00;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x770B;&#x8D77;&#x6765;&#x4E0D;&#x662F;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;&#x4E00;&#x822C;&#x5F00;&#x53D1;&#x4E2D;&#x90FD;&#x4F1A;&#x4F7F;&#x7528;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x4E0B;&#x3002;</p>
+<h4 id="CocoaAsyncSocket"><a href="#CocoaAsyncSocket" class="headerlink" title="CocoaAsyncSocket"></a>CocoaAsyncSocket</h4><p>iOS&#x7684;socket&#x5B9E;&#x73B0;&#x662F;&#x7279;&#x522B;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7528;github&#x7684;&#x5F00;&#x6E90;&#x7C7B;&#x5E93;<a href="https://github.com/robbiehanson/CocoaAsyncSocket" target="_blank" rel="external">cocoaasyncsocket</a>&#x7B80;&#x5316;&#x5F00;&#x53D1;&#xFF0C;cocoaasyncsocket&#x662F;&#x652F;&#x6301;tcp&#x548C;ump&#x7684;&#x3002;&#x4EE3;&#x7801;&#x5927;&#x6982;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code>- (IBAction)connectToServer:(id)sender {
-// 1.与服务器通过三次握手建立连接
+// 1.&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x901A;&#x8FC7;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;
 NSString *host = @&quot;133.33.33.1&quot;;
 int port = 1212;
 
-//创建一个socket对象
+//&#x521B;&#x5EFA;&#x4E00;&#x4E2A;socket&#x5BF9;&#x8C61;
 _socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
 
-//连接
+//&#x8FDE;&#x63A5;
 NSError *error = nil;
 [_socket connectToHost:host onPort:port error:&amp;error];
 
@@ -299,65 +299,65 @@ if (error) {
 }
 
 
-#pragma mark -socket的代理
-#pragma mark 连接成功
+#pragma mark -socket&#x7684;&#x4EE3;&#x7406;
+#pragma mark &#x8FDE;&#x63A5;&#x6210;&#x529F;
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
 NSLog(@&quot;%s&quot;,__func__);
 }
 
 
-#pragma mark 断开连接
+#pragma mark &#x65AD;&#x5F00;&#x8FDE;&#x63A5;
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
 if (err) {
-    NSLog(@&quot;连接失败&quot;);
+    NSLog(@&quot;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&quot;);
 }else{
-    NSLog(@&quot;正常断开&quot;);
+    NSLog(@&quot;&#x6B63;&#x5E38;&#x65AD;&#x5F00;&quot;);
 }
 }
 
 
-#pragma mark 数据发送成功
+#pragma mark &#x6570;&#x636E;&#x53D1;&#x9001;&#x6210;&#x529F;
 -(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
 NSLog(@&quot;%s&quot;,__func__);
 
-//发送完数据手动读取，-1不设置超时
+//&#x53D1;&#x9001;&#x5B8C;&#x6570;&#x636E;&#x624B;&#x52A8;&#x8BFB;&#x53D6;&#xFF0C;-1&#x4E0D;&#x8BBE;&#x7F6E;&#x8D85;&#x65F6;
 [sock readDataWithTimeout:-1 tag:tag];
 }
 
-#pragma mark 读取数据
+#pragma mark &#x8BFB;&#x53D6;&#x6570;&#x636E;
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
 NSString *receiverStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 NSLog(@&quot;%s %@&quot;,__func__,receiverStr);
 }
-</code></pre><p>下面是原理补充，有兴趣的朋友可以细看。</p>
+</code></pre><p>&#x4E0B;&#x9762;&#x662F;&#x539F;&#x7406;&#x8865;&#x5145;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x7684;&#x670B;&#x53CB;&#x53EF;&#x4EE5;&#x7EC6;&#x770B;&#x3002;</p>
 <hr>
-<h4 id="网络七层协议"><a href="#网络七层协议" class="headerlink" title="网络七层协议"></a>网络七层协议</h4><p>网络七层协议由下往上分别为物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。其中物理层、数据链路层和网络层通常被称作媒体层，是网络工程师所研究的对象；传输层、会话层、表示层和应用层则被称作主机层，是用户所面向和关心的内容。</p>
-<p>HTTP协议对应于应用层，TCP协议对应于传输层，IP协议对应于网络层，HTTP协议是基于TCP连接的,三者本质上没有可比性。 TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。<strong>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，是它的一组接口</strong>。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-1ceffddc43357839.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网络七层协议"></p>
-<h4 id="TCP-IP五层模型"><a href="#TCP-IP五层模型" class="headerlink" title="TCP/IP五层模型"></a>TCP/IP五层模型</h4><p>TCP/IP五层模型的协议分为：应用层、传输层、网络层、数据链路层和物理层。中继器、集线器、还有我们通常说的双绞线也工作在物理层；网桥（现已很少使用）、以太网交换机（二层交换机）、网卡（其实网卡是一半工作在物理层、一半工作在数据链路层）在数据链路层；路由器、三层交换机在网络层；传输层主要是四层交换机、也有工作在四层的路由器。</p>
-<p>TCP/IP协议中的应用层处理七层模型中的第五层、第六层和第七层的功能。TCP/IP协议中的传输层并不能总是保证在传输层可靠地传输数据包，而七层模型可以做到。TCP/IP协议还提供一项名为UDP（用户数据报协议）的选择。UDP不能保证可靠的数据包传输。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df46648a7fadfa42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对应关系"></p>
+<h4 id="&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;"><a href="#&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;" class="headerlink" title="&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;"></a>&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;</h4><p>&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;&#x7531;&#x4E0B;&#x5F80;&#x4E0A;&#x5206;&#x522B;&#x4E3A;&#x7269;&#x7406;&#x5C42;&#x3001;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#x3001;&#x7F51;&#x7EDC;&#x5C42;&#x3001;&#x4F20;&#x8F93;&#x5C42;&#x3001;&#x4F1A;&#x8BDD;&#x5C42;&#x3001;&#x8868;&#x793A;&#x5C42;&#x548C;&#x5E94;&#x7528;&#x5C42;&#x3002;&#x5176;&#x4E2D;&#x7269;&#x7406;&#x5C42;&#x3001;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#x548C;&#x7F51;&#x7EDC;&#x5C42;&#x901A;&#x5E38;&#x88AB;&#x79F0;&#x4F5C;&#x5A92;&#x4F53;&#x5C42;&#xFF0C;&#x662F;&#x7F51;&#x7EDC;&#x5DE5;&#x7A0B;&#x5E08;&#x6240;&#x7814;&#x7A76;&#x7684;&#x5BF9;&#x8C61;&#xFF1B;&#x4F20;&#x8F93;&#x5C42;&#x3001;&#x4F1A;&#x8BDD;&#x5C42;&#x3001;&#x8868;&#x793A;&#x5C42;&#x548C;&#x5E94;&#x7528;&#x5C42;&#x5219;&#x88AB;&#x79F0;&#x4F5C;&#x4E3B;&#x673A;&#x5C42;&#xFF0C;&#x662F;&#x7528;&#x6237;&#x6240;&#x9762;&#x5411;&#x548C;&#x5173;&#x5FC3;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<p>HTTP&#x534F;&#x8BAE;&#x5BF9;&#x5E94;&#x4E8E;&#x5E94;&#x7528;&#x5C42;&#xFF0C;TCP&#x534F;&#x8BAE;&#x5BF9;&#x5E94;&#x4E8E;&#x4F20;&#x8F93;&#x5C42;&#xFF0C;IP&#x534F;&#x8BAE;&#x5BF9;&#x5E94;&#x4E8E;&#x7F51;&#x7EDC;&#x5C42;&#xFF0C;HTTP&#x534F;&#x8BAE;&#x662F;&#x57FA;&#x4E8E;TCP&#x8FDE;&#x63A5;&#x7684;,&#x4E09;&#x8005;&#x672C;&#x8D28;&#x4E0A;&#x6CA1;&#x6709;&#x53EF;&#x6BD4;&#x6027;&#x3002; TCP/IP&#x662F;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;&#xFF0C;&#x4E3B;&#x8981;&#x89E3;&#x51B3;&#x6570;&#x636E;&#x5982;&#x4F55;&#x5728;&#x7F51;&#x7EDC;&#x4E2D;&#x4F20;&#x8F93;&#xFF1B;&#x800C;HTTP&#x662F;&#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#xFF0C;&#x4E3B;&#x8981;&#x89E3;&#x51B3;&#x5982;&#x4F55;&#x5305;&#x88C5;&#x6570;&#x636E;&#x3002;<strong>Socket&#x662F;&#x5E94;&#x7528;&#x5C42;&#x4E0E;TCP/IP&#x534F;&#x8BAE;&#x65CF;&#x901A;&#x4FE1;&#x7684;&#x4E2D;&#x95F4;&#x8F6F;&#x4EF6;&#x62BD;&#x8C61;&#x5C42;&#xFF0C;&#x662F;&#x5B83;&#x7684;&#x4E00;&#x7EC4;&#x63A5;&#x53E3;</strong>&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-1ceffddc43357839.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x7F51;&#x7EDC;&#x4E03;&#x5C42;&#x534F;&#x8BAE;"></p>
+<h4 id="TCP-IP&#x4E94;&#x5C42;&#x6A21;&#x578B;"><a href="#TCP-IP&#x4E94;&#x5C42;&#x6A21;&#x578B;" class="headerlink" title="TCP/IP&#x4E94;&#x5C42;&#x6A21;&#x578B;"></a>TCP/IP&#x4E94;&#x5C42;&#x6A21;&#x578B;</h4><p>TCP/IP&#x4E94;&#x5C42;&#x6A21;&#x578B;&#x7684;&#x534F;&#x8BAE;&#x5206;&#x4E3A;&#xFF1A;&#x5E94;&#x7528;&#x5C42;&#x3001;&#x4F20;&#x8F93;&#x5C42;&#x3001;&#x7F51;&#x7EDC;&#x5C42;&#x3001;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#x548C;&#x7269;&#x7406;&#x5C42;&#x3002;&#x4E2D;&#x7EE7;&#x5668;&#x3001;&#x96C6;&#x7EBF;&#x5668;&#x3001;&#x8FD8;&#x6709;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x8BF4;&#x7684;&#x53CC;&#x7EDE;&#x7EBF;&#x4E5F;&#x5DE5;&#x4F5C;&#x5728;&#x7269;&#x7406;&#x5C42;&#xFF1B;&#x7F51;&#x6865;&#xFF08;&#x73B0;&#x5DF2;&#x5F88;&#x5C11;&#x4F7F;&#x7528;&#xFF09;&#x3001;&#x4EE5;&#x592A;&#x7F51;&#x4EA4;&#x6362;&#x673A;&#xFF08;&#x4E8C;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#xFF09;&#x3001;&#x7F51;&#x5361;&#xFF08;&#x5176;&#x5B9E;&#x7F51;&#x5361;&#x662F;&#x4E00;&#x534A;&#x5DE5;&#x4F5C;&#x5728;&#x7269;&#x7406;&#x5C42;&#x3001;&#x4E00;&#x534A;&#x5DE5;&#x4F5C;&#x5728;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#xFF09;&#x5728;&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;&#xFF1B;&#x8DEF;&#x7531;&#x5668;&#x3001;&#x4E09;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x5728;&#x7F51;&#x7EDC;&#x5C42;&#xFF1B;&#x4F20;&#x8F93;&#x5C42;&#x4E3B;&#x8981;&#x662F;&#x56DB;&#x5C42;&#x4EA4;&#x6362;&#x673A;&#x3001;&#x4E5F;&#x6709;&#x5DE5;&#x4F5C;&#x5728;&#x56DB;&#x5C42;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x3002;</p>
+<p>TCP/IP&#x534F;&#x8BAE;&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x5C42;&#x5904;&#x7406;&#x4E03;&#x5C42;&#x6A21;&#x578B;&#x4E2D;&#x7684;&#x7B2C;&#x4E94;&#x5C42;&#x3001;&#x7B2C;&#x516D;&#x5C42;&#x548C;&#x7B2C;&#x4E03;&#x5C42;&#x7684;&#x529F;&#x80FD;&#x3002;TCP/IP&#x534F;&#x8BAE;&#x4E2D;&#x7684;&#x4F20;&#x8F93;&#x5C42;&#x5E76;&#x4E0D;&#x80FD;&#x603B;&#x662F;&#x4FDD;&#x8BC1;&#x5728;&#x4F20;&#x8F93;&#x5C42;&#x53EF;&#x9760;&#x5730;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x5305;&#xFF0C;&#x800C;&#x4E03;&#x5C42;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x505A;&#x5230;&#x3002;TCP/IP&#x534F;&#x8BAE;&#x8FD8;&#x63D0;&#x4F9B;&#x4E00;&#x9879;&#x540D;&#x4E3A;UDP&#xFF08;&#x7528;&#x6237;&#x6570;&#x636E;&#x62A5;&#x534F;&#x8BAE;&#xFF09;&#x7684;&#x9009;&#x62E9;&#x3002;UDP&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1;&#x53EF;&#x9760;&#x7684;&#x6570;&#x636E;&#x5305;&#x4F20;&#x8F93;&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-df46648a7fadfa42.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5BF9;&#x5E94;&#x5173;&#x7CFB;"></p>
 <blockquote>
-<p>TCP：面向连接、传输可靠(保证数据正确性,保证数据顺序)、用于传输大量数据(流模式)、速度慢，建立连接需要开销较多(时间，系统资源)。<br>UDP：面向非连接、传输不可靠、用于传输少量数据(数据包模式)、速度快。<br>TCP是一种流模式的协议，UDP是一种数据报模式的协议。</p>
+<p>TCP&#xFF1A;&#x9762;&#x5411;&#x8FDE;&#x63A5;&#x3001;&#x4F20;&#x8F93;&#x53EF;&#x9760;(&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x6B63;&#x786E;&#x6027;,&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x987A;&#x5E8F;)&#x3001;&#x7528;&#x4E8E;&#x4F20;&#x8F93;&#x5927;&#x91CF;&#x6570;&#x636E;(&#x6D41;&#x6A21;&#x5F0F;)&#x3001;&#x901F;&#x5EA6;&#x6162;&#xFF0C;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x9700;&#x8981;&#x5F00;&#x9500;&#x8F83;&#x591A;(&#x65F6;&#x95F4;&#xFF0C;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;)&#x3002;<br>UDP&#xFF1A;&#x9762;&#x5411;&#x975E;&#x8FDE;&#x63A5;&#x3001;&#x4F20;&#x8F93;&#x4E0D;&#x53EF;&#x9760;&#x3001;&#x7528;&#x4E8E;&#x4F20;&#x8F93;&#x5C11;&#x91CF;&#x6570;&#x636E;(&#x6570;&#x636E;&#x5305;&#x6A21;&#x5F0F;)&#x3001;&#x901F;&#x5EA6;&#x5FEB;&#x3002;<br>TCP&#x662F;&#x4E00;&#x79CD;&#x6D41;&#x6A21;&#x5F0F;&#x7684;&#x534F;&#x8BAE;&#xFF0C;UDP&#x662F;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x62A5;&#x6A21;&#x5F0F;&#x7684;&#x534F;&#x8BAE;&#x3002;</p>
 </blockquote>
-<p>在传输数据时，可以只使用传输层（TCP/IP），但是那样的话，由于没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用应用层协议（HTTP、FTP、TELNET等），也可以自己定义应用层协议。</p>
-<p>WEB使用HTTP作传输层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发送到网络上。<strong>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议</strong>。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fe177ff611c71d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket的位置"></p>
-<h4 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h4><p>要想明白Socket连接，先要明白TCP连接。手机能够使用联网功能是因为手机底层实现了TCP/IP协议，可以使手机终端通过无线网络建立TCP连接。TCP协议可以对上层网络提供接口，使上层网络数据的传输建立在“无差别”的网络之上。</p>
-<p>建立起一个TCP连接需要经过“三次握手”：<br>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
-<p>三次握手(Three-way Handshake)即建立一个TCP连接时，需要客户端和服务器总共发送3个包。三次握手的目的是连接服务器指定端口，建立TCP连接,并同步连接双方的序列号和确认号并交换TCP 窗口大小信息。<strong>在socket编程中，客户端执行connect()时,将触发三次握手</strong>。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a3120a20b9393a94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三次握手"></p>
-<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”。</p>
-<p>TCP连接的拆除需要发送四个包，因此称为四次握手(four-way handshake)。在socket编程中，任何一方执行close()操作即可产生握手（有地方称为“挥手”）操作。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1170656-26cc9a86da3d9a68.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TCP连接的拆除"></p>
-<p>之所以有“三次握手”和“四次握手”的区别，是因为连接时当Server端收到Client端的SYN连接请求报文后，可以直接发送SYN+ACK报文。其中ACK报文是用来应答的，SYN报文是用来同步的。但是关闭连接时，当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，”你发的FIN报文我收到了”。只有等到我Server端所有的报文都发送完了，我才能发送FIN报文，因此不能一起发送。故需要四步握手。</p>
-<h4 id="HTTP连接"><a href="#HTTP连接" class="headerlink" title="HTTP连接"></a>HTTP连接</h4><p>HTTP协议即超文本传送协议(HypertextTransfer Protocol )，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</p>
-<p>HTTP连接最显著的特点是客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接。从建立连接到关闭连接的过程称为“一次连接”。因此HTTP连接是一种“短连接”，要保持客户端程序的在线状态，需要不断地向服务器发起连接请求。若服务器长时间无法收到客户端的请求，则认为客户端“下线”，若客户端长时间无法收到服务器的回复，则认为网络已经断开。在HTTP 1.0中，客户端的每次请求都要求建立一次单独的连接，在处理完本次请求后，就自动释放连接。在HTTP 1.1中则可以在一次连接中处理多个请求，并且多个请求可以重叠进行，不需要等待一个请求结束后再发送下一个请求。</p>
-<p><strong>HTTPS</strong>（Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，是HTTP的安全版。 在HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。 HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此HTTP协议不适合传输一些敏感信息。</p>
-<p>https协议需要到ca申请证书；http是超文本传输协议，信息是明文传输，https 则是具有安全性的ssl加密传输协议；http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443；http的连接很简单，是无状态的，HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议。</p>
+<p>&#x5728;&#x4F20;&#x8F93;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x53EA;&#x4F7F;&#x7528;&#x4F20;&#x8F93;&#x5C42;&#xFF08;TCP/IP&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x90A3;&#x6837;&#x7684;&#x8BDD;&#xFF0C;&#x7531;&#x4E8E;&#x6CA1;&#x6709;&#x5E94;&#x7528;&#x5C42;&#xFF0C;&#x4FBF;&#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x6570;&#x636E;&#x5185;&#x5BB9;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8981;&#x4F7F;&#x4F20;&#x8F93;&#x7684;&#x6570;&#x636E;&#x6709;&#x610F;&#x4E49;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#xFF08;HTTP&#x3001;FTP&#x3001;TELNET&#x7B49;&#xFF09;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#x3002;</p>
+<p>WEB&#x4F7F;&#x7528;HTTP&#x4F5C;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;&#xFF0C;&#x4EE5;&#x5C01;&#x88C5;HTTP&#x6587;&#x672C;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;TCP/IP&#x505A;&#x4F20;&#x8F93;&#x5C42;&#x534F;&#x8BAE;&#x5C06;&#x5B83;&#x53D1;&#x9001;&#x5230;&#x7F51;&#x7EDC;&#x4E0A;&#x3002;<strong>Socket&#x662F;&#x5BF9;TCP/IP&#x534F;&#x8BAE;&#x7684;&#x5C01;&#x88C5;&#xFF0C;Socket&#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x662F;&#x534F;&#x8BAE;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x4E2A;&#x8C03;&#x7528;&#x63A5;&#x53E3;&#xFF08;API&#xFF09;&#xFF0C;&#x901A;&#x8FC7;Socket&#xFF0C;&#x6211;&#x4EEC;&#x624D;&#x80FD;&#x4F7F;&#x7528;TCP/IP&#x534F;&#x8BAE;</strong>&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-fe177ff611c71d76.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Socket&#x7684;&#x4F4D;&#x7F6E;"></p>
+<h4 id="TCP&#x8FDE;&#x63A5;"><a href="#TCP&#x8FDE;&#x63A5;" class="headerlink" title="TCP&#x8FDE;&#x63A5;"></a>TCP&#x8FDE;&#x63A5;</h4><p>&#x8981;&#x60F3;&#x660E;&#x767D;Socket&#x8FDE;&#x63A5;&#xFF0C;&#x5148;&#x8981;&#x660E;&#x767D;TCP&#x8FDE;&#x63A5;&#x3002;&#x624B;&#x673A;&#x80FD;&#x591F;&#x4F7F;&#x7528;&#x8054;&#x7F51;&#x529F;&#x80FD;&#x662F;&#x56E0;&#x4E3A;&#x624B;&#x673A;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x4E86;TCP/IP&#x534F;&#x8BAE;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x624B;&#x673A;&#x7EC8;&#x7AEF;&#x901A;&#x8FC7;&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;&#x5EFA;&#x7ACB;TCP&#x8FDE;&#x63A5;&#x3002;TCP&#x534F;&#x8BAE;&#x53EF;&#x4EE5;&#x5BF9;&#x4E0A;&#x5C42;&#x7F51;&#x7EDC;&#x63D0;&#x4F9B;&#x63A5;&#x53E3;&#xFF0C;&#x4F7F;&#x4E0A;&#x5C42;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x7684;&#x4F20;&#x8F93;&#x5EFA;&#x7ACB;&#x5728;&#x201C;&#x65E0;&#x5DEE;&#x522B;&#x201D;&#x7684;&#x7F51;&#x7EDC;&#x4E4B;&#x4E0A;&#x3002;</p>
+<p>&#x5EFA;&#x7ACB;&#x8D77;&#x4E00;&#x4E2A;TCP&#x8FDE;&#x63A5;&#x9700;&#x8981;&#x7ECF;&#x8FC7;&#x201C;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x201D;&#xFF1A;<br>&#x7B2C;&#x4E00;&#x6B21;&#x63E1;&#x624B;&#xFF1A;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;syn&#x5305;(syn=j)&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5E76;&#x8FDB;&#x5165;SYN_SEND&#x72B6;&#x6001;&#xFF0C;&#x7B49;&#x5F85;&#x670D;&#x52A1;&#x5668;&#x786E;&#x8BA4;&#xFF1B;<br>&#x7B2C;&#x4E8C;&#x6B21;&#x63E1;&#x624B;&#xFF1A;&#x670D;&#x52A1;&#x5668;&#x6536;&#x5230;syn&#x5305;&#xFF0C;&#x5FC5;&#x987B;&#x786E;&#x8BA4;&#x5BA2;&#x6237;&#x7684;SYN&#xFF08;ack=j+1&#xFF09;&#xFF0C;&#x540C;&#x65F6;&#x81EA;&#x5DF1;&#x4E5F;&#x53D1;&#x9001;&#x4E00;&#x4E2A;SYN&#x5305;&#xFF08;syn=k&#xFF09;&#xFF0C;&#x5373;SYN+ACK&#x5305;&#xFF0C;&#x6B64;&#x65F6;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x5165;SYN_RECV&#x72B6;&#x6001;&#xFF1B;<br>&#x7B2C;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#xFF1A;&#x5BA2;&#x6237;&#x7AEF;&#x6536;&#x5230;&#x670D;&#x52A1;&#x5668;&#x7684;SYN&#xFF0B;ACK&#x5305;&#xFF0C;&#x5411;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x9001;&#x786E;&#x8BA4;&#x5305;ACK(ack=k+1)&#xFF0C;&#x6B64;&#x5305;&#x53D1;&#x9001;&#x5B8C;&#x6BD5;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x5165;ESTABLISHED&#x72B6;&#x6001;&#xFF0C;&#x5B8C;&#x6210;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x3002;</p>
+<p>&#x4E09;&#x6B21;&#x63E1;&#x624B;(Three-way Handshake)&#x5373;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;TCP&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x603B;&#x5171;&#x53D1;&#x9001;3&#x4E2A;&#x5305;&#x3002;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x7684;&#x76EE;&#x7684;&#x662F;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x5668;&#x6307;&#x5B9A;&#x7AEF;&#x53E3;&#xFF0C;&#x5EFA;&#x7ACB;TCP&#x8FDE;&#x63A5;,&#x5E76;&#x540C;&#x6B65;&#x8FDE;&#x63A5;&#x53CC;&#x65B9;&#x7684;&#x5E8F;&#x5217;&#x53F7;&#x548C;&#x786E;&#x8BA4;&#x53F7;&#x5E76;&#x4EA4;&#x6362;TCP &#x7A97;&#x53E3;&#x5927;&#x5C0F;&#x4FE1;&#x606F;&#x3002;<strong>&#x5728;socket&#x7F16;&#x7A0B;&#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x6267;&#x884C;connect()&#x65F6;,&#x5C06;&#x89E6;&#x53D1;&#x4E09;&#x6B21;&#x63E1;&#x624B;</strong>&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-a3120a20b9393a94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x4E09;&#x6B21;&#x63E1;&#x624B;"></p>
+<p>&#x63E1;&#x624B;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F20;&#x9001;&#x7684;&#x5305;&#x91CC;&#x4E0D;&#x5305;&#x542B;&#x6570;&#x636E;&#xFF0C;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x5B8C;&#x6BD5;&#x540E;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x624D;&#x6B63;&#x5F0F;&#x5F00;&#x59CB;&#x4F20;&#x9001;&#x6570;&#x636E;&#x3002;&#x7406;&#x60F3;&#x72B6;&#x6001;&#x4E0B;&#xFF0C;TCP&#x8FDE;&#x63A5;&#x4E00;&#x65E6;&#x5EFA;&#x7ACB;&#xFF0C;&#x5728;&#x901A;&#x4FE1;&#x53CC;&#x65B9;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x65B9;&#x4E3B;&#x52A8;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x4E4B;&#x524D;&#xFF0C;TCP &#x8FDE;&#x63A5;&#x90FD;&#x5C06;&#x88AB;&#x4E00;&#x76F4;&#x4FDD;&#x6301;&#x4E0B;&#x53BB;&#x3002;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#x65F6;&#x670D;&#x52A1;&#x5668;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x5747;&#x53EF;&#x4EE5;&#x4E3B;&#x52A8;&#x53D1;&#x8D77;&#x65AD;&#x5F00;TCP&#x8FDE;&#x63A5;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x65AD;&#x5F00;&#x8FC7;&#x7A0B;&#x9700;&#x8981;&#x7ECF;&#x8FC7;&#x201C;&#x56DB;&#x6B21;&#x63E1;&#x624B;&#x201D;&#x3002;</p>
+<p>TCP&#x8FDE;&#x63A5;&#x7684;&#x62C6;&#x9664;&#x9700;&#x8981;&#x53D1;&#x9001;&#x56DB;&#x4E2A;&#x5305;&#xFF0C;&#x56E0;&#x6B64;&#x79F0;&#x4E3A;&#x56DB;&#x6B21;&#x63E1;&#x624B;(four-way handshake)&#x3002;&#x5728;socket&#x7F16;&#x7A0B;&#x4E2D;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x65B9;&#x6267;&#x884C;close()&#x64CD;&#x4F5C;&#x5373;&#x53EF;&#x4EA7;&#x751F;&#x63E1;&#x624B;&#xFF08;&#x6709;&#x5730;&#x65B9;&#x79F0;&#x4E3A;&#x201C;&#x6325;&#x624B;&#x201D;&#xFF09;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1170656-26cc9a86da3d9a68.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="TCP&#x8FDE;&#x63A5;&#x7684;&#x62C6;&#x9664;"></p>
+<p>&#x4E4B;&#x6240;&#x4EE5;&#x6709;&#x201C;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x201D;&#x548C;&#x201C;&#x56DB;&#x6B21;&#x63E1;&#x624B;&#x201D;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x8FDE;&#x63A5;&#x65F6;&#x5F53;Server&#x7AEF;&#x6536;&#x5230;Client&#x7AEF;&#x7684;SYN&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;&#x62A5;&#x6587;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x53D1;&#x9001;SYN+ACK&#x62A5;&#x6587;&#x3002;&#x5176;&#x4E2D;ACK&#x62A5;&#x6587;&#x662F;&#x7528;&#x6765;&#x5E94;&#x7B54;&#x7684;&#xFF0C;SYN&#x62A5;&#x6587;&#x662F;&#x7528;&#x6765;&#x540C;&#x6B65;&#x7684;&#x3002;&#x4F46;&#x662F;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x5F53;Server&#x7AEF;&#x6536;&#x5230;FIN&#x62A5;&#x6587;&#x65F6;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x5E76;&#x4E0D;&#x4F1A;&#x7ACB;&#x5373;&#x5173;&#x95ED;SOCKET&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x80FD;&#x5148;&#x56DE;&#x590D;&#x4E00;&#x4E2A;ACK&#x62A5;&#x6587;&#xFF0C;&#x544A;&#x8BC9;Client&#x7AEF;&#xFF0C;&#x201D;&#x4F60;&#x53D1;&#x7684;FIN&#x62A5;&#x6587;&#x6211;&#x6536;&#x5230;&#x4E86;&#x201D;&#x3002;&#x53EA;&#x6709;&#x7B49;&#x5230;&#x6211;Server&#x7AEF;&#x6240;&#x6709;&#x7684;&#x62A5;&#x6587;&#x90FD;&#x53D1;&#x9001;&#x5B8C;&#x4E86;&#xFF0C;&#x6211;&#x624D;&#x80FD;&#x53D1;&#x9001;FIN&#x62A5;&#x6587;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x80FD;&#x4E00;&#x8D77;&#x53D1;&#x9001;&#x3002;&#x6545;&#x9700;&#x8981;&#x56DB;&#x6B65;&#x63E1;&#x624B;&#x3002;</p>
+<h4 id="HTTP&#x8FDE;&#x63A5;"><a href="#HTTP&#x8FDE;&#x63A5;" class="headerlink" title="HTTP&#x8FDE;&#x63A5;"></a>HTTP&#x8FDE;&#x63A5;</h4><p>HTTP&#x534F;&#x8BAE;&#x5373;&#x8D85;&#x6587;&#x672C;&#x4F20;&#x9001;&#x534F;&#x8BAE;(HypertextTransfer Protocol )&#xFF0C;&#x662F;Web&#x8054;&#x7F51;&#x7684;&#x57FA;&#x7840;&#xFF0C;&#x4E5F;&#x662F;&#x624B;&#x673A;&#x8054;&#x7F51;&#x5E38;&#x7528;&#x7684;&#x534F;&#x8BAE;&#x4E4B;&#x4E00;&#xFF0C;HTTP&#x534F;&#x8BAE;&#x662F;&#x5EFA;&#x7ACB;&#x5728;TCP&#x534F;&#x8BAE;&#x4E4B;&#x4E0A;&#x7684;&#x4E00;&#x79CD;&#x5E94;&#x7528;&#x3002;</p>
+<p>HTTP&#x8FDE;&#x63A5;&#x6700;&#x663E;&#x8457;&#x7684;&#x7279;&#x70B9;&#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x7684;&#x6BCF;&#x6B21;&#x8BF7;&#x6C42;&#x90FD;&#x9700;&#x8981;&#x670D;&#x52A1;&#x5668;&#x56DE;&#x9001;&#x54CD;&#x5E94;&#xFF0C;&#x5728;&#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x4F1A;&#x4E3B;&#x52A8;&#x91CA;&#x653E;&#x8FDE;&#x63A5;&#x3002;&#x4ECE;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x5230;&#x5173;&#x95ED;&#x8FDE;&#x63A5;&#x7684;&#x8FC7;&#x7A0B;&#x79F0;&#x4E3A;&#x201C;&#x4E00;&#x6B21;&#x8FDE;&#x63A5;&#x201D;&#x3002;&#x56E0;&#x6B64;HTTP&#x8FDE;&#x63A5;&#x662F;&#x4E00;&#x79CD;&#x201C;&#x77ED;&#x8FDE;&#x63A5;&#x201D;&#xFF0C;&#x8981;&#x4FDD;&#x6301;&#x5BA2;&#x6237;&#x7AEF;&#x7A0B;&#x5E8F;&#x7684;&#x5728;&#x7EBF;&#x72B6;&#x6001;&#xFF0C;&#x9700;&#x8981;&#x4E0D;&#x65AD;&#x5730;&#x5411;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x8D77;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;&#x3002;&#x82E5;&#x670D;&#x52A1;&#x5668;&#x957F;&#x65F6;&#x95F4;&#x65E0;&#x6CD5;&#x6536;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5219;&#x8BA4;&#x4E3A;&#x5BA2;&#x6237;&#x7AEF;&#x201C;&#x4E0B;&#x7EBF;&#x201D;&#xFF0C;&#x82E5;&#x5BA2;&#x6237;&#x7AEF;&#x957F;&#x65F6;&#x95F4;&#x65E0;&#x6CD5;&#x6536;&#x5230;&#x670D;&#x52A1;&#x5668;&#x7684;&#x56DE;&#x590D;&#xFF0C;&#x5219;&#x8BA4;&#x4E3A;&#x7F51;&#x7EDC;&#x5DF2;&#x7ECF;&#x65AD;&#x5F00;&#x3002;&#x5728;HTTP 1.0&#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6BCF;&#x6B21;&#x8BF7;&#x6C42;&#x90FD;&#x8981;&#x6C42;&#x5EFA;&#x7ACB;&#x4E00;&#x6B21;&#x5355;&#x72EC;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x5728;&#x5904;&#x7406;&#x5B8C;&#x672C;&#x6B21;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x5C31;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x8FDE;&#x63A5;&#x3002;&#x5728;HTTP 1.1&#x4E2D;&#x5219;&#x53EF;&#x4EE5;&#x5728;&#x4E00;&#x6B21;&#x8FDE;&#x63A5;&#x4E2D;&#x5904;&#x7406;&#x591A;&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;&#x5E76;&#x4E14;&#x591A;&#x4E2A;&#x8BF7;&#x6C42;&#x53EF;&#x4EE5;&#x91CD;&#x53E0;&#x8FDB;&#x884C;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x540E;&#x518D;&#x53D1;&#x9001;&#x4E0B;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x3002;</p>
+<p><strong>HTTPS</strong>&#xFF08;Hyper Text Transfer Protocol over Secure Socket Layer&#xFF09;&#xFF0C;&#x662F;&#x4EE5;&#x5B89;&#x5168;&#x4E3A;&#x76EE;&#x6807;&#x7684;HTTP&#x901A;&#x9053;&#xFF0C;&#x662F;HTTP&#x7684;&#x5B89;&#x5168;&#x7248;&#x3002; &#x5728;HTTP&#x4E0B;&#x52A0;&#x5165;SSL&#x5C42;&#xFF0C;HTTPS&#x7684;&#x5B89;&#x5168;&#x57FA;&#x7840;&#x662F;SSL&#xFF0C;&#x56E0;&#x6B64;&#x52A0;&#x5BC6;&#x7684;&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;&#x5C31;&#x9700;&#x8981;SSL&#x3002; HTTPS&#x5B58;&#x5728;&#x4E0D;&#x540C;&#x4E8E;HTTP&#x7684;&#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;&#x53CA;&#x4E00;&#x4E2A;&#x52A0;&#x5BC6;/&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x5C42;&#xFF08;&#x5728;HTTP&#x4E0E;TCP&#x4E4B;&#x95F4;&#xFF09;&#x3002;HTTP&#x534F;&#x8BAE;&#x4EE5;&#x660E;&#x6587;&#x65B9;&#x5F0F;&#x53D1;&#x9001;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x63D0;&#x4F9B;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x52A0;&#x5BC6;&#xFF0C;&#x5982;&#x679C;&#x653B;&#x51FB;&#x8005;&#x622A;&#x53D6;&#x4E86;Web&#x6D4F;&#x89C8;&#x5668;&#x548C;&#x7F51;&#x7AD9;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x4F20;&#x8F93;&#x62A5;&#x6587;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8BFB;&#x61C2;&#x5176;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x56E0;&#x6B64;HTTP&#x534F;&#x8BAE;&#x4E0D;&#x9002;&#x5408;&#x4F20;&#x8F93;&#x4E00;&#x4E9B;&#x654F;&#x611F;&#x4FE1;&#x606F;&#x3002;</p>
+<p>https&#x534F;&#x8BAE;&#x9700;&#x8981;&#x5230;ca&#x7533;&#x8BF7;&#x8BC1;&#x4E66;&#xFF1B;http&#x662F;&#x8D85;&#x6587;&#x672C;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#xFF0C;&#x4FE1;&#x606F;&#x662F;&#x660E;&#x6587;&#x4F20;&#x8F93;&#xFF0C;https &#x5219;&#x662F;&#x5177;&#x6709;&#x5B89;&#x5168;&#x6027;&#x7684;ssl&#x52A0;&#x5BC6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#xFF1B;http&#x548C;https&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x7684;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#xFF0C;&#x7528;&#x7684;&#x7AEF;&#x53E3;&#x4E5F;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x524D;&#x8005;&#x662F;80&#xFF0C;&#x540E;&#x8005;&#x662F;443&#xFF1B;http&#x7684;&#x8FDE;&#x63A5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x662F;&#x65E0;&#x72B6;&#x6001;&#x7684;&#xFF0C;HTTPS&#x534F;&#x8BAE;&#x662F;&#x7531;SSL+HTTP&#x534F;&#x8BAE;&#x6784;&#x5EFA;&#x7684;&#x53EF;&#x8FDB;&#x884C;&#x52A0;&#x5BC6;&#x4F20;&#x8F93;&#x3001;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x3002;</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1170656-0601aab8deb7df8d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTTPS"></p>
-<h4 id="Socket连接与HTTP连接的不同"><a href="#Socket连接与HTTP连接的不同" class="headerlink" title="Socket连接与HTTP连接的不同"></a>Socket连接与HTTP连接的不同</h4><p><strong>通常情况下Socket连接就是TCP连接</strong>，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际应用中，客户端到服务器之间的通信防火墙默认会关闭长时间处于非活跃状态的连接而导致 Socket 连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态。</p>
-<p>而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。</p>
+<h4 id="Socket&#x8FDE;&#x63A5;&#x4E0E;HTTP&#x8FDE;&#x63A5;&#x7684;&#x4E0D;&#x540C;"><a href="#Socket&#x8FDE;&#x63A5;&#x4E0E;HTTP&#x8FDE;&#x63A5;&#x7684;&#x4E0D;&#x540C;" class="headerlink" title="Socket&#x8FDE;&#x63A5;&#x4E0E;HTTP&#x8FDE;&#x63A5;&#x7684;&#x4E0D;&#x540C;"></a>Socket&#x8FDE;&#x63A5;&#x4E0E;HTTP&#x8FDE;&#x63A5;&#x7684;&#x4E0D;&#x540C;</h4><p><strong>&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;Socket&#x8FDE;&#x63A5;&#x5C31;&#x662F;TCP&#x8FDE;&#x63A5;</strong>&#xFF0C;&#x56E0;&#x6B64;Socket&#x8FDE;&#x63A5;&#x4E00;&#x65E6;&#x5EFA;&#x7ACB;&#xFF0C;&#x901A;&#x4FE1;&#x53CC;&#x65B9;&#x5373;&#x53EF;&#x5F00;&#x59CB;&#x76F8;&#x4E92;&#x53D1;&#x9001;&#x6570;&#x636E;&#x5185;&#x5BB9;&#xFF0C;&#x76F4;&#x5230;&#x53CC;&#x65B9;&#x8FDE;&#x63A5;&#x65AD;&#x5F00;&#x3002;&#x4F46;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x5230;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x9632;&#x706B;&#x5899;&#x9ED8;&#x8BA4;&#x4F1A;&#x5173;&#x95ED;&#x957F;&#x65F6;&#x95F4;&#x5904;&#x4E8E;&#x975E;&#x6D3B;&#x8DC3;&#x72B6;&#x6001;&#x7684;&#x8FDE;&#x63A5;&#x800C;&#x5BFC;&#x81F4; Socket &#x8FDE;&#x63A5;&#x65AD;&#x8FDE;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x8F6E;&#x8BE2;&#x544A;&#x8BC9;&#x7F51;&#x7EDC;&#xFF0C;&#x8BE5;&#x8FDE;&#x63A5;&#x5904;&#x4E8E;&#x6D3B;&#x8DC3;&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x800C;HTTP&#x8FDE;&#x63A5;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x201C;&#x8BF7;&#x6C42;&#x2014;&#x54CD;&#x5E94;&#x201D;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0D;&#x4EC5;&#x5728;&#x8BF7;&#x6C42;&#x65F6;&#x9700;&#x8981;&#x5148;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF0C;&#x800C;&#x4E14;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x5411;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x51FA;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x624D;&#x80FD;&#x56DE;&#x590D;&#x6570;&#x636E;&#x3002;</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">

@@ -214,117 +214,117 @@
         </div>
         <!--<div class="col-md-8 col-md-offset-2">-->
         <div class="col-md-offset-2">
-      		<p>  <strong><a href="http://cordova.apache.org" target="_blank" rel="external">官网</a></strong> (markdown下经常无法链接，地址在这： <a href="http://cordova.apache.org" target="_blank" rel="external">http://cordova.apache.org</a>)</p>
-<h4 id="文件分类"><a href="#文件分类" class="headerlink" title="文件分类"></a>文件分类</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
+      		<p>  <strong><a href="http://cordova.apache.org" target="_blank" rel="external">&#x5B98;&#x7F51;</a></strong> (markdown&#x4E0B;&#x7ECF;&#x5E38;&#x65E0;&#x6CD5;&#x94FE;&#x63A5;&#xFF0C;&#x5730;&#x5740;&#x5728;&#x8FD9;&#xFF1A; <a href="http://cordova.apache.org" target="_blank" rel="external">http://cordova.apache.org</a>)</p>
+<h4 id="&#x6587;&#x4EF6;&#x5206;&#x7C7B;"><a href="#&#x6587;&#x4EF6;&#x5206;&#x7C7B;" class="headerlink" title="&#x6587;&#x4EF6;&#x5206;&#x7C7B;"></a>&#x6587;&#x4EF6;&#x5206;&#x7C7B;</h4><p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/Finder.png" alt=""></p>
 <blockquote>
-<p>目录文件说明：</p>
-<p>conig.xml ：cordova的配置文件</p>
-<p>hooks/ ：存放自定义cordova命令的脚本文件。</p>
-<p>platforms/ ：各个平台原生工程代码，会在build时被覆盖勿修改</p>
-<p>plugins/ ：插件目录（主要是提供各个平台的原生API）</p>
-<p>www/ ：用H5编写的源代码目录，build时会被放入各个平台的assets\www目录。</p>
-<p>www/index.html ：App入口html文件</p>
+<p>&#x76EE;&#x5F55;&#x6587;&#x4EF6;&#x8BF4;&#x660E;&#xFF1A;</p>
+<p>conig.xml &#xFF1A;cordova&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<p>hooks/ &#xFF1A;&#x5B58;&#x653E;&#x81EA;&#x5B9A;&#x4E49;cordova&#x547D;&#x4EE4;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x3002;</p>
+<p>platforms/ &#xFF1A;&#x5404;&#x4E2A;&#x5E73;&#x53F0;&#x539F;&#x751F;&#x5DE5;&#x7A0B;&#x4EE3;&#x7801;&#xFF0C;&#x4F1A;&#x5728;build&#x65F6;&#x88AB;&#x8986;&#x76D6;&#x52FF;&#x4FEE;&#x6539;</p>
+<p>plugins/ &#xFF1A;&#x63D2;&#x4EF6;&#x76EE;&#x5F55;&#xFF08;&#x4E3B;&#x8981;&#x662F;&#x63D0;&#x4F9B;&#x5404;&#x4E2A;&#x5E73;&#x53F0;&#x7684;&#x539F;&#x751F;API&#xFF09;</p>
+<p>www/ &#xFF1A;&#x7528;H5&#x7F16;&#x5199;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x76EE;&#x5F55;&#xFF0C;build&#x65F6;&#x4F1A;&#x88AB;&#x653E;&#x5165;&#x5404;&#x4E2A;&#x5E73;&#x53F0;&#x7684;assets\www&#x76EE;&#x5F55;&#x3002;</p>
+<p>www/index.html &#xFF1A;App&#x5165;&#x53E3;html&#x6587;&#x4EF6;</p>
 </blockquote>
-<h4 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h4><p>JS端</p>
+<h4 id="&#x5173;&#x952E;&#x7C7B;"><a href="#&#x5173;&#x952E;&#x7C7B;" class="headerlink" title="&#x5173;&#x952E;&#x7C7B;"></a>&#x5173;&#x952E;&#x7C7B;</h4><p>JS&#x7AEF;</p>
 <ul>
-<li>cordova_plugins.js 插件配置文件</li>
-<li>exec.js 在cordova.js里复现，主要用于JS与Native的交互处理事件</li>
-<li>platform.js 在cordova.js里复现，</li>
-<li>cordova.js  JS端最重要的文件了。提供交互处理</li>
-<li>index.html 关联 index.js,index.css UI显示</li>
+<li>cordova_plugins.js &#x63D2;&#x4EF6;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</li>
+<li>exec.js &#x5728;cordova.js&#x91CC;&#x590D;&#x73B0;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;JS&#x4E0E;Native&#x7684;&#x4EA4;&#x4E92;&#x5904;&#x7406;&#x4E8B;&#x4EF6;</li>
+<li>platform.js &#x5728;cordova.js&#x91CC;&#x590D;&#x73B0;&#xFF0C;</li>
+<li>cordova.js  JS&#x7AEF;&#x6700;&#x91CD;&#x8981;&#x7684;&#x6587;&#x4EF6;&#x4E86;&#x3002;&#x63D0;&#x4F9B;&#x4EA4;&#x4E92;&#x5904;&#x7406;</li>
+<li>index.html &#x5173;&#x8054; index.js,index.css UI&#x663E;&#x793A;</li>
 </ul>
-<p>Native端</p>
+<p>Native&#x7AEF;</p>
 <ul>
-<li>CDVPlugin 插件类，自定义插件继承于此</li>
-<li>CDV 头文件</li>
-<li>CDVAppDelegate 入口，在didFinishLaunchingWithOptions:里初始化CDVViewController</li>
-<li>CDVAvaliability 宏定义</li>
-<li>CDVAvailabilityDeprecated 弃用提示</li>
-<li>CDVCommandDelegate 命令代理类，JS处理</li>
-<li>CDVCommandDelegateImpl 代理类实现，处理JS</li>
-<li>CDVCommandQueue 命令队列，对应于cordova.commandQueue队列</li>
-<li>CDVConfigParser config文件解析（XML格式）</li>
-<li>CDVUIWebViewEngine WebView处理机</li>
-<li>CDVWebViewEngineProtocol WebView处理机代理类</li>
-<li>CDVWhitelist 白名单（允許訪問任何網站）结合config.xml  <access> 元素</access></li>
-<li>CDVScreenOrientaitionDelegate 屏幕方向处理</li>
-<li>CDVLocalStorage 本地存储</li>
-<li>CDVTimer 计时类</li>
-<li>CDVUserAgentUtil 代理工具类</li>
-<li>CDVURLProtocol 继承于NSURLProtocol.在 Objective-C 端使用一个 NSURLProtocol 的子类来检查每个请求</li>
-<li>CDVInvokedUrlCommand js交互命令类（_callbackId;_className; _methodName;_arguments;）</li>
-<li>CDVPluginResult 组件处理完后执行类</li>
+<li>CDVPlugin &#x63D2;&#x4EF6;&#x7C7B;&#xFF0C;&#x81EA;&#x5B9A;&#x4E49;&#x63D2;&#x4EF6;&#x7EE7;&#x627F;&#x4E8E;&#x6B64;</li>
+<li>CDV &#x5934;&#x6587;&#x4EF6;</li>
+<li>CDVAppDelegate &#x5165;&#x53E3;&#xFF0C;&#x5728;didFinishLaunchingWithOptions:&#x91CC;&#x521D;&#x59CB;&#x5316;CDVViewController</li>
+<li>CDVAvaliability &#x5B8F;&#x5B9A;&#x4E49;</li>
+<li>CDVAvailabilityDeprecated &#x5F03;&#x7528;&#x63D0;&#x793A;</li>
+<li>CDVCommandDelegate &#x547D;&#x4EE4;&#x4EE3;&#x7406;&#x7C7B;&#xFF0C;JS&#x5904;&#x7406;</li>
+<li>CDVCommandDelegateImpl &#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x73B0;&#xFF0C;&#x5904;&#x7406;JS</li>
+<li>CDVCommandQueue &#x547D;&#x4EE4;&#x961F;&#x5217;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;cordova.commandQueue&#x961F;&#x5217;</li>
+<li>CDVConfigParser config&#x6587;&#x4EF6;&#x89E3;&#x6790;&#xFF08;XML&#x683C;&#x5F0F;&#xFF09;</li>
+<li>CDVUIWebViewEngine WebView&#x5904;&#x7406;&#x673A;</li>
+<li>CDVWebViewEngineProtocol WebView&#x5904;&#x7406;&#x673A;&#x4EE3;&#x7406;&#x7C7B;</li>
+<li>CDVWhitelist &#x767D;&#x540D;&#x5355;&#xFF08;&#x5141;&#x8A31;&#x8A2A;&#x554F;&#x4EFB;&#x4F55;&#x7DB2;&#x7AD9;&#xFF09;&#x7ED3;&#x5408;config.xml  <access> &#x5143;&#x7D20;</access></li>
+<li>CDVScreenOrientaitionDelegate &#x5C4F;&#x5E55;&#x65B9;&#x5411;&#x5904;&#x7406;</li>
+<li>CDVLocalStorage &#x672C;&#x5730;&#x5B58;&#x50A8;</li>
+<li>CDVTimer &#x8BA1;&#x65F6;&#x7C7B;</li>
+<li>CDVUserAgentUtil &#x4EE3;&#x7406;&#x5DE5;&#x5177;&#x7C7B;</li>
+<li>CDVURLProtocol &#x7EE7;&#x627F;&#x4E8E;NSURLProtocol.&#x5728; Objective-C &#x7AEF;&#x4F7F;&#x7528;&#x4E00;&#x4E2A; NSURLProtocol &#x7684;&#x5B50;&#x7C7B;&#x6765;&#x68C0;&#x67E5;&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;</li>
+<li>CDVInvokedUrlCommand js&#x4EA4;&#x4E92;&#x547D;&#x4EE4;&#x7C7B;&#xFF08;_callbackId;_className; _methodName;_arguments;&#xFF09;</li>
+<li>CDVPluginResult &#x7EC4;&#x4EF6;&#x5904;&#x7406;&#x5B8C;&#x540E;&#x6267;&#x884C;&#x7C7B;</li>
 </ul>
-<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4><p>参见cordova.js 595-610行。</p>
-<p>cordova的初始化包含JS端和Native端，这两端都是基于事件侦听的方式结合起来，JS端主要包含以下几个点：</p>
-<p>onDOMContentLoaded：dom载入完成</p>
-<p>onNativeReady：Native端WebUI载入完成</p>
-<p>onCordovaReady：JS端相关objects都创建完成</p>
-<p>onDeviceReady: Cordova 准备</p>
-<p>onResume: 开始/恢复生命周期事件</p>
-<p>onPause: 暂停生命周期 </p>
-<p><strong>Cordova生命周期事件：</strong></p>
-<p>（1）deviceready ：当Cordova加载完成会触发</p>
-<p>（2）pause：当应用程序进入到后台会触发</p>
-<p>（3）resumes：应用程序从后台进入到前台会触发</p>
+<h4 id="&#x751F;&#x547D;&#x5468;&#x671F;"><a href="#&#x751F;&#x547D;&#x5468;&#x671F;" class="headerlink" title="&#x751F;&#x547D;&#x5468;&#x671F;"></a>&#x751F;&#x547D;&#x5468;&#x671F;</h4><p>&#x53C2;&#x89C1;cordova.js 595-610&#x884C;&#x3002;</p>
+<p>cordova&#x7684;&#x521D;&#x59CB;&#x5316;&#x5305;&#x542B;JS&#x7AEF;&#x548C;Native&#x7AEF;&#xFF0C;&#x8FD9;&#x4E24;&#x7AEF;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x7684;&#x65B9;&#x5F0F;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#xFF0C;JS&#x7AEF;&#x4E3B;&#x8981;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x70B9;&#xFF1A;</p>
+<p>onDOMContentLoaded&#xFF1A;dom&#x8F7D;&#x5165;&#x5B8C;&#x6210;</p>
+<p>onNativeReady&#xFF1A;Native&#x7AEF;WebUI&#x8F7D;&#x5165;&#x5B8C;&#x6210;</p>
+<p>onCordovaReady&#xFF1A;JS&#x7AEF;&#x76F8;&#x5173;objects&#x90FD;&#x521B;&#x5EFA;&#x5B8C;&#x6210;</p>
+<p>onDeviceReady: Cordova &#x51C6;&#x5907;</p>
+<p>onResume: &#x5F00;&#x59CB;/&#x6062;&#x590D;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E8B;&#x4EF6;</p>
+<p>onPause: &#x6682;&#x505C;&#x751F;&#x547D;&#x5468;&#x671F; </p>
+<p><strong>Cordova&#x751F;&#x547D;&#x5468;&#x671F;&#x4E8B;&#x4EF6;&#xFF1A;</strong></p>
+<p>&#xFF08;1&#xFF09;deviceready &#xFF1A;&#x5F53;Cordova&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x4F1A;&#x89E6;&#x53D1;</p>
+<p>&#xFF08;2&#xFF09;pause&#xFF1A;&#x5F53;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x5165;&#x5230;&#x540E;&#x53F0;&#x4F1A;&#x89E6;&#x53D1;</p>
+<p>&#xFF08;3&#xFF09;resumes&#xFF1A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4ECE;&#x540E;&#x53F0;&#x8FDB;&#x5165;&#x5230;&#x524D;&#x53F0;&#x4F1A;&#x89E6;&#x53D1;</p>
 <pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
-        //页面加载后添加各事件监听
+        //&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x540E;&#x6DFB;&#x52A0;&#x5404;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;
         function onLoad() {
             document.addEventListener(&quot;deviceready&quot;, onDeviceReady, false);
             document.addEventListener(&quot;resume&quot;, onResume, false);
             document.addEventListener(&quot;pause&quot;, onPause, false);
         }
 
-        //Cordova加载完毕
+        //Cordova&#x52A0;&#x8F7D;&#x5B8C;&#x6BD5;
         function onDeviceReady() {
-            alert(&quot;Cordova加载完毕！&quot;);
+            alert(&quot;Cordova&#x52A0;&#x8F7D;&#x5B8C;&#x6BD5;&#xFF01;&quot;);
         }
 
-        //进入后台
+        //&#x8FDB;&#x5165;&#x540E;&#x53F0;
         function onPause() {
-            console.log(&quot;应用进入到后台！&quot;);
+            console.log(&quot;&#x5E94;&#x7528;&#x8FDB;&#x5165;&#x5230;&#x540E;&#x53F0;&#xFF01;&quot;);
         }
 
-        //恢复到前台
+        //&#x6062;&#x590D;&#x5230;&#x524D;&#x53F0;
         function onResume() {
-            alert(&quot;应用回到前台运行！&quot;);
+            alert(&quot;&#x5E94;&#x7528;&#x56DE;&#x5230;&#x524D;&#x53F0;&#x8FD0;&#x884C;&#xFF01;&quot;);
         }
  &lt;/script&gt;
-</code></pre><p>以上几个重要事件的先后顺序和hander侦听是通过channel组件架构，所谓的channel组件实际上就是cordova自制的保障事件侦听和触发的组件,具体代码参考cordova.js 626-820行。2百多行代码，就打造了一个JS端事件侦听的框架。</p>
-<p>其中 onNativeReady是被native端调的，当native端WebUI初始化好后就会fire JS端onNativeReady事件，native有以下几个关键的初始化节点：</p>
-<pre><code>AppDelegate.didFinishLaunchingWithOptions：App启动，初始化controller和view
-CDVViewController.viewDidLoad：view加载，初始化WebView
-CDVViewController.webviewDidFinishLoad：WebView加载，触发JS端onNativeReady
-</code></pre><p>Native端存在着App-&gt;view-&gt;webview三个层次，以上三个点正好对应着这三个层次的加载。</p>
+</code></pre><p>&#x4EE5;&#x4E0A;&#x51E0;&#x4E2A;&#x91CD;&#x8981;&#x4E8B;&#x4EF6;&#x7684;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x548C;hander&#x4FA6;&#x542C;&#x662F;&#x901A;&#x8FC7;channel&#x7EC4;&#x4EF6;&#x67B6;&#x6784;&#xFF0C;&#x6240;&#x8C13;&#x7684;channel&#x7EC4;&#x4EF6;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;cordova&#x81EA;&#x5236;&#x7684;&#x4FDD;&#x969C;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x548C;&#x89E6;&#x53D1;&#x7684;&#x7EC4;&#x4EF6;,&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x53C2;&#x8003;cordova.js 626-820&#x884C;&#x3002;2&#x767E;&#x591A;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x6253;&#x9020;&#x4E86;&#x4E00;&#x4E2A;JS&#x7AEF;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x7684;&#x6846;&#x67B6;&#x3002;</p>
+<p>&#x5176;&#x4E2D; onNativeReady&#x662F;&#x88AB;native&#x7AEF;&#x8C03;&#x7684;&#xFF0C;&#x5F53;native&#x7AEF;WebUI&#x521D;&#x59CB;&#x5316;&#x597D;&#x540E;&#x5C31;&#x4F1A;fire JS&#x7AEF;onNativeReady&#x4E8B;&#x4EF6;&#xFF0C;native&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code>AppDelegate.didFinishLaunchingWithOptions&#xFF1A;App&#x542F;&#x52A8;&#xFF0C;&#x521D;&#x59CB;&#x5316;controller&#x548C;view
+CDVViewController.viewDidLoad&#xFF1A;view&#x52A0;&#x8F7D;&#xFF0C;&#x521D;&#x59CB;&#x5316;WebView
+CDVViewController.webviewDidFinishLoad&#xFF1A;WebView&#x52A0;&#x8F7D;&#xFF0C;&#x89E6;&#x53D1;JS&#x7AEF;onNativeReady
+</code></pre><p>Native&#x7AEF;&#x5B58;&#x5728;&#x7740;App-&gt;view-&gt;webview&#x4E09;&#x4E2A;&#x5C42;&#x6B21;&#xFF0C;&#x4EE5;&#x4E0A;&#x4E09;&#x4E2A;&#x70B9;&#x6B63;&#x597D;&#x5BF9;&#x5E94;&#x7740;&#x8FD9;&#x4E09;&#x4E2A;&#x5C42;&#x6B21;&#x7684;&#x52A0;&#x8F7D;&#x3002;</p>
 <p><img src="https://github.com/dangdangfeng/Cordova-Source-Code-Analyse/raw/master/cordova.png" alt=""></p>
-<h4 id="加载流程"><a href="#加载流程" class="headerlink" title="加载流程"></a>加载流程</h4><p>从源码可以看出AppDelegate继承于CDVAppDelegate;MainViewController继承于CDVViewController。MainCommandDelegate继承于CDVCommandDelegateImpl,MainCommandQueue继承于CDVCommandQueue.</p>
-<p>AppDelegate是程序的入口，由此调用MainViewController,由此启动CDVViewController.</p>
+<h4 id="&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;"><a href="#&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;" class="headerlink" title="&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;"></a>&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;</h4><p>&#x4ECE;&#x6E90;&#x7801;&#x53EF;&#x4EE5;&#x770B;&#x51FA;AppDelegate&#x7EE7;&#x627F;&#x4E8E;CDVAppDelegate;MainViewController&#x7EE7;&#x627F;&#x4E8E;CDVViewController&#x3002;MainCommandDelegate&#x7EE7;&#x627F;&#x4E8E;CDVCommandDelegateImpl,MainCommandQueue&#x7EE7;&#x627F;&#x4E8E;CDVCommandQueue.</p>
+<p>AppDelegate&#x662F;&#x7A0B;&#x5E8F;&#x7684;&#x5165;&#x53E3;&#xFF0C;&#x7531;&#x6B64;&#x8C03;&#x7528;MainViewController,&#x7531;&#x6B64;&#x542F;&#x52A8;CDVViewController.</p>
 <ol>
-<li>AppDelegate的application:didFinishLaunchingWithOptions:进入</li>
-<li>从self.viewController = [[MainViewController alloc] init]；到MainViewController.</li>
-<li>CDVViewController 进入init方法</li>
-<li>initWithNibName: bundle:方法调用[self __init]</li>
-<li>__init方法监听通知，UIApplicationWillTerminateNotification（程序被杀死），UIApplicationWillResignActiveNotification（从活动状态进入非活动状态），UIApplicationDidBecomeActiveNotification（程序进入前台并处于活动状态），UIApplicationWillEnterForegroundNotification（进入前台，还没有处于活动状态时），UIApplicationDidEnterBackgroundNotification（进入后台）。在应用处于各种状态时就可以通过evalJs：方法与JS端交互。最终是通过CDVUIWebViewEngine下的evaluateJavaScript: completionHandler:的方法。最终还是用的UIWebView的stringByEvaluatingJavaScriptFromString:方法。从此可以看出，Native处理JS原理上还是用的UIWebView的方法。CDVViewController初始化完成。</li>
-<li>此时AppDelegate调用Super,进入CDVAppDelegate的application: didFinishLaunchingWithOptions:方法。对rootViewController，主window进行设置。此时App才加载MainViewController.走MainViewController生命周期。</li>
-<li>在MainViewController里其实是调用CDVViewController的。进入viewDidLoad方法，在loadSettings里加载配置文件并将index.html设为startPage。</li>
-<li>createGapVeiw初始化webView,通过CDVWebViewEngineProtocol使用CDVUIWebViewEngine使用engineWebView（这是个UIWebView）处理JS。</li>
-<li>registerPlugin: withClassName:初始化插件，此处的插件是CDVUIWebViewEngine。</li>
-<li>将handleopenurl,intentandnavigationfilter,gesturehandler插件注入。计时结束。</li>
-<li>CDVUserAgentUtil acquireLock:加锁处理，加载index.html</li>
-<li>当App进入活跃状态，接收到通知进入onAppDidBecomeActive:方法，执行JS的active事件。js为</li>
+<li>AppDelegate&#x7684;application:didFinishLaunchingWithOptions:&#x8FDB;&#x5165;</li>
+<li>&#x4ECE;self.viewController = [[MainViewController alloc] init]&#xFF1B;&#x5230;MainViewController.</li>
+<li>CDVViewController &#x8FDB;&#x5165;init&#x65B9;&#x6CD5;</li>
+<li>initWithNibName: bundle:&#x65B9;&#x6CD5;&#x8C03;&#x7528;[self __init]</li>
+<li>__init&#x65B9;&#x6CD5;&#x76D1;&#x542C;&#x901A;&#x77E5;&#xFF0C;UIApplicationWillTerminateNotification&#xFF08;&#x7A0B;&#x5E8F;&#x88AB;&#x6740;&#x6B7B;&#xFF09;&#xFF0C;UIApplicationWillResignActiveNotification&#xFF08;&#x4ECE;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x8FDB;&#x5165;&#x975E;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#xFF09;&#xFF0C;UIApplicationDidBecomeActiveNotification&#xFF08;&#x7A0B;&#x5E8F;&#x8FDB;&#x5165;&#x524D;&#x53F0;&#x5E76;&#x5904;&#x4E8E;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#xFF09;&#xFF0C;UIApplicationWillEnterForegroundNotification&#xFF08;&#x8FDB;&#x5165;&#x524D;&#x53F0;&#xFF0C;&#x8FD8;&#x6CA1;&#x6709;&#x5904;&#x4E8E;&#x6D3B;&#x52A8;&#x72B6;&#x6001;&#x65F6;&#xFF09;&#xFF0C;UIApplicationDidEnterBackgroundNotification&#xFF08;&#x8FDB;&#x5165;&#x540E;&#x53F0;&#xFF09;&#x3002;&#x5728;&#x5E94;&#x7528;&#x5904;&#x4E8E;&#x5404;&#x79CD;&#x72B6;&#x6001;&#x65F6;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;evalJs&#xFF1A;&#x65B9;&#x6CD5;&#x4E0E;JS&#x7AEF;&#x4EA4;&#x4E92;&#x3002;&#x6700;&#x7EC8;&#x662F;&#x901A;&#x8FC7;CDVUIWebViewEngine&#x4E0B;&#x7684;evaluateJavaScript: completionHandler:&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x6700;&#x7EC8;&#x8FD8;&#x662F;&#x7528;&#x7684;UIWebView&#x7684;stringByEvaluatingJavaScriptFromString:&#x65B9;&#x6CD5;&#x3002;&#x4ECE;&#x6B64;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;Native&#x5904;&#x7406;JS&#x539F;&#x7406;&#x4E0A;&#x8FD8;&#x662F;&#x7528;&#x7684;UIWebView&#x7684;&#x65B9;&#x6CD5;&#x3002;CDVViewController&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6210;&#x3002;</li>
+<li>&#x6B64;&#x65F6;AppDelegate&#x8C03;&#x7528;Super,&#x8FDB;&#x5165;CDVAppDelegate&#x7684;application: didFinishLaunchingWithOptions:&#x65B9;&#x6CD5;&#x3002;&#x5BF9;rootViewController&#xFF0C;&#x4E3B;window&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x3002;&#x6B64;&#x65F6;App&#x624D;&#x52A0;&#x8F7D;MainViewController.&#x8D70;MainViewController&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</li>
+<li>&#x5728;MainViewController&#x91CC;&#x5176;&#x5B9E;&#x662F;&#x8C03;&#x7528;CDVViewController&#x7684;&#x3002;&#x8FDB;&#x5165;viewDidLoad&#x65B9;&#x6CD5;&#xFF0C;&#x5728;loadSettings&#x91CC;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5E76;&#x5C06;index.html&#x8BBE;&#x4E3A;startPage&#x3002;</li>
+<li>createGapVeiw&#x521D;&#x59CB;&#x5316;webView,&#x901A;&#x8FC7;CDVWebViewEngineProtocol&#x4F7F;&#x7528;CDVUIWebViewEngine&#x4F7F;&#x7528;engineWebView&#xFF08;&#x8FD9;&#x662F;&#x4E2A;UIWebView&#xFF09;&#x5904;&#x7406;JS&#x3002;</li>
+<li>registerPlugin: withClassName:&#x521D;&#x59CB;&#x5316;&#x63D2;&#x4EF6;&#xFF0C;&#x6B64;&#x5904;&#x7684;&#x63D2;&#x4EF6;&#x662F;CDVUIWebViewEngine&#x3002;</li>
+<li>&#x5C06;handleopenurl,intentandnavigationfilter,gesturehandler&#x63D2;&#x4EF6;&#x6CE8;&#x5165;&#x3002;&#x8BA1;&#x65F6;&#x7ED3;&#x675F;&#x3002;</li>
+<li>CDVUserAgentUtil acquireLock:&#x52A0;&#x9501;&#x5904;&#x7406;&#xFF0C;&#x52A0;&#x8F7D;index.html</li>
+<li>&#x5F53;App&#x8FDB;&#x5165;&#x6D3B;&#x8DC3;&#x72B6;&#x6001;&#xFF0C;&#x63A5;&#x6536;&#x5230;&#x901A;&#x77E5;&#x8FDB;&#x5165;onAppDidBecomeActive:&#x65B9;&#x6CD5;&#xFF0C;&#x6267;&#x884C;JS&#x7684;active&#x4E8B;&#x4EF6;&#x3002;js&#x4E3A;</li>
 </ol>
 <pre><code>&lt;code&gt;try{cordova.require(&apos;cordova/exec&apos;).nativeEvalAndFetch(function(){cordova.fireDocumentEvent(&apos;active&apos;);})}catch(e){console.log(&apos;exception nativeEvalAndFetch : &apos;+e);};&lt;/code&gt;
-</code></pre><p>   如此就和cordova.js发生了联系。</p>
+</code></pre><p>   &#x5982;&#x6B64;&#x5C31;&#x548C;cordova.js&#x53D1;&#x751F;&#x4E86;&#x8054;&#x7CFB;&#x3002;</p>
 <ol>
-<li>此后WebView开始加载，并触发了CDVUIWebViewDelegate的webView: shouldStartLoadWithRequest: navigationType:方法。如果_delegate实现了webView:shouldStartLoadWithRequest:navigationType:此时会进入CDVUIWebViewNavigationDelegate。在此判断url的scheme是否为gap(处理加载页里的加载请求)。</li>
-<li>CDVIntentAndNavigationFilter实现了shouldOverrideLoadWithRequest:navigationType:方法，根据navigationType返回是否请求加载。</li>
-<li>允许加载后，走CDVUIWebViewDelegate的webViewDidStartLoad:方法。跳到CDVUIWebViewNavigationDelegate的webViewDidStartLoad:向enginePlugin.webView发送CDVPluginResetNotification通知。但是CDVUIWebViewEngine没有对onReset处理。其他插件根据需要处理。</li>
-<li>然后走CDVUiWebViewDelegate的webViewDidFinishLoad:方法。跳转CDVUIWebViewNavigationDelegate的webViewDidFinishLoad：方法。发送CDVPageDidLoadNotification通知。此版本未处理。</li>
-<li>iframe bridge 在 JS 端创建一个透明的 iframe，设置这个 ifame 的 src 为自定义的协议，而 ifame 的 src 更改时，UIWebView 会先回调其 delegate 的 webView:shouldStartLoadWithRequest:navigationType: 方法。此时又到了CDVUIWebViewDelegate的shouldStartLoadWithRequest：方法。此时的请求是gap://ready。</li>
-<li>CDVViewController的supportedInterfaceOrientations监听App的屏幕显示，是否左转右转等。</li>
-<li>到此，页面加载完毕。</li>
+<li>&#x6B64;&#x540E;WebView&#x5F00;&#x59CB;&#x52A0;&#x8F7D;&#xFF0C;&#x5E76;&#x89E6;&#x53D1;&#x4E86;CDVUIWebViewDelegate&#x7684;webView: shouldStartLoadWithRequest: navigationType:&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;_delegate&#x5B9E;&#x73B0;&#x4E86;webView:shouldStartLoadWithRequest:navigationType:&#x6B64;&#x65F6;&#x4F1A;&#x8FDB;&#x5165;CDVUIWebViewNavigationDelegate&#x3002;&#x5728;&#x6B64;&#x5224;&#x65AD;url&#x7684;scheme&#x662F;&#x5426;&#x4E3A;gap(&#x5904;&#x7406;&#x52A0;&#x8F7D;&#x9875;&#x91CC;&#x7684;&#x52A0;&#x8F7D;&#x8BF7;&#x6C42;)&#x3002;</li>
+<li>CDVIntentAndNavigationFilter&#x5B9E;&#x73B0;&#x4E86;shouldOverrideLoadWithRequest:navigationType:&#x65B9;&#x6CD5;&#xFF0C;&#x6839;&#x636E;navigationType&#x8FD4;&#x56DE;&#x662F;&#x5426;&#x8BF7;&#x6C42;&#x52A0;&#x8F7D;&#x3002;</li>
+<li>&#x5141;&#x8BB8;&#x52A0;&#x8F7D;&#x540E;&#xFF0C;&#x8D70;CDVUIWebViewDelegate&#x7684;webViewDidStartLoad:&#x65B9;&#x6CD5;&#x3002;&#x8DF3;&#x5230;CDVUIWebViewNavigationDelegate&#x7684;webViewDidStartLoad:&#x5411;enginePlugin.webView&#x53D1;&#x9001;CDVPluginResetNotification&#x901A;&#x77E5;&#x3002;&#x4F46;&#x662F;CDVUIWebViewEngine&#x6CA1;&#x6709;&#x5BF9;onReset&#x5904;&#x7406;&#x3002;&#x5176;&#x4ED6;&#x63D2;&#x4EF6;&#x6839;&#x636E;&#x9700;&#x8981;&#x5904;&#x7406;&#x3002;</li>
+<li>&#x7136;&#x540E;&#x8D70;CDVUiWebViewDelegate&#x7684;webViewDidFinishLoad:&#x65B9;&#x6CD5;&#x3002;&#x8DF3;&#x8F6C;CDVUIWebViewNavigationDelegate&#x7684;webViewDidFinishLoad&#xFF1A;&#x65B9;&#x6CD5;&#x3002;&#x53D1;&#x9001;CDVPageDidLoadNotification&#x901A;&#x77E5;&#x3002;&#x6B64;&#x7248;&#x672C;&#x672A;&#x5904;&#x7406;&#x3002;</li>
+<li>iframe bridge &#x5728; JS &#x7AEF;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x900F;&#x660E;&#x7684; iframe&#xFF0C;&#x8BBE;&#x7F6E;&#x8FD9;&#x4E2A; ifame &#x7684; src &#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x800C; ifame &#x7684; src &#x66F4;&#x6539;&#x65F6;&#xFF0C;UIWebView &#x4F1A;&#x5148;&#x56DE;&#x8C03;&#x5176; delegate &#x7684; webView:shouldStartLoadWithRequest:navigationType: &#x65B9;&#x6CD5;&#x3002;&#x6B64;&#x65F6;&#x53C8;&#x5230;&#x4E86;CDVUIWebViewDelegate&#x7684;shouldStartLoadWithRequest&#xFF1A;&#x65B9;&#x6CD5;&#x3002;&#x6B64;&#x65F6;&#x7684;&#x8BF7;&#x6C42;&#x662F;gap://ready&#x3002;</li>
+<li>CDVViewController&#x7684;supportedInterfaceOrientations&#x76D1;&#x542C;App&#x7684;&#x5C4F;&#x5E55;&#x663E;&#x793A;&#xFF0C;&#x662F;&#x5426;&#x5DE6;&#x8F6C;&#x53F3;&#x8F6C;&#x7B49;&#x3002;</li>
+<li>&#x5230;&#x6B64;&#xFF0C;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x5B8C;&#x6BD5;&#x3002;</li>
 </ol>
-<h4 id="JS调用Native"><a href="#JS调用Native" class="headerlink" title="JS调用Native"></a>JS调用Native</h4><p>IOS的UIWebViewDelegate提供了shouldStartLoadWithRequest方法，它能截获web端url请求，因此phonegap就是通过在web端构造一个不可见的iframe，并置其src为gap://ready，Native端截获这个请求后就会得知此时JS端有请求。这块代码可见”cordova/exec”模块：</p>
+<h4 id="JS&#x8C03;&#x7528;Native"><a href="#JS&#x8C03;&#x7528;Native" class="headerlink" title="JS&#x8C03;&#x7528;Native"></a>JS&#x8C03;&#x7528;Native</h4><p>IOS&#x7684;UIWebViewDelegate&#x63D0;&#x4F9B;&#x4E86;shouldStartLoadWithRequest&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x80FD;&#x622A;&#x83B7;web&#x7AEF;url&#x8BF7;&#x6C42;&#xFF0C;&#x56E0;&#x6B64;phonegap&#x5C31;&#x662F;&#x901A;&#x8FC7;&#x5728;web&#x7AEF;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x4E0D;&#x53EF;&#x89C1;&#x7684;iframe&#xFF0C;&#x5E76;&#x7F6E;&#x5176;src&#x4E3A;gap://ready&#xFF0C;Native&#x7AEF;&#x622A;&#x83B7;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x540E;&#x5C31;&#x4F1A;&#x5F97;&#x77E5;&#x6B64;&#x65F6;JS&#x7AEF;&#x6709;&#x8BF7;&#x6C42;&#x3002;&#x8FD9;&#x5757;&#x4EE3;&#x7801;&#x53EF;&#x89C1;&#x201D;cordova/exec&#x201D;&#x6A21;&#x5757;&#xFF1A;</p>
 <pre><code>function pokeNative() {
 // CB-5488 - Don&apos;t attempt to create iframe before document.body is available.
 if (!document.body) {
@@ -357,7 +357,7 @@ failSafeTimerId = setTimeout(function() {
     }
 }, 50); // Making this &gt; 0 improves performance (marginally) in the normal case (where it doesn&apos;t fire).
 }
-</code></pre><p>每次在js端调用exec时，cordova会把调用信息放入commandQueue队列中，并通知native端。native端得到通知后，会调用js端的代码拿到commandQueue队列中所有调用信息，并依次调用plugin来执行请求</p>
+</code></pre><p>&#x6BCF;&#x6B21;&#x5728;js&#x7AEF;&#x8C03;&#x7528;exec&#x65F6;&#xFF0C;cordova&#x4F1A;&#x628A;&#x8C03;&#x7528;&#x4FE1;&#x606F;&#x653E;&#x5165;commandQueue&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x5E76;&#x901A;&#x77E5;native&#x7AEF;&#x3002;native&#x7AEF;&#x5F97;&#x5230;&#x901A;&#x77E5;&#x540E;&#xFF0C;&#x4F1A;&#x8C03;&#x7528;js&#x7AEF;&#x7684;&#x4EE3;&#x7801;&#x62FF;&#x5230;commandQueue&#x961F;&#x5217;&#x4E2D;&#x6240;&#x6709;&#x8C03;&#x7528;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4F9D;&#x6B21;&#x8C03;&#x7528;plugin&#x6765;&#x6267;&#x884C;&#x8BF7;&#x6C42;</p>
 <pre><code>function iOSExec() {
 
 var successCallback, failCallback, service, action, actionArgs;
@@ -409,7 +409,7 @@ if (!isInContextOfEvalJs &amp;&amp; commandQueue.length == 1) {
     pokeNative();
 }
 }
-</code></pre><p>Native端：shouldStartLoadWithRequest</p>
+</code></pre><p>Native&#x7AEF;&#xFF1A;shouldStartLoadWithRequest</p>
 <pre><code>if ([[url scheme] isEqualToString:@&quot;gap&quot;]) {
     [vc.commandQueue fetchCommandsFromJs];
     // The delegate is called asynchronously in this case, so we don&apos;t have to use
@@ -418,7 +418,7 @@ if (!isInContextOfEvalJs &amp;&amp; commandQueue.length == 1) {
     return NO;
 }
 </code></pre><hr>
-<pre><code> // 获取 JS 的请求数据
+<pre><code> // &#x83B7;&#x53D6; JS &#x7684;&#x8BF7;&#x6C42;&#x6570;&#x636E;
 - (void)fetchCommandsFromJs
 {
 __weak CDVCommandQueue* weakSelf = self;
@@ -491,9 +491,9 @@ if (_startExecutionTime &gt; 0) {
     _startExecutionTime = 0;
 }
 }
-</code></pre><p>在CDVCommandQueue里的execute:方法里用objc_msgSend执行JS里需要的方法。</p>
-<h4 id="Native向JS返回结果"><a href="#Native向JS返回结果" class="headerlink" title="Native向JS返回结果"></a>Native向JS返回结果</h4><p>使用webView的 stringByEvaluatingJavaScriptFromString 方法 。native的plugin完成任务后，会在CDVPluginResult里执行initWithStatus:(CDVCommandStatus)statusOrdinal message:(id)theMessage；在CDVCommandDelegateImpl里执行sendPluginResult:(CDVPluginResult<em>)result callbackId:(NSString</em>)callbackId；返回结果给JS端。<br>通过上面，我们知道JS和Native是通过callbackId对应的，由此就建立了连接。</p>
-<pre><code>// Objective-C 返回结果给JS端
+</code></pre><p>&#x5728;CDVCommandQueue&#x91CC;&#x7684;execute:&#x65B9;&#x6CD5;&#x91CC;&#x7528;objc_msgSend&#x6267;&#x884C;JS&#x91CC;&#x9700;&#x8981;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<h4 id="Native&#x5411;JS&#x8FD4;&#x56DE;&#x7ED3;&#x679C;"><a href="#Native&#x5411;JS&#x8FD4;&#x56DE;&#x7ED3;&#x679C;" class="headerlink" title="Native&#x5411;JS&#x8FD4;&#x56DE;&#x7ED3;&#x679C;"></a>Native&#x5411;JS&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</h4><p>&#x4F7F;&#x7528;webView&#x7684; stringByEvaluatingJavaScriptFromString &#x65B9;&#x6CD5; &#x3002;native&#x7684;plugin&#x5B8C;&#x6210;&#x4EFB;&#x52A1;&#x540E;&#xFF0C;&#x4F1A;&#x5728;CDVPluginResult&#x91CC;&#x6267;&#x884C;initWithStatus:(CDVCommandStatus)statusOrdinal message:(id)theMessage&#xFF1B;&#x5728;CDVCommandDelegateImpl&#x91CC;&#x6267;&#x884C;sendPluginResult:(CDVPluginResult<em>)result callbackId:(NSString</em>)callbackId&#xFF1B;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7ED9;JS&#x7AEF;&#x3002;<br>&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x77E5;&#x9053;JS&#x548C;Native&#x662F;&#x901A;&#x8FC7;callbackId&#x5BF9;&#x5E94;&#x7684;&#xFF0C;&#x7531;&#x6B64;&#x5C31;&#x5EFA;&#x7ACB;&#x4E86;&#x8FDE;&#x63A5;&#x3002;</p>
+<pre><code>// Objective-C &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7ED9;JS&#x7AEF;
 - (void)sendPluginResult:(CDVPluginResult*)result callbackId:(NSString*)callbackId
 {
 CDV_EXEC_LOG(@&quot;Exec(%@): Sending result. Status=%@&quot;, callbackId, result.status);
@@ -514,21 +514,21 @@ BOOL debug = NO;
 #ifdef DEBUG
 debug = YES;
 #endif
- // 将请求的处理结果及 callbackId 通过调用 JS 方法返回给 JS 端
+ // &#x5C06;&#x8BF7;&#x6C42;&#x7684;&#x5904;&#x7406;&#x7ED3;&#x679C;&#x53CA; callbackId &#x901A;&#x8FC7;&#x8C03;&#x7528; JS &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7ED9; JS &#x7AEF;
 NSString* js = [NSString stringWithFormat:@&quot;cordova.require(&apos;cordova/exec&apos;).nativeCallback(&apos;%@&apos;,%d,%@,%d, %d)&quot;, callbackId, status, argumentsAsJSON, keepCallback, debug];
 
 [self evalJsHelper:js];
 }
-</code></pre><h4 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h4><p>此处我们默认已经解决了插件的下载和制作。所要做的就是处理插件。</p>
-<p>将CordovaLib引入项目。</p>
-<p>在配置页的 Build Settings -&gt; Other Linker Flags 中添加”-ObjC -all_load”</p>
-<p>在配置页的 Build Phases 标签中添加如下两个库：</p>
+</code></pre><h4 id="&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x7EC4;&#x4EF6;</h4><p>&#x6B64;&#x5904;&#x6211;&#x4EEC;&#x9ED8;&#x8BA4;&#x5DF2;&#x7ECF;&#x89E3;&#x51B3;&#x4E86;&#x63D2;&#x4EF6;&#x7684;&#x4E0B;&#x8F7D;&#x548C;&#x5236;&#x4F5C;&#x3002;&#x6240;&#x8981;&#x505A;&#x7684;&#x5C31;&#x662F;&#x5904;&#x7406;&#x63D2;&#x4EF6;&#x3002;</p>
+<p>&#x5C06;CordovaLib&#x5F15;&#x5165;&#x9879;&#x76EE;&#x3002;</p>
+<p>&#x5728;&#x914D;&#x7F6E;&#x9875;&#x7684; Build Settings -&gt; Other Linker Flags &#x4E2D;&#x6DFB;&#x52A0;&#x201D;-ObjC -all_load&#x201D;</p>
+<p>&#x5728;&#x914D;&#x7F6E;&#x9875;&#x7684; Build Phases &#x6807;&#x7B7E;&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x5E93;&#xFF1A;</p>
 <pre><code>Target Dependencies -&gt; CordovaLib
 
 Link Binary With Libraries -&gt; libCordova.a
-</code></pre><p>  <strong><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">测试</a></strong></p>
-<p>最主要关注的是Hybrid里的跳转逻辑，用scheme跳转解决。在CDVUIWebViewNagigationDelegate 里的shouldStartLoadWithRequest：里实现自己的跳转逻辑即可，因为在cordova里触发跳转，肯定会走这里的。如果实现了CDVWKWebViewEngine,在webView: webView: decidePolicyForNavigationAction: decisionHandler: 里也要实现.</p>
-<p>其他的都是套路。</p>
+</code></pre><p>  <strong><a href="http://www.hangge.com/blog_uploads/201604/2016042214355230378.zip" target="_blank" rel="external">&#x6D4B;&#x8BD5;</a></strong></p>
+<p>&#x6700;&#x4E3B;&#x8981;&#x5173;&#x6CE8;&#x7684;&#x662F;Hybrid&#x91CC;&#x7684;&#x8DF3;&#x8F6C;&#x903B;&#x8F91;&#xFF0C;&#x7528;scheme&#x8DF3;&#x8F6C;&#x89E3;&#x51B3;&#x3002;&#x5728;CDVUIWebViewNagigationDelegate &#x91CC;&#x7684;shouldStartLoadWithRequest&#xFF1A;&#x91CC;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x8DF3;&#x8F6C;&#x903B;&#x8F91;&#x5373;&#x53EF;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;cordova&#x91CC;&#x89E6;&#x53D1;&#x8DF3;&#x8F6C;&#xFF0C;&#x80AF;&#x5B9A;&#x4F1A;&#x8D70;&#x8FD9;&#x91CC;&#x7684;&#x3002;&#x5982;&#x679C;&#x5B9E;&#x73B0;&#x4E86;CDVWKWebViewEngine,&#x5728;webView: webView: decidePolicyForNavigationAction: decisionHandler: &#x91CC;&#x4E5F;&#x8981;&#x5B9E;&#x73B0;.</p>
+<p>&#x5176;&#x4ED6;&#x7684;&#x90FD;&#x662F;&#x5957;&#x8DEF;&#x3002;</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
