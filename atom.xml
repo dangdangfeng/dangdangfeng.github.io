@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dangdangfeng.github.io/"/>
-  <updated>2017-02-22T14:37:24.000Z</updated>
+  <updated>2017-02-22T14:46:30.000Z</updated>
   <id>https://dangdangfeng.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>iOS 10.3的APFS系统</title>
     <link href="https://dangdangfeng.github.io/2017/02/22/iOS%E7%9A%84APFS%E7%B3%BB%E7%BB%9F/"/>
     <id>https://dangdangfeng.github.io/2017/02/22/iOS的APFS系统/</id>
-    <published>2017-02-21T16:21:08.000Z</published>
-    <updated>2017-02-22T14:37:24.000Z</updated>
+    <published>2017-02-22T14:54:20.000Z</published>
+    <updated>2017-02-22T14:46:30.000Z</updated>
     
     <content type="html"><![CDATA[<h4 id="&#x4F55;&#x4E3A;APFS"><a href="#&#x4F55;&#x4E3A;APFS" class="headerlink" title="&#x4F55;&#x4E3A;APFS"></a>&#x4F55;&#x4E3A;APFS</h4><p>&#x5728;iOS 10.3&#x4E2D;&#xFF0C;&#x82F9;&#x679C;&#x65B0;&#x589E;&#x4E86;APFS&#x65B0;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x6700;&#x65E9;&#x5728;2016&#x5E74;WWDC&#x5927;&#x4F1A;&#x4E0A;&#x516C;&#x5E03;&#x3002;APFS&#x662F;Apple File System&#x7684;&#x7B80;&#x79F0;&#xFF0C;&#x7528;&#x4E8E;&#x66FF;&#x4EE3;&#x76EE;&#x524D;&#x6240;&#x4F7F;&#x7528;&#x7684;HFS+&#x683C;&#x5F0F;&#x3002;APFS&#x5BF9;HFS&#x7684;&#x6240;&#x6709;&#x53D8;&#x4F53;&#x8FDB;&#x884C;&#x4E86;&#x7EDF;&#x4E00;&#xFF0C;&#x8FD9;&#x662F;Apple&#x4ECE;&#x5E95;&#x5C42;&#x4EE3;&#x7801;&#x5F00;&#x59CB;&#x4ECE;&#x96F6;&#x6253;&#x9020;&#x7684;&#x5168;&#x65B0;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;&#x4E0E;&#x4F7F;&#x7528;32&#x4F4D;&#x6587;&#x4EF6;ID&#x7684;HFS+&#x4E0D;&#x540C;&#xFF0C;APFS&#x53EF;&#x652F;&#x6301;64&#x4F4D;&#x7D22;&#x5F15;&#x8282;&#x70B9;&#xFF08;Inode&#xFF09;&#x7F16;&#x53F7;&#xFF0C;&#x501F;&#x6B64;&#x4E00;&#x4E2A;&#x5377;&#x6700;&#x591A;&#x53EF;&#x5B58;&#x50A8;&#x8D85;&#x8FC7;900&#x4EBF;&#x4EBF;&#x4E2A;&#x6587;&#x4EF6;&#x3002;HFS+&#x53EA;&#x80FD;&#x540C;&#x65F6;&#x5BF9;&#x6574;&#x4E2A;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF0C;APFS&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x53EF;&#x6269;&#x5C55;&#x5B58;&#x50A8;&#x5757;&#x5206;&#x914D;&#x7A0B;&#x5E8F;&#xFF08;Extensible block allocator&#xFF09;&#xFF0C;&#x53EF;&#x5BF9;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8FDB;&#x884C;&#x5EF6;&#x8FDF;&#x521D;&#x59CB;&#x5316;&#xFF08;Lazy initialization&#xFF09;&#xFF0C;&#x8FDB;&#x800C;&#x5927;&#x5E45;&#x6539;&#x5584;&#x5927;&#x5BB9;&#x91CF;&#x5377;&#x7684;&#x6027;&#x80FD;&#x3002;</p>
 <p>APFS&#x9488;&#x5BF9;&#x95EA;&#x5B58;/SSD&#x5B58;&#x50A8;&#x8FDB;&#x884C;&#x4F18;&#x5316;&#xFF08;&#x4F46;&#x4F9D;&#x7136;&#x53EF;&#x7528;&#x4E8E;&#x4F20;&#x7EDF;&#x673A;&#x68B0;&#x786C;&#x76D8;&#xFF09;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x5F3A;&#x5927;&#x7684;&#x52A0;&#x5BC6;&#x3001;&#x5199;&#x5165;&#x65F6;&#x590D;&#x5236;&#xFF08;Copy-on-write&#xFF09;&#x5143;&#x6570;&#x636E;&#x3001;&#x7A7A;&#x95F4;&#x5206;&#x4EAB;&#x3001;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x514B;&#x9686;&#x3001;&#x5FEB;&#x7167;&#x3001;&#x76EE;&#x5F55;&#x5927;&#x5C0F;&#x5FEB;&#x901F;&#x8C03;&#x6574;&#x3001;&#x539F;&#x5B50;&#x7EA7;&#x5B89;&#x5168;&#x5B58;&#x50A8;&#x57FA;&#x5143;&#xFF08;Atomic safe-save primitives&#xFF09;&#xFF0C;&#x4EE5;&#x53CA;&#x6539;&#x8FDB;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x5E95;&#x5C42;&#x6280;&#x672F;&#x3002;&#x6B64;&#x5916;APFS&#x8FD8;&#x5305;&#x542B;&#x5176;&#x4ED6;&#x6539;&#x5584;&#x548C;&#x65B0;&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x7A00;&#x758F;&#x6587;&#x4EF6;&#x3001;&#x6539;&#x8FDB;&#x7684;TRIM&#x64CD;&#x4F5C;&#xFF0C;&#x5185;&#x5EFA;&#x5BF9;&#x6269;&#x5C55;&#x5C5E;&#x6027;&#x7684;&#x652F;&#x6301;&#x7B49;&#x3002;</p>
@@ -92,6 +92,8 @@
     
     </summary>
     
+    
+      <category term="技术" scheme="https://dangdangfeng.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
