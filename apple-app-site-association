@@ -1,15 +1,25 @@
 {
-    "applinks": {
-        "apps": [],
-        "details": [
-            {
-                "appID": "QH4CR3JHH7.com.q360.voice.ios",
-                "paths": [ "*" ]
-            },
-            {
-                "appID": "ABCD1234.com.apple.wwdc",
-                "paths": [ "*" ]
-            }
-        ]
+  "applinks": {
+    "apps": [],
+    "details": {
+      "QH4CR3JHH7.com.q360.voice.ios": {
+        "paths": ["*"]
+      },
+      "886PYH8YW5.com.zhihu.ios": {
+        "paths": ["*"]
+      },
+      "B6MTNRMU2Y.com.zhihu.ios": {
+        "paths": ["*"]
+      },
+      "B6MTNRMU2Y.com.zhihu.ios-dev": {
+        "paths": ["*"]
+      }
     }
+  },
+  "webcredentials": {
+    "apps": ["QH4CR3JHH7.com.q360.voice.ios", "886PYH8YW5.com.zhihu.ios", "B6MTNRMU2Y.com.zhihu.ios", "B6MTNRMU2Y.com.zhihu.ios-dev"]
+  },
+  "activitycontinuation": {
+    "apps": ["QH4CR3JHH7.com.q360.voice.ios", "886PYH8YW5.com.zhihu.ios", "B6MTNRMU2Y.com.zhihu.ios", "B6MTNRMU2Y.com.zhihu.ios-dev"]
+  }
 }
