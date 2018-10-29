@@ -1,16 +1,11 @@
 {
 	"applinks": {
           "apps": [],
-          "details": [
-              {
-                  "appID": "QH4CR3JHH7.com.q360.voice.ios",
-                  "paths": [ "*" ]
-              },
-              {
-                  "appID": "TeamID.BundleID2",
-                  "paths": [ "*" ]
+          "details": {
+              "8J52SRPW6X.com.zhihu.ios": {
+                "paths": ["*"]
               }
-          ]
+          }
       }
     "webcredentials":{
         "apps":["QH4CR3JHH7.com.q360.voice.ios"] 
